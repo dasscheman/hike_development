@@ -12,33 +12,6 @@ sudo apt-get update
 echo "Installing dependencies"
 composer install
 
-##composer global require 'phpunit/phpunit-selenium=*'
-##composer global require 'phpunit/phpunit-story=*'
-##composer global require 'phpunit/dbunit=*'
-##composer global require 'phpunit/php-invoker=*'
-
-##sudo mkdir -p /usr/share/php/PHPUnit
-##sudo mkdir -p /usr/share/php/PHP
-
-##cd /usr/local/bin/
-##mkdir /tmp/phpunit
-##sudo php -r '$phar = new Phar("phpunit.phar"); $phar->extractTo("/tmp/phpunit");'
-
-##sudo cp -rp /tmp/phpunit/php-invoker/* /usr/share/php/PHP/
-##sudo cp -rp /tmp/phpunit/dbunit/* /usr/share/php/PHPUnit/
-##sudo cp -rp /tmp/phpunit/phpunit-selenium/* /usr/share/php/PHPUnit/
-##sudo cp -rp /tmp/phpunit/phpunit-story/* /usr/share/php/PHPUnit/
-##
-##rm -rf /tmp/phpunit
-
-##wget -O Yii.tar.gz https://github.com/yiisoft/yii/releases/download/1.1.16/yii-1.1.16.bca042.tar.gz
-##tar -zxvf yii.tar.gz -C /home/travis/build/dasscheman/
-##mv /home/travis/build/dasscheman/yii-1.1.16.bca042/ /home/travis/build/dasscheman/yii/
-
-##mkdir PHPUnit
-##mkdir PHPUnit/Extensions/
-##wget -O PHPUnit/Extensions/SeleniumTestCase.php https://github.com/giorgiosironi/phpunit-selenium/blob/master/PHPUnit/Extensions/SeleniumTestCase.php
-
 chmod 777 /home/travis/build/dasscheman/hike_development/hike_development/assets
 chmod 777 /home/travis/build/dasscheman/hike_development/hike_development/protected/runtime
 
