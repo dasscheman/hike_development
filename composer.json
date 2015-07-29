@@ -8,11 +8,5 @@
         "sebastian/comparator": "~1.0",
         "ext-curl": "*",
         "ext-dom": "*"
-    },
-    "autoload": {
-        "classmap" : [
-                "framework/YiiBase.php",
-                "framework/yii.php"
-        ]
     }
 }

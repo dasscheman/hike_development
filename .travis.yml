@@ -30,9 +30,9 @@ before_script:
   - ./hike_development/protected/tests/travis/setup/setup_selenium_server.sh
 
 script:
-  - phpunit --verbose --debug --coverage-text ./hike_development/protected/tests/travis/tests/
-  - phpunit --verbose --debug --coverage-text ./hike_development/protected/tests/functional/ActionsGestartOrganisatieTest.php
-  - phpunit --verbose --debug --coverage-text --configuration ./hike_development/protected/tests/phpunit.xml ./hike_development/protected/tests/functional/ActionsGestartOrganisatieTest.php
+  - phpunit --verbose --debug --coverage-text --configuration ./hike_development/protected/tests/phpunit.xml ./hike_development/protected/tests/travis/tests/
+#  - phpunit --verbose --debug --coverage-text ./hike_development/protected/tests/functional/ActionsGestartOrganisatieTest.php
+#  - phpunit --verbose --debug --coverage-text --configuration ./hike_development/protected/tests/phpunit.xml ./hike_development/protected/tests/functional/ActionsGestartOrganisatieTest.php
 
 #  - phpunit --debug --coverage-text ./trunk/tests/phpunit_selenium/collaboratorTest.php
 #  - phpunit --debug --coverage-text ./trunk/tests/phpunit_selenium/curatorTest.php
