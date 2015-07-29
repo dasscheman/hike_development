@@ -1,0 +1,231 @@
+.fa-rotate-330 {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+  -webkit-transform: rotate(330deg);
+  -moz-transform: rotate(330deg);
+  -ms-transform: rotate(330deg);
+  -o-transform: rotate(330deg);
+  transform: rotate(330deg);
+}
+.fa-stack-up-21p {
+  position: relative;
+  bottom: 21%;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+.fa-stack-up-15p {
+  position: relative;
+  bottom: 15%;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+.fa-stack-up-10p {
+  position: relative;
+  bottom: 10%;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+.fa-stack-up-3p {
+  position: relative;
+  bottom: 3%;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+.fa-stack-2p {
+  position: relative;
+  bottom: -2%;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+.fa-stack-3p {
+  position: relative;
+  bottom: -3%;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+.fa-stack-5p {
+  position: relative;
+  bottom: -5%;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+.fa-stack-6p {
+  position: relative;
+  bottom: -6%;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+.fa-stack-8p {
+  position: relative;
+  bottom: -8%;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+.fa-stack-10p {
+  position: relative;
+  bottom: -10%;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+.fa-stack-11p {
+  position: relative;
+  bottom: -11%;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+.fa-stack-12p {
+  position: relative;
+  bottom: -12%;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+.fa-stack-15p {
+  position: relative;
+  bottom: -15%;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+.fa-stack-20p {
+  position: relative;
+  bottom: -20%;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+.fa-stack-25p {
+  position: relative;
+  bottom: -25%;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+.fa-stack-30p {
+  position: relative;
+  bottom: -30%;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+.fa-stack-32p {
+  position: relative;
+  bottom: -32%;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+.fa-stack-36p {
+  position: relative;
+  bottom: -36%;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+.fa-stack-37p {
+  position: relative;
+  bottom: -37%;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+.fa-stack-40p {
+  position: relative;
+  bottom: -40%;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+.fa-stack-43p {
+  position: relative;
+  bottom: -43%;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+.fa-stack-44p {
+  position: relative;
+  bottom: -44%;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+.fa-stack-45p {
+  position: relative;
+  bottom: -45%;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+.fa-stack-60p {
+  position: relative;
+  bottom: -60%;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+.fa-03x {  
+  font-size: 0.3em;  
+}
+.fa-04x {
+  font-size: 0.4em;
+}
+.fa-05x {
+  font-size: 0.5em;
+}
+.fa-06x {
+  font-size: 0.6em;
+}
+.fa-07x {
+  font-size: 0.7em;
+}
+.fa-09x {
+  font-size: 0.9em;
+}
+.fa-15x {
+  font-size: 1.5em;
+}
+.fa-20x {
+  font-size: 2.0em;
+}
+.fa-red {
+  color: #FF0000;
+}
+.fa-gold {
+  color: #E8B829;
+}
+.fa-green {
+  color: #68C615;
+}
+.fa-blue {
+  color: #0D0DE5;
+}
+.fa-text-right {
+  position: relative;
+  display: inline-block;
+  top: 30%;
+  /*vertical-align: middle;*/
+  width: 600%;
+  text-align: center;
+}
+.fa-text-left {
+  position: relative;
+  display: inline-block;
+  left: -600%;
+  top: 30%;
+  width: 600%;
+  text-align: center;
+}
+.tooltip{
+    text-indent:99px;
+}

@@ -1,0 +1,46 @@
+language: php
+php:
+#  - 5.3.3
+  # aliased to 5.3.29
+#  - 5.3
+  # aliased to a recent 5.4.x version
+#  - 5.4
+  # aliased to a recent 5.5.x version
+  - 5.5
+  # aliased to a recent 5.6.x version  
+#  - 5.6
+  # aliased to a recent 7.x version
+#  - 7.0
+#  - hhvm
+#  - nightly
+
+sudo: required
+
+before_install:
+  - mysql -e "create database IF NOT EXISTS hike_v2_01_test;" -u root
+  - mysql -e "CREATE USER 'test'@'localhost' IDENTIFIED BY 'test';" -u root
+  - mysql -e "GRANT ALL PRIVILEGES ON * . * TO 'test'@'localhost';" -u root
+  - mysql -e "FLUSH PRIVILEGES;"
+
+before_script:
+  - ./protected/tests/travis/setup/before_script.sh
+  - ./protected/tests/travis/setup/setup_apache.sh
+  ## IMPORTANT! convert must be run AFTER the setup_apache.sh
+  ## setup_apache.sh fix some assumptions where the files are stored!
+  - ./protected/tests/travis/setup/setup_selenium_server.sh
+
+script:
+  - phpunit --verbose --debug --coverage-text ./protected/tests/travis/tests/
+  - phpunit --debug --configuration ./protected/tests/phpunit.xml --coverage-text ./protected/tests/functional/ActionsGestartOrganisatieTest.php
+#  - phpunit --debug --coverage-text ./trunk/tests/phpunit_selenium/collaboratorTest.php
+#  - phpunit --debug --coverage-text ./trunk/tests/phpunit_selenium/curatorTest.php
+#  - phpunit --debug --coverage-text ./trunk/tests/phpunit_selenium/importTest.php
+#  - phpunit --debug --coverage-text ./trunk/tests/phpunit_selenium/managerTest.php
+#  - phpunit --debug --coverage-text ./trunk/tests/phpunit_selenium/submitterTest.php
+#  - phpunit --debug --coverage-text ./trunk/tests/phpunit_selenium/tempTest.php
+## Run all tests
+##- phpunit --debug --coverage-text ./trunk/tests/phpunit_selenium/
+
+notifications:
+  email:
+    - dasscheman@hotmail.com
