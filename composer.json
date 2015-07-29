@@ -11,9 +11,9 @@
         "ext-dom": "*"
     },
     "autoload": {
-            "classmap" : [
-                    "framework/YiiBase.php",
-                    "framework/yii.php"
-            ]
+        "classmap" : [
+                "framework/YiiBase.php",
+                "framework/yii.php"
+        ]
     }
 }
