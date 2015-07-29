@@ -18,6 +18,9 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
     public function testTitelControleren()
     {
+	$this->open("/index-test.php?r=site/login");
+	$this->assertEquals("HIKE-app", $this->getText("css=b"));
+
 	$this->open('/site/login');
 	$this->type("id=LoginForm_username", "hgese");
 	$this->type("id=LoginForm_password", "asdf");
@@ -30,6 +33,8 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
     public function testTitelControlerentwe()
     {
+	$this->open("/index-test.php");
+	$this->assertEquals("HIKE-app", $this->getText("css=b"));
 	$this->open('site/login');
 	$this->type("id=LoginForm_username", "hgese");
 	$this->type("id=LoginForm_password", "asdf");
@@ -43,6 +48,8 @@ class ActionGestartOrganisatieTest extends WebTestCase
     ##Game Overview:
     public function testVragenControleren()
     {
+	$this->open("hike_development/index-test.php");
+	$this->assertEquals("HIKE-app", $this->getText("css=b"));
 	$this->open('protected/site/login');
 	$this->type("id=LoginForm_username", "hgese");
 	$this->type("id=LoginForm_password", "asdf");
@@ -56,6 +63,9 @@ class ActionGestartOrganisatieTest extends WebTestCase
         ##Game Overview:
     public function testVragenControlerentweewqwq()
     {
+
+	$this->open("hike_development/hike_development/index-test.php");
+	$this->assertEquals("HIKE-app", $this->getText("css=b"));
 	$this->open('hike_development/site/login');
 	$this->type("id=LoginForm_username", "hgese");
 	$this->type("id=LoginForm_password", "asdf");
