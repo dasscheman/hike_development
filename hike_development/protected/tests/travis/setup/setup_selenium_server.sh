@@ -12,10 +12,10 @@ sudo apt-get update
 echo "Installing dependencies"
 composer install
 
-composer global require 'phpunit/phpunit-selenium=*'
-composer global require 'phpunit/phpunit-story=*'
-composer global require 'phpunit/dbunit=*'
-composer global require 'phpunit/php-invoker=*'
+##composer global require 'phpunit/phpunit-selenium=*'
+##composer global require 'phpunit/phpunit-story=*'
+##composer global require 'phpunit/dbunit=*'
+##composer global require 'phpunit/php-invoker=*'
 
 ##sudo mkdir -p /usr/share/php/PHPUnit
 ##sudo mkdir -p /usr/share/php/PHP
@@ -38,6 +38,9 @@ composer global require 'phpunit/php-invoker=*'
 ##mkdir PHPUnit
 ##mkdir PHPUnit/Extensions/
 ##wget -O PHPUnit/Extensions/SeleniumTestCase.php https://github.com/giorgiosironi/phpunit-selenium/blob/master/PHPUnit/Extensions/SeleniumTestCase.php
+
+chmod 777 /home/travis/build/dasscheman/hike_development/hike_development/assets
+chmod 777 /home/travis/build/dasscheman/hike_development/protected/runtime
 
 echo "Download Firefox"
 wget $firefoxUrl -O $firefoxFile
