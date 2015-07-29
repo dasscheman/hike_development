@@ -37,15 +37,19 @@ class ActionGestartOrganisatieTest extends WebTestCase
 	$this->click("name=yt0");
 	$this->waitForPageToLoad("30000");
 	$this->assertContains("hike_development/index-test.php?r=site/login", $this->getLocation());
-	$this->assertContains("hike_development/index.php?r=game/gameoverview&event_id=1", $this->getLocation());
+	$this->assertContains("hike_development/index-test.php?r=game/gameoverview&event_id=1", $this->getLocation());
     }
 
     ##Game Overview:
-/*    public function testVragenControleren()
+    public function testVragenControleren()
     {
+    	$this->open("hike_development/index-test.php?r=game/gameoverview&event_id=1");
+        $this->waitForPageToLoad ( "30000" );
+	$this->clickAndWait("link=Vragen Controlren");
+	$this->assertContains("hike_development/index-test.php?r=openVragenAntwoorden/vragenControleren", $this->getLocation());
 
     }
-
+/*
     public function testBonuspuntenGeven()
     {
 	$this->assertEquals("Dat mag dus niet...", $this->getText("css=div.error"));
