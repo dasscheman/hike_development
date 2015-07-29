@@ -18,7 +18,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
     public function testTitelControleren()
     {
-	$this->open('index-test.php');
+	$this->open('index-test2.php');
 	$this->assertEquals("Dat mag dus niet...", $this->getLocation());
         $this->assertTitle('HIKE-app');
     }
@@ -26,7 +26,14 @@ class ActionGestartOrganisatieTest extends WebTestCase
     ##Game Overview:
     public function testVragenControleren()
     {
-	$this->open('index-test.php');
+	$this->open('/index-test.php?r=site/login');
+	$this->assertEquals("Dat mag dus niet...", $this->getLocation());
+        $this->assertText('HIKE-app');
+    }
+
+    public function testVragenControlerenTwee()
+    {
+	$this->open('hike_development/index-test.php?r=site/login');
 	$this->assertEquals("Dat mag dus niet...", $this->getLocation());
         $this->assertText('HIKE-app');
     }
