@@ -14,7 +14,7 @@ class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
     {
     	$this->open('hike_development/index-test.php');
         $this->waitForPageToLoad ( "30000" );
-	$this->assertEquals("*HIKE-app*", $this->getBodyText());
+	$this->assertEquals("HIKE-app*", $this->getBodyText());
 	$this->assertTextPresent('HIKE-app');
 	$this->assertEquals("HIKE-app", $this->getText("css=b"));
     }

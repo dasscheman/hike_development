@@ -12,11 +12,20 @@ class ActionGestartOrganisatieTest extends WebTestCase
     {
     	$this->open('hike_development/index-test.php');
         $this->waitForPageToLoad ( "30000" );
-	$this->assertEquals("*HIKE-app*", $this->getBodyText());
+	$this->assertEquals("HIKE-app*", $this->getBodyText());
 	$this->assertTextPresent('HIKE-app');
 	$this->assertEquals("HIKE-app", $this->getText("css=b"));
     }
 
+    public function testLogin()
+    {
+	$this->open("hike_development/index-test.php?r=site/login");
+        $this->waitForPageToLoad ( "30000" );
+	$this->type("id=LoginForm_username", "organisatie");
+	$this->type("id=LoginForm_password", "test");
+	$this->click("name=yt0");
+	$this->waitForPageToLoad("30000");
+    }
     /*
     protected function setUp()
     {
