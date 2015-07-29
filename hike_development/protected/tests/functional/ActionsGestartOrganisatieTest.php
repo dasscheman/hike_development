@@ -4,17 +4,19 @@ class ActionGestartOrganisatieTest extends WebTestCase
     protected function setUp()
     {
         $this->setBrowser('*firefox');
-        $this->setBrowserUrl('http://127.0.0.1/');
+        $this->setBrowserUrl('http://localhost/');
         $this->shareSession(true);
     }
 
-    public function testLoadPage()
+    public function testLoadPageZes()
     {
-        $this->open('http://127.0.0.1/protected/tests/travis/simpleTest.html');
+    	$this->open('hike_development/index-test.php');
         $this->waitForPageToLoad ( "30000" );
-	$this->assertEquals("Dat mag dus niet...", $this->getLocation());
-        $this->assertTitle('phpunit selenium test');
+	$this->assertEquals("*HIKE-app*", $this->getBodyText());
+	$this->assertTextPresent('HIKE-app');
+	$this->assertEquals("HIKE-app", $this->getText("css=b"));
     }
+
     /*
     protected function setUp()
     {
