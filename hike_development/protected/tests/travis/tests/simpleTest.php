@@ -6,13 +6,13 @@ class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
     protected function setUp()
     {
         $this->setBrowser('*firefox');
-        $this->setBrowserUrl('http://127.0.0.1/');
+        $this->setBrowserUrl('http://localhost/');
         $this->shareSession(true);
     }
 
     public function testLoadPage()
     {
-        $this->open('http://127.0.0.1/protected/tests/travis/simpleTest.html');
+        $this->open('http://localhost/protected/tests/travis/simpleTest.html');
         $this->waitForPageToLoad ( "30000" );
 	$this->assertEquals("Dat mag dus niet...", $this->getLocation());
         $this->assertTitle('phpunit selenium test');
@@ -20,23 +20,55 @@ class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
 
     public function testLoadPageTwee()
     {
-    	$this->open("http://127.0.0.1/index-test.php?r=site/login");
+    	$this->open("http://localhost/index-test.php");
         $this->waitForPageToLoad ( "30000" );
+	$this->click("//ul[@id='yw2']/li/a/span/i[2]");
+	$this->assertTrue((bool)preg_match('/^[\s\S]*index-test\.php[\s\S]r=site\/login$/',$this->getLocation()));
 	$this->assertEquals("HIKE-app", $this->getText("css=b"));
     }
 
     public function testLoadPageDrie()
     {
-    	$this->open("http://127.0.0.1/hike_development/index-test.php?r=site/login");
+    	$this->open("http://localhost/hike_development/index-test.php");
         $this->waitForPageToLoad ( "30000" );
 	$this->assertEquals("HIKE-app", $this->getText("css=b"));
     }
 
     public function testLoadPageVier()
     {
-    	$this->open("http://127.0.0.1/hike_development/hike_development/index-test.php?r=site/login");
+    	$this->open("http://localhost/hike_development/hike_development/index-test.php");
+        $this->waitForPageToLoad ( "30000" );
+	$this->click("//ul[@id='yw2']/li/a/span/i[2]");
+	$this->assertTrue((bool)preg_match('/^[\s\S]*index-test\.php[\s\S]r=site\/login$/',$this->getLocation()));
+	$this->assertEquals("HIKE-app", $this->getText("css=b"));
+    }
+
+
+
+        public function testLoadPageVijf()
+    {
+    	$this->open("index-test.php");
+        $this->waitForPageToLoad ( "30000" );
+	$this->click("//ul[@id='yw2']/li/a/span/i[2]");
+	$this->assertTrue((bool)preg_match('/^[\s\S]*index-test\.php[\s\S]r=site\/login$/',$this->getLocation()));
+	$this->assertEquals("HIKE-app", $this->getText("css=b"));
+    }
+
+    public function testLoadPageZes()
+    {
+    	$this->open("hike_development/index-test.php");
         $this->waitForPageToLoad ( "30000" );
 	$this->assertEquals("HIKE-app", $this->getText("css=b"));
     }
+
+    public function testLoadPageZeven()
+    {
+    	$this->open("hike_development/hike_development/index-test.php");
+        $this->waitForPageToLoad ( "30000" );
+	$this->click("//ul[@id='yw2']/li/a/span/i[2]");
+	$this->assertTrue((bool)preg_match('/^[\s\S]*index-test\.php[\s\S]r=site\/login$/',$this->getLocation()));
+	$this->assertEquals("HIKE-app", $this->getText("css=b"));
+    }
+
 }
 ?>
