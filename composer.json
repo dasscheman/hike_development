@@ -6,7 +6,6 @@
         "phpunit/dbunit": "*",
         "phpunit/phpunit-story": "*",
         "sebastian/comparator": "~1.0",
-        //"yiisoft/yii": "1.1.*",
         "ext-curl": "*",
         "ext-dom": "*"
     },
