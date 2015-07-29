@@ -18,7 +18,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
     public function testTitelControleren()
     {
-	$this->open("/index-test.php?r=site/login");
+	$this->open("http://127.0.0.1/index-test.php?r=site/login");
         $this->waitForPageToLoad ( "30000" );
 	$this->assertEquals("HIKE-app", $this->getText("css=b"));
 
@@ -34,7 +34,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
     public function testTitelControlerentwe()
     {
-	$this->open("/index-test.php");
+	$this->open("http://127.0.0.1/index-test.php");
         $this->waitForPageToLoad ( "30000" );
 	$this->assertEquals("HIKE-app", $this->getText("css=b"));
 	$this->open('site/login');
@@ -50,7 +50,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
     ##Game Overview:
     public function testVragenControleren()
     {
-	$this->open("hike_development/index-test.php");
+	$this->open("http://127.0.0.1/hike_development/index-test.php");
         $this->waitForPageToLoad ( "30000" );
 	$this->assertEquals("HIKE-app", $this->getText("css=b"));
 	$this->open('protected/site/login');
@@ -67,7 +67,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
     public function testVragenControlerentweewqwq()
     {
 
-	$this->open("hike_development/hike_development/index-test.php");
+	$this->open("http://127.0.0.1/hike_development/hike_development/index-test.php");
         $this->waitForPageToLoad ( "30000" );
 	$this->assertEquals("HIKE-app", $this->getText("css=b"));
 	$this->open('hike_development/site/login');
@@ -83,7 +83,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
     public function testVragenControlerenTwee()
     {
-	$this->open('hike_development/index-test.php?r=site/login');
+	$this->open('http://127.0.0.1/hike_development/index-test.php?r=site/login');
         $this->waitForPageToLoad ( "30000" );
 	$this->type("id=LoginForm_username", "hgese");
 	$this->type("id=LoginForm_password", "asdf");
@@ -97,7 +97,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
     public function testVragenControlerenTweetwee()
     {
-	$this->open('hike_development/hike_development/index-test.php?r=site/login');
+	$this->open('http://127.0.0.1/hike_development/hike_development/index-test.php?r=site/login');
         $this->waitForPageToLoad ( "30000" );
 	$this->type("id=LoginForm_username", "hgese");
 	$this->type("id=LoginForm_password", "asdf");
@@ -110,7 +110,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
     public function testVragenControlerendrier()
     {
-	$this->open('hike_development/protected/site/login');
+	$this->open('http://127.0.0.1/hike_development/protected/site/login');
         $this->waitForPageToLoad ( "30000" );
 	$this->type("id=LoginForm_username", "hgese");
 	$this->type("id=LoginForm_password", "asdf");
@@ -123,7 +123,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
     public function testVragenControlerenvier()
     {
-	$this->open('hike_development/hike_development/index-test.php?r=site/login');
+	$this->open('http://127.0.0.1/hike_development/hike_development/index-test.php?r=site/login');
         $this->waitForPageToLoad ( "30000" );
 	$this->type("id=LoginForm_username", "hgese");
 	$this->type("id=LoginForm_password", "asdf");
