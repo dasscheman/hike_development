@@ -8,7 +8,8 @@
 // make sure non existing PHPUnit classes do not break with Yii autoloader
 
 // change the following paths if necessary
-$yiit=dirname(__FILE__).'/../../../Yii/framework/yiit.php';
+//$yiit=dirname(__FILE__).'/../../../Yii/framework/yiit.php';
+$yiit=realpath(__DIR__ . '/../../..').'/framework/yiit.php';
 $config=dirname(__FILE__).'/../config/test.php';
 
 require_once($yiit);
