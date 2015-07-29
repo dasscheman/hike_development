@@ -18,22 +18,37 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
     public function testTitelControleren()
     {
-	$this->open('index-test2.php');
-	$this->assertEquals("Dat mag dus niet...", $this->getLocation());
+	$this->open('/index-test.php?r=site/login');
+	$this->type("id=LoginForm_username", "hgese");
+	$this->type("id=LoginForm_password", "asdf");
+	$this->click("name=yt0");
+	$this->waitForPageToLoad("30000");
+	$this->assertEquals("/index-test.php?r=site/login", $this->getLocation());
+	$this->assertEquals("dasman", $this->getText("css=div.view > b"));
         $this->assertTitle('HIKE-app');
     }
 
     ##Game Overview:
     public function testVragenControleren()
     {
-	$this->open('/index-test.php?r=site/login');
+	$this->open('hike_development//index-test.php?r=site/login');
+	$this->type("id=LoginForm_username", "hgese");
+	$this->type("id=LoginForm_password", "asdf");
+	$this->click("name=yt0");
+	$this->waitForPageToLoad("30000");
+	$this->assertEquals("/index-test.php?r=site/login", $this->getLocation());
 	$this->assertEquals("Dat mag dus niet...", $this->getLocation());
         $this->assertText('HIKE-app');
     }
 
     public function testVragenControlerenTwee()
     {
-	$this->open('hike_development/index-test.php?r=site/login');
+	$this->open('hike_development/hike_development/index-test.php?r=site/login');
+	$this->type("id=LoginForm_username", "hgese");
+	$this->type("id=LoginForm_password", "asdf");
+	$this->click("name=yt0");
+	$this->waitForPageToLoad("30000");
+	$this->assertEquals("/index-test.php?r=site/login", $this->getLocation());
 	$this->assertEquals("Dat mag dus niet...", $this->getLocation());
         $this->assertText('HIKE-app');
     }
