@@ -21,7 +21,7 @@ before_install:
   - mysql -e "CREATE USER 'test'@'localhost' IDENTIFIED BY 'test';" -u root
   - mysql -e "GRANT ALL PRIVILEGES ON * . * TO 'test'@'localhost';" -u root
   - mysql -e "FLUSH PRIVILEGES;"
-  - mysql -u root -p hike_v2_01_test < hike_development/protected/data/hike-v2-01.sql
+  - mysql -u root –-password= -p hike_v2_01_test < hike_development/protected/data/hike-v2-01.sql
 
 before_script:
   - ./hike_development/protected/tests/travis/setup/before_script.sh
