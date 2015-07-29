@@ -24,7 +24,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
     {
     	$this->open('hike_development/index-test.php');
         $this->waitForPageToLoad ( "30000" );
-	$this->assertContains("HIKE-app*", $this->getBodyText());
+	$this->assertContains("HIKE-app", $this->getBodyText());
     }
 
     public function testLogin()
