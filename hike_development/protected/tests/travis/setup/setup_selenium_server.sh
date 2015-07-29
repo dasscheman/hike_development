@@ -40,7 +40,7 @@ composer install
 ##wget -O PHPUnit/Extensions/SeleniumTestCase.php https://github.com/giorgiosironi/phpunit-selenium/blob/master/PHPUnit/Extensions/SeleniumTestCase.php
 
 chmod 777 /home/travis/build/dasscheman/hike_development/hike_development/assets
-chmod 777 /home/travis/build/dasscheman/hike_development/protected/runtime
+chmod 777 /home/travis/build/dasscheman/hike_development/hike_development/protected/runtime
 
 echo "Download Firefox"
 wget $firefoxUrl -O $firefoxFile
