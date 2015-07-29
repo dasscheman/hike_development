@@ -12,6 +12,11 @@ sudo apt-get update
 echo "Installing dependencies"
 composer install
 
+composer global require 'phpunit/phpunit-selenium=*'
+composer global require 'phpunit/phpunit-story=*'
+composer global require 'phpunit/dbunit=*'
+composer global require 'phpunit/php-invoker=*'
+
 ##sudo mkdir -p /usr/share/php/PHPUnit
 ##sudo mkdir -p /usr/share/php/PHP
 
