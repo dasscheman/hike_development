@@ -16,10 +16,17 @@ class ActionGestartOrganisatieTest extends WebTestCase
         $this->assertTitle('phpunit selenium test');
     }
 
+    public function testTitelControleren()
+    {
+	$this->open('index-test.php');
+        $this->assertTitle('HIKE-app');
+    }
+
     ##Game Overview:
     public function testVragenControleren()
     {
-	$this->assertEquals("Dat mag dus niet...", $this->getText("css=div.error"));
+	$this->open('index-test.php');
+        $this->assertText('HIKE-app');
     }
 
    /* public function testBonuspuntenGeven()
