@@ -31,7 +31,10 @@ before_script:
 
 script:
   - phpunit --verbose --debug --coverage-text ./hike_development/protected/tests/travis/tests/
-  - phpunit --debug --configuration ./hike_development/protected/tests/phpunit.xml --coverage-text ./hike_development/protected/tests/functional/ActionsGestartOrganisatieTest.php
+  - phpunit --verbose --debug --coverage-text ./hike_development/protected/tests/functional/ActionsGestartOrganisatieTest.php
+
+#  - phpunit --debug --configuration ./hike_development/protected/tests/phpunit.xml --coverage-text ./hike_development/protected/tests/functional/ActionsGestartOrganisatieTest.php
+
 #  - phpunit --debug --coverage-text ./trunk/tests/phpunit_selenium/collaboratorTest.php
 #  - phpunit --debug --coverage-text ./trunk/tests/phpunit_selenium/curatorTest.php
 #  - phpunit --debug --coverage-text ./trunk/tests/phpunit_selenium/importTest.php
