@@ -45,7 +45,32 @@ class ActionGestartOrganisatieTest extends WebTestCase
     {
     	$this->open("hike_development/index-test.php?r=game/gameoverview&event_id=1");
         $this->waitForPageToLoad ( "30000" );
-	$this->clickAndWait("link=Vragen Controlren");
+	$this->click("link=Vragen Controleren");
+        $this->waitForPageToLoad ( "30000" );
+	$this->assertContains("hike_development/index-test.php?r=openVragenAntwoorden/vragenControleren", $this->getLocation());
+
+    }
+
+    public function testVragenControlerenTwee()
+    {
+    	$this->open("hike_development/index-test.php?r=game/gameoverview&event_id=1");
+        $this->waitForPageToLoad ( "30000" );
+	$this->click("//ul[@id='yw2']/li/a/span/i[3]");
+        $this->waitForPageToLoad ( "30000" );
+	$this->assertContains("hike_development/index-test.php?r=openVragenAntwoorden/vragenControleren", $this->getLocation());
+
+    }
+
+    public function testVragenControlerenDrie()
+    {
+    	$this->open("hike_development/index-test.php?r=game/gameoverview&event_id=1");
+        $this->waitForPageToLoad ( "30000" );
+	$this->click("link=Vragen Controlren");
+        $this->waitForPageToLoad ( "30000" );
+	$this->click("link=Vragen Controleren");
+        $this->waitForPageToLoad ( "30000" );
+	$this->click("//ul[@id='yw2']/li/a/span/i[3]");
+        $this->waitForPageToLoad ( "30000" );
 	$this->assertContains("hike_development/index-test.php?r=openVragenAntwoorden/vragenControleren", $this->getLocation());
 
     }
