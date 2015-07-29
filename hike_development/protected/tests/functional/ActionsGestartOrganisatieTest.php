@@ -19,6 +19,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
     public function testTitelControleren()
     {
 	$this->open('index-test.php');
+	$this->assertEquals("Dat mag dus niet...", $this->getLocation());
         $this->assertTitle('HIKE-app');
     }
 
@@ -26,6 +27,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
     public function testVragenControleren()
     {
 	$this->open('index-test.php');
+	$this->assertEquals("Dat mag dus niet...", $this->getLocation());
         $this->assertText('HIKE-app');
     }
 
