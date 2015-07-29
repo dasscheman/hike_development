@@ -1,8 +1,6 @@
 <?php
-
 class SiteController extends Controller
 {
-			
 		/**
 		 * Declares class-based actions.
 		 */
@@ -10,7 +8,7 @@ class SiteController extends Controller
 		{
 			return array(
 				// captcha action renders the CAPTCHA image displayed on the contact page
-			// zolang de captha niet werkt is dit uit gezet. 
+			// zolang de captha niet werkt is dit uit gezet.
 				/*'captcha'=>array(
 					'class'=>'CCaptchaAction',
 					'backColor'=>0xFFFFFF,
@@ -22,7 +20,7 @@ class SiteController extends Controller
 				),
 			);
 		}
-			
+
 		public function filters()
 			{
 				// return the filter configuration for this controller, e.g.:
@@ -30,11 +28,11 @@ class SiteController extends Controller
 					"accessControl",
 				);
 			}
-			
+
 		public function accessRules()
 			{
 				return array(
-					array('allow', 
+					array('allow',
 						'users'=>array('*'),
 					),
 				);
@@ -53,7 +51,7 @@ class SiteController extends Controller
         if (!Yii::app()->user->isGuest) {
             $this->redirect(array('/game/viewUser'));}
 	}
-	
+
 	/**
 	 * This is the default 'index' action that is invoked
 	 * when an action is not explicitly requested by users.
@@ -64,7 +62,7 @@ class SiteController extends Controller
 		// using the default layout 'protected/views/layouts/main.php'
 		$this->render('help');
 	}
-	
+
 	/**
 	 * This is the action to handle external exceptions.
 	 */
@@ -111,7 +109,7 @@ class SiteController extends Controller
 	 */
 	public function actionLogin()
 	{
-        //$this->layout='//layouts/column1';	
+        //$this->layout='//layouts/column1';
 		$model=new LoginForm;
 
 		// if it is ajax validation request

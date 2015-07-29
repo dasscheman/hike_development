@@ -1,13 +1,28 @@
 <?php
 class ActionGestartOrganisatieTest extends WebTestCase
 {
+    protected function setUp()
+    {
+        $this->setBrowser('*firefox');
+        $this->setBrowserUrl('http://127.0.0.1/');
+        $this->shareSession(true);
+    }
+
+    public function testLoadPage()
+    {
+        $this->open('http://127.0.0.1/protected/tests/travis/simpleTest.html');
+        $this->waitForPageToLoad ( "30000" );
+	$this->assertEquals("Dat mag dus niet...", $this->getLocation());
+        $this->assertTitle('phpunit selenium test');
+    }
+
     ##Game Overview:
     public function testVragenControleren()
     {
 	$this->assertEquals("Dat mag dus niet...", $this->getText("css=div.error"));
     }
 
-    public function testBonuspuntenGeven()
+   /* public function testBonuspuntenGeven()
     {
 	$this->assertEquals("Dat mag dus niet...", $this->getText("css=div.error"));
     }
@@ -35,7 +50,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
     public function testGecheckteStillePostenBekijken()
     {
 	$this->assertEquals("Dat mag dus niet...", $this->getText("css=div.error"));
-    }
+    }*/
 
     ## Group Overview
 

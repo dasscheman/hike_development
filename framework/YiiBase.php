@@ -430,7 +430,7 @@ class YiiBase
 				}
 				else
 				{
-					if (file_exists($className.'.php'))
+					if ($className!='PHPUnit_Extensions_Story_TestCase')
 						include($className.'.php');
 				}
 			}
