@@ -7,15 +7,10 @@ sudo a2enmod rewrite
 # convert_selenium_to_phpunit.sh assumes that the files are in a folder with this pattern: */svn/*/trunk
 # * can be a folder or nothing.
 # This is done because of the local folder structure, which I don't want to change.
-##mkdir /home/travis/build/dasscheman/LOVD3_development/svn
-##sudo mv /home/travis/build/dasscheman/LOVD3_development/trunk /home/travis/build/dasscheman/LOVD3_development/svn
-##sudo sed -i -e "s,/var/www,/home/travis/build/dasscheman,g" /etc/apache2/sites-available/default
 sudo sed -i -e "s,/var/www,/home/travis/build/dasscheman/hike_development,g" /etc/apache2/sites-available/default
 sudo sed -i -e "s,AllowOverride[ ]None,AllowOverride All,g" /etc/apache2/sites-available/default
 
-
 sudo /etc/init.d/apache2 restart
 
-
+## create the table in the database.
 mysql -u root --password=password hike_v2_01_test < ./hike_development/protected/data/hike-v2-01.sql;
-##mysql -u lovd -p < SQL_data_ALL.sql;
