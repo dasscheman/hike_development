@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Komodo Project File - DO NOT EDIT -->
 <project id="5d98e0e6-66bc-4137-b498-edb118851c71" kpf_version="5" name="hike.komodoproject">
+<preference-set idref="5d98e0e6-66bc-4137-b498-edb118851c71" id="project" preftype="project">
+  <long id="tabWidth">4</long>
+</preference-set>
 </project>

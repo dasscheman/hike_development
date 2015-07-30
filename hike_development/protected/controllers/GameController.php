@@ -5,7 +5,7 @@ class GameController extends Controller
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
-	public $layout='//layouts/column2'; 
+	public $layout='//layouts/column2';
 
     /**
 	 * @return array action filters
@@ -26,26 +26,33 @@ class GameController extends Controller
 	 */
 	public function accessRules()
 	{
-		return array(		
+		return array(
 			array('deny',  // deny all guest users
 				'users'=>array('?'),
-			),			
+			),
 			array(	'deny',  // deny if group_id is not set
 				'actions'=>array('groupoverview'),
 				'expression'=> '!isset($_GET["group_id"])',
-			),				
+			),
 			array('allow', // allow authenticated user to perform 'create'
 				'actions'=>array('index', 'viewUser'),
 				'users'=> array('@'),
-			),	
+			),
 			array(	'allow', // allow admin user to perform 'viewplayers' actions
-				'actions'=>array('gameoverview', 'groupoverview', 'viewUser'),
+				'actions'=>array('gameoverview'),
 				'expression'=> 'DeelnemersEvent::model()->isActionAllowed(
-                    Yii::app()->controller->id,
-                    Yii::app()->controller->action->id,
-                    $_GET["event_id"],
-                    $_GET["group_id"])',
-			),			
+				    Yii::app()->controller->id,
+				    Yii::app()->controller->action->id,
+				    $_GET["event_id"])',
+			),
+			array(	'allow', // allow admin user to perform 'viewplayers' actions
+				'actions'=>array('groupoverview', 'viewUser'),
+				'expression'=> 'DeelnemersEvent::model()->isActionAllowed(
+				    Yii::app()->controller->id,
+				    Yii::app()->controller->action->id,
+				    $_GET["event_id"],
+				    $_GET["group_id"])',
+			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
@@ -68,7 +75,7 @@ class GameController extends Controller
 			$event_id = GeneralFunctions::getSingleActiveEventIdForUser();
 			$this->redirect(array('game/gameoverview',
 						      'event_id'=>$event_id));
-		}		
+		}
 
 		/**
 		 * Als er uberhaubt maar 1 hike is waar de ingelogde gebruiker voor ingeschreven
@@ -83,7 +90,7 @@ class GameController extends Controller
 			$event_id = GeneralFunctions::getSingleEventIdForUser();
 			$this->redirect(array('game/gameoverview',
 						      'event_id'=>$event_id));
-		}		
+		}
 		/**
 		 * Als admin is ingelogd, dan moet alles getoont worden.
 		 */
@@ -91,7 +98,7 @@ class GameController extends Controller
 		    $where = "user_ID = $user_id";
 		else
 		    $where = "";
-		    
+
 		$deelnemersEventDataProvider =new CActiveDataProvider('DeelnemersEvent',
 		    array(
 			'criteria'=>array(
@@ -101,7 +108,7 @@ class GameController extends Controller
 			'pagination'=>array(
 				'pageSize'=>15,
 			),
-		));  
+		));
 
 		/**
 		 * Laat alle events zien waar een gebruiker voor ingeschreven is.
@@ -115,7 +122,7 @@ class GameController extends Controller
 	 * Lists all models.
 	 */
 	public function actionGameOverview()
-	{       
+	{
 		$event_Id = $_GET['event_id'];
 		$where = "event_ID = $event_Id";
 		$dataProvider=new CActiveDataProvider('Groups',
@@ -134,16 +141,16 @@ class GameController extends Controller
 		));
 	}
 
-	
-	
+
+
 	/**
 	 * Lists all models.
 	 */
 	public function actionGroupOverview()
-	{       
+	{
 		$event_Id = $_GET['event_id'];
-		$group_Id = $_GET['group_id'];    
-	     
+		$group_Id = $_GET['group_id'];
+
 		$ppwhere = "event_ID = $event_Id AND group_ID = $group_Id";
 		$postPassageDataProvider=new CActiveDataProvider('PostPassage',
 		array(
@@ -155,19 +162,19 @@ class GameController extends Controller
 			'pageSize'=>10,
 		    ),
 		));
-		
-	
+
+
         $ovwhere = "event_ID =$event_Id AND group_ID = $group_Id AND checked=0";
 		$teControlerenOpenVragenDataProvider=new CActiveDataProvider('OpenVragenAntwoorden',
 		    array(
 			 'criteria'=>array(
-				'condition'=>$ovwhere       
+				'condition'=>$ovwhere
 			    ),
 			'pagination'=>array(
 			    'pageSize'=>10,
 			),
 		));
-		       
+
 		$newhere = "event_ID = $event_Id AND group_ID = $group_Id";
 		$openNoodEnvelopDataProvider=new CActiveDataProvider('OpenNoodEnvelop',
 		    array(
@@ -179,22 +186,22 @@ class GameController extends Controller
 			    'pageSize'=>30,
 			),
 		));
-        
+
 		$this->render('groupOverview',array(
 			'postPassageDataProvider'=>$postPassageDataProvider,
 			'teControlerenOpenVragenDataProvider'=>$teControlerenOpenVragenDataProvider,
 			'openNoodEnvelopDataProvider'=>$openNoodEnvelopDataProvider,
 		));
 	}
-	
-	
+
+
 	/**
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed
 	 */
 	public function actionView($event_Id, $user_Id, $rol, $group_Id)
 	{
-		/*$rol = DeelnemersEvent::model()->getRolOfPlayer($event_Id, 
+		/*$rol = DeelnemersEvent::model()->getRolOfPlayer($event_Id,
                                                         $user_Id);*/
 		switch ($rol)
 		{
@@ -219,35 +226,35 @@ class GameController extends Controller
 				    'model'=>$this->loadModel($id),
 				));
 		}
-	  
+
 	}
-	
+
     /**
      * Displays a particular model.
      * @param integer $id the ID of the model to be displayed
      */
     public function actionViewUser()
     {
-		$user_id = Yii::app()->user->id;    
+		$user_id = Yii::app()->user->id;
 		$userData=Users::model()->findByPk($user_id);
-	
+
 		$friendsData=new Users('searchFriends');
 		$friendsData->unsetAttributes();
-		
+
 		$pendingFriendsData=new Users('searchPending');
 		$pendingFriendsData->unsetAttributes();
-		
+
 		if(isset($_GET['Users'])) {
 			$friendsData->attributes=$_GET['Users'];
 			$pendingFriendsData->attributes=$_GET['Users'];
 		}
 
 		$hikeData=new EventNames('search');
-		$hikeData->unsetAttributes();		
+		$hikeData->unsetAttributes();
 		if(isset($_GET['EventNames'])) {
 			$hikeData->attributes=$_GET['EventNames'];
 		}
-		
+
 		$this->render('viewUser',
 			array(
 				'userData'=>$userData,
