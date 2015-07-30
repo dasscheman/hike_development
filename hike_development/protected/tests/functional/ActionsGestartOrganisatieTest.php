@@ -1,9 +1,9 @@
 <?php
 class ActionGestartOrganisatieTest extends WebTestCase
 {
-     public $fixtures=array(
+     /*public $fixtures=array(
         'users'=>'Users',
-    );
+    );*/
     /* call fixture:
      *
     // return the row whose alias is 'sample1' in the `Post` fixture table
