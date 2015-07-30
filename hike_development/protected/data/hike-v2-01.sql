@@ -78,7 +78,7 @@ INSERT INTO `tbl_deelnemers_event` (`deelnemers_ID`, `event_ID`, `user_ID`, `rol
 (6, 2, 3, 3, 4, '2014-08-25 12:49:00', 1, '2014-08-25 12:49:00', 1),
 (7, 3, 1, 1, NULL, '2014-08-25 12:49:00', 1, '2014-08-25 12:49:00', 1),
 (8, 3, 2, 3, 5, '2014-08-25 12:49:00', 1, '2014-08-25 12:49:00', 1),
-(9, 3, 3, 3, 6, '2014-08-25 12:49:00', 1, '2014-08-25 12:49:00', 1),
+(9, 3, 3, 3, 6, '2014-08-25 12:49:00', 1, '2014-08-25 12:49:00', 1);
 
 -- --------------------------------------------------------
 
@@ -107,7 +107,7 @@ CREATE TABLE IF NOT EXISTS `tbl_event_names` (
 INSERT INTO `tbl_event_names` (`event_ID`, `event_name`, `start_date`, `end_date`, `status`, `active_day`, `max_time`, `create_time`, `create_user_ID`, `update_time`, `update_user_ID`) VALUES
 (1, 'opstart', '2014-09-05', '2014-09-06', 1, NULL, NULL, '2014-08-25 12:47:51', 1, '2015-07-28 16:03:11', 2),
 (2, 'introductie', '2015-02-25', '2015-03-31', 2, NULL, NULL, '2015-02-23 19:45:17', 2, '2015-02-23 19:45:17', 2),
-(3, 'gestart', '2015-02-25', '2015-02-29', 3, '2015-02-27', '12:00:00', '2015-02-23 19:46:08', 2, '2015-07-10 14:36:10', 2),
+(3, 'gestart', '2015-02-25', '2015-02-29', 3, '2015-02-27', '12:00:00', '2015-02-23 19:46:08', 2, '2015-07-10 14:36:10', 2);
 
 -- --------------------------------------------------------
 
@@ -136,7 +136,7 @@ INSERT INTO `tbl_friend_list` (`friend_list_ID`, `user_ID`, `friends_with_user_I
 (3, 2, 1, 2, '2015-01-26 13:14:37', 2, '2015-01-26 13:14:37', 2),
 (4, 2, 3, 2, '2015-01-26 13:14:37', 2, '2015-01-26 13:14:37', 2),
 (5, 3, 1, 2, '2015-01-26 13:14:37', 2, '2015-01-26 13:14:37', 2),
-(6, 3, 2, 2, '2015-01-26 13:14:37', 2, '2015-01-26 13:14:37', 2),
+(6, 3, 2, 2, '2015-01-26 13:14:37', 2, '2015-01-26 13:14:37', 2);
 
 -- --------------------------------------------------------
 
@@ -164,7 +164,7 @@ INSERT INTO `tbl_groups` (`group_ID`, `group_name`, `event_ID`, `create_time`, `
 (3, 'groep A introductie', 2, '2014-08-25 21:45:04', 2, '2014-08-31 21:42:09', 2),
 (4, 'groep B introductie', 2, '2014-08-25 21:45:17', 2, '2014-08-31 11:48:00', 2),
 (5, 'groep A gestart', 3, '2014-08-25 21:45:44', 2, '2014-08-31 11:47:11', 2),
-(6, 'groep B gestart', 3, '2014-08-31 11:48:30', 2, '2014-09-04 20:52:33', 2),
+(6, 'groep B gestart', 3, '2014-08-31 11:48:30', 2, '2014-09-04 20:52:33', 2);
 
 -- --------------------------------------------------------
 
@@ -778,8 +778,8 @@ CREATE TABLE IF NOT EXISTS `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`user_ID`, `username`, `voornaam`, `achternaam`, `email`, `password`, `macadres`, `birthdate`, `last_login_time`, `create_time`, `create_user_ID`, `update_time`, `update_user_ID`) VALUES
-(1, 'organisatie', 'organisatie', 'organisatie', 'daheman@hotmail.com', '098f6bcd4621d373cade4e832627b4f6', NULL, '0000-00-00', '2015-07-28 15:47:22', '2015-07-10 07:05:13', NULL, '2015-07-10 07:05:13', NULL);
-(2, 'deelnemera', 'deelnemersa', 'deelnemersa', 'daheman@hotmail.com', '098f6bcd4621d373cade4e832627b4f6', NULL, '0000-00-00', '2015-07-28 15:47:22', '2015-07-10 07:05:13', NULL, '2015-07-10 07:05:13', NULL);
+(1, 'organisatie', 'organisatie', 'organisatie', 'daheman@hotmail.com', '098f6bcd4621d373cade4e832627b4f6', NULL, '0000-00-00', '2015-07-28 15:47:22', '2015-07-10 07:05:13', NULL, '2015-07-10 07:05:13', NULL),
+(2, 'deelnemera', 'deelnemersa', 'deelnemersa', 'daheman@hotmail.com', '098f6bcd4621d373cade4e832627b4f6', NULL, '0000-00-00', '2015-07-28 15:47:22', '2015-07-10 07:05:13', NULL, '2015-07-10 07:05:13', NULL),
 (3, 'deelnemerb', 'deelnemersb', 'deelnemersb', 'daheman@hotmail.com', '098f6bcd4621d373cade4e832627b4f6', NULL, '0000-00-00', '2015-07-28 15:47:22', '2015-07-10 07:05:13', NULL, '2015-07-10 07:05:13', NULL);
 
 
