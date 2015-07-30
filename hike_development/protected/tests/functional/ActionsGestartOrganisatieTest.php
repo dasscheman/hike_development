@@ -42,6 +42,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
     ##Game Overview:
     public function testVragenControleren()
     {
+	$this->open("hike_development/index-test.php?r=site/login");
 	$this->assertContains("hike_development/index-test.php?r=site/login", $this->getLocation());
 	$this->type("id=LoginForm_username", "organisatie");
 	$this->type("id=LoginForm_password", "test");
@@ -58,6 +59,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
     public function testVragenControlerenTwee()
     {
+	$this->open("hike_development/index-test.php?r=site/login");
 	$this->assertContains("hike_development/index-test.php?r=site/login", $this->getLocation());
 	$this->type("id=LoginForm_username", "organisatie");
 	$this->type("id=LoginForm_password", "test");
