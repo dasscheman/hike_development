@@ -42,6 +42,11 @@ class ActionGestartOrganisatieTest extends WebTestCase
     ##Game Overview:
     public function testVragenControleren()
     {
+	$this->assertContains("hike_development/index-test.php?r=site/login", $this->getLocation());
+	$this->type("id=LoginForm_username", "organisatie");
+	$this->type("id=LoginForm_password", "test");
+	$this->click("name=yt0");
+	$this->waitForPageToLoad("30000");
     	$this->open("hike_development/index-test.php?r=game/gameoverview&event_id=1");
         $this->waitForPageToLoad ( "30000" );
 	$this->assertContains("hike_development/index-test.php?r=game/gameoverview&event_id=1", $this->getLocation());
@@ -53,6 +58,11 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
     public function testVragenControlerenTwee()
     {
+	$this->assertContains("hike_development/index-test.php?r=site/login", $this->getLocation());
+	$this->type("id=LoginForm_username", "organisatie");
+	$this->type("id=LoginForm_password", "test");
+	$this->click("name=yt0");
+	$this->waitForPageToLoad("30000");
     	$this->open("hike_development/index-test.php?r=game/gameoverview&event_id=1");
         $this->waitForPageToLoad ( "30000" );
 	$this->assertContains("hike_development/index-test.php?r=game/gameoverview&event_id=1", $this->getLocation());
@@ -63,6 +73,11 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
     public function testVragenControlerenDrie()
     {
+	$this->assertContains("hike_development/index-test.php?r=site/login", $this->getLocation());
+	$this->type("id=LoginForm_username", "organisatie");
+	$this->type("id=LoginForm_password", "test");
+	$this->click("name=yt0");
+	$this->waitForPageToLoad("30000");
     	$this->open("hike_development/index-test.php?r=game/gameoverview&event_id=1");
         $this->waitForPageToLoad ( "30000" );
 	$this->click("link=Vragen Controlren");
