@@ -29,14 +29,14 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
     public function testLogin()
     {
-	$this->open("hike_development/index-test.php?r=game/gameoverview&event_id=1");
+	$this->open("hike_development/index-test.php?r=game/gameoverview&event_id=3");
         $this->waitForPageToLoad ( "30000" );
 	$this->assertContains("hike_development/index-test.php?r=site/login", $this->getLocation());
 	$this->type("id=LoginForm_username", "organisatie");
 	$this->type("id=LoginForm_password", "test");
 	$this->click("name=yt0");
 	$this->waitForPageToLoad("30000");
-	$this->assertContains("hike_development/index-test.php?r=game/gameoverview&event_id=1", $this->getLocation());
+	$this->assertContains("hike_development/index-test.php?r=game/gameoverview&event_id=3", $this->getLocation());
     }
 
     ##Game Overview:
@@ -48,9 +48,11 @@ class ActionGestartOrganisatieTest extends WebTestCase
 	$this->type("id=LoginForm_password", "test");
 	$this->click("name=yt0");
 	$this->waitForPageToLoad("30000");
-    	$this->open("hike_development/index-test.php?r=game/gameoverview&event_id=1");
+    	$this->open("hike_development/index-test.php?r=game/gameoverview&event_id=3");
         $this->waitForPageToLoad ( "30000" );
-	$this->assertContains("hike_development/index-test.php?r=game/gameoverview&event_id=1", $this->getLocation());
+	$this->assertContains("hike_development/index-test.php?r=game/gameoverview&event_id=3", $this->getLocation());
+	$this->assertEquals(" Vragen Controleren", implode(',', $this->getAllLinks()));
+	$this->assertEquals("Vragen Controleren", implode(',', $this->getAllLinks()));
 	$this->click("link=*Vragen Controleren*");
         $this->waitForPageToLoad ( "30000" );
 	$this->assertContains("hike_development/index-test.php?r=openVragenAntwoorden/vragenControleren", $this->getLocation());
@@ -65,9 +67,9 @@ class ActionGestartOrganisatieTest extends WebTestCase
 	$this->type("id=LoginForm_password", "test");
 	$this->click("name=yt0");
 	$this->waitForPageToLoad("30000");
-    	$this->open("hike_development/index-test.php?r=game/gameoverview&event_id=1");
+    	$this->open("hike_development/index-test.php?r=game/gameoverview&event_id=3");
         $this->waitForPageToLoad ( "30000" );
-	$this->assertContains("hike_development/index-test.php?r=game/gameoverview&event_id=1", $this->getLocation());
+	$this->assertContains("hike_development/index-test.php?r=game/gameoverview&event_id=3", $this->getLocation());
 	$this->click("//ul[@id='yw2']/li/a/span/i[3]");
         $this->waitForPageToLoad ( "30000" );
 	$this->assertContains("hike_development/index-test.php?r=openVragenAntwoorden/vragenControleren", $this->getLocation());
@@ -80,7 +82,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 	$this->type("id=LoginForm_password", "test");
 	$this->click("name=yt0");
 	$this->waitForPageToLoad("30000");
-    	$this->open("hike_development/index-test.php?r=game/gameoverview&event_id=1");
+    	$this->open("hike_development/index-test.php?r=game/gameoverview&event_id=3");
         $this->waitForPageToLoad ( "30000" );
 	$this->click("link=Vragen Controlren");
         $this->waitForPageToLoad ( "30000" );
