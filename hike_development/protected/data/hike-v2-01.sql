@@ -461,9 +461,9 @@ CREATE TABLE IF NOT EXISTS `tbl_route` (
 -- Dumping data for table `tbl_route`
 --
 
-INSERT INTO `tbl_route` (`route_ID`, `route_name`, `event_ID`, `day_date`, `route_volgorde`, `create_time`, `create_user_ID`, `update_time`, `update_user_ID`) VALUES
-(2, '9 - Homerun', 6, '2014-09-05', 9, NULL, 2, NULL, NULL),
-(1, 'Introductie', 6, '0000-00-00', 1, NULL, 2, NULL, NULL);
+-- INSERT INTO `tbl_route` (`route_ID`, `route_name`, `event_ID`, `day_date`, `route_volgorde`, `create_time`, `create_user_ID`, `update_time`, `update_user_ID`) VALUES
+-- (2, '9 - Homerun', 6, '2014-09-05', 9, NULL, 2, NULL, NULL),
+-- (1, 'Introductie', 6, '0000-00-00', 1, NULL, 2, NULL, NULL);
 
 -- --------------------------------------------------------
 
