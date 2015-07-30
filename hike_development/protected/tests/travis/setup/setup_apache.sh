@@ -15,3 +15,7 @@ sudo sed -i -e "s,AllowOverride[ ]None,AllowOverride All,g" /etc/apache2/sites-a
 
 
 sudo /etc/init.d/apache2 restart
+
+
+mysql -u root --password=password -p hike_v2_01_test < ./hike_development/protected/data/hike-v2-01.sql;
+##mysql -u lovd -p < SQL_data_ALL.sql;
