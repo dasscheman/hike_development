@@ -44,8 +44,8 @@ CREATE TABLE IF NOT EXISTS `tbl_bonuspunten` (
 -- Dumping data for table `tbl_bonuspunten`
 --
 
---INSERT INTO `tbl_bonuspunten` (`bouspunten_ID`, `event_ID`, `date`, `post_ID`, `group_ID`, `omschrijving`, `score`, `create_time`, `create_user_ID`, `update_time`, `update_user_ID`) VALUES
---(2, 6, NULL, NULL, 4, 'testasd', NULL, '2015-07-07 07:25:46', 2, '2015-07-07 07:25:46', 2);
+-- INSERT INTO `tbl_bonuspunten` (`bouspunten_ID`, `event_ID`, `date`, `post_ID`, `group_ID`, `omschrijving`, `score`, `create_time`, `create_user_ID`, `update_time`, `update_user_ID`) VALUES
+-- (2, 6, NULL, NULL, 4, 'testasd', NULL, '2015-07-07 07:25:46', 2, '2015-07-07 07:25:46', 2);
 
 -- --------------------------------------------------------
 
@@ -209,16 +209,16 @@ CREATE TABLE IF NOT EXISTS `tbl_nood_envelop` (
 -- Dumping data for table `tbl_nood_envelop`
 --
 
---INSERT INTO `tbl_nood_envelop` (`nood_envelop_ID`, `nood_envelop_name`, `event_ID`, `route_ID`, `nood_envelop_volgorde`, `coordinaat`, `opmerkingen`, `score`, `create_time`, `create_user_ID`, `update_time`, `update_user_ID`) VALUES
---(4, ' ''Coördinaat startpunt van "Niet te doen"''', 6, 26, 2040, '190971, 417461', 'Je had uit de richting van  300 graden moeten komen', 5, '2014-08-30 11:30:06', 2, '2014-08-30 11:30:06', 2),
---(5, ' ''Coördinaat eerste punt van "Good old..."''', 6, 25, 2030, '190319, 418016', 'Je had moeten komen vanuit de richting 325 graden. ', 5, '2014-08-30 11:31:31', 2, '2014-08-30 11:31:31', 2),
---(6, ' ''Coördinaat eerste kruispunt van "Kruispuntjepuzzelen"''', 6, 27, 2050, '191934, 416899', 'Je had uit de richting van  300 graden moeten komen', 5, '2014-08-30 11:36:53', 2, '2014-08-30 11:36:53', 2),
---(7, ' ''Coordinaat eerste punt van "Evert, bedankt!"''', 6, 28, 2065, '192056, 416942', 'Je had uit de richting van  200 graden moeten komen', 5, '2014-08-30 12:31:38', 2, '2014-08-30 12:31:38', 2),
---(8, 'Coördinaat eerste punt van de eerste Origami', 6, 29, 2070, '193174, 417140', 'Start met de eerste richting op dit punt. ', 5, '2014-08-30 12:34:46', 2, '2014-08-30 12:34:46', 2),
---(9, 'Coördinaat eerste punt van de tweede Origami', 6, 29, 2075, '193466, 416919', 'Schiet het eerste richting vanaf dit punt. ', 5, '2014-08-30 12:36:43', 2, '2014-08-30 12:36:43', 2),
---(10, ' ''Coördinaat punt van "Tja"''', 6, 30, 2080, '194208, 416799', 'Spreekt voor zich', 5, '2014-08-30 12:39:00', 2, '2014-08-30 12:39:00', 2),
---(11, ' ''Coördinaat van startpunt van "Kruispeiling"''', 6, 31, 2090, '194348, 416803', 'geen', 5, '2014-08-30 12:51:26', 2, '2014-08-30 12:51:26', 2),
---(12, ' ''Coördinaat van startpunt "Even die grijze massa aanzwengelen" ''', 6, 32, 2100, '194533, 417343', 'geen', 5, '2014-08-30 12:53:36', 2, '2014-08-30 12:53:36', 2),
+-- INSERT INTO `tbl_nood_envelop` (`nood_envelop_ID`, `nood_envelop_name`, `event_ID`, `route_ID`, `nood_envelop_volgorde`, `coordinaat`, `opmerkingen`, `score`, `create_time`, `create_user_ID`, `update_time`, `update_user_ID`) VALUES
+-- (4, ' ''Coördinaat startpunt van "Niet te doen"''', 6, 26, 2040, '190971, 417461', 'Je had uit de richting van  300 graden moeten komen', 5, '2014-08-30 11:30:06', 2, '2014-08-30 11:30:06', 2),
+-- (5, ' ''Coördinaat eerste punt van "Good old..."''', 6, 25, 2030, '190319, 418016', 'Je had moeten komen vanuit de richting 325 graden. ', 5, '2014-08-30 11:31:31', 2, '2014-08-30 11:31:31', 2),
+-- (6, ' ''Coördinaat eerste kruispunt van "Kruispuntjepuzzelen"''', 6, 27, 2050, '191934, 416899', 'Je had uit de richting van  300 graden moeten komen', 5, '2014-08-30 11:36:53', 2, '2014-08-30 11:36:53', 2),
+-- (7, ' ''Coordinaat eerste punt van "Evert, bedankt!"''', 6, 28, 2065, '192056, 416942', 'Je had uit de richting van  200 graden moeten komen', 5, '2014-08-30 12:31:38', 2, '2014-08-30 12:31:38', 2),
+-- (8, 'Coördinaat eerste punt van de eerste Origami', 6, 29, 2070, '193174, 417140', 'Start met de eerste richting op dit punt. ', 5, '2014-08-30 12:34:46', 2, '2014-08-30 12:34:46', 2),
+-- (9, 'Coördinaat eerste punt van de tweede Origami', 6, 29, 2075, '193466, 416919', 'Schiet het eerste richting vanaf dit punt. ', 5, '2014-08-30 12:36:43', 2, '2014-08-30 12:36:43', 2),
+-- (10, ' ''Coördinaat punt van "Tja"''', 6, 30, 2080, '194208, 416799', 'Spreekt voor zich', 5, '2014-08-30 12:39:00', 2, '2014-08-30 12:39:00', 2),
+-- (11, ' ''Coördinaat van startpunt van "Kruispeiling"''', 6, 31, 2090, '194348, 416803', 'geen', 5, '2014-08-30 12:51:26', 2, '2014-08-30 12:51:26', 2),
+-- (12, ' ''Coördinaat van startpunt "Even die grijze massa aanzwengelen" ''', 6, 32, 2100, '194533, 417343', 'geen', 5, '2014-08-30 12:53:36', 2, '2014-08-30 12:53:36', 2),
 
 -- --------------------------------------------------------
 
@@ -242,11 +242,11 @@ CREATE TABLE IF NOT EXISTS `tbl_open_nood_envelop` (
 -- Dumping data for table `tbl_open_nood_envelop`
 --
 
---INSERT INTO `tbl_open_nood_envelop` (`open_nood_envelop_ID`, `nood_envelop_ID`, `event_ID`, `group_ID`, `opened`, `create_time`, `create_user_ID`, `update_time`, `update_user_ID`) VALUES
---(1, 14, 6, 9, 1, '2014-09-05 21:03:04', 35, '2014-09-05 21:03:04', 35),
---(2, 14, 6, 6, 1, '2014-09-05 21:43:15', 26, '2014-09-05 21:43:15', 26),
---(3, 17, 6, 8, 1, '2014-09-05 22:55:27', 29, '2014-09-05 22:55:27', 29),
---(4, 29, 6, 6, 1, '2014-09-06 01:27:51', 27, '2014-09-06 01:27:51', 27);
+-- INSERT INTO `tbl_open_nood_envelop` (`open_nood_envelop_ID`, `nood_envelop_ID`, `event_ID`, `group_ID`, `opened`, `create_time`, `create_user_ID`, `update_time`, `update_user_ID`) VALUES
+-- (1, 14, 6, 9, 1, '2014-09-05 21:03:04', 35, '2014-09-05 21:03:04', 35),
+-- (2, 14, 6, 6, 1, '2014-09-05 21:43:15', 26, '2014-09-05 21:43:15', 26),
+-- (3, 17, 6, 8, 1, '2014-09-05 22:55:27', 29, '2014-09-05 22:55:27', 29),
+-- (4, 29, 6, 6, 1, '2014-09-06 01:27:51', 27, '2014-09-06 01:27:51', 27);
 
 -- --------------------------------------------------------
 
@@ -274,11 +274,11 @@ CREATE TABLE IF NOT EXISTS `tbl_open_vragen` (
 -- Dumping data for table `tbl_open_vragen`
 --
 
---INSERT INTO `tbl_open_vragen` (`open_vragen_ID`, `open_vragen_name`, `event_ID`, `route_ID`, `vraag_volgorde`, `omschrijving`, `vraag`, `goede_antwoord`, `score`, `create_time`, `create_user_ID`, `update_time`, `update_user_ID`) VALUES
---(14, 'Info bord', 6, 25, 203, 'Locatie: voor hek halverwege de strippenkaart ', 'Waar is het voormalig landgoed beroemd om volgens het bord? ', 'bronbeekjes', 3, '2014-08-25 22:09:39', 2, '2014-09-05 10:55:13', 2),
---(15, 'Bankje voor...', 6, 26, 204, 'Locatie: Bij tweede haakse bocht naar rechts. ', 'Bij een van de twee haakse bochten in het oleaat staat een bankje. Ter nagedachtenis aan wie  is deze neergezet? ', 'Frans baron van Verschuer ', 3, '2014-08-25 22:11:30', 2, '2014-08-28 21:05:07', 2),
---(16, 'Papier-mache', 6, 27, 205, 'Locatie: bij laatste kruising, die bij de watermolen. ', ' ''Wanneer is de "papier fabriek" gebouwd? ''', '1725.', 3, '2014-08-25 22:13:24', 2, '2014-09-05 11:12:18', 2),
---(17, 'Nenenenenenenenene......', 6, 28, 206, 'Locatie: bij vleermuis ', 'Op het bord staat een foto van een dier dat ’s avonds insecten vangt. Wat is de naam van dit  dier?', 'Franjestaart', 3, '2014-08-25 22:14:40', 2, '2014-08-28 21:05:42', 2);
+-- INSERT INTO `tbl_open_vragen` (`open_vragen_ID`, `open_vragen_name`, `event_ID`, `route_ID`, `vraag_volgorde`, `omschrijving`, `vraag`, `goede_antwoord`, `score`, `create_time`, `create_user_ID`, `update_time`, `update_user_ID`) VALUES
+-- (14, 'Info bord', 6, 25, 203, 'Locatie: voor hek halverwege de strippenkaart ', 'Waar is het voormalig landgoed beroemd om volgens het bord? ', 'bronbeekjes', 3, '2014-08-25 22:09:39', 2, '2014-09-05 10:55:13', 2),
+-- (15, 'Bankje voor...', 6, 26, 204, 'Locatie: Bij tweede haakse bocht naar rechts. ', 'Bij een van de twee haakse bochten in het oleaat staat een bankje. Ter nagedachtenis aan wie  is deze neergezet? ', 'Frans baron van Verschuer ', 3, '2014-08-25 22:11:30', 2, '2014-08-28 21:05:07', 2),
+-- (16, 'Papier-mache', 6, 27, 205, 'Locatie: bij laatste kruising, die bij de watermolen. ', ' ''Wanneer is de "papier fabriek" gebouwd? ''', '1725.', 3, '2014-08-25 22:13:24', 2, '2014-09-05 11:12:18', 2),
+-- (17, 'Nenenenenenenenene......', 6, 28, 206, 'Locatie: bij vleermuis ', 'Op het bord staat een foto van een dier dat ’s avonds insecten vangt. Wat is de naam van dit  dier?', 'Franjestaart', 3, '2014-08-25 22:14:40', 2, '2014-08-28 21:05:42', 2);
 
 -- --------------------------------------------------------
 
@@ -304,14 +304,14 @@ CREATE TABLE IF NOT EXISTS `tbl_open_vragen_antwoorden` (
 -- Dumping data for table `tbl_open_vragen_antwoorden`
 --
 
---INSERT INTO `tbl_open_vragen_antwoorden` (`open_vragen_antwoorden_ID`, `open_vragen_ID`, `event_ID`, `group_ID`, `antwoord_spelers`, `checked`, `correct`, `create_time`, `create_user_ID`, `update_time`, `update_user_ID`) VALUES
---(3, 39, 6, 5, 'Rijksdriehoekscoördinaten', 1, 1, '2014-08-31 13:46:28', 25, '2014-08-31 13:48:55', 2),
---(4, 40, 6, 5, ' ''de spits van de Onze Lieve Vrouwetoren (''''Lange Jan'''') in Amersfoort. Met coördinaten x = 155 000,  y = 463 000.''', 1, 1, '2014-08-31 13:49:10', 25, '2014-08-31 13:50:22', 2),
---(5, 39, 6, 6, 'Rijksdriehoekscoördinaten', 1, 1, '2014-08-31 14:19:14', 26, '2014-08-31 14:19:31', 2),
---(6, 40, 6, 6, ' ''Het centrale punt van het stelsel is de spits van de Onze Lieve Vrouwetoren (''''Lange Jan'''') in Amersfoort. Dit punt heeft de coördinaten x = 155 000,  y = 463 000.''', 1, 1, '2014-08-31 14:24:03', 26, '2014-08-31 14:28:43', 2),
---(7, 39, 6, 4, 'rijksdriehoekscoördinaten', 1, 1, '2014-08-31 14:36:25', 17, '2014-08-31 15:35:21', 5),
---(8, 40, 6, 4, 'Onze Lieve Vrouwetoren Amersfoort', 1, 1, '2014-08-31 14:37:22', 17, '2014-08-31 15:35:24', 5),
---(9, 39, 6, 8, 'Rijksdriehoekscoördinaten', 1, 1, '2014-08-31 14:56:36', 30, '2014-08-31 15:35:03', 5);
+-- INSERT INTO `tbl_open_vragen_antwoorden` (`open_vragen_antwoorden_ID`, `open_vragen_ID`, `event_ID`, `group_ID`, `antwoord_spelers`, `checked`, `correct`, `create_time`, `create_user_ID`, `update_time`, `update_user_ID`) VALUES
+-- (3, 39, 6, 5, 'Rijksdriehoekscoördinaten', 1, 1, '2014-08-31 13:46:28', 25, '2014-08-31 13:48:55', 2),
+-- (4, 40, 6, 5, ' ''de spits van de Onze Lieve Vrouwetoren (''''Lange Jan'''') in Amersfoort. Met coördinaten x = 155 000,  y = 463 000.''', 1, 1, '2014-08-31 13:49:10', 25, '2014-08-31 13:50:22', 2),
+-- (5, 39, 6, 6, 'Rijksdriehoekscoördinaten', 1, 1, '2014-08-31 14:19:14', 26, '2014-08-31 14:19:31', 2),
+-- (6, 40, 6, 6, ' ''Het centrale punt van het stelsel is de spits van de Onze Lieve Vrouwetoren (''''Lange Jan'''') in Amersfoort. Dit punt heeft de coördinaten x = 155 000,  y = 463 000.''', 1, 1, '2014-08-31 14:24:03', 26, '2014-08-31 14:28:43', 2),
+-- (7, 39, 6, 4, 'rijksdriehoekscoördinaten', 1, 1, '2014-08-31 14:36:25', 17, '2014-08-31 15:35:21', 5),
+-- (8, 40, 6, 4, 'Onze Lieve Vrouwetoren Amersfoort', 1, 1, '2014-08-31 14:37:22', 17, '2014-08-31 15:35:24', 5),
+-- (9, 39, 6, 8, 'Rijksdriehoekscoördinaten', 1, 1, '2014-08-31 14:56:36', 30, '2014-08-31 15:35:03', 5);
 
 -- --------------------------------------------------------
 
@@ -336,16 +336,16 @@ CREATE TABLE IF NOT EXISTS `tbl_posten` (
 -- Dumping data for table `tbl_posten`
 --
 
---INSERT INTO `tbl_posten` (`post_ID`, `post_name`, `event_ID`, `date`, `post_volgorde`, `score`, `create_time`, `create_user_ID`, `update_time`, `update_user_ID`) VALUES
---(1, 'Tijd voor een biertje. ', 6, '2014-09-05', 1, 13, '2014-08-30 10:53:28', 2, '2015-07-15 12:53:08', 2),
---(2, 'Een afzakkertje voor het laatste stukje', 6, '2014-09-05', 2, 13, '2014-08-30 10:54:06', 2, '2015-07-15 12:53:08', 2),
---(3, 'Je weet maar nooit of we ze nog ergens moeten opvangen...', 6, '2014-09-05', 3, 13, '2014-08-30 10:54:43', 2, '2015-07-13 17:40:59', 2),
---(4, 'Nog maar een kopjekoffie om op gang te komen', 6, '2014-09-06', 5, 13, '2014-08-30 10:55:45', 2, '2015-07-15 12:53:16', 2),
---(5, 'Tijd voor lunch?', 6, '2014-09-06', 6, 13, '2014-08-30 10:56:19', 2, '2015-07-15 12:53:16', 2),
---(6, 'Snacky?', 6, '2014-09-06', 7, 13, '2014-08-30 10:57:09', 2, '2014-08-30 14:38:06', 2),
---(7, 'Is het al tijd voor een biertje?', 6, '2014-09-06', 8, 13, '2014-08-30 10:57:38', 2, '2014-08-30 14:38:12', 2),
---(8, 'Dinner', 6, '2014-09-06', 10, 13, '2014-08-30 10:59:30', 2, '2015-07-27 12:21:09', 2),
---(9, 'test', 6, '2014-09-06', 9, 34, '2015-07-27 12:20:55', 2, '2015-07-27 12:21:09', 2);
+-- INSERT INTO `tbl_posten` (`post_ID`, `post_name`, `event_ID`, `date`, `post_volgorde`, `score`, `create_time`, `create_user_ID`, `update_time`, `update_user_ID`) VALUES
+-- (1, 'Tijd voor een biertje. ', 6, '2014-09-05', 1, 13, '2014-08-30 10:53:28', 2, '2015-07-15 12:53:08', 2),
+-- (2, 'Een afzakkertje voor het laatste stukje', 6, '2014-09-05', 2, 13, '2014-08-30 10:54:06', 2, '2015-07-15 12:53:08', 2),
+-- (3, 'Je weet maar nooit of we ze nog ergens moeten opvangen...', 6, '2014-09-05', 3, 13, '2014-08-30 10:54:43', 2, '2015-07-13 17:40:59', 2),
+-- (4, 'Nog maar een kopjekoffie om op gang te komen', 6, '2014-09-06', 5, 13, '2014-08-30 10:55:45', 2, '2015-07-15 12:53:16', 2),
+-- (5, 'Tijd voor lunch?', 6, '2014-09-06', 6, 13, '2014-08-30 10:56:19', 2, '2015-07-15 12:53:16', 2),
+-- (6, 'Snacky?', 6, '2014-09-06', 7, 13, '2014-08-30 10:57:09', 2, '2014-08-30 14:38:06', 2),
+-- (7, 'Is het al tijd voor een biertje?', 6, '2014-09-06', 8, 13, '2014-08-30 10:57:38', 2, '2014-08-30 14:38:12', 2),
+-- (8, 'Dinner', 6, '2014-09-06', 10, 13, '2014-08-30 10:59:30', 2, '2015-07-27 12:21:09', 2),
+-- (9, 'test', 6, '2014-09-06', 9, 34, '2015-07-27 12:20:55', 2, '2015-07-27 12:21:09', 2);
 
 -- --------------------------------------------------------
 
@@ -371,13 +371,13 @@ CREATE TABLE IF NOT EXISTS `tbl_post_passage` (
 -- Dumping data for table `tbl_post_passage`
 --
 
---INSERT INTO `tbl_post_passage` (`posten_passage_ID`, `post_ID`, `event_ID`, `group_ID`, `gepasseerd`, `binnenkomst`, `vertrek`, `create_time`, `create_user_ID`, `update_time`, `update_user_ID`) VALUES
---(1, 1, 6, 5, 1, '2014-09-05 20:47:00', '2014-09-05 20:55:00', '2014-09-05 20:47:54', 6, '2014-09-05 20:50:46', 6),
---(2, 1, 6, 8, 1, '2014-09-05 20:55:00', '2014-09-05 20:57:00', '2014-09-05 20:55:34', 6, '2014-09-05 20:57:48', 6),
---(3, 1, 6, 7, 1, '2014-09-05 21:38:00', '2014-09-05 22:05:00', '2014-09-05 21:38:56', 6, '2014-09-05 22:05:59', 6),
---(4, 1, 6, 9, 1, '2014-09-05 21:40:00', '2014-09-05 21:46:00', '2014-09-05 21:40:43', 6, '2014-09-05 21:53:58', 6),
---(5, 1, 6, 4, 1, '2014-09-05 22:01:00', '2014-09-05 22:13:00', '2014-09-05 22:01:17', 6, '2014-09-05 22:13:10', 6),
---(6, 1, 6, 6, 1, '2014-09-05 22:01:00', '2014-09-05 22:12:00', '2014-09-05 22:01:45', 6, '2014-09-05 22:12:56', 6);
+-- INSERT INTO `tbl_post_passage` (`posten_passage_ID`, `post_ID`, `event_ID`, `group_ID`, `gepasseerd`, `binnenkomst`, `vertrek`, `create_time`, `create_user_ID`, `update_time`, `update_user_ID`) VALUES
+-- (1, 1, 6, 5, 1, '2014-09-05 20:47:00', '2014-09-05 20:55:00', '2014-09-05 20:47:54', 6, '2014-09-05 20:50:46', 6),
+-- (2, 1, 6, 8, 1, '2014-09-05 20:55:00', '2014-09-05 20:57:00', '2014-09-05 20:55:34', 6, '2014-09-05 20:57:48', 6),
+-- (3, 1, 6, 7, 1, '2014-09-05 21:38:00', '2014-09-05 22:05:00', '2014-09-05 21:38:56', 6, '2014-09-05 22:05:59', 6),
+-- (4, 1, 6, 9, 1, '2014-09-05 21:40:00', '2014-09-05 21:46:00', '2014-09-05 21:40:43', 6, '2014-09-05 21:53:58', 6),
+-- (5, 1, 6, 4, 1, '2014-09-05 22:01:00', '2014-09-05 22:13:00', '2014-09-05 22:01:17', 6, '2014-09-05 22:13:10', 6),
+-- (6, 1, 6, 6, 1, '2014-09-05 22:01:00', '2014-09-05 22:12:00', '2014-09-05 22:01:45', 6, '2014-09-05 22:12:56', 6);
 
 -- --------------------------------------------------------
 
@@ -403,13 +403,13 @@ CREATE TABLE IF NOT EXISTS `tbl_qr` (
 -- Dumping data for table `tbl_qr`
 --
 
---INSERT INTO `tbl_qr` (`qr_ID`, `qr_name`, `qr_code`, `event_ID`, `route_ID`, `qr_volgorde`, `score`, `create_time`, `create_user_ID`, `update_time`, `update_user_ID`) VALUES
---(3, 'Vrijdag - Kan het makkelijker', '1wDlYLbS8Ws9EutrUMjNv6', 6, 17, 3, 3, '2014-08-30 14:44:11', 2, '2014-08-30 14:44:11', 2),
---(4, 'Vrijdag - En vraag niet naar de weg', '6hUg3eWLzE4qOcvoFwId1K', 6, 18, 4, 3, '2014-08-30 14:44:42', 2, '2014-08-30 14:45:32', 2),
---(5, 'Vrijdag - Meneer van Dalen wacht op antwoord', 'swqYfNxRPvikX6KE41cTmH', 6, 19, 5, 3, '2014-08-30 14:45:01', 2, '2014-08-30 14:45:46', 2),
---(6, 'Vrijdag - Aan de wandel', 'iYMPtVWjXc1EparqnxCeAZ', 6, 20, 7, 3, '2014-08-30 14:46:31', 2, '2014-08-30 14:46:31', 2),
---(7, 'Vrijdag - Je gaat het pas zien als je het door heb', 'FpoSea4nYzKQ6IOW27NCBm', 6, 21, 7, 3, '2014-08-30 14:46:51', 2, '2014-08-30 14:46:51', 2),
---(8, 'Vrijdag - In vogelvlucht', 'gNHpBGPb9EcTLs1Ih8Ov5i', 6, 22, 8, 3, '2014-08-30 14:47:05', 2, '2014-08-30 14:48:34', 2);
+-- INSERT INTO `tbl_qr` (`qr_ID`, `qr_name`, `qr_code`, `event_ID`, `route_ID`, `qr_volgorde`, `score`, `create_time`, `create_user_ID`, `update_time`, `update_user_ID`) VALUES
+-- (3, 'Vrijdag - Kan het makkelijker', '1wDlYLbS8Ws9EutrUMjNv6', 6, 17, 3, 3, '2014-08-30 14:44:11', 2, '2014-08-30 14:44:11', 2),
+-- (4, 'Vrijdag - En vraag niet naar de weg', '6hUg3eWLzE4qOcvoFwId1K', 6, 18, 4, 3, '2014-08-30 14:44:42', 2, '2014-08-30 14:45:32', 2),
+-- (5, 'Vrijdag - Meneer van Dalen wacht op antwoord', 'swqYfNxRPvikX6KE41cTmH', 6, 19, 5, 3, '2014-08-30 14:45:01', 2, '2014-08-30 14:45:46', 2),
+-- (6, 'Vrijdag - Aan de wandel', 'iYMPtVWjXc1EparqnxCeAZ', 6, 20, 7, 3, '2014-08-30 14:46:31', 2, '2014-08-30 14:46:31', 2),
+-- (7, 'Vrijdag - Je gaat het pas zien als je het door heb', 'FpoSea4nYzKQ6IOW27NCBm', 6, 21, 7, 3, '2014-08-30 14:46:51', 2, '2014-08-30 14:46:51', 2),
+-- (8, 'Vrijdag - In vogelvlucht', 'gNHpBGPb9EcTLs1Ih8Ov5i', 6, 22, 8, 3, '2014-08-30 14:47:05', 2, '2014-08-30 14:48:34', 2);
 
 -- --------------------------------------------------------
 
@@ -432,12 +432,12 @@ CREATE TABLE IF NOT EXISTS `tbl_qr_check` (
 -- Dumping data for table `tbl_qr_check`
 --
 
---INSERT INTO `tbl_qr_check` (`qr_check_ID`, `qr_ID`, `event_ID`, `group_ID`, `create_time`, `create_user_ID`, `update_time`, `update_user_ID`) VALUES
---(12, 29, 6, 6, '2014-08-31 14:03:05', 26, '2014-08-31 14:03:05', 26),
---(13, 29, 6, 8, '2014-08-31 14:06:44', 30, '2014-08-31 14:06:44', 30),
---(15, 29, 6, 5, '2014-08-31 14:19:03', 25, '2014-08-31 14:19:03', 25),
---(16, 29, 6, 4, '2014-08-31 14:30:00', 17, '2014-08-31 14:30:00', 17),
---(18, 29, 6, 7, '2014-08-31 15:22:24', 20, '2014-08-31 15:22:24', 20);
+-- INSERT INTO `tbl_qr_check` (`qr_check_ID`, `qr_ID`, `event_ID`, `group_ID`, `create_time`, `create_user_ID`, `update_time`, `update_user_ID`) VALUES
+-- (12, 29, 6, 6, '2014-08-31 14:03:05', 26, '2014-08-31 14:03:05', 26),
+-- (13, 29, 6, 8, '2014-08-31 14:06:44', 30, '2014-08-31 14:06:44', 30),
+-- (15, 29, 6, 5, '2014-08-31 14:19:03', 25, '2014-08-31 14:19:03', 25),
+-- (16, 29, 6, 4, '2014-08-31 14:30:00', 17, '2014-08-31 14:30:00', 17),
+-- (18, 29, 6, 7, '2014-08-31 15:22:24', 20, '2014-08-31 15:22:24', 20);
 
 -- --------------------------------------------------------
 
