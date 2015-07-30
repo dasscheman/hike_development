@@ -778,9 +778,9 @@ CREATE TABLE IF NOT EXISTS `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`user_ID`, `username`, `voornaam`, `achternaam`, `email`, `password`, `macadres`, `birthdate`, `last_login_time`, `create_time`, `create_user_ID`, `update_time`, `update_user_ID`) VALUES
-(1, 'organisatie', 'organisatie', 'organisatie', 'daheman@hotmail.com', '098f6bcd4621d373cade4e832627b4f6', NULL, '0000-00-00', '2015-07-28 15:47:22', '2015-07-10 07:05:13', NULL, '2015-07-10 07:05:13', NULL),
-(2, 'deelnemera', 'deelnemersa', 'deelnemersa', 'daheman@hotmail.com', '098f6bcd4621d373cade4e832627b4f6', NULL, '0000-00-00', '2015-07-28 15:47:22', '2015-07-10 07:05:13', NULL, '2015-07-10 07:05:13', NULL),
-(3, 'deelnemerb', 'deelnemersb', 'deelnemersb', 'daheman@hotmail.com', '098f6bcd4621d373cade4e832627b4f6', NULL, '0000-00-00', '2015-07-28 15:47:22', '2015-07-10 07:05:13', NULL, '2015-07-10 07:05:13', NULL);
+(1, 'organisatie', 'organisatie', 'organisatie', 'daheman1@hotmail.com', '098f6bcd4621d373cade4e832627b4f6', NULL, '0000-00-00', '2015-07-28 15:47:22', '2015-07-10 07:05:13', NULL, '2015-07-10 07:05:13', NULL),
+(2, 'deelnemera', 'deelnemersa', 'deelnemersa', 'daheman2@hotmail.com', '098f6bcd4621d373cade4e832627b4f6', NULL, '0000-00-00', '2015-07-28 15:47:22', '2015-07-10 07:05:13', NULL, '2015-07-10 07:05:13', NULL),
+(3, 'deelnemerb', 'deelnemersb', 'deelnemersb', 'daheman3@hotmail.com', '098f6bcd4621d373cade4e832627b4f6', NULL, '0000-00-00', '2015-07-28 15:47:22', '2015-07-10 07:05:13', NULL, '2015-07-10 07:05:13', NULL);
 
 
 --
