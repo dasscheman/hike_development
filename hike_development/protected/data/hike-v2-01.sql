@@ -105,8 +105,8 @@ CREATE TABLE IF NOT EXISTS `tbl_event_names` (
 --
 
 INSERT INTO `tbl_event_names` (`event_ID`, `event_name`, `start_date`, `end_date`, `status`, `active_day`, `max_time`, `create_time`, `create_user_ID`, `update_time`, `update_user_ID`) VALUES
-(1, 'opstart', '2014-09-05', '2014-09-06', 1, NULL, NULL, '2014-08-25 12:47:51', 1, '2015-07-28 16:03:11', 2),
-(2, 'introductie', '2015-02-25', '2015-03-31', 2, NULL, NULL, '2015-02-23 19:45:17', 2, '2015-02-23 19:45:17', 2),
+(1, 'opstart', '2015-02-25', '2015-02-29', 1, NULL, NULL, '2014-08-25 12:47:51', 1, '2015-07-28 16:03:11', 2),
+(2, 'introductie', '2015-02-25', '2015-02-29', 2, NULL, NULL, '2015-02-23 19:45:17', 2, '2015-02-23 19:45:17', 2),
 (3, 'gestart', '2015-02-25', '2015-02-29', 3, '2015-02-27', '12:00:00', '2015-02-23 19:46:08', 2, '2015-07-10 14:36:10', 2);
 
 -- --------------------------------------------------------
@@ -274,11 +274,9 @@ CREATE TABLE IF NOT EXISTS `tbl_open_vragen` (
 -- Dumping data for table `tbl_open_vragen`
 --
 
--- INSERT INTO `tbl_open_vragen` (`open_vragen_ID`, `open_vragen_name`, `event_ID`, `route_ID`, `vraag_volgorde`, `omschrijving`, `vraag`, `goede_antwoord`, `score`, `create_time`, `create_user_ID`, `update_time`, `update_user_ID`) VALUES
--- (14, 'Info bord', 6, 25, 203, 'Locatie: voor hek halverwege de strippenkaart ', 'Waar is het voormalig landgoed beroemd om volgens het bord? ', 'bronbeekjes', 3, '2014-08-25 22:09:39', 2, '2014-09-05 10:55:13', 2),
--- (15, 'Bankje voor...', 6, 26, 204, 'Locatie: Bij tweede haakse bocht naar rechts. ', 'Bij een van de twee haakse bochten in het oleaat staat een bankje. Ter nagedachtenis aan wie  is deze neergezet? ', 'Frans baron van Verschuer ', 3, '2014-08-25 22:11:30', 2, '2014-08-28 21:05:07', 2),
--- (16, 'Papier-mache', 6, 27, 205, 'Locatie: bij laatste kruising, die bij de watermolen. ', ' ''Wanneer is de "papier fabriek" gebouwd? ''', '1725.', 3, '2014-08-25 22:13:24', 2, '2014-09-05 11:12:18', 2),
--- (17, 'Nenenenenenenenene......', 6, 28, 206, 'Locatie: bij vleermuis ', 'Op het bord staat een foto van een dier dat ’s avonds insecten vangt. Wat is de naam van dit  dier?', 'Franjestaart', 3, '2014-08-25 22:14:40', 2, '2014-08-28 21:05:42', 2);
+INSERT INTO `tbl_open_vragen` (`open_vragen_ID`, `open_vragen_name`, `event_ID`, `route_ID`, `vraag_volgorde`, `omschrijving`, `vraag`, `goede_antwoord`, `score`, `create_time`, `create_user_ID`, `update_time`, `update_user_ID`) VALUES
+(1, 'Hoofdletter a', 3, 6, 1, 'Vraag voor ActionsGestartOrganisatieTest', 'Hoofdletter a? ', 'A', 5, '2014-08-25 22:09:39', 1, '2014-09-05 10:55:13', 1),
+(2, 'Hoofdletter b', 3, 6, 2, 'Vraag voor ActionsGestartOrganisatieTest', 'Hoofdletter b? ', 'B ', 5, '2014-08-25 22:11:30', 1, '2014-08-28 21:05:07', 1);
 
 -- --------------------------------------------------------
 
@@ -304,14 +302,9 @@ CREATE TABLE IF NOT EXISTS `tbl_open_vragen_antwoorden` (
 -- Dumping data for table `tbl_open_vragen_antwoorden`
 --
 
--- INSERT INTO `tbl_open_vragen_antwoorden` (`open_vragen_antwoorden_ID`, `open_vragen_ID`, `event_ID`, `group_ID`, `antwoord_spelers`, `checked`, `correct`, `create_time`, `create_user_ID`, `update_time`, `update_user_ID`) VALUES
--- (3, 39, 6, 5, 'Rijksdriehoekscoördinaten', 1, 1, '2014-08-31 13:46:28', 25, '2014-08-31 13:48:55', 2),
--- (4, 40, 6, 5, ' ''de spits van de Onze Lieve Vrouwetoren (''''Lange Jan'''') in Amersfoort. Met coördinaten x = 155 000,  y = 463 000.''', 1, 1, '2014-08-31 13:49:10', 25, '2014-08-31 13:50:22', 2),
--- (5, 39, 6, 6, 'Rijksdriehoekscoördinaten', 1, 1, '2014-08-31 14:19:14', 26, '2014-08-31 14:19:31', 2),
--- (6, 40, 6, 6, ' ''Het centrale punt van het stelsel is de spits van de Onze Lieve Vrouwetoren (''''Lange Jan'''') in Amersfoort. Dit punt heeft de coördinaten x = 155 000,  y = 463 000.''', 1, 1, '2014-08-31 14:24:03', 26, '2014-08-31 14:28:43', 2),
--- (7, 39, 6, 4, 'rijksdriehoekscoördinaten', 1, 1, '2014-08-31 14:36:25', 17, '2014-08-31 15:35:21', 5),
--- (8, 40, 6, 4, 'Onze Lieve Vrouwetoren Amersfoort', 1, 1, '2014-08-31 14:37:22', 17, '2014-08-31 15:35:24', 5),
--- (9, 39, 6, 8, 'Rijksdriehoekscoördinaten', 1, 1, '2014-08-31 14:56:36', 30, '2014-08-31 15:35:03', 5);
+INSERT INTO `tbl_open_vragen_antwoorden` (`open_vragen_antwoorden_ID`, `open_vragen_ID`, `event_ID`, `group_ID`, `antwoord_spelers`, `checked`, `correct`, `create_time`, `create_user_ID`, `update_time`, `update_user_ID`) VALUES
+(1, 1, 3, 1, 'A', 0, 0, '2014-08-31 13:46:28', 1, '2014-08-31 13:48:55', 1),
+(2, 2, 3, 1, 'A', 0, 0, '2014-08-31 13:49:10', 1, '2014-08-31 13:50:22', 1);
 
 -- --------------------------------------------------------
 
@@ -461,9 +454,13 @@ CREATE TABLE IF NOT EXISTS `tbl_route` (
 -- Dumping data for table `tbl_route`
 --
 
--- INSERT INTO `tbl_route` (`route_ID`, `route_name`, `event_ID`, `day_date`, `route_volgorde`, `create_time`, `create_user_ID`, `update_time`, `update_user_ID`) VALUES
--- (2, '9 - Homerun', 6, '2014-09-05', 9, NULL, 2, NULL, NULL),
--- (1, 'Introductie', 6, '0000-00-00', 1, NULL, 2, NULL, NULL);
+INSERT INTO `tbl_route` (`route_ID`, `route_name`, `event_ID`, `day_date`, `route_volgorde`, `create_time`, `create_user_ID`, `update_time`, `update_user_ID`) VALUES
+(1, 'Introductie', 1, '0000-00-00', 1, NULL, 2, NULL, NULL),
+(2, '9 - Homerun', 1, '2015-02-27', 9, NULL, 2, NULL, NULL),
+(3, 'Introductie', 2, '0000-00-00', 1, NULL, 2, NULL, NULL),
+(4, '9 - Homerun', 2, '2015-02-27', 9, NULL, 2, NULL, NULL),
+(5, 'Introductie', 3, '0000-00-00', 1, NULL, 2, NULL, NULL),
+(6, '9 - Homerun', 3, '2015-02-27', 9, NULL, 2, NULL, NULL);
 
 -- --------------------------------------------------------
 

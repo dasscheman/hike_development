@@ -47,6 +47,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
     ##Game Overview:
     public function testVragenControleren()
     {
+		$scoreBegin = OpenVragenAntwoorden::model()->getOpenVragenScore(3, 1);
 		$this->login();
     	$this->open("hike_development/index-test.php?r=game/gameoverview&event_id=3");
         $this->waitForPageToLoad ( "30000" );
@@ -56,6 +57,10 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		// can be done with: $this->click("//ul[@id='yw2']/li/a/span/i[3]");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=openVragenAntwoorden/viewControle&event_id=3", $this->getLocation());
+
+
+		$scoreEnd = OpenVragenAntwoorden::model()->getOpenVragenScore(3, 1);
+		$this->assertEquals(5, $scoreEnd-$scoreBegin);
     }
 
 
