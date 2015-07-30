@@ -1,17 +1,10 @@
 <?php
 class ActionGestartOrganisatieTest extends WebTestCase
 {
-     /*public $fixtures=array(
-        'users'=>'Users',
-    );*/
-    /* call fixture:
-     *
-    // return the row whose alias is 'sample1' in the `Post` fixture table
-    $user = $this->users['sampleOrganisatie'];
-
-    // return the AR instance representing the 'sample1' fixture data row
-    $user = $this->users('sampleOrganisatie');
-    */
+    /*
+     *	For debugging use:
+     * 	$this->assertContains("ASDFASDFASDF", $this->getBodyText());
+     */
 
     protected function setUp()
     {
@@ -52,12 +45,14 @@ class ActionGestartOrganisatieTest extends WebTestCase
         $this->waitForPageToLoad ( "30000" );
 	$this->assertContains("hike_development/index-test.php?r=game/gameoverview&event_id=3", $this->getLocation());
 	$this->click("link=Vragen Controleren");
+	// can be done with: $this->click("//ul[@id='yw2']/li/a/span/i[3]");
         $this->waitForPageToLoad ( "30000" );
 	$this->assertContains("hike_development/index-test.php?r=openVragenAntwoorden/viewControle&event_id=3", $this->getLocation());
 
     }
 
-    public function testVragenControlerenTwee()
+
+    public function testBonuspuntenGeven()
     {
 	$this->open("hike_development/index-test.php?r=site/login");
 	$this->assertContains("hike_development/index-test.php?r=site/login", $this->getLocation());
@@ -68,12 +63,12 @@ class ActionGestartOrganisatieTest extends WebTestCase
     	$this->open("hike_development/index-test.php?r=game/gameoverview&event_id=3");
         $this->waitForPageToLoad ( "30000" );
 	$this->assertContains("hike_development/index-test.php?r=game/gameoverview&event_id=3", $this->getLocation());
-	$this->click("//ul[@id='yw2']/li/a/span/i[3]");
+	$this->click("link=Bonuspunten Geven");
         $this->waitForPageToLoad ( "30000" );
 	$this->assertContains("hike_development/index-test.php?r=openVragenAntwoorden/viewControle&event_id=3", $this->getLocation());
     }
 
-    public function testVragenControlerenDrie()
+    public function testBeantwoordeVragenBekijken()
     {
 	$this->open("hike_development/index-test.php?r=site/login");
 	$this->assertContains("hike_development/index-test.php?r=site/login", $this->getLocation());
@@ -83,45 +78,75 @@ class ActionGestartOrganisatieTest extends WebTestCase
 	$this->waitForPageToLoad("30000");
     	$this->open("hike_development/index-test.php?r=game/gameoverview&event_id=3");
         $this->waitForPageToLoad ( "30000" );
-	$this->click("link= Vragen Controlren");
+	$this->assertContains("hike_development/index-test.php?r=game/gameoverview&event_id=3", $this->getLocation());
+	$this->click("link=Beantwoorde Vragen");
         $this->waitForPageToLoad ( "30000" );
-	$this->click("link=Vragen Controleren");
-        $this->waitForPageToLoad ( "30000" );
-	$this->click("//ul[@id='yw2']/li/a/span/i[3]");
-        $this->waitForPageToLoad ( "30000" );
-	$this->assertContains("hike_development/index-test.php?r=openVragenAntwoorden/vragenControleren", $this->getLocation());
-
-    }
-/*
-    public function testBonuspuntenGeven()
-    {
-	$this->assertEquals("Dat mag dus niet...", $this->getText("css=div.error"));
-    }
-
-    public function testBeantwoordeVragenBekijken()
-    {
-	$this->assertEquals("Dat mag dus niet...", $this->getText("css=div.error"));
+	$this->assertContains("hike_development/index-test.php?r=openVragenAntwoorden/viewControle&event_id=3", $this->getLocation());
     }
 
     public function testGeopendeHintsBekijken()
     {
-	$this->assertEquals("Dat mag dus niet...", $this->getText("css=div.error"));
+	$this->open("hike_development/index-test.php?r=site/login");
+	$this->assertContains("hike_development/index-test.php?r=site/login", $this->getLocation());
+	$this->type("id=LoginForm_username", "organisatie");
+	$this->type("id=LoginForm_password", "test");
+	$this->click("name=yt0");
+	$this->waitForPageToLoad("30000");
+    	$this->open("hike_development/index-test.php?r=game/gameoverview&event_id=3");
+        $this->waitForPageToLoad ( "30000" );
+	$this->assertContains("hike_development/index-test.php?r=game/gameoverview&event_id=3", $this->getLocation());
+	$this->click("link=Geopende Hints");
+        $this->waitForPageToLoad ( "30000" );
+	$this->assertContains("hike_development/index-test.php?r=openVragenAntwoorden/viewControle&event_id=3", $this->getLocation());
     }
 
     public function testBonuspuntenBekijken()
     {
-	$this->assertEquals("Dat mag dus niet...", $this->getText("css=div.error"));
+	$this->open("hike_development/index-test.php?r=site/login");
+	$this->assertContains("hike_development/index-test.php?r=site/login", $this->getLocation());
+	$this->type("id=LoginForm_username", "organisatie");
+	$this->type("id=LoginForm_password", "test");
+	$this->click("name=yt0");
+	$this->waitForPageToLoad("30000");
+    	$this->open("hike_development/index-test.php?r=game/gameoverview&event_id=3");
+        $this->waitForPageToLoad ( "30000" );
+	$this->assertContains("hike_development/index-test.php?r=game/gameoverview&event_id=3", $this->getLocation());
+	$this->click("link=Bonuspunten Overzicht");
+        $this->waitForPageToLoad ( "30000" );
+	$this->assertContains("hike_development/index-test.php?r=openVragenAntwoorden/viewControle&event_id=3", $this->getLocation());
     }
 
     public function testGepasserdePostenBekijken()
     {
-	$this->assertEquals("Dat mag dus niet...", $this->getText("css=div.error"));
+	$this->open("hike_development/index-test.php?r=site/login");
+	$this->assertContains("hike_development/index-test.php?r=site/login", $this->getLocation());
+	$this->type("id=LoginForm_username", "organisatie");
+	$this->type("id=LoginForm_password", "test");
+	$this->click("name=yt0");
+	$this->waitForPageToLoad("30000");
+    	$this->open("hike_development/index-test.php?r=game/gameoverview&event_id=3");
+        $this->waitForPageToLoad ( "30000" );
+	$this->assertContains("hike_development/index-test.php?r=game/gameoverview&event_id=3", $this->getLocation());
+	$this->click("link=Gepasserde Posten");
+        $this->waitForPageToLoad ( "30000" );
+	$this->assertContains("hike_development/index-test.php?r=openVragenAntwoorden/viewControle&event_id=3", $this->getLocation());
     }
 
     public function testGecheckteStillePostenBekijken()
     {
-	$this->assertEquals("Dat mag dus niet...", $this->getText("css=div.error"));
-    }*/
+	$this->open("hike_development/index-test.php?r=site/login");
+	$this->assertContains("hike_development/index-test.php?r=site/login", $this->getLocation());
+	$this->type("id=LoginForm_username", "organisatie");
+	$this->type("id=LoginForm_password", "test");
+	$this->click("name=yt0");
+	$this->waitForPageToLoad("30000");
+    	$this->open("hike_development/index-test.php?r=game/gameoverview&event_id=3");
+        $this->waitForPageToLoad ( "30000" );
+	$this->assertContains("hike_development/index-test.php?r=game/gameoverview&event_id=3", $this->getLocation());
+	$this->click("link=Stille Posten");
+        $this->waitForPageToLoad ( "30000" );
+	$this->assertContains("hike_development/index-test.php?r=openVragenAntwoorden/viewControle&event_id=3", $this->getLocation());
+    }
 
     ## Group Overview
 
