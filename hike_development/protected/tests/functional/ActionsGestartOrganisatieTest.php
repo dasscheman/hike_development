@@ -39,7 +39,9 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
     public function testLoginAndGameOverview()
     {
-		$this->login();
+		if (Yii::app()->user->isGuest )
+			$this->login();
+
 		$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=3");
 		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=3", $this->getLocation());
     }
@@ -49,7 +51,9 @@ class ActionGestartOrganisatieTest extends WebTestCase
     {
 		$scoreVragenBegin = OpenVragenAntwoorden::model()->getOpenVragenScore(3, 5);
 		$scoreTotalBegin = Groups::model()->getTotalScoreGroup(3, 5);
-		$this->login();
+		if (Yii::app()->user->isGuest )
+			$this->login();
+
     	$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=3");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=3", $this->getLocation());
@@ -81,7 +85,9 @@ class ActionGestartOrganisatieTest extends WebTestCase
     {
 		$scoreBonuspuntenBegin = Bonuspunten::model()->getBonuspuntenScore(3, 5);
 		$scoreTotalBegin = Groups::model()->getTotalScoreGroup(3, 5);
-		$this->login();
+		if (Yii::app()->user->isGuest )
+			$this->login();
+
     	$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=3");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=3", $this->getLocation());
@@ -112,7 +118,9 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
     public function testBeantwoordeVragenBekijken()
     {
-		$this->login();
+		if (Yii::app()->user->isGuest )
+			$this->login();
+
     	$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=3");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=3", $this->getLocation());
@@ -128,7 +136,9 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
     public function testGeopendeHintsBekijken()
     {
-		$this->login();
+		if (Yii::app()->user->isGuest )
+			$this->login();
+
     	$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=3");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=3", $this->getLocation());
@@ -143,7 +153,9 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
     public function testBonuspuntenBekijken()
     {
-		$this->login();
+		if (Yii::app()->user->isGuest )
+			$this->login();
+
     	$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=3");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=3", $this->getLocation());
@@ -157,7 +169,9 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
     public function testGepasserdePostenBekijken()
     {
-		$this->login();
+		if (Yii::app()->user->isGuest )
+			$this->login();
+
     	$this->open("hike_development/index-test.php?r=game/gameoverview&event_id=3");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=3", $this->getLocation());
@@ -171,7 +185,9 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
     public function testGecheckteStillePostenBekijken()
     {
-		$this->login();
+		if (Yii::app()->user->isGuest )
+			$this->login();
+
     	$this->open("hike_development/index-test.php?r=game/gameoverview&event_id=3");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=3", $this->getLocation());
@@ -186,7 +202,9 @@ class ActionGestartOrganisatieTest extends WebTestCase
     ## Group Overview
     public function testLoadGroupOverview()
 	{
-		$this->login();
+		if (Yii::app()->user->isGuest )
+			$this->login();
+
     	$this->open("hike_development/index-test.php?r=game/groupOverview&event_id=3&group_id=5");
 		$this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=game/groupOverview&event_id=3&group_id=5", $this->getLocation());
@@ -196,7 +214,9 @@ class ActionGestartOrganisatieTest extends WebTestCase
 	{
 		$scorePostenBegin = PostPassage::model()->getPostScore(3, 5);
 		$scoreTotalBegin = Groups::model()->getTotalScoreGroup(3, 5);
-		$this->login();
+		if (Yii::app()->user->isGuest )
+			$this->login();
+
     	$this->open("hike_development/index-test.php?r=game/groupOverview&event_id=3&group_id=5");
 		$this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=game/groupOverview&event_id=3&group_id=5", $this->getLocation());
@@ -216,7 +236,9 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
 	public function testGroupsVragenBekijken()
 	{
-		$this->login();
+		if (Yii::app()->user->isGuest )
+			$this->login();
+
     	$this->open("hike_development/index-test.php?r=game/groupOverview&event_id=3&group_id=5");
 		$this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=game/groupOverview&event_id=3&group_id=5", $this->getLocation());
@@ -231,7 +253,9 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
 	public function testGroupsBeantwoordenVragenBekijken()
 	{
-		$this->login();
+		if (Yii::app()->user->isGuest )
+			$this->login();
+
     	$this->open("hike_development/index-test.php?r=game/groupOverview&event_id=3&group_id=5");
 		$this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=game/groupOverview&event_id=3&group_id=5", $this->getLocation());
@@ -246,7 +270,9 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
 	public function testGroupsHintsBekijken()
 	{
-		$this->login();
+		if (Yii::app()->user->isGuest )
+			$this->login();
+
     	$this->open("hike_development/index-test.php?r=game/groupOverview&event_id=3&group_id=5");
 		$this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=game/groupOverview&event_id=3&group_id=5", $this->getLocation());
@@ -261,7 +287,9 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
 	public function testGroupsBonuspuntenBekijken()
 	{
-		$this->login();
+		if (Yii::app()->user->isGuest )
+			$this->login();
+
     	$this->open("hike_development/index-test.php?r=game/groupOverview&event_id=3&group_id=5");
 		$this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=game/groupOverview&event_id=3&group_id=5", $this->getLocation());
@@ -276,7 +304,9 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
 	public function testGroupsStillePostenBekijken()
 	{
-		$this->login();
+		if (Yii::app()->user->isGuest )
+			$this->login();
+			
     	$this->open("hike_development/index-test.php?r=game/groupOverview&event_id=3&group_id=5");
 		$this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=game/groupOverview&event_id=3&group_id=5", $this->getLocation());
