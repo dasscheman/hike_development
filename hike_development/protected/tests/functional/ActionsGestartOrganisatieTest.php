@@ -53,6 +53,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
     	$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=3");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=3", $this->getLocation());
+		$this->assertContains("ASDFASDFASDF", $this->getBodyText());
 		//$this->assertTrue($this->isElementPresent("link=Vragen Controleren"));
 		$this->click("link=Vragen Controleren");
 		// can be done with: $this->click("//ul[@id='yw2']/li/a/span/i[3]");
