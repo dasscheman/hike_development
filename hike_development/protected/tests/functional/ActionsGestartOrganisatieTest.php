@@ -63,15 +63,8 @@ class ActionGestartOrganisatieTest extends WebTestCase
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=openVragenAntwoorden/viewControle&event_id=3", $this->getLocation());
 
-		$this->open("hike_development/index-test.php?r=openVragenAntwoorden/antwoordGoedOfFout',
-					'id'=>1,
-					'goedfout'=>0,
-					'event_id'=>3");
-		$this->assertContains("ASDFASDFASDF", $this->getBodyText());
-		$this->open("hike_development/index-test.php?r=openVragenAntwoorden/antwoordGoedOfFout',
-					'id'=>2,
-					'goedfout'=>1,
-					'event_id'=>3");
+		$this->open("hike_development/index-test.php?r=openVragenAntwoorden/antwoordGoedOfFout&id'=>2&goedfout'=>0&event_id'=>3");
+		$this->open("hike_development/index-test.php?r=openVragenAntwoorden/antwoordGoedOfFout&id'=>2&goedfout'=>1&event_id'=>3");
 
 		$scoreVragenEnd = OpenVragenAntwoorden::model()->getOpenVragenScore(3, 5);
 		$scoreTotalEnd = Groups::model()->getTotalScoreGroup(3, 5);
@@ -94,7 +87,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		$this->click("link=Bonuspunten Geven");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=bonuspunten/create&event_id=3", $this->getLocation());
-
+$this->assertContains("ASDFASDFASDF", $this->getBodyText());
 		$this->select("id=Bonuspunten_group_ID", "label=groep A gestart");
 		$this->type("id=Bonuspunten_omschrijving", "bonuspunten group a");
 		$this->type("id=Bonuspunten_score", 6);
