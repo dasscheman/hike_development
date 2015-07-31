@@ -39,14 +39,14 @@ class GameController extends Controller
 				'users'=> array('@'),
 			),
 			array(	'allow', // allow admin user to perform 'viewplayers' actions
-				'actions'=>array('gameoverview'),
+				'actions'=>array('gameOverview'),
 				/*'expression'=> 'DeelnemersEvent::model()->isActionAllowed(
 				    Yii::app()->controller->id,
 				    Yii::app()->controller->action->id,
 				    $_GET["event_id"])',*/
 			),
 			array(	'allow', // allow admin user to perform 'viewplayers' actions
-				'actions'=>array('groupoverview', 'viewUser'),
+				'actions'=>array('groupOverview', 'viewUser'),
 				'expression'=> 'DeelnemersEvent::model()->isActionAllowed(
 				    Yii::app()->controller->id,
 				    Yii::app()->controller->action->id,
@@ -73,7 +73,7 @@ class GameController extends Controller
 			 * actief (gestart, introductie), dan direct door naar gameoverview.
 			 */
 			$event_id = GeneralFunctions::getSingleActiveEventIdForUser();
-			$this->redirect(array('game/gameoverview',
+			$this->redirect(array('game/gameOverview',
 						      'event_id'=>$event_id));
 		}
 
@@ -88,7 +88,7 @@ class GameController extends Controller
 			 * actief (gestart), dan direct door naar gameoverview.
 			 */
 			$event_id = GeneralFunctions::getSingleEventIdForUser();
-			$this->redirect(array('game/gameoverview',
+			$this->redirect(array('game/gameOverview',
 						      'event_id'=>$event_id));
 		}
 		/**

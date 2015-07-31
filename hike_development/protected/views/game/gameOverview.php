@@ -10,17 +10,17 @@ $hikeStatus = EventNames::model()->getStatusHike($event_id);
 $activeDay  = EventNames::model()->getActiveDayOfHike($event_id);
 
 $this->menu=array(
-	
+
 	array('label'=>'<span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x fa-green"></i>
-                                <i class="fa fa-file-o fa-stack-1x"></i>					
+                                <i class="fa fa-file-o fa-stack-1x"></i>
                                 <i class="fa fa-blue fa-text-right fa-07x"> Vragen Controleren</i>
-                                <i class="fa fa-check fa-stack-5p fa-blue fa-05x"> </i>	
+                                <i class="fa fa-check fa-stack-5p fa-blue fa-05x"> </i>
                         </span>',
 	      'url'=>array('openVragenAntwoorden/viewControle',
                 'event_id'=>$event_id),
                 'visible'=> OpenVragenAntwoorden::model()->isActionAllowed('openVragenAntwoorden', 'viewControle', $_GET['event_id'])),
-	
+
 	array('label'=>'<span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x fa-green"></i>
                                 <i class="fa fa-sun-o fa-stack-1x"></i>
@@ -36,21 +36,21 @@ $this->menu=array(
                                 <i class="fa fa-file-o fa-stack-1x"></i>
                                 <i class="fa fa-blue fa-text-right fa-07x"> Beantwoorde Vragen</i>
                                 <i class="fa fa-list-ol fa-stack-5p fa-blue fa-05x"> </i>
-                        </span>', 
+                        </span>',
 	      'url'=>array('openVragenAntwoorden/index',
                 'event_id'=>$event_id,
-                'previous'=>'game/gameoverview'),
+                'previous'=>'game/gameOverview'),
                 'visible'=> OpenVragenAntwoorden::model()->isActionAllowed('openVragenAntwoorden', 'index', $_GET['event_id'])),
-	
+
 	array('label'=>'<span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x fa-green"></i>
                                 <i class="fa fa-dropbox fa-stack-1x"></i>
                                 <i class="fa fa-blue fa-text-right fa-07x">Geopende Hints</i>
                                 <i class="fa fa-lightbulb-o fa-stack-up-21p fa-blue fa-06x"> </i>
-                        </span>', 
+                        </span>',
 	      'url'=>array('openNoodEnvelop/index',
                 'event_id'=>$event_id,
-                'previous'=>'game/gameoverview'),
+                'previous'=>'game/gameOverview'),
                 'visible'=> OpenNoodEnvelop::model()->isActionAllowed('openNoodEnvelop', 'index', $_GET['event_id'])),
 	array('label'=>'<span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x fa-green"></i>
@@ -60,9 +60,9 @@ $this->menu=array(
                         </span>',
 	      'url'=>array('bonuspunten/index',
                 'event_id'=>$event_id,
-                'previous'=>'game/gameoverview'),
+                'previous'=>'game/gameOverview'),
                 'visible'=> Bonuspunten::model()->isActionAllowed('bonuspunten', 'index', $_GET['event_id'])),
-	
+
 	array('label'=>'<span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x fa-green"></i>
                                 <i class="fa fa-flag-o fa-stack-1x"></i>
@@ -71,9 +71,9 @@ $this->menu=array(
                         </span>',
 	      'url'=>array('postPassage/index',
                 'event_id'=>$event_id,
-                'previous'=>'game/gameoverview'),
+                'previous'=>'game/gameOverview'),
                 'visible'=> PostPassage::model()->isActionAllowed('postPassage', 'index', $_GET['event_id'])),
-	
+
 	array('label'=>'<span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x fa-green"></i>
                                 <i class="fa fa-qrcode fa-stack-1x"></i>
@@ -82,9 +82,9 @@ $this->menu=array(
                         </span>',
 	      'url'=>array('QrCheck/index',
                 'event_id'=>$event_id,
-                'previous'=>'game/gameoverview'),
+                'previous'=>'game/gameOverview'),
                 'visible'=> QrCheck::model()->isActionAllowed('QrCheck', 'index', $_GET['event_id'])),
-        );  
+        );
 ?>
 
 <table>
@@ -96,13 +96,13 @@ $this->menu=array(
                                 array('target'=>'_blank')); ?>
                              </small></sup>
            </h2>
-        </td>		    
+        </td>
     </tr>
 
     <tr>
         <td style="text-align:center;font-family:verdana;font-size:17px;">
-            <b> Status van Hike: </b> <?php echo EventNames::model()->getStatusText2($hikeStatus); ?>	
-       </td>	
+            <b> Status van Hike: </b> <?php echo EventNames::model()->getStatusText2($hikeStatus); ?>
+       </td>
     </tr>
     <?php if ($hikeStatus == EventNames::STATUS_gestart) { ?>
     <tr>
@@ -112,11 +112,11 @@ $this->menu=array(
     </tr>
     <?php } ?>
 </table>
-<center>Dit is een overzicht van alle groepjes die meedoen. Het symbool <i class="fa fa-search-plus fa-inverse"></i> 
+<center>Dit is een overzicht van alle groepjes die meedoen. Het symbool <i class="fa fa-search-plus fa-inverse"></i>
 betekend dat je daar meer details van je groep kan bekijken.
 
-Je kunt zien wat de score is van een groepje voor een bepaald onderdeel, maar 
-je kunt niet precies zien welke vragen of hints deze groep heeft beantwoord of 
+Je kunt zien wat de score is van een groepje voor een bepaald onderdeel, maar
+je kunt niet precies zien welke vragen of hints deze groep heeft beantwoord of
 open gemaakt. </center><br/>
 
 <i> Als de Hike is afgelopen, dan kun je de resultaten van een ander groepje bekijken. </i><br/>
@@ -126,6 +126,6 @@ open gemaakt. </center><br/>
 			  'enablePagination' => false,
 			  'summaryText'=>'',
 			  'emptyText'=>'Er zijn nog geen groepen ingeschreven',
-			
+
 ));
 ?>

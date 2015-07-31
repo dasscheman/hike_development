@@ -50,7 +50,7 @@
                 'id'=>'tab1',
                 'active'=>true,
                 'label'=>'Thuis',
-                'content'=>$this->renderPartial("/users/_view", array('data' => $userData),true),         
+                'content'=>$this->renderPartial("/users/_view", array('data' => $userData),true),
             ),
             array(
                 'label' => 'Vrienden',
@@ -101,7 +101,7 @@
                                             <i class="fa fa-ban fa-stack-1x"></i>
                                         </span>',
                                         'url'=>'Yii::app()->createUrl("friendList/decline", array("user_id"=>$data->user_ID))',
-                                        'visible'=>'FriendList::model()->isActionAllowed("friendList", "decline", "", $data->user_ID )',                                    
+                                        'visible'=>'FriendList::model()->isActionAllowed("friendList", "decline", "", $data->user_ID )',
                                     ),
                                 ),
                             ),
@@ -128,7 +128,7 @@
                                 'value'=>'$data->getStatusText()'),
                             'create_user'=>array(
                                 'name'=>'create_user_ID',
-                                'value'=>'Users::model()->getUserName($data->create_user_ID)'),                          
+                                'value'=>'Users::model()->getUserName($data->create_user_ID)'),
                             array(
                                 'header'=>'Bekijk',
                                 'class'=>'CButtonColumn',
@@ -140,12 +140,12 @@
 													<i class="fa fa-compass fa-stack-1x"></i>
 												</span>',
                                         'options'=>array('title'=>'Bekijk deze hike'),
-                                        'url'=>'Yii::app()->createUrl("game/gameoverview", array("event_id"=>$data->event_ID))',
+                                        'url'=>'Yii::app()->createUrl("game/gameOverview", array("event_id"=>$data->event_ID))',
                                         'visible'=>'DeelnemersEvent::model()->isActionAllowed(
                                             "game",
-                                            "gameoverview",
+                                            "gameOverview",
                                             $data->event_ID)'
-									),        
+									),
                                     'startup' => array(
                                         'label'=>'<span class="fa-stack fa-lg">
 													<i class="fa fa-circle fa-stack-1x fa-green fa-15x"></i>
@@ -174,7 +174,3 @@
 
 
 ?>
-
-
-
-

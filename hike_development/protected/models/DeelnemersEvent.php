@@ -166,10 +166,10 @@ class DeelnemersEvent extends HikeActiveRecord
 
 		if (isset($rolPlayer) && $controller_id == 'game'){
             if ($rolPlayer <= DeelnemersEvent::ROL_deelnemer &&
-				$action_id == 'gameoverview') {
+				$action_id == 'gameOverview') {
 					$actionAllowed = true;
 			}
-			if ($action_id == 'groupoverview') {
+			if ($action_id == 'groupOverview') {
 				if ($rolPlayer <= DeelnemersEvent::ROL_post) {
 					$actionAllowed = true;
 				}

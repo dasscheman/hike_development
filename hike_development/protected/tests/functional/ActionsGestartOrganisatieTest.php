@@ -67,10 +67,10 @@ class ActionGestartOrganisatieTest extends WebTestCase
 					'id'=>1,
 					'goedfout'=>0,
 					'event_id'=>3");
-
+		$this->assertContains("ASDFASDFASDF", $this->getBodyText());
 		$this->open("hike_development/index-test.php?r=openVragenAntwoorden/antwoordGoedOfFout',
 					'id'=>2,
-					'goedfout'=>3,
+					'goedfout'=>1,
 					'event_id'=>3");
 
 		$scoreVragenEnd = OpenVragenAntwoorden::model()->getOpenVragenScore(3, 5);
@@ -90,12 +90,12 @@ class ActionGestartOrganisatieTest extends WebTestCase
     	$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=3");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=3", $this->getLocation());
-		//$this->assertTrue($this->isElementPresent("link=Bonuspunten Geven"));
+		$this->assertTrue($this->isElementPresent("link=Bonuspunten Geven"));
 		$this->click("link=Bonuspunten Geven");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=bonuspunten/create&event_id=3", $this->getLocation());
 
-		$this->type("id=Bonuspunten_group_ID", 5);
+		$this->select("id=Bonuspunten_group_ID", "label=groep A gestart");
 		$this->type("id=Bonuspunten_omschrijving", "bonuspunten group a");
 		$this->type("id=Bonuspunten_score", 6);
 		$this->click("name=yt0");
@@ -103,7 +103,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
 		$this->open("hike_development/index-test.php?r=bonuspunten/create&event_id=3", $this->getLocation());
         $this->waitForPageToLoad ( "30000" );
-		$this->type("id=Bonuspunten_group_ID", 6);
+		$this->select("id=Bonuspunten_group_ID", "label=groep B gestart");
 		$this->type("id=Bonuspunten_omschrijving", "bonuspunten group a");
 		$this->type("id=Bonuspunten_score", 3);
 		$this->click("name=yt0");
