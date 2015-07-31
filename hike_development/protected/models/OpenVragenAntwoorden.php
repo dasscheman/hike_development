@@ -147,7 +147,13 @@ class OpenVragenAntwoorden extends HikeActiveRecord
 		$rolPlayer = DeelnemersEvent::model()->getRolOfPlayer($event_id, Yii::app()->user->id);
         switch ($action_id) {
 			case 'antwoordGoedOfFout':
-
+				if (($hikeStatus == EventNames::STATUS_introductie OR
+                    $hikeStatus == EventNames::STATUS_gestart) AND
+                    $rolPlayer == DeelnemersEvent::ROL_organisatie AND
+					!OpenVragenAntwoorden::model()->isAntwoordGecontroleerd($event_id, $model_id)) {
+						$actionAllowed = true;
+                }
+				break;
 			case 'viewControle':
                 if (($hikeStatus == EventNames::STATUS_introductie OR
                     $hikeStatus == EventNames::STATUS_gestart) AND
@@ -248,6 +254,18 @@ class OpenVragenAntwoorden extends HikeActiveRecord
 			{return('Ja');}
 		else
 			{return('Nee');}
+	}
+
+	public function isAntwoordGecontroleerd($event_id, $id)
+	{
+		$criteria = new CDbCriteria;
+		$criteria->condition="event_ID = $event_id AND
+				      open_vragen_antwoorden_ID = $id";
+		$data = OpenVragenAntwoorden::model()->find($criteria);
+		if(isset($data->checked) AND $data->checked == 1)
+			return true;
+		else
+			return false;
 	}
 
 	/**

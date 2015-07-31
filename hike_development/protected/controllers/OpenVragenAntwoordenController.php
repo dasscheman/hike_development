@@ -28,29 +28,18 @@ class OpenVragenAntwoordenController extends Controller
 	 */
 	public function accessRules()
 	{
-		return array(			
+		return array(
 			array('deny',  // deny all users
 				'users'=>array('?'),
-			),			
-			array(	'deny',  // deny if event_id is not set
-				'actions'=>array('delete', 'index', 'viewControle', 'create', 'update', 'viewPlayers'),
-				'expression'=> '!isset($_GET["event_id"])',
-			),				
-			array(	'deny',  // deny if group_id is not set
-				'actions'=>array('create', 'update', 'viewPlayers'),
-				'expression'=> '!isset($_GET["group_id"])',
-			),	
-			array(	'deny',  // deny if group_id is not set
-				'actions'=>array('update'),
-				'expression'=> '!isset($_GET["vraag_id"])',
-			),					
+			),
             array(	'allow', // allow admin user to perform 'viewplayers' actions
                 'actions'=>array('index', 'update', 'delete', 'create', 'viewControle', 'antwoordGoedOfFout', 'updateOrganisatie', 'viewPlayers'),
                 'expression'=> 'OpenVragenAntwoorden::model()->isActionAllowed(
                     Yii::app()->controller->id,
                     Yii::app()->controller->action->id,
-                    $_GET["event_id"])',
-            ),	
+                    $_GET["event_id"],
+                    $_GET["id"])',
+            ),
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
@@ -77,7 +66,7 @@ class OpenVragenAntwoordenController extends Controller
 		$event_id = $_GET['event_id'];
 		$where = "event_ID = $event_id AND
 			  checked = 0 ";
-		
+
 		$DataProvider=new CActiveDataProvider('OpenVragenAntwoorden',
 						       array('criteria'=>array('condition'=>$where,
 									       'order'=>'group_ID DESC',
@@ -90,42 +79,42 @@ class OpenVragenAntwoordenController extends Controller
 		));
 	}
 
-		
+
 	public function actionViewPlayers()
-	{       
+	{
 		$event_Id = $_GET['event_id'];
 		$group_id = $_GET['group_id'];
-			
+
 		$testwhere = "event_ID = $event_Id AND group_ID = $group_id";
 		$openVragenAntwoordenDataProvider=new CActiveDataProvider('OpenVragenAntwoorden',
 		    array(
 			 'criteria'=>array(
 				'condition'=>$testwhere,
 				   'order'=>'create_time DESC',
-			  ),	  	
+			  ),
 			'pagination'=>array(
 			    'pageSize'=>30,
 			),
 		));
-		
+
 		$this->render('viewPlayers',array(
 			'openVragenAntwoordenDataProvider'=>$openVragenAntwoordenDataProvider,
 		));
 	}
 
-	public function actionAntwoordGoedOfFout($id)
+	public function actionAntwoordGoedOfFout()
 	{
-		
-		$model=$this->loadModel($id);
-	
+
+		$model=$this->loadModel($_GET["id"]);
+
 		$model->checked = 1;
 		$model->correct = $_GET['goedfout'];
 		$model->save();
-		
+
 		$event_id = $_GET['event_id'];
 		$where = "event_ID = $event_id AND
 			  checked = 0 ";
-		
+
 		$DataProvider=new CActiveDataProvider('OpenVragenAntwoorden',
 						       array('criteria'=>array('condition'=>$where,
 									       'order'=>'group_ID DESC',
@@ -181,9 +170,9 @@ class OpenVragenAntwoordenController extends Controller
 								      ':vraag_id'=>$_GET['vraag_id']));}
 		if(isset($data->open_vragen_antwoorden_ID))
 		{$id = $data->open_vragen_antwoorden_ID;}
-		
+
 		$model=$this->loadModel($id);
-	
+
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
@@ -220,12 +209,12 @@ class OpenVragenAntwoordenController extends Controller
 											  ':vraag_id'=>$_GET['vraag_id']));}
 				if(isset($data->open_vragen_antwoorden_ID))
 				{$id = $data->open_vragen_antwoorden_ID;}
-			
+
 				$model=$this->loadModel($id);
-			
+
 				// Uncomment the following line if AJAX validation is needed
 				// $this->performAjaxValidation($model);
-		
+
 				if(isset($_POST['OpenVragenAntwoorden']))
 				{
 					$model->attributes=$_POST['OpenVragenAntwoorden'];
@@ -234,13 +223,13 @@ class OpenVragenAntwoordenController extends Controller
 									  'event_id'=>$model->event_ID,
 									  'group_id'=>$model->group_ID));
 				}
-		
+
 				$this->render('updateOrganisatie',
 							  array('model'=>$model,
 									)
 							  );
 		}
-	
+
 	/**
 	 * Deletes a particular model.
 	 * If deletion is successful, the browser will be redirected to the 'admin' page.
@@ -315,29 +304,29 @@ class OpenVragenAntwoordenController extends Controller
 			Yii::app()->end();
 		}
 	}
-	
+
 /*	public function actionDynamicVraag()
 	{
 		$day_id = $_POST['day_id'];
 		$event_id = $_POST['event_id'];
-		
+
 
 		$data=Posten::model()->findAll('day_ID =:day_id AND event_ID =:event_id',
 			  array(':day_id'=>$day_id,
 				':event_id'=>$event_id));
 	   	$mainarr = array();
-		
+
 		foreach($data as $obj)
 		{
 			//De post naam moet gekoppeld worden aan de post_id:
 			$mainarr["$obj->post_ID"] = Posten::model()->getPostName($obj->post_ID);
 		}
-		
+
 		foreach($mainarr as $value=>$name)
 		{
 		    echo CHtml::tag('option', array('value'=>$value), CHtml::encode($name),true);
 		}
-		// weet niet zeker of dit wel nodig is. 	
+		// weet niet zeker of dit wel nodig is.
 		return $mainarr;
 
 	}*/
