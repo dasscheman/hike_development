@@ -137,15 +137,17 @@ class OpenVragenAntwoorden extends HikeActiveRecord
 
 	/**
 	 * Check if actions are allowed. These checks are not only use in the controllers,
-	 * but also for the visability of the menu items. 
+	 * but also for the visability of the menu items.
 	 */
-    function isActionAllowed($controller_id = null, $action_id = null, $event_id = null, $group_id = null)
+    function isActionAllowed($controller_id = null, $action_id = null, $event_id = null, $model_id = null)
     {
-		$actionAllowed = parent::isActionAllowed($controller_id, $action_id, $event_id, $group_id);
-  
+		$actionAllowed = parent::isActionAllowed($controller_id, $action_id, $event_id, $model_id);
+
 		$hikeStatus = EventNames::model()->getStatusHike($event_id);
 		$rolPlayer = DeelnemersEvent::model()->getRolOfPlayer($event_id, Yii::app()->user->id);
         switch ($action_id) {
+			case 'antwoordGoedOfFout':
+
 			case 'viewControle':
                 if (($hikeStatus == EventNames::STATUS_introductie OR
                     $hikeStatus == EventNames::STATUS_gestart) AND
@@ -159,7 +161,7 @@ class OpenVragenAntwoorden extends HikeActiveRecord
 	/**
 	 * Als een nieuwe record aangemaakt wordt dan moeten deze waarden gezet worden.
 	 * Ook bedenken wat er met het score veld moet gebeuren... Als deze toch gezet wordt moet
-	 * de score anders opgehaald worden. 
+	 * de score anders opgehaald worden.
 	 */
 	protected function beforeSave()
         {
@@ -167,18 +169,18 @@ class OpenVragenAntwoorden extends HikeActiveRecord
 		{
 			return false;
 		}
-				
+
 		if($this->isNewRecord)
-		{ 
+		{
 			$this->correct = 0;
 			$this->checked = 0;
 		}
 		return true;
-		
+
         }
-	
+
 	/**
-	 * Score ophalen voor een group. 
+	 * Score ophalen voor een group.
 	 */
 	public function getOpenVragenScore($event_id, $group_id)
 	{
@@ -195,7 +197,7 @@ class OpenVragenAntwoorden extends HikeActiveRecord
         }
         return $score;
 	}
-	
+
 	/**
 	 * Check of een bepaalde vraag is beantwoord door een group, Retruns true of false
 	 */
@@ -208,7 +210,7 @@ class OpenVragenAntwoorden extends HikeActiveRecord
 			{return true;}
 		else
 			{return(false);}
-	}	
+	}
 
 	/**
 	 * Check of een bepaalde vraag is beantwoord door een gegeven group, Retruns JA of NEE
@@ -227,12 +229,12 @@ class OpenVragenAntwoorden extends HikeActiveRecord
 		else
 			{return('Nee');}
 	}
-										  
+
 	/**
 	 * Check of een bepaalde vraag is gecontroleerd, Retruns JA of NEE
 	 * Als JA dan moet het niet meer mogelijk zijn om die vraag te
 	 * beantwoorden door een groep.
-	 */								  
+	 */
 	public function isVraagGecontroleerd($event_id,
 										 $group_id,
 										 $vragen_id)
@@ -245,9 +247,9 @@ class OpenVragenAntwoorden extends HikeActiveRecord
 		if(isset($data->checked) AND $data->checked == 1)
 			{return('Ja');}
 		else
-			{return('Nee');}	
+			{return('Nee');}
 	}
-	
+
 	/**
 	 * Check of een bepaald antwoord goed is. Retruns JA of NEE
 	 */
@@ -263,7 +265,6 @@ class OpenVragenAntwoorden extends HikeActiveRecord
 		if(isset($data->correct) AND $data->correct == 1)
 			{return('Ja');}
 		else
-			{return('Nee');}	
+			{return('Nee');}
 	}
 }
-
