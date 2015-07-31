@@ -29,7 +29,7 @@ class DeelnemersEvent extends HikeActiveRecord
     const ROL_post=2;
     const ROL_deelnemer=3;
     const ROL_toeschouwer=4;
- 	
+
 	public $actionAllowed;
 	/**
 	 * Returns the static model of the specified AR class.
@@ -163,8 +163,8 @@ class DeelnemersEvent extends HikeActiveRecord
 		if ($rolPlayer == DeelnemersEvent::ROL_deelnemer) {
 			$group_id = DeelnemersEvent::model()->getGroupOfPlayer($event_id, Yii::app()->user->id);
 		}
-		
-		if (isset($rolPlayer) && $controller_id === 'game'){
+
+		if (isset($rolPlayer) && $controller_id == 'game'){
             if ($rolPlayer <= DeelnemersEvent::ROL_deelnemer &&
 				$action_id == 'gameoverview') {
 					$actionAllowed = true;
@@ -172,7 +172,7 @@ class DeelnemersEvent extends HikeActiveRecord
 			if ($action_id == 'groupoverview') {
 				if ($rolPlayer <= DeelnemersEvent::ROL_post) {
 					$actionAllowed = true;
-				}				
+				}
 				if ($rolPlayer == DeelnemersEvent::ROL_deelnemer &&
 					$model_id == $group_id) {
 					$actionAllowed = true;
@@ -184,7 +184,7 @@ class DeelnemersEvent extends HikeActiveRecord
             if (in_array($action_id, array('startupOverview'))) {
 					$actionAllowed = true;
 			}
-        }   
+        }
 		return $actionAllowed;
     }
 
@@ -201,66 +201,66 @@ class DeelnemersEvent extends HikeActiveRecord
 			self::ROL_toeschouwer=>'Toeschouwer',
 		    );
 	}
-    
+
 	/**
 	* @return string de rol text display
 	*/
 	public function getRolText($rol)
 	{
-		$rolOptions=$this->getRolOptions();   
+		$rolOptions=$this->getRolOptions();
 		return isset($rolOptions[$rol]) ?
 		    $rolOptions[$rol] : "Onbekende rol";
-	}
-	
-	/**
-	 * @return de rol van een speler tijdens een bepaalde hike
-	 */
-	public function getRolOfPlayer($event_Id, 
-				       $user_Id)
-	{  
-		$data = DeelnemersEvent::model()->find('event_ID = :event_Id AND user_ID=:user_Id', 
-						    array(':event_Id' => $event_Id, 
-							  ':user_Id' => $user_Id)); 
-		if(isset($data->rol))
-		{
-		    return $data->rol;
-		}
-		
-		return;  
-	}
-	
-	/**
-	 * @return de group van een speler tijdens een bepaalde hike
-	 */
-	public function getGroupOfPlayer(	$event_Id, 
-										$user_Id)
-	{  
-		$data = DeelnemersEvent::model()->find('event_ID = :event_Id AND user_ID=:user_Id', 
-						    array(':event_Id' => $event_Id, 
-							  ':user_Id' => $user_Id)); 
-		if(!isset($data->rol))
-		{
-		    return;
-		}
-		
-		if($data->rol<>DeelnemersEvent::ROL_deelnemer or
-		   !isset($data->group_ID))
-		{
-		    return;
-		}
-		
-		return $data->group_ID;		
 	}
 
 	/**
 	 * @return de rol van een speler tijdens een bepaalde hike
 	 */
-	public function userSignedinInHike($event_Id, 
+	public function getRolOfPlayer($event_Id,
+				       $user_Id)
+	{
+		$data = DeelnemersEvent::model()->find('event_ID = :event_Id AND user_ID=:user_Id',
+						    array(':event_Id' => $event_Id,
+							  ':user_Id' => $user_Id));
+		if(isset($data->rol))
+		{
+		    return $data->rol;
+		}
+
+		return;
+	}
+
+	/**
+	 * @return de group van een speler tijdens een bepaalde hike
+	 */
+	public function getGroupOfPlayer(	$event_Id,
 										$user_Id)
-	{       
-		$data = DeelnemersEvent::model()->exists('event_ID = :event_Id AND user_ID=:user_Id', 
-						    array(':event_Id' => $event_Id, 
-							  ':user_Id' => $user_Id)); 
+	{
+		$data = DeelnemersEvent::model()->find('event_ID = :event_Id AND user_ID=:user_Id',
+						    array(':event_Id' => $event_Id,
+							  ':user_Id' => $user_Id));
+		if(!isset($data->rol))
+		{
+		    return;
+		}
+
+		if($data->rol<>DeelnemersEvent::ROL_deelnemer or
+		   !isset($data->group_ID))
+		{
+		    return;
+		}
+
+		return $data->group_ID;
+	}
+
+	/**
+	 * @return de rol van een speler tijdens een bepaalde hike
+	 */
+	public function userSignedinInHike($event_Id,
+										$user_Id)
+	{
+		$data = DeelnemersEvent::model()->exists('event_ID = :event_Id AND user_ID=:user_Id',
+						    array(':event_Id' => $event_Id,
+							  ':user_Id' => $user_Id));
 		return $data;
 	}
 }
