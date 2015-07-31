@@ -40,10 +40,10 @@ class GameController extends Controller
 			),
 			array(	'allow', // allow admin user to perform 'viewplayers' actions
 				'actions'=>array('gameoverview'),
-				'expression'=> 'DeelnemersEvent::model()->isActionAllowed(
+				'expression'=> true,/* 'DeelnemersEvent::model()->isActionAllowed(
 				    Yii::app()->controller->id,
 				    Yii::app()->controller->action->id,
-				    $_GET["event_id"])',
+				    $_GET["event_id"])',*/
 			),
 			array(	'allow', // allow admin user to perform 'viewplayers' actions
 				'actions'=>array('groupoverview', 'viewUser'),
