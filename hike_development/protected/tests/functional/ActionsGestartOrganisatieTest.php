@@ -64,6 +64,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		$this->assertContains("hike_development/index-test.php?r=openVragenAntwoorden/viewControle&event_id=3", $this->getLocation());
 
 		$this->open("hike_development/index-test.php?r=openVragenAntwoorden/antwoordGoedOfFout&id'=>2&goedfout'=>0&event_id'=>3");
+$this->assertContains("ASDFASDFASDF", $this->getBodyText());
 		$this->open("hike_development/index-test.php?r=openVragenAntwoorden/antwoordGoedOfFout&id'=>2&goedfout'=>1&event_id'=>3");
 
 		$scoreVragenEnd = OpenVragenAntwoorden::model()->getOpenVragenScore(3, 5);

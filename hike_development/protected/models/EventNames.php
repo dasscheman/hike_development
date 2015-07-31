@@ -79,7 +79,7 @@ class EventNames extends HikeActiveRecord
 			array('start_date, end_date, active_day, max_time', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('event_ID, event_name, start_date, end_date, status, active_day, 
+			array('event_ID, event_name, start_date, end_date, status, active_day,
 			      create_time, create_user_ID, update_time, update_user_ID',
 			      'safe', 'on'=>'search'),
 		);
@@ -140,9 +140,9 @@ class EventNames extends HikeActiveRecord
 		// should not be searched.
 
 		$criteria=new CDbCriteria;
-		
+
 		$criteria->join = 'JOIN tbl_deelnemers_event deelnemers ON deelnemers.event_ID = t.event_ID';
-		$criteria->condition = 'deelnemers.user_ID = :currentuser';		
+		$criteria->condition = 'deelnemers.user_ID = :currentuser';
 		$criteria->params = array(':currentuser'=>Yii::app()->user->id);
 		$criteria->compare('event_ID',$this->event_ID);
 		$criteria->compare('event_name',$this->event_name,true);
@@ -167,10 +167,10 @@ class EventNames extends HikeActiveRecord
     function isActionAllowed($controller_id = null, $action_id = null, $event_id = null, $group_id = null)
     {
 		$actionAllowed = parent::isActionAllowed($controller_id, $action_id, $event_id, $group_id);
-  
+
 		$hikeStatus = EventNames::model()->getStatusHike($event_id);
-		$rolPlayer = DeelnemersEvent::model()->getRolOfPlayer($event_id, Yii::app()->user->id);    
-   
+		$rolPlayer = DeelnemersEvent::model()->getRolOfPlayer($event_id, Yii::app()->user->id);
+
 		if ($action_id == 'changeStatus'){
             if (($hikeStatus == EventNames::STATUS_opstart or
                 $hikeStatus == EventNames::STATUS_introductie or
@@ -214,17 +214,17 @@ class EventNames extends HikeActiveRecord
 		}
 		return "unknown status ({$this->status})";
 	}
-	
+
     /**
 	* @return string the status text display
 	*/
 	public function getStatusText2($status)
 	{
-		$statusOptions=$this->statusOptions;   
+		$statusOptions=$this->statusOptions;
 		return isset($statusOptions[$status]) ?
 			$statusOptions[$status] : "unknown status ({$status})";
 	}
-     	
+
     /**
      * De het veld active day wordt gezet afhankelijk van de status.
      */
@@ -238,7 +238,7 @@ class EventNames extends HikeActiveRecord
 				$this->active_day = "";
 				$this->max_time = null;
 			}
-			
+
 			if($this->status == self::STATUS_introductie)
 			{
 			// Als de status 1 (introductie) dan moet avtive day introductie worden
@@ -248,7 +248,7 @@ class EventNames extends HikeActiveRecord
 		}
 		return(false);
     }
-	
+
 	/**
 	* Retrieves a list of events
 	* @return array an array of available events with status 'opstart'.
@@ -257,9 +257,9 @@ class EventNames extends HikeActiveRecord
 	{
 		$data = EventNames::model()->findAll('status = 1');
 		$list = CHtml::listData($data, 'event_ID', 'event_name');
-		return $list;        
+		return $list;
 	}
-       
+
 	/**
 	* Retrieves a list of events
 	* @return array an array of available events with status 'gestart'.
@@ -268,9 +268,9 @@ class EventNames extends HikeActiveRecord
 	{
 		$data = EventNames::model()->findAll('status = 3');
 		$list = CHtml::listData($data, 'event_ID', 'event_name');
-		return $list;     
+		return $list;
 	}
-       
+
 	/**
 	* Retrieves a list of events
 	* @return array an array of all available events'.
@@ -279,90 +279,90 @@ class EventNames extends HikeActiveRecord
 	{
 		$data = EventNames::model()->findAll();
 		$list = CHtml::listData($data, 'event_ID', 'event_name');
-		return $list;        
+		return $list;
 	}
-	    
+
 	/**
 	* Retrieves a event name
 	*/
 	public function getEventName($event_Id)
 	{
-		$data = EventNames::model()->find('event_ID =:event_Id', array(':event_Id' => $event_Id));   
+		$data = EventNames::model()->find('event_ID =:event_Id', array(':event_Id' => $event_Id));
 		if(isset($data->event_name))
 			{return $data->event_name;}
-		else	
+		else
 			{return;}
 	}
-	
+
 	/**
 	 * Returns de status of a hike.
 	 */
 	public function getStatusHike($event_Id)
 	{
-		$data = EventNames::model()->find('event_ID =:event_Id', array(':event_Id' => $event_Id));   
+		$data = EventNames::model()->find('event_ID =:event_Id', array(':event_Id' => $event_Id));
 		if(isset($data->status))
 			{return $data->status;}
-		else	
+		else
 			{return;}
 	}
-	
+
 	/**
 	 * Returns de status of a hike.
 	 */
 	public function getStartDate($event_Id)
 	{
-		$data = EventNames::model()->find('event_ID =:event_Id', array(':event_Id' => $event_Id));   
+		$data = EventNames::model()->find('event_ID =:event_Id', array(':event_Id' => $event_Id));
 		if(isset($data->status))
 			{return $data->start_date;}
-		else	
+		else
 			{return;}
-	}	
+	}
 	/**
 	 * Returns de status of a hike.
 	 */
 	public function getEndDate($event_Id)
 	{
-		$data = EventNames::model()->find('event_ID =:event_Id', array(':event_Id' => $event_Id));   
+		$data = EventNames::model()->find('event_ID =:event_Id', array(':event_Id' => $event_Id));
 		if(isset($data->status))
 			{return $data->end_date;}
-		else	
+		else
 			{return;}
 	}
-	
+
 	public function maxTimeSet($event_Id){
-		$data = EventNames::model()->find('event_ID =:event_Id', array(':event_Id' => $event_Id));   
+		$data = EventNames::model()->find('event_ID =:event_Id', array(':event_Id' => $event_Id));
 		if(isset($data->max_time))
 			{return $data->max_time;}
-		else	
+		else
 			{return false;}
 	}
-	
+
 	/**
 	 * Returns de actieve dag.
 	 */
 	public function getActiveDayOfHike($event_id)
 	{
-		$data = EventNames::model()->find('event_ID =:event_id', array(':event_id' => $event_id)); 
+		$data = EventNames::model()->find('event_ID =:event_id', array(':event_id' => $event_id));
 		if(isset($data->active_day))
 			{return $data->active_day;}
-		else	
+		else
 			{return;}
 	}
-    
+
     public function determineNewHikeId()
     {
 		$criteria = new CDbCriteria();
 		$criteria->order = "event_ID DESC";
 		$criteria->limit = 1;
-		
+
 		if (EventNames::model()->exists($criteria))
 		{	$data = EventNames::model()->findAll($criteria);
 			$newHikeId = $data[0]->event_ID+1;
 		} else {
 			$newHikeId = 1;}
-	
+
 		$newHikeIdOk=EventNames::checkNewHikeId($newHikeId);
-	
+
 		if($newHikeIdOk)
 		{
 			return $newHikeId;
@@ -375,12 +375,12 @@ class EventNames extends HikeActiveRecord
     {
 		$criteria = new CDbCriteria();
 		$criteria->condition = "event_ID = $id";
-	
+
 		if(EventNames::model()->exists($criteria))
 		{
 			return false;
 		}
-	
+
 		if(DeelnemersEvent::model()->exists($criteria))
 		{
 			return false;
@@ -392,6 +392,7 @@ class EventNames extends HikeActiveRecord
 	{
 		$StartDate = EventNames::model()->getStartDate($event_Id);
 		$EndDate = EventNames::model()->getEndDate($event_Id);
+		$mainarr = array();
 		$date = $StartDate;
 		$count = 0;
 		while($date <= $EndDate)
@@ -406,8 +407,7 @@ class EventNames extends HikeActiveRecord
 			if ($count == 10) {
 				break;
 			}
-		}		
+		}
 		return $mainarr;
 	}
-}   
-   
+}
