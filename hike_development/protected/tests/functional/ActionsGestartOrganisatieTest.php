@@ -59,8 +59,15 @@ class ActionGestartOrganisatieTest extends WebTestCase
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=openVragenAntwoorden/viewControle&event_id=3", $this->getLocation());
 
-		#uitwerken
-		$this->assertTrue(false);
+		$this->open("hike_development/index-test.php?r=openVragenAntwoorden/antwoordGoedOfFout',
+					'id'=>1,
+					'goedfout'=>0,
+					'event_id'=>3");
+
+		$this->open("hike_development/index-test.php?r=openVragenAntwoorden/antwoordGoedOfFout',
+					'id'=>2,
+					'goedfout'=>3,
+					'event_id'=>3");
 
 		$scoreVragenEnd = OpenVragenAntwoorden::model()->getOpenVragenScore(3, 5);
 		$scoreTotalEnd = Groups::model()->getTotalScoreGroup(3, 5);
@@ -82,8 +89,19 @@ class ActionGestartOrganisatieTest extends WebTestCase
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=bonuspunten/create&event_id=3", $this->getLocation());
 
-		#uitwerken
-		$this->assertTrue(false);
+		$this->type("id=Bonuspunten_group_ID", 5);
+		$this->type("id=Bonuspunten_omschrijving", "bonuspunten group a");
+		$this->type("id=Bonuspunten_score", 6);
+		$this->click("name=yt0");
+		$this->waitForPageToLoad("30000");
+
+		$this->open("hike_development/index-test.php?r=bonuspunten/create&event_id=3", $this->getLocation());
+        $this->waitForPageToLoad ( "30000" );
+		$this->type("id=Bonuspunten_group_ID", 6);
+		$this->type("id=Bonuspunten_omschrijving", "bonuspunten group a");
+		$this->type("id=Bonuspunten_score", 3);
+		$this->click("name=yt0");
+		$this->waitForPageToLoad("30000");
 
 		$scoreBonuspuntenEnd = Bonuspunten::model()->getOpenVragenScore(3, 5);
 		$scoreTotalEnd = Groups::model()->getTotalScoreGroup(3, 5);
@@ -118,8 +136,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		$this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=openNoodEnvelop/index&event_id=3", $this->getLocation());
 
-		#uitwerken
-		$this->assertTrue(false);
+		$this->assertContains("Alle geopende hints", $this->getBodyText());
 
 	}
 
@@ -134,9 +151,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=bonuspunten/index&event_id=3", $this->getLocation());
 
-
-		#uitwerken
-		$this->assertTrue(false);
+		$this->assertContains("Bonuspunten Overzicht", $this->getBodyText());
 	}
 
     public function testGepasserdePostenBekijken()
@@ -150,9 +165,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=postPassage/index&event_id=3", $this->getLocation());
 
-
-		#uitwerken
-		$this->assertTrue(false);
+		$this->assertContains("Gepasserde Posten", $this->getBodyText());
 	}
 
     public function testGecheckteStillePostenBekijken()
@@ -166,9 +179,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=QrCheck/index&event_id=3", $this->getLocation());
 
-		#uitwerken
-		$this->assertTrue(false);
-
+		$this->assertContains("Stille Posten", $this->getBodyText());
 	}
 
     ## Group Overview
