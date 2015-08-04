@@ -53,17 +53,17 @@ class OpenVragenAntwoorden extends HikeActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('open_vragen_ID, group_ID, event_ID, vraag, antwoord_spelers', 'required'),
+			array('open_vragen_ID, group_ID, event_ID, antwoord_spelers', 'required'),
 			//array('open_vragen_ID, group_ID, checked, correct, score, create_user_ID, update_user_ID', 'numerical', 'integerOnly'=>true),
-			array('open_vragen_ID, group_ID, event_ID, checked, correct, score', 'numerical',
+			array('open_vragen_ID, group_ID, event_ID, checked, correct', 'numerical',
 			      'integerOnly'=>true),
-			array('vraag, antwoord_spelers', 'length', 'max'=>255),
+			array('antwoord_spelers', 'length', 'max'=>255),
 			//array('create_time, update_time', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('open_vragen_antwoorden_ID, event_ID, open_vragen_ID,
-			      group_ID, vraag, antwoord_spelers, checked, correct,
-			      score, create_time, create_user_ID, update_time,
+			      group_ID, antwoord_spelers, checked, correct,
+			      create_time, create_user_ID, update_time,
 			      update_user_ID', 'safe', 'on'=>'search'),
 		        array('open_vragen_ID',
 			      'ext.UniqueAttributesValidator',

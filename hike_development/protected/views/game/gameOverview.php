@@ -34,13 +34,13 @@ $this->menu=array(
 	array('label'=>'<span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x fa-green"></i>
                                 <i class="fa fa-file-o fa-stack-1x"></i>
-                                <i class="fa fa-blue fa-text-right fa-07x">Vragen Controleren</i>
+                                <i class="fa fa-blue fa-text-right fa-07x">Beandwoorden Vragen</i>
                                 <i class="fa fa-list-ol fa-stack-5p fa-blue fa-05x"> </i>
                         </span>',
-	      'url'=>array('openVragenAntwoorden/viewControle',
+	      'url'=>array('openVragenAntwoorden/index',
                 'event_id'=>$event_id,
                 'previous'=>'game/gameOverview'),
-                'visible'=> OpenVragenAntwoorden::model()->isActionAllowed('openVragenAntwoorden', 'viewControle', $_GET['event_id'])),
+                'visible'=> OpenVragenAntwoorden::model()->isActionAllowed('openVragenAntwoorden', 'index', $_GET['event_id'])),
 
 	array('label'=>'<span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x fa-green"></i>
@@ -83,7 +83,7 @@ $this->menu=array(
 	      'url'=>array('QrCheck/index',
                 'event_id'=>$event_id,
                 'previous'=>'game/gameOverview'),
-                'visible'=> QrCheck::model()->isActionAllowed('QrCheck', 'index', $_GET['event_id'])),
+                'visible'=> QrCheck::model()->isActionAllowed('qrCheck', 'index', $_GET['event_id'])),
         );
 ?>
 

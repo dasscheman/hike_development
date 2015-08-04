@@ -92,7 +92,7 @@ $this->menu=array(
     </tr>
 	<?php 
 		if (EventNames::model()->getStatusHike($event_id) == EventNames::STATUS_gestart) {
-	   		if (PostPassage::model()->timeLeftToday($event_id, $group)) {?>
+	   		if (PostPassage::model()->timeLeftToday($event_id, $group_id)) {?>
     <tr>
         <td style="text-align:center;font-family:verdana;font-size:17px;">
 			<b> Tijd over vandaag: </b><?php echo PostPassage::model()->timeLeftToday($event_id, $group_id); ?>

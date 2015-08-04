@@ -64,7 +64,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		$this->assertContains("hike_development/index-test.php?r=openVragenAntwoorden/viewControle&event_id=3", $this->getLocation());
 
 		$this->open("hike_development/index-test.php?r=openVragenAntwoorden/antwoordGoedOfFout&id=>1&goedfout=>0&event_id=>3");
-		$this->assertContains("ASDFASDFASDF", $this->getBodyText());
+
 		$this->open("hike_development/index-test.php?r=openVragenAntwoorden/antwoordGoedOfFout&id=>2&goedfout=>1&event_id=>3");
 
 		$scoreVragenEnd = OpenVragenAntwoorden::model()->getOpenVragenScore(3, 5);
@@ -90,28 +90,26 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		$this->assertContains("hike_development/index-test.php?r=bonuspunten/create&event_id=3", $this->getLocation());
 		$this->select("name=Bonuspunten[group_ID]", "label=groep A gestart");
 		$this->type("id=Bonuspunten_omschrijving", "bonuspunten group a");
-		$this->type("id=Bonuspunten_score", 6);
+		$this->type("id=Bonuspunten_score", 3);
 		$this->click("name=yt0");
 		$this->waitForPageToLoad("30000");
 
 		$this->open("hike_development/index-test.php?r=bonuspunten/create&event_id=3", $this->getLocation());
         $this->waitForPageToLoad ( "30000" );
 		$this->select("id=Bonuspunten_group_ID", "label=groep B gestart");
-		$this->type("id=Bonuspunten_omschrijving", "bonuspunten group a");
-		$this->type("id=Bonuspunten_score", 3);
+		$this->type("id=Bonuspunten_omschrijving", "bonuspunten group b");
+		$this->type("id=Bonuspunten_score", 2);
 		$this->click("name=yt0");
 		$this->waitForPageToLoad("30000");
 
 		$scoreBonuspuntenEnd = Bonuspunten::model()->getBonuspuntenScore(3, 5);
 		$scoreTotalEnd = Groups::model()->getTotalScoreGroup(3, 5);
-		$this->assertEquals(5, $scoreBonuspuntenEnd-$scoreBonuspuntenBegin);
-		$this->assertEquals(5, $scoreTotalEnd-$scoreTotalBegin);
+		$this->assertEquals(3, $scoreBonuspuntenEnd-$scoreBonuspuntenBegin);
+		$this->assertEquals(3, $scoreTotalEnd-$scoreTotalBegin);
     }
 
-    public function testBeantwoordeVragenContoleren()
+    public function testBeantwoordeVragen()
     {
-		$scoreVragenBegin = OpenVragenAntwoorden::model()->getVragenScore(3, 5);
-		$scoreTotalEnd = Groups::model()->getTotalScoreGroup(3, 5);
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
@@ -123,14 +121,9 @@ class ActionGestartOrganisatieTest extends WebTestCase
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=openVragenAntwoorden/viewControle&event_id=3", $this->getLocation());
 
-		$this->assertContains("Antwoorden Controleren", $this->getBodyText());
-    	$this->open("hike_development/index-test.php?r=openVragenAntwoorden/antwoordGoedOfFout&id=2&goedfout=0&event_id=3");
-    	$this->open("hike_development/index-test.php?r=openVragenAntwoorden/antwoordGoedOfFout&id=1&goedfout=1&event_id=3");
-		
-		$scoreVragenEnd = OpenVragenAntwoorden::model()->getVragenScore(3, 5);
-		$scoreTotalEnd = Groups::model()->getTotalScoreGroup(3, 5);
-		$this->assertEquals(5, $scoreVragenEnd-$scoreVragenBegin);
-		$this->assertEquals(5, $scoreTotalEnd-$scoreTotalBegin);
+		$this->assertContains("Alle beantwoorde vragen", $this->getBodyText());
+		$this->assertContains("Hoofdletter b", $this->getBodyText());
+		$this->assertContains("Hoofdletter a", $this->getBodyText());    	
 	}
 
     public function testGeopendeHintsBekijken()
