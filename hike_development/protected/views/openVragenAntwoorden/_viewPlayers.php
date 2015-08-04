@@ -63,7 +63,7 @@
 	<br />
 -->
 	<b><?php echo CHtml::encode($data->getAttributeLabel('vraag')); ?>:</b>
-	<?php echo CHtml::encode($data->vraag); ?>
+	<?php echo CHtml::encode(OpenVragen::model()->getOpenVraag($data->open_vragen_ID)); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('antwoord_spelers')); ?>:</b>

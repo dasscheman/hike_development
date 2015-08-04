@@ -64,11 +64,13 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		$this->assertContains("hike_development/index-test.php?r=openVragenAntwoorden/viewControle&event_id=3", $this->getLocation());
 
 		$this->open("hike_development/index-test.php?r=openVragenAntwoorden/antwoordGoedOfFout&id=>1&goedfout=>0&event_id=>3");
-
+		$this->waitForPageToLoad ( "30000" );
 		$this->open("hike_development/index-test.php?r=openVragenAntwoorden/antwoordGoedOfFout&id=>2&goedfout=>1&event_id=>3");
-
+		$this->waitForPageToLoad ( "30000" );
 		$scoreVragenEnd = OpenVragenAntwoorden::model()->getOpenVragenScore(3, 5);
 		$scoreTotalEnd = Groups::model()->getTotalScoreGroup(3, 5);
+		$this->assertEquals(0, $scoreVragenBegin);
+		$this->assertEquals(5, $scoreVragenEnd);
 		$this->assertEquals(5, $scoreVragenEnd-$scoreVragenBegin);
 		$this->assertEquals(5, $scoreTotalEnd-$scoreTotalBegin);
     }
@@ -115,11 +117,11 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
     	$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=3");
         $this->waitForPageToLoad ( "30000" );
-		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=3", $this->getLocation());
-		$this->assertTrue($this->isElementPresent("link=Vragen Controleren"));
-		$this->click("link=Vragen Controleren");
+		$this->assertContains("hike_development/index-test.php?r=game/index&event_id=3", $this->getLocation());
+		$this->assertTrue($this->isElementPresent("link=Beantwoorden Vragen"));
+		$this->click("link=Beantwoorden Vragen");
         $this->waitForPageToLoad ( "30000" );
-		$this->assertContains("hike_development/index-test.php?r=openVragenAntwoorden/viewControle&event_id=3", $this->getLocation());
+		$this->assertContains("hike_development/index-test.php?r=openVragenAntwoorden/index&event_id=3", $this->getLocation());
 
 		$this->assertContains("Alle beantwoorde vragen", $this->getBodyText());
 		$this->assertContains("Hoofdletter b", $this->getBodyText());
@@ -191,7 +193,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=QrCheck/index&event_id=3", $this->getLocation());
 
-		$this->assertContains("Stille Posten", $this->getBodyText());
+		$this->assertContains("Stille Posten Moet nog uitwerken", $this->getBodyText());
 	}
 
     ## Group Overview
