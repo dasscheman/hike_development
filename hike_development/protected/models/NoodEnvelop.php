@@ -289,6 +289,17 @@ class NoodEnvelop extends HikeActiveRecord
 		return NoodEnvelop::model()->count($criteria);
 	}
 
+	public function getRouteNameOfEnvelopId($envelop_id)
+	{
+		$criteria = new CDbCriteria;
+		$criteria->condition="nood_envelop_ID = $envelop_id";
+		$data = NoodEnvelop::model()->find($criteria);
+		if(isset($data->route_ID))
+			{return(Route::model()->getRouteName($data->route_ID));}
+		else
+			{return('Geen Hint volgnummer beschikbaar.');}		
+	}
+
 	public function getNewOrderForNoodEnvelop($event_id, $route_id)
 	{
         $criteria = new CDbCriteria();
@@ -298,7 +309,8 @@ class NoodEnvelop extends HikeActiveRecord
 		$criteria->limit = 1;
 		
 		if (NoodEnvelop::model()->exists($criteria))
-		{	$data = NoodEnvelop::model()->findAll($criteria);
+		{
+			$data = NoodEnvelop::model()->findAll($criteria);
 			$newOrder = $data[0]->nood_envelop_volgorde+1;
 		} else {
 			$newOrder = 1;}

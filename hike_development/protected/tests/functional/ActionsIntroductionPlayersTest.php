@@ -2,7 +2,7 @@
 
 class ActionIntroductionPlayersTest extends WebTestCase
 {
-    /*
+      /*
      *	For debugging use:
      * 	$this->assertContains("ASDFASDFASDF", $this->getBodyText());
      *
@@ -43,8 +43,8 @@ class ActionIntroductionPlayersTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-		$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=2");
-		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=2", $this->getLocation());
+		$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=1");
+		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=1", $this->getLocation());
     }
 
     ##Game Overview:
@@ -53,18 +53,18 @@ class ActionIntroductionPlayersTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-    	$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=2");
+    	$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=1");
         $this->waitForPageToLoad ( "30000" );
-		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=2", $this->getLocation());
+		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=1", $this->getLocation());
         $this->assertContains("Dat mag dus niet...", $this->getBodyText());
 		$this->assertTrue($this->isElementNotPresent("link=Vragen Controleren"));
-		$this->open("hike_development/index-test.php?r=openVragenAntwoorden/viewControle&event_id=2");
+		$this->open("hike_development/index-test.php?r=openVragenAntwoorden/viewControle&event_id=1");
         $this->assertContains("Dat mag dus niet...", $this->getBodyText());
 
         #data aanmaken:
-		$this->open("hike_development/index-test.php?r=openVragenAntwoorden/antwoordGoedOfFout&id=>1&goedfout=>0&event_id=>2");
+		$this->open("hike_development/index-test.php?r=openVragenAntwoorden/antwoordGoedOfFout&id=>1&goedfout=>0&event_id=>1");
         $this->assertContains("Dat mag dus niet...", $this->getBodyText());
-		$this->open("hike_development/index-test.php?r=openVragenAntwoorden/antwoordGoedOfFout&id=>2&goedfout=>1&event_id=>2");
+		$this->open("hike_development/index-test.php?r=openVragenAntwoorden/antwoordGoedOfFout&id=>2&goedfout=>1&event_id=>1");
         $this->assertContains("Dat mag dus niet...", $this->getBodyText());
     }
 
@@ -74,11 +74,11 @@ class ActionIntroductionPlayersTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-    	$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=2");
+    	$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=1");
         $this->waitForPageToLoad ( "30000" );
-		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=2", $this->getLocation());
+		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=1", $this->getLocation());
 		$this->assertTrue($this->isElementNotPresent("link=Bonuspunten Geven"));
-		$this->open("hike_development/index-test.php?r=bonuspunten/create&event_id=2");
+		$this->open("hike_development/index-test.php?r=bonuspunten/create&event_id=1");
 		$this->waitForPageToLoad("30000");
         $this->assertContains("Dat mag dus niet...", $this->getBodyText());
     }
@@ -88,11 +88,11 @@ class ActionIntroductionPlayersTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-    	$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=2");
+    	$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=1");
         $this->waitForPageToLoad ( "30000" );
-		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=2", $this->getLocation());
+		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=1", $this->getLocation());
 		$this->assertTrue($this->isElementNotPresent("link=Beantwoorde Vragen"));
-		$this->open("hike_development/index-test.php?r=openVragenAntwoorden/index&event_id=2");
+		$this->open("hike_development/index-test.php?r=openVragenAntwoorden/index&event_id=1");
         $this->waitForPageToLoad ( "30000" );
         $this->assertContains("Dat mag dus niet...", $this->getBodyText());
 	}
@@ -102,11 +102,11 @@ class ActionIntroductionPlayersTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-    	$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=2");
+    	$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=1");
         $this->waitForPageToLoad ( "30000" );
-		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=2", $this->getLocation());
+		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=1", $this->getLocation());
 		$this->assertTrue($this->isElementNotPresent("link=Geopende Hints"));
-		$this->open("hike_development/index-test.php?r=openNoodEnvelop/index&event_id=2");
+		$this->open("hike_development/index-test.php?r=openNoodEnvelop/index&event_id=1");
 		$this->waitForPageToLoad ( "30000" );
         $this->assertContains("Dat mag dus niet...", $this->getBodyText());
 	}
@@ -116,12 +116,12 @@ class ActionIntroductionPlayersTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-    	$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=2");
+    	$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=1");
         $this->waitForPageToLoad ( "30000" );
-		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=2", $this->getLocation());
+		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=1", $this->getLocation());
 		$this->assertTrue($this->isElementNotPresent("link=Bonuspunten Overzicht"));
         $this->waitForPageToLoad ( "30000" );
-		$this->open("hike_development/index-test.php?r=bonuspunten/index&event_id=2");
+		$this->open("hike_development/index-test.php?r=bonuspunten/index&event_id=1");
         $this->assertContains("Dat mag dus niet...", $this->getBodyText());
 	}
 
@@ -130,12 +130,12 @@ class ActionIntroductionPlayersTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-    	$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=2");
+    	$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=1");
         $this->waitForPageToLoad ( "30000" );
-		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=2", $this->getLocation());
+		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=1", $this->getLocation());
 		$this->assertTrue($this->isElementNotPresent("link=Gepasserde Posten"));
         $this->waitForPageToLoad ( "30000" );
-		$this->open("hike_development/index-test.php?r=postPassage/index&event_id=2");
+		$this->open("hike_development/index-test.php?r=postPassage/index&event_id=1");
         $this->assertContains("Dat mag dus niet...", $this->getBodyText());
 	}
 
@@ -144,12 +144,12 @@ class ActionIntroductionPlayersTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-    	$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=2");
+    	$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=1");
         $this->waitForPageToLoad ( "30000" );
-		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=2", $this->getLocation());
+		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=1", $this->getLocation());
 		$this->assertTrue($this->isElementNotPresent("link=Stille Posten"));
         $this->waitForPageToLoad ( "30000" );
-		$this->open("hike_development/index-test.php?r=QrCheck/index&event_id=2");
+		$this->open("hike_development/index-test.php?r=QrCheck/index&event_id=1");
         $this->assertContains("Dat mag dus niet...", $this->getBodyText());
 	}
 

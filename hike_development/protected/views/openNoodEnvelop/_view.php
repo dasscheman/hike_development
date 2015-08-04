@@ -39,7 +39,7 @@
 	<br />
 	
 	<b><?php echo CHtml::encode('Route Onderdeel'); ?>:</b>
-	<?php echo CHtml::encode(NoodEnvelop::model()->getRouteOnderdeelOfEnvelop($data->nood_envelop_ID)); ?>
+	<?php echo CHtml::encode(NoodEnvelop::model()->getRouteNameOfEnvelopId($data->nood_envelop_ID)); ?>
 	<br />
 	</td>
 	<td>

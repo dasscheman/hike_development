@@ -1,9 +1,7 @@
 <?php
 
 class ActionIntroductionOrganisatieTest extends WebTestCase
-{
-
-    /*
+{   /*
      *	For debugging use:
      * 	$this->assertContains("ASDFASDFASDF", $this->getBodyText());
      *
@@ -193,6 +191,7 @@ $this->assertContains("ASDFASDFASDF", $this->getBodyText());
 
 		$this->assertContains("Stille Posten", $this->getBodyText());
 	}
+
 
     ## Group Overview
     public function testLoadGroupOverview()

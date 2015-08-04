@@ -37,6 +37,7 @@ class GeneralFunctions
 	 */
 	public static function checkForSingleActiveEventForUser()
 	{
+
 		$count_gestart = 0;
 		$dataDeelnemersEvent = DeelnemersEvent::model()->findAll('user_ID = :user_id',
 						       array(':user_id' => Yii::app()->user->id)); 

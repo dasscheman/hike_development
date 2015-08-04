@@ -44,8 +44,8 @@ CREATE TABLE IF NOT EXISTS `tbl_bonuspunten` (
 -- Dumping data for table `tbl_bonuspunten`
 --
 
--- INSERT INTO `tbl_bonuspunten` (`bouspunten_ID`, `event_ID`, `date`, `post_ID`, `group_ID`, `omschrijving`, `score`, `create_time`, `create_user_ID`, `update_time`, `update_user_ID`) VALUES
--- (2, 6, NULL, NULL, 4, 'testasd', NULL, '2015-07-07 07:25:46', 2, '2015-07-07 07:25:46', 2);
+INSERT INTO `tbl_bonuspunten` (`bouspunten_ID`, `event_ID`, `date`, `post_ID`, `group_ID`, `omschrijving`, `score`, `create_time`, `create_user_ID`, `update_time`, `update_user_ID`) VALUES
+(1, 3, NULL, NULL, 5, 'bonus gestart organisatie', 3, '2015-07-07 07:25:46', 2, '2015-07-07 07:25:46', 2);
 
 -- --------------------------------------------------------
 
@@ -209,8 +209,8 @@ CREATE TABLE IF NOT EXISTS `tbl_nood_envelop` (
 -- Dumping data for table `tbl_nood_envelop`
 --
 
--- INSERT INTO `tbl_nood_envelop` (`nood_envelop_ID`, `nood_envelop_name`, `event_ID`, `route_ID`, `nood_envelop_volgorde`, `coordinaat`, `opmerkingen`, `score`, `create_time`, `create_user_ID`, `update_time`, `update_user_ID`) VALUES
--- (4, ' ''Coördinaat startpunt van "Niet te doen"''', 6, 26, 2040, '190971, 417461', 'Je had uit de richting van  300 graden moeten komen', 5, '2014-08-30 11:30:06', 2, '2014-08-30 11:30:06', 2),
+INSERT INTO `tbl_nood_envelop` (`nood_envelop_ID`, `nood_envelop_name`, `event_ID`, `route_ID`, `nood_envelop_volgorde`, `coordinaat`, `opmerkingen`, `score`, `create_time`, `create_user_ID`, `update_time`, `update_user_ID`) VALUES
+(1, 'Hint gestart organisatie', 3, 6, 1, '190971, 417461', 'Je had uit de richting van  300 graden moeten komen', 7, '2014-08-30 11:30:06', 1, '2014-08-30 11:30:06', 1);
 -- (5, ' ''Coördinaat eerste punt van "Good old..."''', 6, 25, 2030, '190319, 418016', 'Je had moeten komen vanuit de richting 325 graden. ', 5, '2014-08-30 11:31:31', 2, '2014-08-30 11:31:31', 2),
 -- (6, ' ''Coördinaat eerste kruispunt van "Kruispuntjepuzzelen"''', 6, 27, 2050, '191934, 416899', 'Je had uit de richting van  300 graden moeten komen', 5, '2014-08-30 11:36:53', 2, '2014-08-30 11:36:53', 2),
 -- (7, ' ''Coordinaat eerste punt van "Evert, bedankt!"''', 6, 28, 2065, '192056, 416942', 'Je had uit de richting van  200 graden moeten komen', 5, '2014-08-30 12:31:38', 2, '2014-08-30 12:31:38', 2),
@@ -242,8 +242,8 @@ CREATE TABLE IF NOT EXISTS `tbl_open_nood_envelop` (
 -- Dumping data for table `tbl_open_nood_envelop`
 --
 
--- INSERT INTO `tbl_open_nood_envelop` (`open_nood_envelop_ID`, `nood_envelop_ID`, `event_ID`, `group_ID`, `opened`, `create_time`, `create_user_ID`, `update_time`, `update_user_ID`) VALUES
--- (1, 14, 6, 9, 1, '2014-09-05 21:03:04', 35, '2014-09-05 21:03:04', 35),
+INSERT INTO `tbl_open_nood_envelop` (`open_nood_envelop_ID`, `nood_envelop_ID`, `event_ID`, `group_ID`, `opened`, `create_time`, `create_user_ID`, `update_time`, `update_user_ID`) VALUES
+(1, 1, 3, 5, 1, '2014-09-05 21:03:04', 2, '2014-09-05 21:03:04', 2);
 -- (2, 14, 6, 6, 1, '2014-09-05 21:43:15', 26, '2014-09-05 21:43:15', 26),
 -- (3, 17, 6, 8, 1, '2014-09-05 22:55:27', 29, '2014-09-05 22:55:27', 29),
 -- (4, 29, 6, 6, 1, '2014-09-06 01:27:51', 27, '2014-09-06 01:27:51', 27);
@@ -276,7 +276,9 @@ CREATE TABLE IF NOT EXISTS `tbl_open_vragen` (
 
 INSERT INTO `tbl_open_vragen` (`open_vragen_ID`, `open_vragen_name`, `event_ID`, `route_ID`, `vraag_volgorde`, `omschrijving`, `vraag`, `goede_antwoord`, `score`, `create_time`, `create_user_ID`, `update_time`, `update_user_ID`) VALUES
 (1, 'Hoofdletter a', 3, 6, 1, 'Vraag voor ActionsGestartOrganisatieTest', 'Hoofdletter a? ', 'A', 5, '2014-08-25 22:09:39', 1, '2014-09-05 10:55:13', 1),
-(2, 'Hoofdletter b', 3, 6, 2, 'Vraag voor ActionsGestartOrganisatieTest', 'Hoofdletter b? ', 'B ', 5, '2014-08-25 22:11:30', 1, '2014-08-28 21:05:07', 1);
+(2, 'Hoofdletter b', 3, 6, 2, 'Vraag voor ActionsGestartOrganisatieTest', 'Hoofdletter b? ', 'B ', 5, '2014-08-25 22:11:30', 1, '2014-08-28 21:05:07', 1),
+(3, 'Hoofdletter c', 3, 6, 1, 'Vraag voor ActionsGestartOrganisatieTest', 'Hoofdletter c? ', 'C', 5, '2014-08-25 22:09:39', 1, '2014-09-05 10:55:13', 1),
+(4, 'Hoofdletter d', 3, 6, 2, 'Vraag voor ActionsGestartOrganisatieTest', 'Hoofdletter v? ', 'B ', 5, '2014-08-25 22:11:30', 1, '2014-08-28 21:05:07', 1);
 
 -- --------------------------------------------------------
 
@@ -303,8 +305,8 @@ CREATE TABLE IF NOT EXISTS `tbl_open_vragen_antwoorden` (
 --
 
 INSERT INTO `tbl_open_vragen_antwoorden` (`open_vragen_antwoorden_ID`, `open_vragen_ID`, `event_ID`, `group_ID`, `antwoord_spelers`, `checked`, `correct`, `create_time`, `create_user_ID`, `update_time`, `update_user_ID`) VALUES
-(1, 1, 3, 1, 'A', 0, 0, '2014-08-31 13:46:28', 1, '2014-08-31 13:48:55', 1),
-(2, 2, 3, 1, 'A', 0, 0, '2014-08-31 13:49:10', 1, '2014-08-31 13:50:22', 1);
+(1, 1, 3, 5, 'A', 0, 0, '2014-08-31 13:46:28', 2, '2014-08-31 13:48:55', 1),
+(2, 2, 3, 5, 'B', 0, 0, '2014-08-31 13:49:10', 2, '2014-08-31 13:50:22', 1);
 
 -- --------------------------------------------------------
 
@@ -329,9 +331,10 @@ CREATE TABLE IF NOT EXISTS `tbl_posten` (
 -- Dumping data for table `tbl_posten`
 --
 
--- INSERT INTO `tbl_posten` (`post_ID`, `post_name`, `event_ID`, `date`, `post_volgorde`, `score`, `create_time`, `create_user_ID`, `update_time`, `update_user_ID`) VALUES
--- (1, 'Tijd voor een biertje. ', 6, '2014-09-05', 1, 13, '2014-08-30 10:53:28', 2, '2015-07-15 12:53:08', 2),
--- (2, 'Een afzakkertje voor het laatste stukje', 6, '2014-09-05', 2, 13, '2014-08-30 10:54:06', 2, '2015-07-15 12:53:08', 2),
+INSERT INTO `tbl_posten` (`post_ID`, `post_name`, `event_ID`, `date`, `post_volgorde`, `score`, `create_time`, `create_user_ID`, `update_time`, `update_user_ID`) VALUES
+(1, 'post 1 gestart organisatie test', 3, '2015-02-27', 1, 13, '2014-08-30 10:53:28', 2, '2015-07-15 12:53:08', 2),
+(2, 'post 2 gestart organisatie test', 3, '2015-02-27', 2, 13, '2014-08-30 10:54:06', 2, '2015-07-15 12:53:08', 2),
+(3, 'post 3 gestart organisatie test', 3, '2015-02-28', 3, 13, '2014-08-30 10:54:06', 2, '2015-07-15 12:53:08', 2);
 -- (3, 'Je weet maar nooit of we ze nog ergens moeten opvangen...', 6, '2014-09-05', 3, 13, '2014-08-30 10:54:43', 2, '2015-07-13 17:40:59', 2),
 -- (4, 'Nog maar een kopjekoffie om op gang te komen', 6, '2014-09-06', 5, 13, '2014-08-30 10:55:45', 2, '2015-07-15 12:53:16', 2),
 -- (5, 'Tijd voor lunch?', 6, '2014-09-06', 6, 13, '2014-08-30 10:56:19', 2, '2015-07-15 12:53:16', 2),
@@ -364,8 +367,8 @@ CREATE TABLE IF NOT EXISTS `tbl_post_passage` (
 -- Dumping data for table `tbl_post_passage`
 --
 
--- INSERT INTO `tbl_post_passage` (`posten_passage_ID`, `post_ID`, `event_ID`, `group_ID`, `gepasseerd`, `binnenkomst`, `vertrek`, `create_time`, `create_user_ID`, `update_time`, `update_user_ID`) VALUES
--- (1, 1, 6, 5, 1, '2014-09-05 20:47:00', '2014-09-05 20:55:00', '2014-09-05 20:47:54', 6, '2014-09-05 20:50:46', 6),
+INSERT INTO `tbl_post_passage` (`posten_passage_ID`, `post_ID`, `event_ID`, `group_ID`, `gepasseerd`, `binnenkomst`, `vertrek`, `create_time`, `create_user_ID`, `update_time`, `update_user_ID`) VALUES
+(1, 1, 3, 5, 1, '2015-02-27 11:47:00', '2015-02-27 11:57:00', '2014-09-05 20:47:54', 6, '2014-09-05 20:50:46', 6),
 -- (2, 1, 6, 8, 1, '2014-09-05 20:55:00', '2014-09-05 20:57:00', '2014-09-05 20:55:34', 6, '2014-09-05 20:57:48', 6),
 -- (3, 1, 6, 7, 1, '2014-09-05 21:38:00', '2014-09-05 22:05:00', '2014-09-05 21:38:56', 6, '2014-09-05 22:05:59', 6),
 -- (4, 1, 6, 9, 1, '2014-09-05 21:40:00', '2014-09-05 21:46:00', '2014-09-05 21:40:43', 6, '2014-09-05 21:53:58', 6),

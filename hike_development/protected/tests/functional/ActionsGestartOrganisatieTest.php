@@ -12,7 +12,6 @@ class ActionGestartOrganisatieTest extends WebTestCase
      *  $this->assertTrue($this->isElementPresent("link=NG_011986.11"));
      */
 
-/*TEST*/
     protected function setUp()
     {
         $this->setBrowser('*firefox');
@@ -65,7 +64,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		$this->assertContains("hike_development/index-test.php?r=openVragenAntwoorden/viewControle&event_id=3", $this->getLocation());
 
 		$this->open("hike_development/index-test.php?r=openVragenAntwoorden/antwoordGoedOfFout&id=>1&goedfout=>0&event_id=>3");
-$this->assertContains("ASDFASDFASDF", $this->getBodyText());
+		$this->assertContains("ASDFASDFASDF", $this->getBodyText());
 		$this->open("hike_development/index-test.php?r=openVragenAntwoorden/antwoordGoedOfFout&id=>2&goedfout=>1&event_id=>3");
 
 		$scoreVragenEnd = OpenVragenAntwoorden::model()->getOpenVragenScore(3, 5);
@@ -109,23 +108,29 @@ $this->assertContains("ASDFASDFASDF", $this->getBodyText());
 		$this->assertEquals(5, $scoreTotalEnd-$scoreTotalBegin);
     }
 
-    public function testBeantwoordeVragenBekijken()
+    public function testBeantwoordeVragenContoleren()
     {
+		$scoreVragenBegin = OpenVragenAntwoorden::model()->getVragenScore(3, 5);
+		$scoreTotalEnd = Groups::model()->getTotalScoreGroup(3, 5);
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
     	$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=3");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=3", $this->getLocation());
-		$this->assertTrue($this->isElementPresent("link=Beantwoorde Vragen"));
-		$this->click("link=Beantwoorde Vragen");
+		$this->assertTrue($this->isElementPresent("link=Vragen Controleren"));
+		$this->click("link=Vragen Controleren");
         $this->waitForPageToLoad ( "30000" );
-		$this->assertContains("hike_development/index-test.php?r=openVragenAntwoorden/index&event_id=3", $this->getLocation());
+		$this->assertContains("hike_development/index-test.php?r=openVragenAntwoorden/viewControle&event_id=3", $this->getLocation());
 
-		#uitwerken
-		#wat kan de organisatie zien.
-
-		$this->assertContains("Alle beantwoorde vragen", $this->getBodyText());
+		$this->assertContains("Antwoorden Controleren", $this->getBodyText());
+    	$this->open("hike_development/index-test.php?r=openVragenAntwoorden/antwoordGoedOfFout&id=2&goedfout=0&event_id=3");
+    	$this->open("hike_development/index-test.php?r=openVragenAntwoorden/antwoordGoedOfFout&id=1&goedfout=1&event_id=3");
+		
+		$scoreVragenEnd = OpenVragenAntwoorden::model()->getVragenScore(3, 5);
+		$scoreTotalEnd = Groups::model()->getTotalScoreGroup(3, 5);
+		$this->assertEquals(5, $scoreVragenEnd-$scoreVragenBegin);
+		$this->assertEquals(5, $scoreTotalEnd-$scoreTotalBegin);
 	}
 
     public function testGeopendeHintsBekijken()
@@ -142,6 +147,7 @@ $this->assertContains("ASDFASDFASDF", $this->getBodyText());
 		$this->assertContains("hike_development/index-test.php?r=openNoodEnvelop/index&event_id=3", $this->getLocation());
 
 		$this->assertContains("Alle geopende hints", $this->getBodyText());
+		$this->assertContains("Hint gestart organisatie", $this->getBodyText());
 
 	}
 
@@ -159,6 +165,7 @@ $this->assertContains("ASDFASDFASDF", $this->getBodyText());
 		$this->assertContains("hike_development/index-test.php?r=bonuspunten/index&event_id=3", $this->getLocation());
 
 		$this->assertContains("Bonuspunten Overzicht", $this->getBodyText());
+		$this->assertContains("bonus gestart organisatie", $this->getBodyText());
 	}
 
     public function testGepasserdePostenBekijken()
@@ -175,6 +182,7 @@ $this->assertContains("ASDFASDFASDF", $this->getBodyText());
 		$this->assertContains("hike_development/index-test.php?r=postPassage/index&event_id=3", $this->getLocation());
 
 		$this->assertContains("Gepasserde Posten", $this->getBodyText());
+		$this->assertContains("post 1 gestart organisatie test", $this->getBodyText());
 	}
 
     public function testGecheckteStillePostenBekijken()
@@ -222,13 +230,15 @@ $this->assertContains("ASDFASDFASDF", $this->getBodyText());
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=postPassage/create&event_id=3&group_id=5", $this->getLocation());
 
-		#uitwerken
-		$this->assertTrue(false);
+		$this->select("name=PostPassage[post_ID]", "label=post 2 gestart organisatie test");
+		$this->type("name=PostPassage[binnenkomst]", "2015-02-27 12:43");
+		$this->click("name=yt0");
+		$this->waitForPageToLoad("30000");
 
 		$scorePostenEnd = PostPassage::model()->getPostScore(3, 5);
 		$scoreTotalEnd = Groups::model()->getTotalScoreGroup(3, 5);
-		$this->assertEquals(5, $scorePostenEnd-$scorePostenBegin);
-		$this->assertEquals(5, $scoreTotalEnd-$scoreTotalBegin);
+		$this->assertEquals(13, $scorePostenEnd-$scorePostenBegin);
+		$this->assertEquals(13, $scoreTotalEnd-$scoreTotalBegin);
 	}
 
 	public function testGroupsVragenBekijken()
@@ -244,8 +254,8 @@ $this->assertContains("ASDFASDFASDF", $this->getBodyText());
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=openVragen/viewPlayers&event_id=3&group_id=5", $this->getLocation());
 
-		#uitwerken
-		$this->assertTrue(false);
+		$this->assertContains("Hoofdletter b", $this->getBodyText());
+		$this->assertContains("Hoofdletter a", $this->getBodyText());
 	}
 
 	public function testGroupsBeantwoordenVragenBekijken()
@@ -261,8 +271,8 @@ $this->assertContains("ASDFASDFASDF", $this->getBodyText());
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=openVragenAntwoorden/viewPlayers&event_id=3&group_id=5", $this->getLocation());
 
-		#uitwerken
-		$this->assertTrue(false);
+		$this->assertContains("Hoofdletter b", $this->getBodyText());
+		$this->assertContains("Hoofdletter a", $this->getBodyText());
 	}
 
 	public function testGroupsHintsBekijken()
@@ -295,8 +305,7 @@ $this->assertContains("ASDFASDFASDF", $this->getBodyText());
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=bonuspunten/viewPlayers&event_id=3&group_id=5", $this->getLocation());
 
-		#uitwerken
-		$this->assertTrue(false);
+		$this->assertContains("bonus gestart organisatie", $this->getBodyText());
 	}
 
 	public function testGroupsStillePostenBekijken()

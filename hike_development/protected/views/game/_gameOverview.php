@@ -10,7 +10,7 @@
 						<div style="font-family:verdana; font-size:23px;">
 							  <b><?php echo CHtml::encode($data->group_name); ?></b><sup>
 							  <?php echo CHtml::link('<i class="fa fa-search-plus fa-inverse"></i>',
-										 array('groupoverview',
+										 array('groupOverview',
 										   'event_id'=>$data->event_ID,
 										   'group_id'=>$data->group_ID)); ?></sup></div>
 						

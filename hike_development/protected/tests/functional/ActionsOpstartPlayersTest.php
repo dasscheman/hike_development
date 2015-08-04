@@ -164,6 +164,7 @@ class ActionOpstarPlayersTest extends WebTestCase
 		$this->assertContains("Posten Overzicht", $this->getBodyText());
 		$this->assertContains("Te Controleren Vragen", $this->getBodyText());
 		$this->assertContains("Geopende Hints", $this->getBodyText());
+        $this->assertContains("Dat mag dus niet...", $this->getBodyText());
 	}
 
     public function testPostBinnenkomst()
@@ -180,7 +181,7 @@ class ActionOpstarPlayersTest extends WebTestCase
 		$this->click("link=Binnenkomst Post");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=postPassage/create&event_id=1&group_id=5", $this->getLocation());
-
+        $this->assertContains("Dat mag dus niet...", $this->getBodyText());
 		#uitwerken
 		$this->assertTrue(false);
 
