@@ -12,6 +12,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
      *  $this->assertTrue($this->isElementPresent("link=NG_011986.11"));
      */
 
+/*TEST*/
     protected function setUp()
     {
         $this->setBrowser('*firefox');
