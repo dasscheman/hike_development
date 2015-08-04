@@ -67,6 +67,8 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		$this->waitForPageToLoad ( "30000" );
 		$this->open("hike_development/index-test.php?r=openVragenAntwoorden/antwoordGoedOfFout&id=>2&goedfout=>1&event_id=>3");
 		$this->waitForPageToLoad ( "30000" );
+
+		$this->assertContains("AASDASDF", $this->getBodyText());
 		$scoreVragenEnd = OpenVragenAntwoorden::model()->getOpenVragenScore(3, 5);
 		$scoreTotalEnd = Groups::model()->getTotalScoreGroup(3, 5);
 		$this->assertEquals(0, $scoreVragenBegin);
@@ -117,7 +119,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
     	$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=3");
         $this->waitForPageToLoad ( "30000" );
-		$this->assertContains("hike_development/index-test.php?r=game/index&event_id=3", $this->getLocation());
+		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=3", $this->getLocation());
 		$this->assertTrue($this->isElementPresent("link=Beantwoorden Vragen"));
 		$this->click("link=Beantwoorden Vragen");
         $this->waitForPageToLoad ( "30000" );

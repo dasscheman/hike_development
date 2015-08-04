@@ -34,7 +34,7 @@ $this->menu=array(
 	array('label'=>'<span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x fa-green"></i>
                                 <i class="fa fa-file-o fa-stack-1x"></i>
-                                <i class="fa fa-blue fa-text-right fa-07x">Beandwoorden Vragen</i>
+                                <i class="fa fa-blue fa-text-right fa-07x">Beantwoorden Vragen</i>
                                 <i class="fa fa-list-ol fa-stack-5p fa-blue fa-05x"> </i>
                         </span>',
 	      'url'=>array('openVragenAntwoorden/index',

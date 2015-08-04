@@ -82,10 +82,10 @@ class OpenVragenAntwoordenController extends Controller
 
 	public function actionViewPlayers()
 	{
-		$event_Id = $_GET['event_id'];
+		$event_id = $_GET['event_id'];
 		$group_id = $_GET['group_id'];
 
-		$testwhere = "event_ID = $event_Id AND group_ID = $group_id";
+		$testwhere = "event_ID = $event_id AND group_ID = $group_id";
 		$openVragenAntwoordenDataProvider=new CActiveDataProvider('OpenVragenAntwoorden',
 		    array(
 			 'criteria'=>array(
