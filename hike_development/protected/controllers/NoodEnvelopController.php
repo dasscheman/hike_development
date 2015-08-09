@@ -86,19 +86,23 @@ class NoodEnvelopController extends Controller
 	{
 		$event_id = $_GET['event_id'];   
 		
-		$day_id = EventNames::model()->getActiveDayOfHike($event_id);
+		$active_day = EventNames::model()->getActiveDayOfHike($event_id);
 			
-		$where = "event_ID = $event_id AND day_ID = $day_id";
 		$noodEnvelopDataProvider=new CActiveDataProvider('NoodEnvelop',
 		    array(
-			'criteria'=>array(
-			    'condition'=>$where,
-			    'order'=>'nood_envelop_volgorde ASC',
-			    ),
-			'pagination'=>array(
-			    'pageSize'=>30,
-			),
-		));
+				'criteria'=>array(
+					 'join'=>'JOIN tbl_route route ON route.route_ID = t.route_ID', 
+					 'condition'=>'route.day_date =:active_day
+									AND route.event_ID =:event_id',
+					 'params'=>array(':active_day'=>$active_day, 
+									  ':event_id'=>$event_id),
+					 'order'=>'route_ID ASC, nood_envelop_volgorde ASC'
+					),	
+				'pagination'=>array(
+					'pageSize'=>30,
+				),
+			)
+		);
 		$this->render('viewPlayers',array(
 			'noodEnvelopDataProvider'=>$noodEnvelopDataProvider,
 		));

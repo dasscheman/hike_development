@@ -21,8 +21,8 @@
 	<?php //echo CHtml::encode($data->group_ID); ?>
 	<br />
 -->
-	<b><?php echo CHtml::encode($data->getAttributeLabel('score')); ?>:</b>
-	<?php echo CHtml::encode($data->score); ?>
+	<b><?php echo CHtml::encode('Score'); ?>:</b>
+	<?php echo CHtml::encode(Qr::model()->getQrScore($data->qr_ID)); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('create_time')); ?>:</b>

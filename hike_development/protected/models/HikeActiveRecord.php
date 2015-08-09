@@ -335,6 +335,7 @@ abstract class HikeActiveRecord extends CActiveRecord
 
 		switch ($controller_id) {
 			case 'bonuspunten':
+			case 'qrCheck':
 			case 'openVragen':
 			case 'openVragenAntwoorden':
 				if ($hikeStatus == EventNames::STATUS_introductie and
@@ -342,6 +343,7 @@ abstract class HikeActiveRecord extends CActiveRecord
 					$groupOfPlayer == $group_id) {
 						$viewPlayersAllowed = true;
 				}
+			case 'noodEnvelop':
 			case 'openNoodEnvelop':
 			case 'postPassage':
 				if ($hikeStatus <> EventNames::STATUS_opstart AND
