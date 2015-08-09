@@ -49,7 +49,7 @@
                                               </td>
                         </tr>
             <?php   }
-                } /*?>			
+                } ?>			
 			<tr>
 			      	  <td style="text-align:right">	
 						<?php echo CHtml::encode('Score Posten'); ?>		
@@ -129,4 +129,3 @@
 			</tr>
       </table>
 </div>
-*/?>
