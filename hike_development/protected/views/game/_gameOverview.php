@@ -31,7 +31,7 @@
 				
 				  </td>
 			</tr>
-            <?php/*
+            <?php echo "test";  /*
                 if (EventNames::model()->maxTimeSet($data->event_ID)){
                     if (PostPassage::model()->timeLeftToday($data->event_ID, $data->group_ID)) { ?>  
                         <tr>
@@ -49,7 +49,7 @@
                                               </td>
                         </tr>
             <?php   }
-                } */?>			
+                } */ ?>			
 			<tr>
 			      	  <td style="text-align:right">	
 						<?php echo CHtml::encode('Score Posten'); ?>		
