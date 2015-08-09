@@ -284,7 +284,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=noodEnvelop/viewPlayers&event_id=3&group_id=5", $this->getLocation());
 
-		$this->assertContains("Hint gestart organisatie	", $this->getBodyText());
+		$this->assertContains("Hint gestart organisatie", $this->getBodyText());
 	}
 
 	public function testGroupsBonuspuntenBekijken()

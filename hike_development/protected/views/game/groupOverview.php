@@ -73,7 +73,7 @@ $this->menu=array(
                                 <i class="fa fa-blue fa-text-right fa-07x">Stille Posten</i>
                                 <i class="fa fa-list-ol fa-stack-2p fa-05x fa-blue"> </i>
                         </span>',
-	      'url'=>array('QrCheck/viewPlayers',
+	      'url'=>array('qrCheck/viewPlayers',
 			   'event_id'=>$event_id,
 			   'group_id'=>$group_id),
 	      'visible'=> QrCheck::model()->isActionAllowed('qrCheck', 'viewPlayers', $event_id, $group_id)),
