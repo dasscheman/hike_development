@@ -37,19 +37,19 @@
                         <tr>
                             <td colspan="4" style="text-align:center;">
                                 <b><?php echo CHtml::encode('Tijd over'); ?>:</b>		
-                                <?php //echo CHtml::encode(PostPassage::model()->timeLeftToday($data->event_ID,
-                                       //                              $data->group_ID)); ?>
+                                <?php echo CHtml::encode(PostPassage::model()->timeLeftToday($data->event_ID,
+                                                                     $data->group_ID)); ?>
                           
                             </td>
                         </tr>
             <?php   } else { ?>
                         <tr>
                               <td colspan="4" style="text-align:center;">
-                                    <b><?php echo CHtml::encode('TDe tijd is om voor vandaag'); ?>:</b>		
+                                    <b><?php echo CHtml::encode('De tijd is om voor vandaag'); ?>:</b>		
                                               </td>
                         </tr>
             <?php   }
-                } ?>			
+                } /*?>			
 			<tr>
 			      	  <td style="text-align:right">	
 						<?php echo CHtml::encode('Score Posten'); ?>		
@@ -129,3 +129,4 @@
 			</tr>
       </table>
 </div>
+*/?>
