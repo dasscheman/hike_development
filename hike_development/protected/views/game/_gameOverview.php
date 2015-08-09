@@ -26,8 +26,8 @@
 			<tr>
 				  <td colspan="4" style="text-align:center;">
 						<b><?php echo CHtml::encode('Tijd laatste post'); ?>:</b>		
-						<?php //echo CHtml::encode(PostPassage::model()->getLaatstePostPassageTijd($data->event_ID,
-								//							 $data->group_ID)); ?>
+						<?php echo CHtml::encode(PostPassage::model()->getLaatstePostPassageTijd($data->event_ID,
+															 $data->group_ID)); ?>
 				
 				  </td>
 			</tr>
@@ -36,9 +36,9 @@
                     if (PostPassage::model()->timeLeftToday($data->event_ID, $data->group_ID)) { ?>  
                         <tr>
                             <td colspan="4" style="text-align:center;">
-                                <b><?php echo CHtml::encode('Tijd over:'); ?>:</b>		
-                                <?php echo CHtml::encode(PostPassage::model()->timeLeftToday($data->event_ID,
-                                                                     $data->group_ID)); ?>
+                                <b><?php echo CHtml::encode('Tijd over'); ?>:</b>		
+                                <?php //echo CHtml::encode(PostPassage::model()->timeLeftToday($data->event_ID,
+                                       //                              $data->group_ID)); ?>
                           
                             </td>
                         </tr>
