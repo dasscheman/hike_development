@@ -399,8 +399,8 @@ CREATE TABLE IF NOT EXISTS `tbl_qr` (
 -- Dumping data for table `tbl_qr`
 --
 
--- INSERT INTO `tbl_qr` (`qr_ID`, `qr_name`, `qr_code`, `event_ID`, `route_ID`, `qr_volgorde`, `score`, `create_time`, `create_user_ID`, `update_time`, `update_user_ID`) VALUES
--- (3, 'Vrijdag - Kan het makkelijker', '1wDlYLbS8Ws9EutrUMjNv6', 6, 17, 3, 3, '2014-08-30 14:44:11', 2, '2014-08-30 14:44:11', 2),
+INSERT INTO `tbl_qr` (`qr_ID`, `qr_name`, `qr_code`, `event_ID`, `route_ID`, `qr_volgorde`, `score`, `create_time`, `create_user_ID`, `update_time`, `update_user_ID`) VALUES
+(1, 'gestart organisatie', '1wDlYLbS8Ws9EutrUMjNv6', 3, 6, 1, 7, '2014-08-30 14:44:11', 1, '2014-08-30 14:44:11', 2);
 -- (4, 'Vrijdag - En vraag niet naar de weg', '6hUg3eWLzE4qOcvoFwId1K', 6, 18, 4, 3, '2014-08-30 14:44:42', 2, '2014-08-30 14:45:32', 2),
 -- (5, 'Vrijdag - Meneer van Dalen wacht op antwoord', 'swqYfNxRPvikX6KE41cTmH', 6, 19, 5, 3, '2014-08-30 14:45:01', 2, '2014-08-30 14:45:46', 2),
 -- (6, 'Vrijdag - Aan de wandel', 'iYMPtVWjXc1EparqnxCeAZ', 6, 20, 7, 3, '2014-08-30 14:46:31', 2, '2014-08-30 14:46:31', 2),
@@ -428,8 +428,8 @@ CREATE TABLE IF NOT EXISTS `tbl_qr_check` (
 -- Dumping data for table `tbl_qr_check`
 --
 
--- INSERT INTO `tbl_qr_check` (`qr_check_ID`, `qr_ID`, `event_ID`, `group_ID`, `create_time`, `create_user_ID`, `update_time`, `update_user_ID`) VALUES
--- (12, 29, 6, 6, '2014-08-31 14:03:05', 26, '2014-08-31 14:03:05', 26),
+INSERT INTO `tbl_qr_check` (`qr_check_ID`, `qr_ID`, `event_ID`, `group_ID`, `create_time`, `create_user_ID`, `update_time`, `update_user_ID`) VALUES
+(1, 1, 3, 5, '2014-08-31 14:03:05', 2, '2014-08-31 14:03:05', 2);
 -- (13, 29, 6, 8, '2014-08-31 14:06:44', 30, '2014-08-31 14:06:44', 30),
 -- (15, 29, 6, 5, '2014-08-31 14:19:03', 25, '2014-08-31 14:19:03', 25),
 -- (16, 29, 6, 4, '2014-08-31 14:30:00', 17, '2014-08-31 14:30:00', 17),

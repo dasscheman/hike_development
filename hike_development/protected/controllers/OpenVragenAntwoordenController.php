@@ -33,12 +33,27 @@ class OpenVragenAntwoordenController extends Controller
 				'users'=>array('?'),
 			),
             array(	'allow', // allow admin user to perform 'viewplayers' actions
-                'actions'=>array('index', 'update', 'delete', 'create', 'viewControle', 'antwoordGoedOfFout', 'updateOrganisatie', 'viewPlayers'),
+                'actions'=>array('antwoordGoedOfFout'),
                 'expression'=> 'OpenVragenAntwoorden::model()->isActionAllowed(
                     Yii::app()->controller->id,
                     Yii::app()->controller->action->id,
                     $_GET["event_id"],
                     $_GET["id"])',
+            ),
+            array(	'allow', // allow admin user to perform 'viewplayers' actions
+                'actions'=>array('viewPlayers'),
+                'expression'=> 'OpenVragenAntwoorden::model()->isActionAllowed(
+                    Yii::app()->controller->id,
+                    Yii::app()->controller->action->id,
+                    $_GET["event_id"],
+                    $_GET["group_id"])',
+            ),
+            array(	'allow', // allow admin user to perform 'viewplayers' actions
+                'actions'=>array('index', 'update', 'delete', 'create', 'viewControle', 'updateOrganisatie'),
+                'expression'=> 'OpenVragenAntwoorden::model()->isActionAllowed(
+                    Yii::app()->controller->id,
+                    Yii::app()->controller->action->id,
+                    $_GET["event_id"])',
             ),
 			array('deny',  // deny all users
 				'users'=>array('*'),

@@ -261,7 +261,7 @@ class OpenVragenAntwoorden extends HikeActiveRecord
 		$criteria = new CDbCriteria;
 		$criteria->condition="event_ID = $event_id AND
 				      open_vragen_antwoorden_ID = $id";
-		$data = OpenVragenAntwoorden::model()->find($criteria);
+		$data = OpenVragenAntwoorden::model()->findAll($criteria);
 		if(isset($data->checked) AND $data->checked == 1)
 			return true;
 		else
