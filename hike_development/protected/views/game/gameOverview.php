@@ -128,12 +128,12 @@ je kunt niet precies zien welke vragen of hints deze groep heeft beantwoord of
 open gemaakt. </center><br/>
 
 <i> Als de Hike is afgelopen, dan kun je de resultaten van een ander groepje bekijken. </i><br/>
-<?php /*$this->widget('zii.widgets.CListView',
+<?php $this->widget('zii.widgets.CListView',
 		    array('dataProvider'=>$dataProvider,
 			  'itemView'=>'_gameOverview',
 			  'enablePagination' => false,
 			  'summaryText'=>'',
 			  'emptyText'=>'Er zijn nog geen groepen ingeschreven',
 
-));*/
+));
 ?>

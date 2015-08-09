@@ -8,26 +8,26 @@
 			<tr>
 				  <td colspan="4" style="text-align:center; height:40px">								 
 						<div style="font-family:verdana; font-size:23px;">
-							  <b><?php echo CHtml::encode($data->group_name); ?></b><sup>
-							  <?php echo CHtml::link('<i class="fa fa-search-plus fa-inverse"></i>',
+							  <b><?php //echo CHtml::encode($data->group_name); ?></b><sup>
+							  <?php /*echo CHtml::link('<i class="fa fa-search-plus fa-inverse"></i>',
 										 array('groupOverview',
 										   'event_id'=>$data->event_ID,
-										   'group_id'=>$data->group_ID)); ?></sup></div>
+										   'group_id'=>$data->group_ID)); */?></sup></div>
 						
 				  </td>
 			</tr>
 			<tr>
 				  <td colspan="4" style="text-align:center;">
 						<b><?php echo CHtml::encode('Laatste post'); ?>: </b>		
-						<?php echo CHtml::encode(Posten::model()->getPostName(PostPassage::model()->getLaatstePostPassageNaam($data->event_ID,
-																			  $data->group_ID))); ?>		
+						<?php /*echo CHtml::encode(Posten::model()->getPostName(PostPassage::model()->getLaatstePostPassageNaam($data->event_ID,
+																			  $data->group_ID))); */?>		
 				  </td>
 			</tr>
 			<tr>
 				  <td colspan="4" style="text-align:center;">
 						<b><?php echo CHtml::encode('Tijd laatste post'); ?>:</b>		
-						<?php echo CHtml::encode(PostPassage::model()->getLaatstePostPassageTijd($data->event_ID,
-															 $data->group_ID)); ?>
+						<?php /*echo CHtml::encode(PostPassage::model()->getLaatstePostPassageTijd($data->event_ID,
+															 $data->group_ID)); */?>
 				
 				  </td>
 			</tr>
