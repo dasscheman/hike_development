@@ -26,8 +26,8 @@
 			<tr>
 				  <td colspan="4" style="text-align:center;">
 						<b><?php echo CHtml::encode('Tijd laatste post'); ?>:</b>		
-						<?php echo CHtml::encode(PostPassage::model()->getLaatstePostPassageTijd($data->event_ID,
-															 $data->group_ID)); ?>
+						<?php //echo CHtml::encode(PostPassage::model()->getLaatstePostPassageTijd($data->event_ID,
+								//							 $data->group_ID)); ?>
 				
 				  </td>
 			</tr>
