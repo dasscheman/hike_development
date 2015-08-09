@@ -55,7 +55,15 @@ class NoodEnvelopController extends Controller
 						$_GET["volgorde"],
 						$_GET["up_down"])'),
 			array('allow', // allow authenticated user to perform 'index' actions
-				'actions'=>array('create', 'index', 'update', 'delete', 'viewPlayers' ),
+				'actions'=>array('viewPlayers'),
+				'expression'=> 'NoodEnvelop::model()->isActionAllowed(
+                    Yii::app()->controller->id,
+                    Yii::app()->controller->action->id,
+                    $_GET["event_id"],
+                    $_GET["group_id"])',
+			),	
+			array('allow', // allow authenticated user to perform 'index' actions
+				'actions'=>array('create', 'index', 'update', 'delete'),
 				'expression'=> 'NoodEnvelop::model()->isActionAllowed(
                     Yii::app()->controller->id,
                     Yii::app()->controller->action->id,

@@ -277,16 +277,20 @@ class PostPassage extends HikeActiveRecord
 		$criteriaEvent->params = array(':event_id'=>$event_id);
 		$dataEvent = EventNames::model()->find($criteriaEvent);
 
-		$criteriaPostenPassages = new CDbCriteria;
-		$criteriaPostenPassages->join = 'JOIN tbl_posten post ON post.post_ID = t.post_ID';
-		$criteriaPostenPassages->condition = 'post.date =:active_date AND
+		$dataPostPassages = new CActiveDataProvider('PostPassage',
+				array(
+					'criteria'=>array(
+						 'join'=>'JOIN tbl_posten post ON post.post_ID = t.post_ID', 
+						 'condition'=>'post.date =:active_date AND
 											t.group_ID =:group_id AND
-											post.event_ID =:event_id';
-		$criteriaPostenPassages->order = 'post.date ASC';
-		$criteriaPostenPassages->params = array(':active_date'=>$dataEvent->active_day,
+											post.event_ID =:event_id',
+						 'params'=>array(':active_date'=>$dataEvent->active_day,
 									    'group_id'=>$group_id,
-										'event_id'=>$event_id);
-		$dataPostPassages = PostPassage::model()->findAll($criteriaPostenPassages);
+										'event_id'=>$event_id),
+						 'order'=>'post.post_volgorde ASC'
+					),	 
+				)
+			);		
  
 		$totalTime = 0;
 		$timeLastStint = 0;
@@ -322,9 +326,12 @@ class PostPassage extends HikeActiveRecord
 			// afgetrokken worden en opgeteld worden bij totaltime.
 			$timeLastStint = strtotime(date('Y-m-d H:i:s')) - strtotime($timeLeftLastPost);		
 			$totalTime = $totalTime + $timeLastStint;
-		}			
+		}
 		if ($totalTime < strtotime("1970-01-01 $dataEvent->max_time UTC")) {
 			return round(abs(strtotime("1970-01-01 $dataEvent->max_time UTC") - $totalTime) / 60,2);
+		}
+		if (empty($dataPostPassages)){
+			return true;
 		}
 		return false;
 	}

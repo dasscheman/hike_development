@@ -41,7 +41,7 @@ class OpenVragenAntwoordenController extends Controller
                     $_GET["id"])',
             ),
             array(	'allow', // allow admin user to perform 'viewplayers' actions
-                'actions'=>array('viewPlayers'),
+                'actions'=>array('viewPlayers', 'update',  'create'),
                 'expression'=> 'OpenVragenAntwoorden::model()->isActionAllowed(
                     Yii::app()->controller->id,
                     Yii::app()->controller->action->id,
@@ -49,7 +49,7 @@ class OpenVragenAntwoordenController extends Controller
                     $_GET["group_id"])',
             ),
             array(	'allow', // allow admin user to perform 'viewplayers' actions
-                'actions'=>array('index', 'update', 'delete', 'create', 'viewControle', 'updateOrganisatie'),
+                'actions'=>array('index', 'delete', 'viewControle', 'updateOrganisatie'),
                 'expression'=> 'OpenVragenAntwoorden::model()->isActionAllowed(
                     Yii::app()->controller->id,
                     Yii::app()->controller->action->id,

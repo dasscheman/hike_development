@@ -22,7 +22,10 @@
 					      'event_id'=>$_GET['event_id'],
 					      'group_id'=>$_GET['group_id'])),
 					array('confirm'=>'Weet je zeker dat je deze envelop open wilt maken?'));
-		       } ?>
+		       
+	} else {
+		echo "GEOPEND";
+	}?>
     </div> <!-- end row buttons-->
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('nood_envelop_name')); ?>:</b>

@@ -65,7 +65,7 @@ $this->menu=array(
 	      'url'=>array('bonuspunten/viewPlayers',
 			   'event_id'=>$event_id,
 			   'group_id'=>$group_id),
-	      'visible'=> Bonuspunten::model()->isActionAllowed('bonuspunten', 'viewPlayers', $event_id)),
+	      'visible'=> Bonuspunten::model()->isActionAllowed('bonuspunten', 'viewPlayers', $event_id, $group_id)),
 	
 	array('label'=>'<span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x fa-green"></i>

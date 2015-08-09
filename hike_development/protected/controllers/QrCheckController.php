@@ -41,11 +41,19 @@ class QrCheckController extends Controller
 				'expression'=> '!isset($_GET["group_id"])',
 			),		
             array(	'allow', // allow admin user to perform 'viewplayers' actions
-                'actions'=>array('index', 'update', 'delete', 'create', 'viewPlayers'),
+                'actions'=>array('index', 'update', 'delete', 'create'),
                 'expression'=> 'QrCheck::model()->isActionAllowed(
                     Yii::app()->controller->id,
                     Yii::app()->controller->action->id,
                     $_GET["event_id"])',
+            ),	
+            array(	'allow', // allow admin user to perform 'viewplayers' actions
+                'actions'=>array('viewPlayers'),
+                'expression'=> 'QrCheck::model()->isActionAllowed(
+                    Yii::app()->controller->id,
+                    Yii::app()->controller->action->id,
+                    $_GET["event_id"],
+					$_GET["group_id"])',
             ),
 			array('deny',  // deny all users
 				'users'=>array('*'),

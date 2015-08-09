@@ -37,12 +37,20 @@ class OpenNoodEnvelopController extends Controller
 				'expression'=> '!isset($_GET["group_id"])',
 			),	
             array(	'allow', // allow admin user to perform 'viewplayers' actions
-                'actions'=>array('index', 'update', 'delete', 'create',),
+                'actions'=>array('index', 'update', 'delete'),
                 'expression'=> 'OpenNoodEnvelop::model()->isActionAllowed(
                     Yii::app()->controller->id,
                     Yii::app()->controller->action->id,
                     $_GET["event_id"])',
-            ),	
+            ),
+            array(	'allow', // allow admin user to perform 'viewplayers' actions
+                'actions'=>array('create'),
+                'expression'=> 'OpenNoodEnvelop::model()->isActionAllowed(
+                    Yii::app()->controller->id,
+                    Yii::app()->controller->action->id,
+                    $_GET["event_id"],
+					$_GET["group_id"])',
+            ),		
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
@@ -79,7 +87,6 @@ class OpenNoodEnvelopController extends Controller
 		$model->nood_envelop_ID = $nood_envelop_id;
 		$model->group_ID = $group_id;
 		$model->opened = 1;
-		$model->score = $noodEnvelop->score;
 		
 		if($model->save())
 				$this->redirect(array('/game/groupOverview',

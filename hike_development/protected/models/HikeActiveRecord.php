@@ -71,7 +71,7 @@ abstract class HikeActiveRecord extends CActiveRecord
 				$actionAllowed = HikeActiveRecord::setViewAllowed($controller_id, $action_id, $event_id);
 				break;
 			case 'create':
-				$actionAllowed = HikeActiveRecord::setCreateAllowed($controller_id, $action_id, $event_id);
+				$actionAllowed = HikeActiveRecord::setCreateAllowed($controller_id, $action_id, $event_id, $model_id);
 				break;
 			case 'createIntroductie':
 				$actionAllowed = HikeActiveRecord::setCreateIntroductieAllowed($controller_id, $action_id, $event_id);
@@ -134,6 +134,9 @@ abstract class HikeActiveRecord extends CActiveRecord
 		$updateAllowed = false;
 		$hikeStatus = EventNames::model()->getStatusHike($event_id);
 		$rolPlayer = Yii::app()->user->getRole($event_id);
+		if ($rolPlayer == DeelnemersEvent::ROL_deelnemer) {
+			$groupOfPlayer = DeelnemersEvent::model()->getGroupOfPlayer($event_id, Yii::app()->user->id);
+		}
 
 		switch ($controller_id) {
 			case 'bonuspunten':
@@ -171,6 +174,16 @@ abstract class HikeActiveRecord extends CActiveRecord
           	case 'qrCheck':
           		break;
 			case 'openVragenAntwoorden':
+				if ($hikeStatus == EventNames::STATUS_introductie and
+					$rolPlayer == DeelnemersEvent::ROL_deelnemer and
+				    $groupOfPlayer == $model_id) {
+						$updateAllowed = true;}
+				if ($hikeStatus == EventNames::STATUS_gestart and
+					$rolPlayer == DeelnemersEvent::ROL_deelnemer and
+				    $groupOfPlayer == $model_id and
+					PostPassage::model()->timeLeftToday($event_id, $model_id)) {
+						$updateAllowed = true;}
+				break;
 			case 'postPassage':
 				if ($hikeStatus == EventNames::STATUS_introductie and
 					$rolPlayer == DeelnemersEvent::ROL_organisatie) {
@@ -325,7 +338,7 @@ abstract class HikeActiveRecord extends CActiveRecord
 		return $viewAllowed;
 	}
 
-	function setViewPlayersAllowed($controller_id = null, $action_id = null, $event_id = null, $group_id = null)
+	function setViewPlayersAllowed($controller_id = null, $action_id = null, $event_id = null, $model_id = null)
 	{
 		$viewPlayersAllowed = false;
 		$hikeStatus = EventNames::model()->getStatusHike($event_id);
@@ -340,7 +353,7 @@ abstract class HikeActiveRecord extends CActiveRecord
 			case 'openVragenAntwoorden':
 				if ($hikeStatus == EventNames::STATUS_introductie and
 					$rolPlayer == DeelnemersEvent::ROL_deelnemer and
-					$groupOfPlayer == $group_id) {
+					$groupOfPlayer == $model_id) {
 						$viewPlayersAllowed = true;
 				}
 			case 'noodEnvelop':
@@ -358,10 +371,10 @@ abstract class HikeActiveRecord extends CActiveRecord
 				if ($hikeStatus == EventNames::STATUS_beindigd) {
 						$viewPlayersAllowed = true;
 				}
-			
+
 				if ($hikeStatus == EventNames::STATUS_gestart and
 					$rolPlayer == DeelnemersEvent::ROL_deelnemer and
-					$groupOfPlayer == $group_id) {
+					$groupOfPlayer == $model_id) {
 						$viewPlayersAllowed = true;
 				}
 				break;

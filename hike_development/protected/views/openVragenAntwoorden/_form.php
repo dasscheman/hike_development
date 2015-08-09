@@ -32,7 +32,7 @@
 -->
 	<div class="row">
 		<?php echo $form->labelEx($model,'vraag'); ?>
-		<?php echo $model->vraag; ?>
+		<?php echo OpenVragen::model()->getOpenVraag($_GET['vraag_id']); ?>
 		<?php echo $form->error($model,'vraag'); ?>
 	</div>
 
@@ -56,7 +56,7 @@
 -->
 	<div class="row">
 		<?php echo $form->labelEx($model,'score'); ?>
-		<?php echo $model->score; ?>
+		<?php echo OpenVragen::model()->getOpenVraagScore($_GET['vraag_id']); ?>
 		<?php echo $form->error($model,'score'); ?>
 	</div>
 <!--
