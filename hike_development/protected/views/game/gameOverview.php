@@ -4,7 +4,7 @@
 
 /* @var $this GroupsController */
 /* @var $dataProvider CActiveDataProvider */
-/*
+
 $event_id = $_GET['event_id'];
 $hikeStatus = EventNames::model()->getStatusHike($event_id);
 $activeDay  = EventNames::model()->getActiveDayOfHike($event_id);
@@ -118,7 +118,7 @@ $this->menu=array(
             <b> Actieve dag: </b><?php echo $activeDay; ?>
         </td>
     </tr>
-    <?php } */?>
+    <?php } ?>
 </table>
 <center>Dit is een overzicht van alle groepjes die meedoen. Het symbool <i class="fa fa-search-plus fa-inverse"></i>
 betekend dat je daar meer details van je groep kan bekijken.

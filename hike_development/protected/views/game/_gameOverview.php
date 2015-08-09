@@ -55,13 +55,13 @@
 						<?php echo CHtml::encode('Score Posten'); ?>		
 				  </td>
 				  <td>
-						<?php echo CHtml::encode(PostPassage::model()->getPostScore($data->event_ID,
-													 $data->group_ID)); ?>
+						<?php //echo CHtml::encode(PostPassage::model()->getPostScore($data->event_ID,
+							//						 $data->group_ID)); ?>
 					 
 				  </td>
 				  <td style="text-align:right">
-						<?php echo CHtml::encode(QrCheck::model()->getQrScore($data->event_ID,
-													  $data->group_ID)); ?>
+						<?php //echo CHtml::encode(QrCheck::model()->getQrScore($data->event_ID,
+								//					  $data->group_ID)); ?>
 		 
 				  </td>
 				  <td style="text-align:left">
@@ -73,13 +73,13 @@
 						 <?php echo CHtml::encode('Score Vragen'); ?>		
 				  </td>
 				  <td>
-						 <?php echo CHtml::encode(OpenVragenAntwoorden::model()->getOpenVragenScore($data->event_ID,
-																$data->group_ID)); ?>
+						 <?php //echo CHtml::encode(OpenVragenAntwoorden::model()->getOpenVragenScore($data->event_ID,
+								//								$data->group_ID)); ?>
 		 
 				  </td>
 				  <td style="text-align:right">
-						 <?php echo CHtml::encode(Bonuspunten::model()->getBonuspuntenScore($data->event_ID,
-															$data->group_ID)); ?>
+						 <?php // echo CHtml::encode(Bonuspunten::model()->getBonuspuntenScore($data->event_ID,
+								//							$data->group_ID)); ?>
 					 
 				  </td>
 				  <td style="text-align:left">
@@ -91,8 +91,8 @@
 					 <?php echo CHtml::encode('Strafpunten Hints'); ?>
 				  </td>
 				  <td style="text-align:left">
-					 <?php echo CHtml::encode(OpenNoodEnvelop::model()->getOpenEnvelopScore($data->event_ID,
-															$data->group_ID)); ?>	 
+					 <?php //echo CHtml::encode(OpenNoodEnvelop::model()->getOpenEnvelopScore($data->event_ID,
+							//								$data->group_ID)); ?>	 
 			 
 				  </td>
 						  <td style="text-align:right">			
@@ -106,8 +106,8 @@
 				  <td>
 				  </td>
 				  <td style="text-align:right">
-					 <?php echo CHtml::encode(Groups::model()->getTotalScoreGroup($data->event_ID,
-												  $data->group_ID)); ?></b>
+					 <?php //echo CHtml::encode(Groups::model()->getTotalScoreGroup($data->event_ID,
+							//					  $data->group_ID)); ?></b>
 					 
 				  </td>
 				  <td style="text-align:left">
