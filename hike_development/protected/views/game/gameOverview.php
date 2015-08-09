@@ -4,7 +4,7 @@
 
 /* @var $this GroupsController */
 /* @var $dataProvider CActiveDataProvider */
-
+/*
 $event_id = $_GET['event_id'];
 $hikeStatus = EventNames::model()->getStatusHike($event_id);
 $activeDay  = EventNames::model()->getActiveDayOfHike($event_id);
@@ -19,7 +19,8 @@ $this->menu=array(
                         </span>',
 	      'url'=>array('openVragenAntwoorden/viewControle',
                 'event_id'=>$event_id),
-                'visible'=> OpenVragenAntwoorden::model()->isActionAllowed('openVragenAntwoorden', 'viewControle', $_GET['event_id'])),
+                'visible'=> OpenVragenAntwoorden::model()->isActionAllowed('openVragenAntwoorden', 'viewControle', $_GET['event_id'])
+	),
 
 	array('label'=>'<span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x fa-green"></i>
@@ -29,7 +30,8 @@ $this->menu=array(
                         </span>',
 	      'url'=>array('bonuspunten/create',
                 'event_id'=>$event_id),
-                'visible'=> Bonuspunten::model()->isActionAllowed('bonuspunten', 'create', $_GET['event_id'])),
+                'visible'=> Bonuspunten::model()->isActionAllowed('bonuspunten', 'create', $_GET['event_id'])
+	),
 
 	array('label'=>'<span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x fa-green"></i>
@@ -40,7 +42,8 @@ $this->menu=array(
 	      'url'=>array('openVragenAntwoorden/index',
                 'event_id'=>$event_id,
                 'previous'=>'game/gameOverview'),
-                'visible'=> OpenVragenAntwoorden::model()->isActionAllowed('openVragenAntwoorden', 'index', $_GET['event_id'])),
+                'visible'=> OpenVragenAntwoorden::model()->isActionAllowed('openVragenAntwoorden', 'index', $_GET['event_id'])
+	),
 
 	array('label'=>'<span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x fa-green"></i>
@@ -51,7 +54,9 @@ $this->menu=array(
 	      'url'=>array('openNoodEnvelop/index',
                 'event_id'=>$event_id,
                 'previous'=>'game/gameOverview'),
-                'visible'=> OpenNoodEnvelop::model()->isActionAllowed('openNoodEnvelop', 'index', $_GET['event_id'])),
+                'visible'=> OpenNoodEnvelop::model()->isActionAllowed('openNoodEnvelop', 'index', $_GET['event_id'])
+	),
+
 	array('label'=>'<span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x fa-green"></i>
                                 <i class="fa fa-sun-o fa-stack-1x"></i>
@@ -61,7 +66,8 @@ $this->menu=array(
 	      'url'=>array('bonuspunten/index',
                 'event_id'=>$event_id,
                 'previous'=>'game/gameOverview'),
-                'visible'=> Bonuspunten::model()->isActionAllowed('bonuspunten', 'index', $_GET['event_id'])),
+                'visible'=> Bonuspunten::model()->isActionAllowed('bonuspunten', 'index', $_GET['event_id'])
+	),
 
 	array('label'=>'<span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x fa-green"></i>
@@ -72,7 +78,8 @@ $this->menu=array(
 	      'url'=>array('postPassage/index',
                 'event_id'=>$event_id,
                 'previous'=>'game/gameOverview'),
-                'visible'=> PostPassage::model()->isActionAllowed('postPassage', 'index', $_GET['event_id'])),
+                'visible'=> PostPassage::model()->isActionAllowed('postPassage', 'index', $_GET['event_id'])
+	),
 
 	array('label'=>'<span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x fa-green"></i>
@@ -83,7 +90,8 @@ $this->menu=array(
 	      'url'=>array('QrCheck/index',
                 'event_id'=>$event_id,
                 'previous'=>'game/gameOverview'),
-                'visible'=> QrCheck::model()->isActionAllowed('qrCheck', 'index', $_GET['event_id'])),
+                'visible'=> QrCheck::model()->isActionAllowed('qrCheck', 'index', $_GET['event_id'])
+	),
         );
 ?>
 
@@ -110,7 +118,7 @@ $this->menu=array(
             <b> Actieve dag: </b><?php echo $activeDay; ?>
         </td>
     </tr>
-    <?php } ?>
+    <?php } */?>
 </table>
 <center>Dit is een overzicht van alle groepjes die meedoen. Het symbool <i class="fa fa-search-plus fa-inverse"></i>
 betekend dat je daar meer details van je groep kan bekijken.
