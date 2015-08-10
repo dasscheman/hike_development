@@ -8,7 +8,7 @@
 			<tr>
 				  <td colspan="4" style="text-align:center; height:40px">								 
 						<div style="font-family:verdana; font-size:23px;">
-							  <b><?php //echo CHtml::encode($data->group_name); ?></b><sup>
+							  <b><?php echo CHtml::encode($data->group_name); ?></b><sup>
 							  <?php echo CHtml::link('<i class="fa fa-search-plus fa-inverse"></i>',
 										 array('groupOverview',
 										   'event_id'=>$data->event_ID,
@@ -31,7 +31,7 @@
 				
 				  </td>
 			</tr>
-            <?php echo "test";  /*
+            <?php 
                 if (EventNames::model()->maxTimeSet($data->event_ID)){
                     if (PostPassage::model()->timeLeftToday($data->event_ID, $data->group_ID)) { ?>  
                         <tr>
@@ -45,11 +45,11 @@
             <?php   } else { ?>
                         <tr>
                               <td colspan="4" style="text-align:center;">
-                                    <b><?php echo CHtml::encode('De tijd is om voor vandaag'); ?>:</b>		
+                                    <b><?php echo CHtml::encode('De tijd is om voor vandaag!'); ?></b>		
                                               </td>
                         </tr>
             <?php   }
-                } */ ?>			
+                } ?>			
 			<tr>
 			      	  <td style="text-align:right">	
 						<?php echo CHtml::encode('Score Posten'); ?>		

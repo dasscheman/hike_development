@@ -277,28 +277,28 @@ class PostPassage extends HikeActiveRecord
 		$criteriaEvent->params = array(':event_id'=>$event_id);
 		$dataEvent = EventNames::model()->find($criteriaEvent);
 
-		$dataPostPassages = new CActiveDataProvider('PostPassage',
-				array(
-					'criteria'=>array(
-						 'join'=>'JOIN tbl_posten post ON post.post_ID = t.post_ID', 
-						 'condition'=>'post.date =:active_date AND
-											t.group_ID =:group_id AND
-											post.event_ID =:event_id',
-						 'params'=>array(':active_date'=>$dataEvent->active_day,
-									    'group_id'=>$group_id,
-										'event_id'=>$event_id),
-						 'order'=>'post.post_volgorde ASC'
-					),	 
-				)
-			);		
+		$criteriaPostenPassages = new CDbCriteria;
+		$criteriaPostenPassages->condition = 'group_ID =:group_id AND
+											event_ID =:event_id';
+		$criteriaPostenPassages->order = 'binnenkomst ASC';
+		$criteriaPostenPassages->params = array(':group_id'=>$group_id,
+										':event_id'=>$event_id);
+		$dataPostPassages = PostPassage::model()->findAll($criteriaPostenPassages);	
  
 		$totalTime = 0;
 		$timeLastStint = 0;
 		$timeLeftLastPost = 0;
 		$atPost = false;
 		$count = 0;
+		if (empty($dataPostPassages)){
+			return 'nog niet gestart';
+		}
+
 		foreach($dataPostPassages as $obj)
 		{
+			if (Posten::model()->getDatePost($obj->post_ID) <> $dataEvent->active_day){
+				continue;
+			}
 			if ($obj->vertrek == null) {
 				$atPost = true;
 			}
@@ -320,6 +320,10 @@ class PostPassage extends HikeActiveRecord
 			$count++;
         }
 
+		if ($count == 0){
+			return 'vandaag nog niet gestart';
+		}
+
 		if (!$atPost) {
 			// De deelnemers zijn niet op een post, dus ze zijn nog aan het lopen.
 			// Daarom moet de huidige tijd min de laatste vertrektijd van elkaar 
@@ -330,9 +334,6 @@ class PostPassage extends HikeActiveRecord
 		if ($totalTime < strtotime("1970-01-01 $dataEvent->max_time UTC")) {
 			return round(abs(strtotime("1970-01-01 $dataEvent->max_time UTC") - $totalTime) / 60,2);
 		}
-		if (empty($dataPostPassages)){
-			return true;
-		}
-		return false;
+		return round((strtotime("1970-01-01 $dataEvent->max_time UTC") - $totalTime) / 60,2);
 	}
 }

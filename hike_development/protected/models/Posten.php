@@ -274,7 +274,7 @@ class Posten extends HikeActiveRecord
     {
     	$data = Posten::model()->find('post_ID =:post_Id', array(':post_Id' => $post_Id));   
         return isset($data->date) ?
-            $data->post_name : "nvt";
+            $data->date : "nvt";
     }
 
 
@@ -337,7 +337,7 @@ class Posten extends HikeActiveRecord
 			return false;
 	}
 	
-		public function setActiveTab($date)
+	public function setActiveTab($date)
 	{
 		$this->_activeTab = $date;
 	}

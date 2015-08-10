@@ -14,11 +14,11 @@
 	<?php
 
 	$printSeparator = false;
-	foreach ($data->deelnemersEvents as $test )
+	foreach ($data->deelnemersEvents as $player )
 	{
 		if ($printSeparator)
 			echo " - ";
-		echo CHtml::encode(Users::model()->getUserName($test->user_ID));
+		echo CHtml::encode(Users::model()->getUserName($player->user_ID));
 		$printSeparator = true;
 	}?>
 </div>

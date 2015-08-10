@@ -337,11 +337,11 @@ CREATE TABLE IF NOT EXISTS `tbl_posten` (
 --
 
 INSERT INTO `tbl_posten` (`post_ID`, `post_name`, `event_ID`, `date`, `post_volgorde`, `score`, `create_time`, `create_user_ID`, `update_time`, `update_user_ID`) VALUES
-(1, 'post 1 gestart organisatie test', 3, '2015-02-27', 1, 13, '2014-08-30 10:53:28', 2, '2015-07-15 12:53:08', 2),
-(2, 'post 2 gestart organisatie test', 3, '2015-02-27', 2, 13, '2014-08-30 10:54:06', 2, '2015-07-15 12:53:08', 2),
-(3, 'post 3 gestart organisatie START', 3, '2015-02-28', 3, 13, '2014-08-30 10:54:06', 2, '2015-07-15 12:53:08', 2),
-(4, 'post 3 gestart organisatie LUNCH', 3, '2015-02-28', 4, 13, '2014-08-30 10:54:06', 2, '2015-07-15 12:53:08', 2),
-(5, 'post 3 gestart organisatie EIND', 3, '2015-02-28', 5, 13, '2014-08-30 10:54:06', 2, '2015-07-15 12:53:08', 2);
+(1, 'post 1 gestart organisatie test', 3, '2015-02-28', 1, 13, '2014-08-30 10:53:28', 2, '2015-07-15 12:53:08', 2),
+(2, 'post 2 gestart organisatie test', 3, '2015-02-28', 2, 13, '2014-08-30 10:54:06', 2, '2015-07-15 12:53:08', 2),
+(3, 'post 3 gestart organisatie START', 3, '2015-02-27', 3, 13, '2014-08-30 10:54:06', 2, '2015-07-15 12:53:08', 2),
+(4, 'post 3 gestart organisatie LUNCH', 3, '2015-02-27', 4, 13, '2014-08-30 10:54:06', 2, '2015-07-15 12:53:08', 2),
+(5, 'post 3 gestart organisatie EIND', 3, '2015-02-27', 5, 13, '2014-08-30 10:54:06', 2, '2015-07-15 12:53:08', 2);
 -- (3, 'Je weet maar nooit of we ze nog ergens moeten opvangen...', 6, '2014-09-05', 3, 13, '2014-08-30 10:54:43', 2, '2015-07-13 17:40:59', 2),
 -- (4, 'Nog maar een kopjekoffie om op gang te komen', 6, '2014-09-06', 5, 13, '2014-08-30 10:55:45', 2, '2015-07-15 12:53:16', 2),
 -- (5, 'Tijd voor lunch?', 6, '2014-09-06', 6, 13, '2014-08-30 10:56:19', 2, '2015-07-15 12:53:16', 2),
