@@ -57,7 +57,6 @@ class ActionGestartOrganisatieTest extends WebTestCase
     	$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=3");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=3", $this->getLocation());
-$this->assertContains("ASDFASDFASDF", $this->getBodyText());
 		$this->assertTrue($this->isElementPresent("link=Vragen Controleren"));
 		$this->click("link=Vragen Controleren");
 		// can be done with: $this->click("//ul[@id='yw2']/li/a/span/i[3]");
@@ -179,7 +178,9 @@ $this->assertContains("ASDFASDFASDF", $this->getBodyText());
 		$this->assertContains("hike_development/index-test.php?r=postPassage/index&event_id=3", $this->getLocation());
 
 		$this->assertContains("Gepasserde Posten", $this->getBodyText());
-		$this->assertContains("post 1 gestart organisatie test", $this->getBodyText());
+		$this->assertContains("post 3 gestart organisatie START", $this->getBodyText());
+		$this->assertContains("post 3 gestart organisatie LUNCH", $this->getBodyText());
+		$this->assertContains("post 3 gestart organisatie EIND", $this->getBodyText());
 	}
 
     public function testGecheckteStillePostenBekijken()

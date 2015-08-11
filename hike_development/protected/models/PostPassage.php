@@ -278,62 +278,52 @@ class PostPassage extends HikeActiveRecord
 		$dataEvent = EventNames::model()->find($criteriaEvent);
 
 		$criteriaPostenPassages = new CDbCriteria;
+		$criteriaPostenPassages->with = array('post');
+
 		$criteriaPostenPassages->condition = 'group_ID =:group_id AND
-											event_ID =:event_id';
+											  post.event_ID =:event_id AND
+											  post.date =:active_date';
 		$criteriaPostenPassages->order = 'binnenkomst ASC';
 		$criteriaPostenPassages->params = array(':group_id'=>$group_id,
-										':event_id'=>$event_id);
+												':event_id'=>$event_id,
+												':active_date'=>$dataEvent->active_day);
 		$dataPostPassages = PostPassage::model()->findAll($criteriaPostenPassages);	
- 
+		$aantalPosten = PostPassage::model()->count($criteriaPostenPassages);	
+
 		$totalTime = 0;
 		$timeLastStint = 0;
 		$timeLeftLastPost = 0;
 		$atPost = false;
-		$count = 0;
-		if (empty($dataPostPassages)){
+		$count = 1;
+		if ($aantalPosten == 0){
 			return 'nog niet gestart';
 		}
 
 		foreach($dataPostPassages as $obj)
 		{
-			if (Posten::model()->getDatePost($obj->post_ID) <> $dataEvent->active_day){
-				continue;
-			}
-			if ($obj->vertrek == null) {
-				$atPost = true;
-			}
-			
-			if ($count == 0) {
-				// Als count 0 is dan is het de start post en moeten 
-				// we alleen naar de vertrektijd kijken.
-				$timeLeftLastPost = $obj->vertrek;
-			} else {
+			// Als count 1 is dan is het de start post en moeten 
+			// we alleen naar de vertrektijd mee te nemen naar de volgende post.
+			if ($count > 1) {
 				$to_time = strtotime($obj->binnenkomst);
 				$from_time = strtotime($timeLeftLastPost);
-				$timeLastStint = $to_time - $from_time;
-
+				$timeLastStint = $to_time-$from_time;
 				$totalTime = $totalTime + $timeLastStint;
-				if (!$atPost) {
-					$timeLeftLastPost = $obj->vertrek;
-				} 
+
+				if ($count == $aantalPosten && (strtotime($obj->vertrek))) {
+					// Hier wordt de laatste post gecontroleerd.
+					// De deelnemers zijn niet op een post, dus ze zijn nog aan het lopen.
+					// Daarom moet de huidige tijd min de laatste vertrektijd van elkaar 
+					// afgetrokken worden en opgeteld worden bij totaltime.
+					$timeLastStint = strtotime(date('Y-m-d H:i:s')) - strtotime($timeLeftLastPost);		
+					$totalTime = $totalTime + $timeLastStint;
+				}
 			}
+
+			// Als count 1 is dan is het de start post en moeten 
+			// we alleen naar de vertrektijd mee te nemen naar de volgende post.
+			$timeLeftLastPost = $obj->vertrek;
 			$count++;
         }
-
-		if ($count == 0){
-			return 'vandaag nog niet gestart';
-		}
-
-		if (!$atPost) {
-			// De deelnemers zijn niet op een post, dus ze zijn nog aan het lopen.
-			// Daarom moet de huidige tijd min de laatste vertrektijd van elkaar 
-			// afgetrokken worden en opgeteld worden bij totaltime.
-			$timeLastStint = strtotime(date('Y-m-d H:i:s')) - strtotime($timeLeftLastPost);		
-			$totalTime = $totalTime + $timeLastStint;
-		}
-		if ($totalTime < strtotime("1970-01-01 $dataEvent->max_time UTC")) {
-			return round(abs(strtotime("1970-01-01 $dataEvent->max_time UTC") - $totalTime) / 60,2);
-		}
 		return round((strtotime("1970-01-01 $dataEvent->max_time UTC") - $totalTime) / 60,2);
 	}
 }
