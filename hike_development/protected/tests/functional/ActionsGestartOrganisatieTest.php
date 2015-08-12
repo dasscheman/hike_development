@@ -324,4 +324,245 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		$this->assertContains("2014-08-31 14:03:05", $this->getBodyText());
 	}
     ## Startup Overview
+
+	public function testLoginAndStartupOverview()
+    {
+		if (Yii::app()->user->isGuest )
+			$this->login();
+
+		$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=3");
+		$this->waitForPageToLoad ( "30000" );
+		$this->assertContains("hike_development/index-test.php?r=startup/startupOverview&event_id=3", $this->getLocation());
+    }
+
+    public function testIntroductieBekijken()
+    {
+		if (Yii::app()->user->isGuest )
+			$this->login();
+
+    	$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=3");
+        $this->waitForPageToLoad ( "30000" );
+		$this->assertContains("hike_development/index-test.php?r=startup/startupOverview&event_id=3", $this->getLocation());
+		$this->isElementPresent("link=Introductie");
+		$this->open("hike_development/index-test.php?r=route/viewIntroductie&event_id=3");
+        $this->assertContains("Vraag voor ActionsGestartOrganisatie introductie", $this->getBodyText());
+        $this->assertContains("gestart organisatie Introductie", $this->getBodyText());
+        $this->assertContains("2wDlYLbS8Ws9EutrUMjNv6", $this->getBodyText());
+
+		$this->assertFalse($this->isElementPresent("link=Introductie Vraag Maken"));
+		$this->assertFalse($this->isElementPresent("link=Introductie Stille Post Maken"));
+
+		$this->open("hike_development/index-test.php?r=openVragen/createIntroductie&event_id=3");
+        $this->assertContains("Dat mag dus niet...", $this->getBodyText());
+
+		$this->open("hike_development/index-test.php?r=qr/createIntroductie&event_id=3");
+        $this->assertContains("Dat mag dus niet...", $this->getBodyText());
+	}
+
+    public function testRouteBeheren()
+    {
+		if (Yii::app()->user->isGuest )
+			$this->login();
+
+    	$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=3");
+        $this->waitForPageToLoad ( "30000" );
+		$this->assertContains("hike_development/index-test.php?r=startup/startupOverview&event_id=3", $this->getLocation());
+		$this->isElementPresent("link=Route Beheren");
+		$this->open("hike_development/index-test.php?r=route/index&event_id=3");
+
+		$this->assertTrue($this->isElementPresent("link=2015-02-25"));
+		$this->assertTrue($this->isElementPresent("link=2015-02-26"));
+		$this->assertTrue($this->isElementPresent("link=2015-02-27"));
+		$this->assertTrue($this->isElementPresent("link=2015-02-28"));
+		$this->assertTrue($this->isElementPresent("link=2015-03-01"));
+		$this->click("link=2015-02-27");
+        $this->assertContains("9 - Homerun", $this->getBodyText());
+	}
+
+    public function testPostenBeheren()
+    {
+		if (Yii::app()->user->isGuest )
+			$this->login();
+
+    	$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=3");
+        $this->waitForPageToLoad ( "30000" );
+		$this->assertContains("hike_development/index-test.php?r=startup/startupOverview&event_id=3", $this->getLocation());
+		$this->isElementPresent("link=Posten Beheren");
+		$this->open("hike_development/index-test.php?r=posten/index&event_id=3");
+		$this->assertTrue($this->isElementPresent("link=2015-02-25"));
+		$this->assertTrue($this->isElementPresent("link=2015-02-26"));
+		$this->assertTrue($this->isElementPresent("link=2015-02-27"));
+		$this->assertTrue($this->isElementPresent("link=2015-02-28"));
+		$this->assertTrue($this->isElementPresent("link=2015-03-01"));
+        $this->assertNotContains("post 3 gestart organisatie START", $this->getBodyText());
+        $this->assertNotContains("post 3 gestart organisatie LUNCH", $this->getBodyText());
+        $this->assertNotContains("post 3 gestart organisatie EIND", $this->getBodyText());
+		$this->click("link=2015-02-27");
+        $this->assertContains("post 3 gestart organisatie START", $this->getBodyText());
+        $this->assertContains("post 3 gestart organisatie LUNCH", $this->getBodyText());
+        $this->assertContains("post 3 gestart organisatie EIND", $this->getBodyText());
+		$this->click("link=2015-02-28");
+        $this->assertContains("post 1 gestart organisatie test", $this->getBodyText());
+        $this->assertContains("post 1 gestart organisatie test", $this->getBodyText());
+	}
+
+    public function testVragenOverzicht()
+    {
+		if (Yii::app()->user->isGuest )
+			$this->login();
+
+    	$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=3");
+        $this->waitForPageToLoad ( "30000" );
+		$this->assertContains("hike_development/index-test.php?r=startup/startupOverview&event_id=3", $this->getLocation());
+		$this->isElementPresent("link=Vragen Overzicht");
+		$this->open("hike_development/index-test.php?r=openVragen/index&event_id=3");
+        $this->assertNotContains("Hoofdletter E", $this->getBodyText());
+        $this->assertNotContains("0000-00-00", $this->getBodyText());
+        $this->assertNotContains("Hoofdletter a", $this->getBodyText());
+        $this->assertNotContains("2015-02-27", $this->getBodyText());
+	}
+
+    public function testHintsOverzicht()
+    {
+		if (Yii::app()->user->isGuest )
+			$this->login();
+
+    	$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=3");
+        $this->waitForPageToLoad ( "30000" );
+		$this->assertContains("hike_development/index-test.php?r=startup/startupOverview&event_id=3", $this->getLocation());
+		$this->isElementPresent("link=Hints Overzicht");
+		$this->open("hike_development/index-test.php?r=noodEnvelop/index&event_id=3");
+        $this->assertNotContains("Hint gestart organisatie", $this->getBodyText());
+        $this->assertNotContains("2015-02-27", $this->getBodyText());
+	}
+
+    public function testStillePostenOverzicht()
+    {
+		if (Yii::app()->user->isGuest )
+			$this->login();
+
+    	$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=3");
+        $this->waitForPageToLoad ( "30000" );
+		$this->assertContains("hike_development/index-test.php?r=startup/startupOverview&event_id=3", $this->getLocation());
+		$this->isElementPresent("link=Stille Posten Overzicht");
+		$this->open("hike_development/index-test.php?r=qr/index&event_id=3");
+        $this->assertContains("1wDlYLbS8Ws9EutrUMjNv6", $this->getBodyText());
+        $this->assertContains("2wDlYLbS8Ws9EutrUMjNv6", $this->getBodyText());
+	}
+
+    public function testDeelnemersToevoegen()
+    {
+		if (Yii::app()->user->isGuest )
+			$this->login();
+
+    	$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=3");
+        $this->waitForPageToLoad ( "30000" );
+		$this->assertContains("hike_development/index-test.php?r=startup/startupOverview&event_id=3", $this->getLocation());
+		$this->assertFalse($this->isElementPresent("link=Deelnemers Toevoegen"));
+		$this->open("hike_development/index-test.php?r=deelnemersEvent/create&event_id=3");
+        $this->assertContains("Dat mag dus niet...", $this->getBodyText());
+	}
+
+    public function testGroepAanmaken()
+    {
+		if (Yii::app()->user->isGuest )
+			$this->login();
+
+    	$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=3");
+        $this->waitForPageToLoad ( "30000" );
+		$this->assertContains("hike_development/index-test.php?r=startup/startupOverview&event_id=3", $this->getLocation());
+		$this->assertFalse($this->isElementPresent("link=Groep Aanmaken"));
+		$this->open("hike_development/index-test.php?r=groups/create&event_id=3");
+        $this->assertContains("Dat mag dus niet...", $this->getBodyText());
+	}
+
+    public function testDagVeranderen()
+    {
+		if (Yii::app()->user->isGuest )
+			$this->login();
+
+    	$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=3");
+        $this->waitForPageToLoad ( "30000" );
+		$this->assertContains("hike_development/index-test.php?r=startup/startupOverview&event_id=3", $this->getLocation());
+		$this->assertFalse($this->isElementPresent("link=Dag Veranderen"));
+		$this->open("hike_development/index-test.php?r=eventNames/changeDay&event_id=3");
+        $this->waitForPageToLoad ( "30000" );
+		$this->type("name=EventNames[max_time]", "label=23:00:00");
+		$this->click("name=yt0");
+		$this->waitForPageToLoad("30000");
+
+		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=3", $this->getLocation());
+        $this->assertContains("Tijd over (minuten): 724", $this->getBodyText());
+        $this->assertContains("Tijd over (minuten): nog niet gestart", $this->getBodyText());
+
+		$this->open("hike_development/index-test.php?r=eventNames/changeDay&event_id=3");
+        $this->waitForPageToLoad ( "30000" );
+		$this->type("name=EventNames[max_time]", "label=24:00:00");
+		$this->click("name=yt0");
+		$this->waitForPageToLoad("30000");
+
+		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=3", $this->getLocation());
+        $this->assertContains("Tijd over (minuten): 784", $this->getBodyText());
+        $this->assertContains("Tijd over (minuten): nog niet gestart", $this->getBodyText());
+
+		$this->open("hike_development/index-test.php?r=eventNames/changeDay&event_id=3");
+        $this->waitForPageToLoad ( "30000" );
+		$this->select("name=EventNames[active_day]", "label=2015-02-26");
+		$this->click("name=yt0");
+		$this->waitForPageToLoad("30000");
+
+		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=3", $this->getLocation());
+        $this->assertNotContains("Tijd over (minuten): 784", $this->getBodyText());
+        $this->assertContains("Tijd over (minuten): nog niet gestart", $this->getBodyText());
+        $this->assertContains("Status van Hike: Gestart", $this->getBodyText());
+        $this->assertContains("Actieve dag: 2015-02-26", $this->getBodyText());
+
+		$this->open("hike_development/index-test.php?r=eventNames/changeDay&event_id=3");
+        $this->waitForPageToLoad ( "30000" );
+		$this->select("name=EventNames[active_day]", "label=2015-02-27");
+		$this->click("name=yt0");
+		$this->waitForPageToLoad("30000");
+
+		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=3", $this->getLocation());
+        $this->assertContains("Tijd over (minuten): 784", $this->getBodyText());
+        $this->assertContains("Tijd over (minuten): nog niet gestart", $this->getBodyText());
+        $this->assertContains("Status van Hike: Gestart", $this->getBodyText());
+        $this->assertContains("Actieve dag: 2015-02-27", $this->getBodyText());
+	}
+
+    public function testStatusVeranderen()
+    {
+		if (Yii::app()->user->isGuest )
+			$this->login();
+
+    	$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=3");
+        $this->waitForPageToLoad ( "30000" );
+		$this->assertContains("hike_development/index-test.php?r=startup/startupOverview&event_id=3", $this->getLocation());
+		$this->assertFalse($this->isElementPresent("link=Status Veranderen"));
+		$this->open("hike_development/index-test.php?r=eventNames/changeStatus&event_id=3");
+
+        $this->waitForPageToLoad ( "30000" );
+		$this->select("name=EventNames[status]", "label=Opstart");
+		$this->click("name=yt0");
+		$this->waitForPageToLoad("30000");
+
+		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=3", $this->getLocation());
+        $this->assertNotContains("Tijd over (minuten): 784", $this->getBodyText());
+        $this->assertNotContains("Tijd over (minuten): nog niet gestart", $this->getBodyText());
+        $this->assertContains("Status van Hike: Opstart", $this->getBodyText());
+        $this->assertNotContains("Actieve dag: 2015-02-27", $this->getBodyText());
+
+		$this->open("hike_development/index-test.php?r=eventNames/changeStatus&event_id=3");
+
+        $this->waitForPageToLoad ( "30000" );
+		$this->select("name=EventNames[status]", "label=Gestart");
+		$this->click("name=yt0");
+		$this->waitForPageToLoad("30000");
+
+		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=3", $this->getLocation());
+        $this->assertContains("Tijd over (minuten): 784", $this->getBodyText());
+        $this->assertContains("Tijd over (minuten): nog niet gestart", $this->getBodyText());
+        $this->assertContains("Status van Hike: Gestart", $this->getBodyText());
+        $this->assertContains("Actieve dag: 2015-02-27", $this->getBodyText());
+	}
 }

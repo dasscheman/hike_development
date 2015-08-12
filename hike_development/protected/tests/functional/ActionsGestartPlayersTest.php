@@ -177,8 +177,6 @@ class ActionGestartPlayersTest extends WebTestCase
 
     public function testPostBinnenkomst()
 	{
-		$scorePostenBegin = PostPassage::model()->getPostScore(3, 5);
-		$scoreTotalBegin = Groups::model()->getTotalScoreGroup(3, 5);
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
@@ -239,6 +237,9 @@ class ActionGestartPlayersTest extends WebTestCase
 
 	public function testGroupsHintsBekijken()
 	{
+		$scoreHintBegin = NoodEnvelop::model()->getNoodEnvelopScore(3, 5);
+		$scoreTotalBegin = Groups::model()->getTotalScoreGroup(3, 5);
+
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
@@ -255,11 +256,21 @@ class ActionGestartPlayersTest extends WebTestCase
 		$this->assertTrue($this->isElementPresent("id=yt0"));
 		$this->assertEquals("OPENEN", $this->getValue("id=yt0"));
     	$this->open("hike_development/index-test.php?r=openNoodEnvelop/create&nood_envelop_id=2&event_id=3&group_id=5");
-    	$this->open("hike_development/index-test.php?r=openNoodEnvelop/create&nood_envelop_id=3&event_id=3&group_id=6");
-        $this->waitForPageToLoad ( "30000" );
+		$this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=game/groupOverview&event_id=3&group_id=5", $this->getLocation());
+		$this->open("hike_development/index-test.php?r=openNoodEnvelop/create&nood_envelop_id=3&event_id=3&group_id=6");
+        $this->waitForPageToLoad ( "30000" );
+		$this->assertContains("hike_development/index-test.php?r=game/groupOverview&event_id=3&group_id=6", $this->getLocation());
 		$this->assertContains("Hint gestart players", $this->getBodyText());
 		$this->assertNotContains("Hint gestart players groep B", $this->getBodyText());
+
+
+		$scoreHintEnd = NoodEnvelop::model()->getNoodEnvelopScore(3, 5);
+		$scoreTotalEnd = Groups::model()->getTotalScoreGroup(3, 5);
+		$this->assertEquals(0, $scoreHintBegin);
+		$this->assertEquals(5, $scoreHintEnd);
+		$this->assertEquals(5, $scoreHintEnd-$scoreHintBegin);
+		$this->assertEquals(5, $scoreTotalEnd-$scoreTotalBegin);
 	}
 
 	public function testGroupsBonuspuntenBekijken()

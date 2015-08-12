@@ -139,7 +139,8 @@ $this->menu=array(
 		    ),
 		//),
 	    );
-	    $startDate++;
+
+		$startDate = date('Y-m-d', strtotime($startDate. ' + 1 days'));
 	    $count++;
 		// more then 10 days is unlikly, therefore break.
 		if ($count == 10) {

@@ -189,7 +189,13 @@ class OpenVragen extends HikeActiveRecord
 			$rolPlayer == DeelnemersEvent::ROL_organisatie) {
 				$actionAllowed = true;
 		}
-		
+
+		if ($action_id == 'createIntroductie' and 
+			$hikeStatus == EventNames::STATUS_opstart and
+			$rolPlayer == DeelnemersEvent::ROL_organisatie) {
+				$actionAllowed = true;
+		}
+
 		if ($action_id == 'moveUpDown'){
 			if (!isset($order) || !isset($route_id)){
 				return $actionAllowed;

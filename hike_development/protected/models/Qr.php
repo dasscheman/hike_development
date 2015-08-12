@@ -145,6 +145,12 @@ class Qr extends HikeActiveRecord
 		$rolPlayer = DeelnemersEvent::model()->getRolOfPlayer($event_id, Yii::app()->user->id);
 		$route_id = Qr::model()->getQrRouteID($model_id);
 
+		if ($action_id == 'createIntroductie' and 
+			$hikeStatus == EventNames::STATUS_opstart and
+			$rolPlayer == DeelnemersEvent::ROL_organisatie) {
+				$actionAllowed = true;
+		}
+
 		if ($action_id == 'moveUpDown'){
 			if (!isset($order) || !isset($route_id)){
 				return $actionAllowed;

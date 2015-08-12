@@ -32,7 +32,7 @@ $this->breadcrumbs=array(
 		$newButton = '';
 	}
 
-	while($startDate <= $endDate) {
+	while(strtotime($startDate) <= strtotime($endDate)) {
 		// dit moet nog een vervangen worden door javascript.
 		//Met de volgende code wordt de active tab onthouden. 		
 		$active=false;
@@ -138,15 +138,13 @@ $this->breadcrumbs=array(
 		    ),
 		//),
 	    );
-	    $startDate++;
+		$startDate = date('Y-m-d', strtotime($startDate. ' + 1 days'));
 	    $count++;
 		// more then 10 days is unlikly, therefore break.
 		if ($count == 10) {
 			break;
 		}
 	} 
-
-
 
 $this->widget('bootstrap.widgets.TbTabs', array(
 	'tabs'=>$dataArray

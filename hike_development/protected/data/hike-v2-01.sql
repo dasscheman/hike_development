@@ -107,9 +107,9 @@ CREATE TABLE IF NOT EXISTS `tbl_event_names` (
 --
 
 INSERT INTO `tbl_event_names` (`event_ID`, `event_name`, `start_date`, `end_date`, `status`, `active_day`, `max_time`, `create_time`, `create_user_ID`, `update_time`, `update_user_ID`) VALUES
-(1, 'opstart', '2015-02-25', '2015-02-29', 1, NULL, NULL, '2014-08-25 12:47:51', 1, '2015-07-28 16:03:11', 2),
-(2, 'introductie', '2015-02-25', '2015-02-29', 2, NULL, NULL, '2015-02-23 19:45:17', 2, '2015-02-23 19:45:17', 2),
-(3, 'gestart', '2015-02-25', '2015-02-29', 3, '2015-02-27', '24:00:00', '2015-02-23 19:46:08', 2, '2015-07-10 14:36:10', 2);
+(1, 'opstart', '2015-02-25', '2015-03-01', 1, NULL, NULL, '2014-08-25 12:47:51', 1, '2015-07-28 16:03:11', 2),
+(2, 'introductie', '2015-02-25', '2015-03-01', 2, NULL, NULL, '2015-02-23 19:45:17', 2, '2015-02-23 19:45:17', 2),
+(3, 'gestart', '2015-02-25', '2015-03-01', 3, '2015-02-27', '24:00:00', '2015-02-23 19:46:08', 2, '2015-07-10 14:36:10', 2);
 
 -- --------------------------------------------------------
 
@@ -213,7 +213,8 @@ CREATE TABLE IF NOT EXISTS `tbl_nood_envelop` (
 
 INSERT INTO `tbl_nood_envelop` (`nood_envelop_ID`, `nood_envelop_name`, `event_ID`, `route_ID`, `nood_envelop_volgorde`, `coordinaat`, `opmerkingen`, `score`, `create_time`, `create_user_ID`, `update_time`, `update_user_ID`) VALUES
 (1, 'Hint gestart organisatie', 3, 6, 1, '190971, 417461', 'Je had uit de richting van  300 graden moeten komen', 7, '2014-08-30 11:30:06', 1, '2014-08-30 11:30:06', 1),
-(2, 'Hint gestart players', 3, 6, 1, '190971, 417461', 'Je had uit de richting van  300 graden moeten komen', 7, '2014-08-30 11:30:06', 1, '2014-08-30 11:30:06', 1);
+(2, 'Hint gestart players', 3, 6, 1, '190971, 417461', 'Je had uit de richting van  300 graden moeten komen', 7, '2014-08-30 11:30:06', 1, '2014-08-30 11:30:06', 1),
+(3, 'Hint gestart players groep B', 3, 6, 1, '190971, 417461', 'Je had uit de richting van  300 graden moeten komen', 7, '2014-08-30 11:30:06', 1, '2014-08-30 11:30:06', 1);
 
 -- (5, ' ''Coördinaat eerste punt van "Good old..."''', 6, 25, 2030, '190319, 418016', 'Je had moeten komen vanuit de richting 325 graden. ', 5, '2014-08-30 11:31:31', 2, '2014-08-30 11:31:31', 2),
 -- (6, ' ''Coördinaat eerste kruispunt van "Kruispuntjepuzzelen"''', 6, 27, 2050, '191934, 416899', 'Je had uit de richting van  300 graden moeten komen', 5, '2014-08-30 11:36:53', 2, '2014-08-30 11:36:53', 2),
@@ -282,7 +283,8 @@ INSERT INTO `tbl_open_vragen` (`open_vragen_ID`, `open_vragen_name`, `event_ID`,
 (1, 'Hoofdletter a', 3, 6, 1, 'Vraag voor ActionsGestartOrganisatieTest', 'Hoofdletter a? ', 'A', 5, '2014-08-25 22:09:39', 1, '2014-09-05 10:55:13', 1),
 (2, 'Hoofdletter b', 3, 6, 2, 'Vraag voor ActionsGestartOrganisatieTest', 'Hoofdletter b? ', 'B ', 5, '2014-08-25 22:11:30', 1, '2014-08-28 21:05:07', 1),
 (3, 'Hoofdletter c', 3, 6, 1, 'Vraag voor ActionsGestartOrganisatieTest', 'Hoofdletter c? ', 'C', 5, '2014-08-25 22:09:39', 1, '2014-09-05 10:55:13', 1),
-(4, 'Hoofdletter d', 3, 6, 2, 'Vraag voor ActionsGestartOrganisatieTest', 'Hoofdletter v? ', 'B ', 5, '2014-08-25 22:11:30', 1, '2014-08-28 21:05:07', 1);
+(4, 'Hoofdletter d', 3, 6, 2, 'Vraag voor ActionsGestartOrganisatieTest', 'Hoofdletter v? ', 'B ', 5, '2014-08-25 22:11:30', 1, '2014-08-28 21:05:07', 1),
+(5, 'Hoofdletter E', 3, 5, 2, 'Vraag voor ActionsGestartOrganisatie introductie', 'Hoofdletter E? ', 'E ', 5, '2014-08-25 22:11:30', 1, '2014-08-28 21:05:07', 1);
 
 -- --------------------------------------------------------
 
@@ -408,7 +410,9 @@ CREATE TABLE IF NOT EXISTS `tbl_qr` (
 --
 
 INSERT INTO `tbl_qr` (`qr_ID`, `qr_name`, `qr_code`, `event_ID`, `route_ID`, `qr_volgorde`, `score`, `create_time`, `create_user_ID`, `update_time`, `update_user_ID`) VALUES
-(1, 'gestart organisatie', '1wDlYLbS8Ws9EutrUMjNv6', 3, 6, 1, 7, '2014-08-30 14:44:11', 1, '2014-08-30 14:44:11', 2);
+(1, 'gestart organisatie', '1wDlYLbS8Ws9EutrUMjNv6', 3, 6, 1, 7, '2014-08-30 14:44:11', 1, '2014-08-30 14:44:11', 2),
+(2, 'gestart organisatie Introductie', '2wDlYLbS8Ws9EutrUMjNv6', 3, 5, 1, 7, '2014-08-30 14:44:11', 1, '2014-08-30 14:44:11', 2);
+
 -- (4, 'Vrijdag - En vraag niet naar de weg', '6hUg3eWLzE4qOcvoFwId1K', 6, 18, 4, 3, '2014-08-30 14:44:42', 2, '2014-08-30 14:45:32', 2),
 -- (5, 'Vrijdag - Meneer van Dalen wacht op antwoord', 'swqYfNxRPvikX6KE41cTmH', 6, 19, 5, 3, '2014-08-30 14:45:01', 2, '2014-08-30 14:45:46', 2),
 -- (6, 'Vrijdag - Aan de wandel', 'iYMPtVWjXc1EparqnxCeAZ', 6, 20, 7, 3, '2014-08-30 14:46:31', 2, '2014-08-30 14:46:31', 2),

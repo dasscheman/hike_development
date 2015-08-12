@@ -34,10 +34,7 @@
 											   'event_id'=>$data->event_ID)); 		
 		
 					} else {
-						echo CHtml::encode($data->qr_name), 
-										   array('/qr/update',
-												 'qr_id'=>$data->qr_ID,
-												 'event_id'=>$data->event_ID);
+						echo CHtml::encode($data->qr_name);
 					}
 			?>
             <br />

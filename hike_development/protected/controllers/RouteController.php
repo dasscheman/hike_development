@@ -245,7 +245,6 @@ class RouteController extends Controller
 		$event_Id = $_GET['event_id'];
 		$startDate=EventNames::model()->getStartDate($event_Id);
 		$endDate=EventNames::model()->getEndDate($event_Id);
-
 		$routeData=new Route('searchRoute');
 
 		$dataModel=array(
