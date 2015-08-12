@@ -380,6 +380,10 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		$this->assertTrue($this->isElementPresent("link=2015-03-01"));
 		$this->click("link=2015-02-27");
         $this->assertContains("9 - Homerun", $this->getBodyText());
+
+		$this->assertFalse($this->isElementPresent("link=Nieuw"));
+		$this->open("hike_development/index-test.php?r=route/create&event_id=3&date=2015-02-25");
+        $this->assertContains("Dat mag dus niet...", $this->getBodyText());
 	}
 
     public function testPostenBeheren()
