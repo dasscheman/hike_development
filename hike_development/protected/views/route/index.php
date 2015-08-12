@@ -17,7 +17,7 @@ $this->breadcrumbs=array(
     $activeTab = Route::model()->getDefaultActiveTab($startDate);
 	$count=0;
 
-	if (Route::model()->isActionAllowed("route", "create", $data->event_ID)) { 
+	if (Route::model()->isActionAllowed("route", "create", $_GET['event_id'])) { 
 		$newButton = CHtml::link(
                 '<span class="fa-stack fa-lg">
                     <td style="text-align:right;">
