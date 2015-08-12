@@ -47,7 +47,7 @@ class ActionGestartPlayersTest extends WebTestCase
 		$this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=3", $this->getLocation());
         $this->assertContains("Tijd over (minuten): 784", $this->getBodyText());
-        $this->assertContains("Tijd over (minuten): nog niet gestart", $this->getBodyText());
+        $this->assertContains("Tijd over (minuten): 1440", $this->getBodyText());
     }
 
     ##Game Overview:
@@ -402,6 +402,7 @@ class ActionGestartPlayersTest extends WebTestCase
 		$this->assertContains("hike_development/index-test.php?r=startup/startupOverview&event_id=3", $this->getLocation());
 		$this->assertFalse($this->isElementPresent("link=Deelnemers Toevoegen"));
 		$this->open("hike_development/index-test.php?r=deelnemersEvent/create&event_id=3");
+        $this->waitForPageToLoad ( "30000" );
         $this->assertContains("Dat mag dus niet...", $this->getBodyText());
 	}
 
@@ -415,6 +416,7 @@ class ActionGestartPlayersTest extends WebTestCase
 		$this->assertContains("hike_development/index-test.php?r=startup/startupOverview&event_id=3", $this->getLocation());
 		$this->assertFalse($this->isElementPresent("link=Groep Aanmaken"));
 		$this->open("hike_development/index-test.php?r=groups/create&event_id=3");
+        $this->waitForPageToLoad ( "30000" );
         $this->assertContains("Dat mag dus niet...", $this->getBodyText());
 	}
 
@@ -428,6 +430,7 @@ class ActionGestartPlayersTest extends WebTestCase
 		$this->assertContains("hike_development/index-test.php?r=startup/startupOverview&event_id=3", $this->getLocation());
 		$this->assertFalse($this->isElementPresent("link=Dag Veranderen"));
 		$this->open("hike_development/index-test.php?r=eventNames/changeDay&event_id=3");
+        $this->waitForPageToLoad ( "30000" );
         $this->assertContains("Dat mag dus niet...", $this->getBodyText());
 	}
 
@@ -441,6 +444,7 @@ class ActionGestartPlayersTest extends WebTestCase
 		$this->assertContains("hike_development/index-test.php?r=startup/startupOverview&event_id=3", $this->getLocation());
 		$this->assertFalse($this->isElementPresent("link=Status Veranderen"));
 		$this->open("hike_development/index-test.php?r=eventNames/changeStatus&event_id=3");
+        $this->waitForPageToLoad ( "30000" );
         $this->assertContains("Dat mag dus niet...", $this->getBodyText());
 	}
 }

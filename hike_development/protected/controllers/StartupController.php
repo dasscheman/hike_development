@@ -89,28 +89,18 @@ class StartupController extends Controller
 						      'event_id'=>$event_id));
 		}
 		
-		if($user_id==1)   
-		{					
-			/**
-			 * Als admin is ingelogd, dan moet alles getoont worden.
-			 */
-			$dataprovider = new CActiveDataProvider('DeelnemersEvent');
-		}
-	    else
-		{
-			$where = "user_ID = $user_id AND rol = 1";
+		$where = "user_ID = $user_id AND rol = 1";
 		
-			$dataprovider =new CActiveDataProvider('DeelnemersEvent',
-			    array(
-				'criteria'=>array(
-				    'condition'=>$where,
-				    //'order'=>'deelnemers_ID DESC',
-				    ),
-				'pagination'=>array(
-					'pageSize'=>15,
+		$dataprovider =new CActiveDataProvider('DeelnemersEvent',
+			array(
+			'criteria'=>array(
+				'condition'=>$where,
+				//'order'=>'deelnemers_ID DESC',
 				),
-			));  
-		}
+			'pagination'=>array(
+				'pageSize'=>15,
+			),
+		));  
 		
 		$this->render('index',array(
 			'deelnemersEventDataProvider'=>$dataprovider,

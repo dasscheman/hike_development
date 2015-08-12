@@ -370,6 +370,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		$this->isElementPresent("link=Route Beheren");
 		$this->open("hike_development/index-test.php?r=route/index&event_id=3");
 
+		$this->assertTrue($this->isElementPresent("//a[contains(@href, '#tab_3')]"));
 		$this->assertTrue($this->isElementPresent("link=2015-02-25"));
 		$this->assertTrue($this->isElementPresent("link=2015-02-26"));
 		$this->assertTrue($this->isElementPresent("link=2015-02-27"));
@@ -416,10 +417,11 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		$this->assertContains("hike_development/index-test.php?r=startup/startupOverview&event_id=3", $this->getLocation());
 		$this->isElementPresent("link=Vragen Overzicht");
 		$this->open("hike_development/index-test.php?r=openVragen/index&event_id=3");
-        $this->assertNotContains("Hoofdletter E", $this->getBodyText());
-        $this->assertNotContains("0000-00-00", $this->getBodyText());
-        $this->assertNotContains("Hoofdletter a", $this->getBodyText());
-        $this->assertNotContains("2015-02-27", $this->getBodyText());
+        $this->waitForPageToLoad ( "30000" );
+        $this->assertContains("Hoofdletter E", $this->getBodyText());
+        $this->assertContains("0000-00-00", $this->getBodyText());
+        $this->assertContains("Hoofdletter a", $this->getBodyText());
+        $this->assertContains("2015-02-27", $this->getBodyText());
 	}
 
     public function testHintsOverzicht()
@@ -432,8 +434,9 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		$this->assertContains("hike_development/index-test.php?r=startup/startupOverview&event_id=3", $this->getLocation());
 		$this->isElementPresent("link=Hints Overzicht");
 		$this->open("hike_development/index-test.php?r=noodEnvelop/index&event_id=3");
-        $this->assertNotContains("Hint gestart organisatie", $this->getBodyText());
-        $this->assertNotContains("2015-02-27", $this->getBodyText());
+        $this->waitForPageToLoad ( "30000" );
+        $this->assertContains("Hint gestart organisatie", $this->getBodyText());
+        $this->assertContains("2015-02-27", $this->getBodyText());
 	}
 
     public function testStillePostenOverzicht()
@@ -446,6 +449,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		$this->assertContains("hike_development/index-test.php?r=startup/startupOverview&event_id=3", $this->getLocation());
 		$this->isElementPresent("link=Stille Posten Overzicht");
 		$this->open("hike_development/index-test.php?r=qr/index&event_id=3");
+        $this->waitForPageToLoad ( "30000" );
         $this->assertContains("1wDlYLbS8Ws9EutrUMjNv6", $this->getBodyText());
         $this->assertContains("2wDlYLbS8Ws9EutrUMjNv6", $this->getBodyText());
 	}
@@ -460,6 +464,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		$this->assertContains("hike_development/index-test.php?r=startup/startupOverview&event_id=3", $this->getLocation());
 		$this->assertFalse($this->isElementPresent("link=Deelnemers Toevoegen"));
 		$this->open("hike_development/index-test.php?r=deelnemersEvent/create&event_id=3");
+        $this->waitForPageToLoad ( "30000" );
         $this->assertContains("Dat mag dus niet...", $this->getBodyText());
 	}
 
@@ -473,6 +478,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		$this->assertContains("hike_development/index-test.php?r=startup/startupOverview&event_id=3", $this->getLocation());
 		$this->assertFalse($this->isElementPresent("link=Groep Aanmaken"));
 		$this->open("hike_development/index-test.php?r=groups/create&event_id=3");
+        $this->waitForPageToLoad ( "30000" );
         $this->assertContains("Dat mag dus niet...", $this->getBodyText());
 	}
 

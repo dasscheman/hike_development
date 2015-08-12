@@ -91,13 +91,8 @@ class GameController extends Controller
 			$this->redirect(array('game/gameOverview',
 						      'event_id'=>$event_id));
 		}
-		/**
-		 * Als admin is ingelogd, dan moet alles getoont worden.
-		 */
-		if($user_id <> 1)
-		    $where = "user_ID = $user_id";
-		else
-		    $where = "";
+
+		$where = "user_ID = $user_id";
 
 		$deelnemersEventDataProvider =new CActiveDataProvider('DeelnemersEvent',
 		    array(
