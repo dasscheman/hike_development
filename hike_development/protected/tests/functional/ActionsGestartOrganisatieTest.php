@@ -21,6 +21,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
     public function login()
     {
+		$this->pause(3);
 		$this->open("hike_development/index-test.php?r=site/login");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=site/login", $this->getLocation());
@@ -28,6 +29,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		$this->type("id=LoginForm_password", "test");
 		$this->click("name=yt0");
 		$this->waitForPageToLoad("30000");
+		$this->pause(3);
     }
 
     public function testLoadPage()
@@ -531,7 +533,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		$this->click("name=yt0");
 		$this->waitForPageToLoad("30000");
 
-		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=3", $this->getLocation());
+		$this->assertContains("testDeelnemersToevoegenhike_development/index-test.php?r=game/gameOverview&event_id=3", $this->getLocation());
         $this->assertContains("Tijd over (minuten): 784", $this->getBodyText());
         $this->assertContains("Tijd over (minuten): nog niet gestart", $this->getBodyText());
         $this->assertContains("Status van Hike: Gestart", $this->getBodyText());
