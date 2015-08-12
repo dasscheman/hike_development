@@ -32,7 +32,7 @@ $this->menu=array(
 <?php
    	$activeTab = Posten::model()->getDefaultActiveTab($startDate);
 		
-	if (Posten::model()->isActionAllowed("posten", "create", $data->event_ID)) { 
+	if (Posten::model()->isActionAllowed("posten", "create", $_GET['event_id'])) { 
 		$newButton = CHtml::link(
                 '<span class="fa-stack fa-lg">
                     <td style="text-align:right;">
@@ -88,7 +88,7 @@ $this->menu=array(
 											  </span>',
 									'options'=>array('title'=>'Bekijk deze hike'),
 									'url'=>'Yii::app()->createUrl("posten/view", array(
-										"post_id"=>$data->post_ID,
+										"post_id"=>$dataz->post_ID,
 										"event_id"=>$data->event_ID,))',
 								),
 								'omhoog' => array(
