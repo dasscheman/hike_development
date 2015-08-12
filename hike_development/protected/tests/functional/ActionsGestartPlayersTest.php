@@ -249,8 +249,8 @@ class ActionGestartPlayersTest extends WebTestCase
 		$this->assertContains("hike_development/index-test.php?r=noodEnvelop/viewPlayers&event_id=3&group_id=5", $this->getLocation());
 
 		$this->assertContains("Hint gestart players", $this->getBodyText());
-		$this->assertNotContains("GEOPEND", $this->getBodyText());
-		$this->assertNotContains("OPENEN", $this->getBodyText());
+		$this->assertContains("GEOPEND", $this->getBodyText());
+		$this->assertContains("OPENEN", $this->getBodyText());
     	$this->open("hike_development/index-test.php?r=openNoodEnvelop/create&nood_envelop_id=2&event_id=3&group_id=5");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=game/groupOverview&event_id=3&group_id=5", $this->getLocation());
@@ -293,7 +293,7 @@ class ActionGestartPlayersTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-		$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=3");
+		$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=3");
 		$this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=startup/startupOverview&event_id=3", $this->getLocation());
     }

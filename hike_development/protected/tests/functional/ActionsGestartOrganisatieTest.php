@@ -236,7 +236,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		$scorePostenEnd = PostPassage::model()->getPostScore(3, 6);
 		$scoreTotalEnd = Groups::model()->getTotalScoreGroup(3, 6);
 		$this->assertEquals(13, $scorePostenEnd);
-		$this->assertEquals(13, $scoreTotalEnd);
+		$this->assertEquals(18, $scoreTotalEnd);
 		$this->assertEquals(13, $scorePostenEnd-$scorePostenBegin);
 		$this->assertEquals(13, $scoreTotalEnd-$scoreTotalBegin);
 	}

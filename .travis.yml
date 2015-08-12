@@ -39,6 +39,6 @@ script:
 ## Run all tests
 ##- phpunit --debug --coverage-text ./trunk/tests/phpunit_selenium/
 
-notifications:
-  email:
-    - dasscheman@hotmail.com
+##notifications:
+##  email:
+##    - dasscheman@hotmail.com
