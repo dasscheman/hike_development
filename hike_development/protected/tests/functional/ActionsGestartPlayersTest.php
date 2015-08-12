@@ -250,7 +250,8 @@ class ActionGestartPlayersTest extends WebTestCase
 
 		$this->assertContains("Hint gestart players", $this->getBodyText());
 		$this->assertContains("GEOPEND", $this->getBodyText());
-		$this->isElementPresent("button=OPENEN");
+		$this->assertTrue($this->isElementPresent("id=yt0"));
+		$this->assertEquals("OPENEN", $this->getValue("id=yt0"));
     	$this->open("hike_development/index-test.php?r=openNoodEnvelop/create&nood_envelop_id=2&event_id=3&group_id=5");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=game/groupOverview&event_id=3&group_id=5", $this->getLocation());
@@ -303,7 +304,7 @@ class ActionGestartPlayersTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-    	$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=3");
+    	$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=3");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=startup/startupOverview&event_id=3", $this->getLocation());
 		$this->assertFalse($this->isElementPresent("link=Introductie"));
@@ -316,7 +317,7 @@ class ActionGestartPlayersTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-    	$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=3");
+    	$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=3");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=startup/startupOverview&event_id=3", $this->getLocation());
 		$this->assertFalse($this->isElementPresent("link=Route Beheren"));
@@ -329,7 +330,7 @@ class ActionGestartPlayersTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-    	$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=3");
+    	$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=3");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=startup/startupOverview&event_id=3", $this->getLocation());
 		$this->assertFalse($this->isElementPresent("link=Posten Beheren"));
@@ -342,7 +343,7 @@ class ActionGestartPlayersTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-    	$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=3");
+    	$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=3");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=startup/startupOverview&event_id=3", $this->getLocation());
 		$this->assertFalse($this->isElementPresent("link=Vragen Overzicht"));
@@ -355,7 +356,7 @@ class ActionGestartPlayersTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-    	$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=3");
+    	$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=3");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=startup/startupOverview&event_id=3", $this->getLocation());
 		$this->assertFalse($this->isElementPresent("link=Hints Overzicht"));
@@ -368,7 +369,7 @@ class ActionGestartPlayersTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-    	$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=3");
+    	$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=3");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=startup/startupOverview&event_id=3", $this->getLocation());
 		$this->assertFalse($this->isElementPresent("link=Stille Posten Overzicht"));
@@ -381,7 +382,7 @@ class ActionGestartPlayersTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-    	$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=3");
+    	$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=3");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=startup/startupOverview&event_id=3", $this->getLocation());
 		$this->assertFalse($this->isElementPresent("link=Deelnemers Toevoegen"));
@@ -394,7 +395,7 @@ class ActionGestartPlayersTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-    	$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=3");
+    	$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=3");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=startup/startupOverview&event_id=3", $this->getLocation());
 		$this->assertFalse($this->isElementPresent("link=Groep Aanmaken"));
@@ -407,7 +408,7 @@ class ActionGestartPlayersTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-    	$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=3");
+    	$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=3");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=startup/startupOverview&event_id=3", $this->getLocation());
 		$this->assertFalse($this->isElementPresent("link=Dag Veranderen"));
@@ -420,7 +421,7 @@ class ActionGestartPlayersTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-    	$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=3");
+    	$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=3");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=startup/startupOverview&event_id=3", $this->getLocation());
 		$this->assertFalse($this->isElementPresent("link=Status Veranderen"));
