@@ -215,26 +215,28 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
     public function testPostBinnenkomst()
 	{
-		$scorePostenBegin = PostPassage::model()->getPostScore(3, 5);
-		$scoreTotalBegin = Groups::model()->getTotalScoreGroup(3, 5);
+		$scorePostenBegin = PostPassage::model()->getPostScore(3, 6);
+		$scoreTotalBegin = Groups::model()->getTotalScoreGroup(3, 6);
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-    	$this->open("hike_development/index-test.php?r=game/groupOverview&event_id=3&group_id=5");
+    	$this->open("hike_development/index-test.php?r=game/groupOverview&event_id=3&group_id=6");
 		$this->waitForPageToLoad ( "30000" );
-		$this->assertContains("hike_development/index-test.php?r=game/groupOverview&event_id=3&group_id=5", $this->getLocation());
+		$this->assertContains("hike_development/index-test.php?r=game/groupOverview&event_id=3&group_id=6", $this->getLocation());
 		$this->assertTrue($this->isElementPresent("link=Binnenkomst Post"));
 		$this->click("link=Binnenkomst Post");
         $this->waitForPageToLoad ( "30000" );
-		$this->assertContains("hike_development/index-test.php?r=postPassage/create&event_id=3&group_id=5", $this->getLocation());
+		$this->assertContains("hike_development/index-test.php?r=postPassage/create&event_id=3&group_id=6", $this->getLocation());
 
 		$this->select("name=PostPassage[post_ID]", "label=post 3 gestart organisatie LUNCH");
 		$this->type("name=PostPassage[binnenkomst]", "2015-02-27 12:43");
 		$this->click("name=yt0");
 		$this->waitForPageToLoad("30000");
 
-		$scorePostenEnd = PostPassage::model()->getPostScore(3, 5);
-		$scoreTotalEnd = Groups::model()->getTotalScoreGroup(3, 5);
+		$scorePostenEnd = PostPassage::model()->getPostScore(3, 6);
+		$scoreTotalEnd = Groups::model()->getTotalScoreGroup(3, 6);
+		$this->assertEquals(13, $scorePostenEnd);
+		$this->assertEquals(13, $scoreTotalEnd);
 		$this->assertEquals(13, $scorePostenEnd-$scorePostenBegin);
 		$this->assertEquals(13, $scoreTotalEnd-$scoreTotalBegin);
 	}
