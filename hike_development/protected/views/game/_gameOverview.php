@@ -36,7 +36,7 @@
                     if (PostPassage::model()->timeLeftToday($data->event_ID, $data->group_ID)) { ?>  
                         <tr>
                             <td colspan="4" style="text-align:center;">
-                                <b><?php echo CHtml::encode('Tijd over'); ?>:</b>		
+                                <b><?php echo CHtml::encode('Tijd over (minuten)'); ?>:</b>		
                                 <?php echo CHtml::encode(PostPassage::model()->timeLeftToday($data->event_ID,
                                                                      $data->group_ID)); ?>
                           
