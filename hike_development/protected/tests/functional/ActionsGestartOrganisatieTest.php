@@ -370,9 +370,6 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		$this->isElementPresent("link=Route Beheren");
 		$this->open("hike_development/index-test.php?r=route/index&event_id=3");
 
-		$this->assertEquals("2015-02-27", $this->getText("link=2015-02-27"));
-        $this->assertContains("2015-02-25", $this->getBodyText());
-		$this->assertTrue($this->isElementPresent("//a[contains(@href, '#tab_3')]"));
 		$this->assertTrue($this->isElementPresent("link=2015-02-25"));
 		$this->assertTrue($this->isElementPresent("link=2015-02-26"));
 		$this->assertTrue($this->isElementPresent("link=2015-02-27"));
@@ -396,6 +393,8 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		$this->assertContains("hike_development/index-test.php?r=startup/startupOverview&event_id=3", $this->getLocation());
 		$this->isElementPresent("link=Posten Beheren");
 		$this->open("hike_development/index-test.php?r=posten/index&event_id=3");
+
+        $this->assertContains("2015-02-25", $this->getBodyText());
 		$this->assertTrue($this->isElementPresent("link=2015-02-25"));
 		$this->assertTrue($this->isElementPresent("link=2015-02-26"));
 		$this->assertTrue($this->isElementPresent("link=2015-02-27"));
