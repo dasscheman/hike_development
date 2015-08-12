@@ -400,9 +400,6 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		$this->assertTrue($this->isElementPresent("link=2015-02-27"));
 		$this->assertTrue($this->isElementPresent("link=2015-02-28"));
 		$this->assertTrue($this->isElementPresent("link=2015-03-01"));
-        $this->assertNotContains("post 3 gestart organisatie START", $this->getBodyText());
-        $this->assertNotContains("post 3 gestart organisatie LUNCH", $this->getBodyText());
-        $this->assertNotContains("post 3 gestart organisatie EIND", $this->getBodyText());
 		$this->click("link=2015-02-27");
         $this->assertContains("post 3 gestart organisatie START", $this->getBodyText());
         $this->assertContains("post 3 gestart organisatie LUNCH", $this->getBodyText());
