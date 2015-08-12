@@ -443,12 +443,12 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
     public function testStillePostenOverzicht()
     {
-		if (Yii::app()->user->isGuest){
+		if (Yii::app()->user->isGuest)
 			$this->login();
-		}
 
     	$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=3");
         $this->waitForPageToLoad ( "30000" );
+        $this->assertContains("1wDlYLbS8Ws9EutrUMjNv6", $this->getBodyText());
 		$this->assertContains("hike_development/index-test.php?r=startup/startupOverview&event_id=3", $this->getLocation());
 		$this->isElementPresent("link=Stille Posten Overzicht");
 		$this->open("hike_development/index-test.php?r=qr/index&event_id=3");
