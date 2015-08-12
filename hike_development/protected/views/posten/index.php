@@ -88,7 +88,7 @@ $this->menu=array(
 											  </span>',
 									'options'=>array('title'=>'Bekijk deze hike'),
 									'url'=>'Yii::app()->createUrl("posten/view", array(
-										"post_id"=>$dataz->post_ID,
+										"post_id"=>$data->post_ID,
 										"event_id"=>$data->event_ID,))',
 								),
 								'omhoog' => array(
