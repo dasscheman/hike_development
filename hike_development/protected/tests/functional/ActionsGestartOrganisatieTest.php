@@ -370,6 +370,8 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		$this->isElementPresent("link=Route Beheren");
 		$this->open("hike_development/index-test.php?r=route/index&event_id=3");
 
+
+        $this->assertContains("2015-02-25", $this->getBodyText());
 		$this->assertTrue($this->isElementPresent("//a[contains(@href, '#tab_3')]"));
 		$this->assertTrue($this->isElementPresent("link=2015-02-25"));
 		$this->assertTrue($this->isElementPresent("link=2015-02-26"));

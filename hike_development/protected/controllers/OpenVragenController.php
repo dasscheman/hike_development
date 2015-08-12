@@ -55,13 +55,20 @@ class OpenVragenController extends Controller
 					$_GET["volgorde"],
 					$_GET["up_down"])'),
             array(	'allow', // allow admin user to perform 'viewplayers' actions
-                'actions'=>array('index', 'update', 'delete', 'create', 'view', 'createIntroductie', 'viewPlayers'),
+                'actions'=>array('update', 'delete', 'create', 'view', 'createIntroductie', 'index'),
+                'expression'=> 'OpenVragen::model()->isActionAllowed(
+                    Yii::app()->controller->id,
+                    Yii::app()->controller->action->id,
+                    $_GET["event_id"])',
+            ),
+			array(	'allow', // allow admin user to perform 'viewplayers' actions
+                'actions'=>array('viewPlayers'),
                 'expression'=> 'OpenVragen::model()->isActionAllowed(
                     Yii::app()->controller->id,
                     Yii::app()->controller->action->id,
                     $_GET["event_id"], 
 					$_GET["group_id"])',
-            ),		
+            ),	
 			array(	'deny',  // deny all users
 				'users'=>array('*'),
 			),
