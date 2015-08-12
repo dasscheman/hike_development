@@ -361,7 +361,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
     public function testRouteBeheren()
     {
-		if (Yii::app()->user->isGuest )
+		if (Yii::app()->user->isGuest)
 			$this->login();
 
     	$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=3");
@@ -385,7 +385,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
     public function testPostenBeheren()
     {
-		if (Yii::app()->user->isGuest )
+		if (Yii::app()->user->isGuest)
 			$this->login();
 
     	$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=3");
@@ -411,7 +411,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
     public function testVragenOverzicht()
     {
-		if (Yii::app()->user->isGuest )
+		if (Yii::app()->user->isGuest)
 			$this->login();
 
     	$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=3");
@@ -428,7 +428,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
     public function testHintsOverzicht()
     {
-		if (Yii::app()->user->isGuest )
+		if (Yii::app()->user->isGuest)
 			$this->login();
 
     	$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=3");
@@ -443,8 +443,9 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
     public function testStillePostenOverzicht()
     {
-		if (Yii::app()->user->isGuest )
+		if (Yii::app()->user->isGuest){
 			$this->login();
+		}
 
     	$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=3");
         $this->waitForPageToLoad ( "30000" );
@@ -458,7 +459,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
     public function testDeelnemersToevoegen()
     {
-		if (Yii::app()->user->isGuest )
+		if (Yii::app()->user->isGuest)
 			$this->login();
 
     	$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=3");
@@ -486,7 +487,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
     public function testDagVeranderen()
     {
-		if (Yii::app()->user->isGuest )
+		if (Yii::app()->user->isGuest)
 			$this->login();
 
     	$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=3");
@@ -540,7 +541,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
     public function testStatusVeranderen()
     {
-		if (Yii::app()->user->isGuest )
+		if (Yii::app()->user->isGuest)
 			$this->login();
 
     	$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=3");
