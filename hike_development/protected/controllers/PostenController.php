@@ -152,7 +152,7 @@ class PostenController extends Controller
 		$startDate=EventNames::model()->getStartDate($event_Id);
 		$endDate=EventNames::model()->getEndDate($event_Id);
 		
-		$postenData=new Posten(searchPostDate);
+		$postenData=new Posten('searchPostDate');
 	
 		$dataModel=array(
 			'postenData'=>$postenData,
@@ -243,7 +243,7 @@ class PostenController extends Controller
 		$startDate=EventNames::model()->getStartDate($event_id);
 		$endDate=EventNames::model()->getEndDate($event_id);
 		
-		$postenData=new Posten(searchPostDate);
+		$postenData=new Posten('searchPostDate');
 	
 		$dataModel=array(
 			'postenData'=>$postenData,
