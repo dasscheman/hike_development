@@ -285,10 +285,10 @@ INSERT INTO `tbl_open_vragen` (`open_vragen_ID`, `open_vragen_name`, `event_ID`,
 (3, 'Hoofdletter c', 3, 6, 3, 'Vraag voor ActionsGestartOrganisatieTest', 'Hoofdletter c? ', 'C', 5, '2014-08-25 22:09:39', 1, '2014-09-05 10:55:13', 1),
 (4, 'Hoofdletter d', 3, 6, 4, 'Vraag voor ActionsGestartOrganisatieTest', 'Hoofdletter v? ', 'B ', 5, '2014-08-25 22:11:30', 1, '2014-08-28 21:05:07', 1),
 (5, 'Hoofdletter e', 3, 5, 1, 'Vraag voor ActionsGestartOrganisatie introductie', 'Hoofdletter E? ', 'E ', 5, '2014-08-25 22:11:30', 1, '2014-08-28 21:05:07', 1),
-(6, 'Hoofdletter d', 1, 1, 1, 'Vraag voor status opstart players introvraag', 'Hoofdletter a? ', 'A', 5, '2014-08-25 22:09:39', 1, '2014-09-05 10:55:13', 1),
-(7, 'Hoofdletter f', 1, 2, 1, 'Vraag voor status opstart players', 'Hoofdletter b? ', 'B ', 5, '2014-08-25 22:11:30', 1, '2014-08-28 21:05:07', 1),
-(8, 'Hoofdletter g', 2, 3, 1, 'Vraag voor status introductie players introvraag', 'Hoofdletter a? ', 'A', 5, '2014-08-25 22:09:39', 1, '2014-09-05 10:55:13', 1),
-(9, 'Hoofdletter h', 2, 4, 1, 'Vraag voor status introductie players', 'Hoofdletter b? ', 'B ', 5, '2014-08-25 22:11:30', 1, '2014-08-28 21:05:07', 1);
+(6, 'Hoofdletter f', 1, 1, 1, 'Vraag voor status opstart players introvraag', 'Hoofdletter a? ', 'A', 5, '2014-08-25 22:09:39', 1, '2014-09-05 10:55:13', 1),
+(7, 'Hoofdletter g', 1, 2, 1, 'Vraag voor status opstart players', 'Hoofdletter b? ', 'B ', 5, '2014-08-25 22:11:30', 1, '2014-08-28 21:05:07', 1),
+(8, 'Hoofdletter h', 2, 3, 1, 'Vraag voor status introductie players introvraag', 'Hoofdletter a? ', 'A', 5, '2014-08-25 22:09:39', 1, '2014-09-05 10:55:13', 1),
+(9, 'Hoofdletter i', 2, 4, 1, 'Vraag voor status introductie players', 'Hoofdletter b? ', 'B ', 5, '2014-08-25 22:11:30', 1, '2014-08-28 21:05:07', 1);
 
 -- --------------------------------------------------------
 

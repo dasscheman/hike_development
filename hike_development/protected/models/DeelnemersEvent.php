@@ -185,6 +185,7 @@ class DeelnemersEvent extends HikeActiveRecord
 					$actionAllowed = true;
 			}
         }
+
 		return $actionAllowed;
     }
 

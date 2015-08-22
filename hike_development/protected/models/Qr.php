@@ -151,6 +151,11 @@ class Qr extends HikeActiveRecord
 				$actionAllowed = true;
 		}
 
+		if ($action_id == 'report' and 
+			$rolPlayer == DeelnemersEvent::ROL_organisatie) {
+				$actionAllowed = true;
+		}
+
 		if ($action_id == 'moveUpDown'){
 			if (!isset($order) || !isset($route_id)){
 				return $actionAllowed;

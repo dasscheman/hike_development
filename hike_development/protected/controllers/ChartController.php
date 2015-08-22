@@ -33,15 +33,8 @@ class ChartController extends Controller
 				'users'=>array('?'),
 			),
 			array(	'allow', // allow admin user to perform 'viewplayers' actions
-				'actions'=>array('index'),
+				'actions'=>array('index', 'viewChart'),
 				'users'=>array('@'),
-			),
-			array(	'allow', // allow admin user to perform 'viewplayers' actions
-				'actions'=>array('viewChart'),
-				'expression'=> 'DeelnemersEvent::model()->isActionAllowed(
-                    Yii::app()->controller->id,
-                    Yii::app()->controller->action->id,
-                    $_GET["event_id"])',
 			),
 			array(	'deny',  // deny all users
 				'users'=>array('*'),
