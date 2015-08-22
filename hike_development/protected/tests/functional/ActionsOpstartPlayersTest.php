@@ -396,7 +396,7 @@ class ActionOpstartPlayersTest extends WebTestCase
 
     public function testGroepAanmaken()
     {
-		if (Yii::app()->user->isGuest )
+		if (Yii::app()->user->isGuest)
 			$this->login();
 
     	$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=1");
@@ -410,7 +410,7 @@ class ActionOpstartPlayersTest extends WebTestCase
 
     public function testDagVeranderen()
     {
-		if (Yii::app()->user->isGuest )
+	//	if (Yii::app()->user->isGuest)
 			$this->login();
 
     	//$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=1");
@@ -424,7 +424,7 @@ class ActionOpstartPlayersTest extends WebTestCase
 
     public function testStatusVeranderen()
     {
-		if (Yii::app()->user->isGuest )
+//		if (Yii::app()->user->isGuest )
 			$this->login();
 
     	//$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=1");
