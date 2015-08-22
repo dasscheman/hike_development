@@ -282,9 +282,13 @@ CREATE TABLE IF NOT EXISTS `tbl_open_vragen` (
 INSERT INTO `tbl_open_vragen` (`open_vragen_ID`, `open_vragen_name`, `event_ID`, `route_ID`, `vraag_volgorde`, `omschrijving`, `vraag`, `goede_antwoord`, `score`, `create_time`, `create_user_ID`, `update_time`, `update_user_ID`) VALUES
 (1, 'Hoofdletter a', 3, 6, 1, 'Vraag voor ActionsGestartOrganisatieTest', 'Hoofdletter a? ', 'A', 5, '2014-08-25 22:09:39', 1, '2014-09-05 10:55:13', 1),
 (2, 'Hoofdletter b', 3, 6, 2, 'Vraag voor ActionsGestartOrganisatieTest', 'Hoofdletter b? ', 'B ', 5, '2014-08-25 22:11:30', 1, '2014-08-28 21:05:07', 1),
-(3, 'Hoofdletter c', 3, 6, 1, 'Vraag voor ActionsGestartOrganisatieTest', 'Hoofdletter c? ', 'C', 5, '2014-08-25 22:09:39', 1, '2014-09-05 10:55:13', 1),
-(4, 'Hoofdletter d', 3, 6, 2, 'Vraag voor ActionsGestartOrganisatieTest', 'Hoofdletter v? ', 'B ', 5, '2014-08-25 22:11:30', 1, '2014-08-28 21:05:07', 1),
-(5, 'Hoofdletter E', 3, 5, 2, 'Vraag voor ActionsGestartOrganisatie introductie', 'Hoofdletter E? ', 'E ', 5, '2014-08-25 22:11:30', 1, '2014-08-28 21:05:07', 1);
+(3, 'Hoofdletter c', 3, 6, 3, 'Vraag voor ActionsGestartOrganisatieTest', 'Hoofdletter c? ', 'C', 5, '2014-08-25 22:09:39', 1, '2014-09-05 10:55:13', 1),
+(4, 'Hoofdletter d', 3, 6, 4, 'Vraag voor ActionsGestartOrganisatieTest', 'Hoofdletter v? ', 'B ', 5, '2014-08-25 22:11:30', 1, '2014-08-28 21:05:07', 1),
+(5, 'Hoofdletter e', 3, 5, 1, 'Vraag voor ActionsGestartOrganisatie introductie', 'Hoofdletter E? ', 'E ', 5, '2014-08-25 22:11:30', 1, '2014-08-28 21:05:07', 1),
+(6, 'Hoofdletter d', 1, 1, 1, 'Vraag voor status opstart players introvraag', 'Hoofdletter a? ', 'A', 5, '2014-08-25 22:09:39', 1, '2014-09-05 10:55:13', 1),
+(7, 'Hoofdletter f', 1, 2, 1, 'Vraag voor status opstart players', 'Hoofdletter b? ', 'B ', 5, '2014-08-25 22:11:30', 1, '2014-08-28 21:05:07', 1),
+(8, 'Hoofdletter g', 2, 3, 1, 'Vraag voor status introductie players introvraag', 'Hoofdletter a? ', 'A', 5, '2014-08-25 22:09:39', 1, '2014-09-05 10:55:13', 1),
+(9, 'Hoofdletter h', 2, 4, 1, 'Vraag voor status introductie players', 'Hoofdletter b? ', 'B ', 5, '2014-08-25 22:11:30', 1, '2014-08-28 21:05:07', 1);
 
 -- --------------------------------------------------------
 
@@ -471,11 +475,11 @@ CREATE TABLE IF NOT EXISTS `tbl_route` (
 
 INSERT INTO `tbl_route` (`route_ID`, `route_name`, `event_ID`, `day_date`, `route_volgorde`, `create_time`, `create_user_ID`, `update_time`, `update_user_ID`) VALUES
 (1, 'Introductie', 1, '0000-00-00', 1, NULL, 2, NULL, NULL),
-(2, '9 - Homerun', 1, '2015-02-27', 9, NULL, 2, NULL, NULL),
+(2, '9 - Homerun', 1, '2015-02-27', 2, NULL, 2, NULL, NULL),
 (3, 'Introductie', 2, '0000-00-00', 1, NULL, 2, NULL, NULL),
-(4, '9 - Homerun', 2, '2015-02-27', 9, NULL, 2, NULL, NULL),
+(4, '9 - Homerun', 2, '2015-02-27', 2, NULL, 2, NULL, NULL),
 (5, 'Introductie', 3, '0000-00-00', 1, NULL, 2, NULL, NULL),
-(6, '9 - Homerun', 3, '2015-02-27', 9, NULL, 2, NULL, NULL);
+(6, '9 - Homerun', 3, '2015-02-27', 2, NULL, 2, NULL, NULL);
 
 -- --------------------------------------------------------
 

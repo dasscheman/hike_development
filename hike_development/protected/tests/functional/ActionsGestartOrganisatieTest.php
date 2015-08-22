@@ -493,6 +493,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
     	$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=3");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=startup/startupOverview&event_id=3", $this->getLocation());
+$this->assertContains("ASDFASDFASDF", $this->getBodyText());		
 		$this->assertFalse($this->isElementPresent("link=Dag Veranderen"));
 		$this->open("hike_development/index-test.php?r=eventNames/changeDay&event_id=3");
         $this->waitForPageToLoad ( "30000" );
@@ -546,6 +547,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
     	$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=3");
         $this->waitForPageToLoad ( "30000" );
+		$this->assertContains("ASDFASDFASDF", $this->getBodyText());
 		$this->assertContains("hike_development/index-test.php?r=startup/startupOverview&event_id=3", $this->getLocation());
 		$this->assertFalse($this->isElementPresent("link=Status Veranderen"));
 		$this->open("hike_development/index-test.php?r=eventNames/changeStatus&event_id=3");
