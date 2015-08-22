@@ -174,7 +174,9 @@ class DeelnemersEvent extends HikeActiveRecord
 					$actionAllowed = true;
 				}
 				if ($rolPlayer == DeelnemersEvent::ROL_deelnemer &&
-					$model_id == $group_id) {
+					$model_id == $group_id &&
+					($hikeStatus == EventNames::STATUS_gestart ||
+					$hikeStatus == EventNames::STATUS_introductie)) {
 					$actionAllowed = true;
 				}
 			}

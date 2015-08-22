@@ -67,8 +67,7 @@ class ActionOpstartOrganisatieTest extends WebTestCase
     	$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=1");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=1", $this->getLocation());
-        $this->assertContains("Dat mag dus niet...", $this->getBodyText());
-		$this->assertTrue($this->isElementNotPresent("link=Vragen Controleren"));
+		$this->assertFalse($this->isElementPresent("link=Vragen Controleren"));
 		$this->open("hike_development/index-test.php?r=openVragenAntwoorden/viewControle&event_id=1");
         $this->assertContains("Dat mag dus niet...", $this->getBodyText());
 
@@ -88,7 +87,7 @@ class ActionOpstartOrganisatieTest extends WebTestCase
     	$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=1");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=1", $this->getLocation());
-		$this->assertTrue($this->isElementNotPresent("link=Bonuspunten Geven"));
+		$this->assertFalse($this->isElementPresent("link=Bonuspunten Geven"));
 		$this->open("hike_development/index-test.php?r=bonuspunten/create&event_id=1");
 		$this->waitForPageToLoad("30000");
         $this->assertContains("Dat mag dus niet...", $this->getBodyText());
@@ -102,7 +101,7 @@ class ActionOpstartOrganisatieTest extends WebTestCase
     	$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=1");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=1", $this->getLocation());
-		$this->assertTrue($this->isElementNotPresent("link=Beantwoorde Vragen"));
+		$this->assertFalse($this->isElementPresent("link=Beantwoorde Vragen"));
 		$this->open("hike_development/index-test.php?r=openVragenAntwoorden/index&event_id=1");
         $this->waitForPageToLoad ( "30000" );
         $this->assertContains("Dat mag dus niet...", $this->getBodyText());
@@ -116,7 +115,7 @@ class ActionOpstartOrganisatieTest extends WebTestCase
     	$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=1");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=1", $this->getLocation());
-		$this->assertTrue($this->isElementNotPresent("link=Geopende Hints"));
+		$this->assertFalse($this->isElementPresent("link=Geopende Hints"));
 		$this->open("hike_development/index-test.php?r=openNoodEnvelop/index&event_id=1");
 		$this->waitForPageToLoad ( "30000" );
         $this->assertContains("Dat mag dus niet...", $this->getBodyText());
@@ -130,7 +129,7 @@ class ActionOpstartOrganisatieTest extends WebTestCase
     	$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=1");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=1", $this->getLocation());
-		$this->assertTrue($this->isElementNotPresent("link=Bonuspunten Overzicht"));
+		$this->assertFalse($this->isElementPresent("link=Bonuspunten Overzicht"));
         $this->waitForPageToLoad ( "30000" );
 		$this->open("hike_development/index-test.php?r=bonuspunten/index&event_id=1");
         $this->assertContains("Dat mag dus niet...", $this->getBodyText());
@@ -144,7 +143,7 @@ class ActionOpstartOrganisatieTest extends WebTestCase
     	$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=1");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=1", $this->getLocation());
-		$this->assertTrue($this->isElementNotPresent("link=Gepasserde Posten"));
+		$this->assertFalse($this->isElementPresent("link=Gepasserde Posten"));
         $this->waitForPageToLoad ( "30000" );
 		$this->open("hike_development/index-test.php?r=postPassage/index&event_id=1");
         $this->assertContains("Dat mag dus niet...", $this->getBodyText());
@@ -158,7 +157,7 @@ class ActionOpstartOrganisatieTest extends WebTestCase
     	$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=1");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=1", $this->getLocation());
-		$this->assertTrue($this->isElementNotPresent("link=Stille Posten"));
+		$this->assertFalse($this->isElementPresent("link=Stille Posten"));
         $this->waitForPageToLoad ( "30000" );
 		$this->open("hike_development/index-test.php?r=QrCheck/index&event_id=1");
         $this->assertContains("Dat mag dus niet...", $this->getBodyText());
