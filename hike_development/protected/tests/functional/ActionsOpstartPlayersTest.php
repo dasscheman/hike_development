@@ -1,6 +1,6 @@
 <?php
 
-class ActionGestartPlayersTest extends WebTestCase
+class ActionOpstartPlayersTest extends WebTestCase
 {
     /*
      *	For debugging use:
@@ -17,10 +17,10 @@ class ActionGestartPlayersTest extends WebTestCase
 	 * route_id = 1, 2;
 	 * group_id = 1, 2;
 	 * bonuspunten_id = ;
-	 * openVragen_id = ;
-	 * noodenvelop_id = ;
-	 * qr_id = ;
-	 * post_id = ;
+	 * openVragen_id = 6, 7;
+	 * noodenvelop_id = 4;
+	 * qr_id = 3, 4;
+	 * post_id = 6, 7;
      */
 
     protected function setUp()

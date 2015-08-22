@@ -11,6 +11,16 @@ class ActionOpstartOrganisatieTest extends WebTestCase
      *
      *  Check of een link wel bestaat:
      *  $this->assertTrue($this->isElementPresent("link=NG_011986.11"));
+ 	 *
+	 * DATA:
+	 * event_id = 1;
+	 * route_id = 1, 2;
+	 * group_id = 1, 2;
+	 * bonuspunten_id = ;
+	 * openVragen_id = 6, 7;
+	 * noodenvelop_id = 4;
+	 * qr_id = 3, 4;
+	 * post_id = 6, 7;
      */
 
     protected function setUp()
@@ -151,7 +161,7 @@ class ActionOpstartOrganisatieTest extends WebTestCase
         $this->waitForPageToLoad ( "30000" );
 		$this->open("hike_development/index-test.php?r=QrCheck/index&event_id=1");
         $this->assertContains("Dat mag dus niet...", $this->getBodyText());
-	}    $this->waitForPageToLoad ( "30000" );
+		$this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=bonuspunten/create&event_id=3", $this->getLocation());
 		$this->select("name=Bonuspunten[group_ID]", "label=groep A gestart");
 		$this->type("id=Bonuspunten_omschrijving", "bonuspunten group a");
