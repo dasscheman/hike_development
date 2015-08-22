@@ -108,13 +108,13 @@ abstract class HikeActiveRecord extends CActiveRecord
 			case 'eventNames':
 			//case friendList:
 			case 'groups':
-			case 'qrCheck':
 			case 'route':
 			case 'startup':
 				if ($rolPlayer == DeelnemersEvent::ROL_organisatie) {
 					$indexAllowed = true;
 				}				
 				break;
+			case 'qrCheck':
 			case 'bonuspunten':
 			case 'openNoodEnvelop':
 			case 'openVragenAntwoorden':

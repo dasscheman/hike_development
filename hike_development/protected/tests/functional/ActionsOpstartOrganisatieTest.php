@@ -199,26 +199,16 @@ class ActionOpstartOrganisatieTest extends WebTestCase
 
     public function testPostBinnenkomst()
 	{
-		$scorePostenBegin = PostPassage::model()->getPostScore(3, 5);
-		$scoreTotalBegin = Groups::model()->getTotalScoreGroup(3, 5);
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-    	$this->open("hike_development/index-test.php?r=game/groupOverview&event_id=3&group_id=1");
+    	$this->open("hike_development/index-test.php?r=game/groupOverview&event_id=1&group_id=1");
 		$this->waitForPageToLoad ( "30000" );
-		$this->assertContains("hike_development/index-test.php?r=game/groupOverview&event_id=3&group_id=1", $this->getLocation());
-		$this->assertTrue($this->isElementPresent("link=Binnenkomst Post"));
-		$this->click("link=Binnenkomst Post");
+		$this->assertContains("hike_development/index-test.php?r=game/groupOverview&event_id=1&group_id=1", $this->getLocation());
+		$this->assertFalse($this->isElementPresent("link=Binnenkomst Post"));
+		$this->open("hike_development/index-test.php?r=postPassage/create&event_id=1&group_id=1");
         $this->waitForPageToLoad ( "30000" );
-		$this->assertContains("hike_development/index-test.php?r=postPassage/create&event_id=3&group_id=1", $this->getLocation());
-
-		#uitwerken
-		$this->assertTrue(false);
-
-		$scorePostenEnd = PostPassage::model()->getPostScore(3, 5);
-		$scoreTotalEnd = Groups::model()->getTotalScoreGroup(3, 5);
-		$this->assertEquals(5, $scorePostenEnd-$scorePostenBegin);
-		$this->assertEquals(5, $scoreTotalEnd-$scoreTotalBegin);
+		$this->assertContains("Dat mag dus niet...", $this->getBodyText());
 	}
 
 	public function testGroupsVragenBekijken()

@@ -60,7 +60,7 @@ $this->menu=array(
 	array('label'=>'<span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x fa-green"></i>
                                 <i class="fa fa-sun-o fa-stack-1x"></i>
-                                <i class="fa fa-blue fa-text-right fa-07x"> Bonuspunten Overzicht</i>
+                                <i class="fa fa-blue fa-text-right fa-07x">Bonuspunten Overzicht</i>
                                 <i class="fa fa-list-ol fa-stack-6p fa-blue fa-03x"> </i>
                         </span>',
 	      'url'=>array('bonuspunten/index',
@@ -72,7 +72,7 @@ $this->menu=array(
 	array('label'=>'<span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x fa-green"></i>
                                 <i class="fa fa-flag-o fa-stack-1x"></i>
-                                <i class="fa fa-blue fa-text-right fa-07x"> Gepasserde Posten</i>
+                                <i class="fa fa-blue fa-text-right fa-07x">Gepasserde Posten</i>
                                 <i class="fa fa-list-ol fa-stack-2p fa-blue fa-03x"> </i>
                         </span>',
 	      'url'=>array('postPassage/index',
@@ -84,7 +84,7 @@ $this->menu=array(
 	array('label'=>'<span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x fa-green"></i>
                                 <i class="fa fa-qrcode fa-stack-1x"></i>
-                                <i class="fa fa-blue fa-text-right fa-07x"> Stille Posten</i>
+                                <i class="fa fa-blue fa-text-right fa-07x">Stille Posten</i>
                                 <i class="fa fa-check fa-stack-5p fa-blue fa-05x"> </i>
                         </span>',
 	      'url'=>array('QrCheck/index',
