@@ -411,12 +411,12 @@ class ActionOpstartPlayersTest extends WebTestCase
     public function testDagVeranderen()
     {
 	//	if (Yii::app()->user->isGuest)
-			$this->login();
+		$this->login();
 
-    	//$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=1");
-        //$this->waitForPageToLoad ( "30000" );
-		//$this->assertContains("hike_development/index-test.php?r=startup/startupOverview&event_id=1", $this->getLocation());
-		//$this->assertFalse($this->isElementPresent("link=Dag Veranderen"));
+    	$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=1");
+        $this->waitForPageToLoad ( "30000" );
+		$this->assertContains("hike_development/index-test.php?r=startup/startupOverview&event_id=1", $this->getLocation());
+		$this->assertFalse($this->isElementPresent("link=Dag Veranderen"));
 		$this->open("hike_development/index-test.php?r=eventNames/changeDay&event_id=1");
         $this->waitForPageToLoad ( "30000" );
         $this->assertContains("Dat mag dus niet...", $this->getBodyText());
@@ -425,12 +425,12 @@ class ActionOpstartPlayersTest extends WebTestCase
     public function testStatusVeranderen()
     {
 //		if (Yii::app()->user->isGuest )
-			$this->login();
+		$this->login();
 
-    	//$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=1");
-        //$this->waitForPageToLoad ( "30000" );
-		//$this->assertContains("hike_development/index-test.php?r=startup/startupOverview&event_id=1", $this->getLocation());
-		//$this->assertFalse($this->isElementPresent("link=Status Veranderen"));
+    	$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=1");
+        $this->waitForPageToLoad ( "30000" );
+		$this->assertContains("hike_development/index-test.php?r=startup/startupOverview&event_id=1", $this->getLocation());
+		$this->assertFalse($this->isElementPresent("link=Status Veranderen"));
 		$this->open("hike_development/index-test.php?r=eventNames/changeStatus&event_id=1");
         $this->waitForPageToLoad ( "30000" );
         $this->assertContains("Dat mag dus niet...", $this->getBodyText());
