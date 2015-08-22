@@ -35,7 +35,7 @@ class ActionOpstartOrganisatieTest extends WebTestCase
 		$this->open("hike_development/index-test.php?r=site/login");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=site/login", $this->getLocation());
-		$this->type("id=LoginForm_username", "deelnemera");
+		$this->type("id=LoginForm_username", "organisatie");
 		$this->type("id=LoginForm_password", "test");
 		$this->check("id=LoginForm_rememberMe");
 		$this->click("name=yt0");
@@ -130,8 +130,8 @@ class ActionOpstartOrganisatieTest extends WebTestCase
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=1", $this->getLocation());
 		$this->assertFalse($this->isElementPresent("link=Bonuspunten Overzicht"));
-        $this->waitForPageToLoad ( "30000" );
 		$this->open("hike_development/index-test.php?r=bonuspunten/index&event_id=1");
+        $this->waitForPageToLoad ( "30000" );
         $this->assertContains("Dat mag dus niet...", $this->getBodyText());
 	}
 
@@ -144,8 +144,8 @@ class ActionOpstartOrganisatieTest extends WebTestCase
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=1", $this->getLocation());
 		$this->assertFalse($this->isElementPresent("link=Gepasserde Posten"));
-        $this->waitForPageToLoad ( "30000" );
 		$this->open("hike_development/index-test.php?r=postPassage/index&event_id=1");
+        $this->waitForPageToLoad ( "30000" );
         $this->assertContains("Dat mag dus niet...", $this->getBodyText());
 	}
 
@@ -158,8 +158,8 @@ class ActionOpstartOrganisatieTest extends WebTestCase
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=1", $this->getLocation());
 		$this->assertFalse($this->isElementPresent("link=Stille Posten"));
-        $this->waitForPageToLoad ( "30000" );
 		$this->open("hike_development/index-test.php?r=QrCheck/index&event_id=1");
+        $this->waitForPageToLoad ( "30000" );
         $this->assertContains("Dat mag dus niet...", $this->getBodyText());
 		$this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=bonuspunten/create&event_id=3", $this->getLocation());

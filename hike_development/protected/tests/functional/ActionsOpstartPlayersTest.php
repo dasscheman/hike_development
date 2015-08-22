@@ -253,7 +253,7 @@ class ActionOpstartPlayersTest extends WebTestCase
 
     	$this->open("hike_development/index-test.php?r=openNoodEnvelop/create&nood_envelop_id=2&event_id=1&group_id=1");
 		$this->waitForPageToLoad ( "30000" );
-		$this->assertContains("hike_development/index-test.php?r=game/groupOverview&event_id=1&group_id=1", $this->getLocation());
+		$this->assertContains("hike_development/index-test.php?r=openNoodEnvelop/create&nood_envelop_id=2&event_id=1&group_id=1", $this->getLocation());
 		$this->assertContains("Dat mag dus niet...", $this->getBodyText());
 		
 		$this->open("hike_development/index-test.php?r=openNoodEnvelop/create&nood_envelop_id=3&event_id=1&group_id=2");
@@ -270,7 +270,7 @@ class ActionOpstartPlayersTest extends WebTestCase
     	$this->open("hike_development/index-test.php?r=game/groupOverview&event_id=1&group_id=1");
 		$this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=game/groupOverview&event_id=1&group_id=1", $this->getLocation());
-		$this->assertTrue($this->isElementPresent("link=Bonuspunten"));
+		$this->assertFalse($this->isElementPresent("link=Bonuspunten"));
 		$this->open("hike_development/index-test.php?r=bonuspunten/viewPlayers&event_id=1&group_id=1");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=bonuspunten/viewPlayers&event_id=1&group_id=1", $this->getLocation());
@@ -285,7 +285,7 @@ class ActionOpstartPlayersTest extends WebTestCase
     	$this->open("hike_development/index-test.php?r=game/groupOverview&event_id=1&group_id=1");
 		$this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=game/groupOverview&event_id=1&group_id=1", $this->getLocation());
-		$this->assertTrue($this->isElementPresent("link=Stille Posten"));
+		$this->assertFalse($this->isElementPresent("link=Stille Posten"));
 		$this->open("hike_development/index-test.php?r=qrCheck/viewPlayers&event_id=1&group_id=1");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=qrCheck/viewPlayers&event_id=1&group_id=1", $this->getLocation());
