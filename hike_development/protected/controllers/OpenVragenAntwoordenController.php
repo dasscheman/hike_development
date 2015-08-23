@@ -177,16 +177,24 @@ class OpenVragenAntwoordenController extends Controller
 		if(isset($_GET['event_id']) AND
 		   isset($_GET['group_id']) AND
 		   isset($_GET['vraag_id']))
-		{$data=OpenVragenAntwoorden::model()->find('event_ID =:event_id AND
+		{
+			$data=OpenVragenAntwoorden::model()->find('event_ID =:event_id AND
 							        group_ID =:group_id AND
 							        open_vragen_ID=:vraag_id',
 								array(':event_id'=>$_GET['event_id'],
 								      ':group_id'=>$_GET['group_id'],
-								      ':vraag_id'=>$_GET['vraag_id']));}
-		if(isset($data->open_vragen_antwoorden_ID))
-		{$id = $data->open_vragen_antwoorden_ID;}
+								      ':vraag_id'=>$_GET['vraag_id']));
+		}
 
-		$model=$this->loadModel($id);
+		if(isset($data->open_vragen_antwoorden_ID))
+		{
+			$id = $data->open_vragen_antwoorden_ID;
+			$model=$this->loadModel($id);
+		} else {
+			$this->render('update',array(
+				'model'=>$model,
+			));
+		}
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);

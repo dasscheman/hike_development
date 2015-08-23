@@ -138,8 +138,8 @@ class ActionIntroductionOrganisatieTest extends WebTestCase
 		$this->assertContains("hike_development/index-test.php?r=openVragenAntwoorden/index&event_id=2", $this->getLocation());
 
 		$this->assertContains("Alle beantwoorde vragen", $this->getBodyText());
-		$this->assertContains("Hoofdletter b", $this->getBodyText());
-		$this->assertContains("Hoofdletter a", $this->getBodyText());    	
+		$this->assertContains("Hoofdletter h", $this->getBodyText());
+		$this->assertContains("Hoofdletter i", $this->getBodyText());    	
 	}
 
     public function testGeopendeHintsBekijken()

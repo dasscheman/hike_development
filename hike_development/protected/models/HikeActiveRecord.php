@@ -114,12 +114,17 @@ abstract class HikeActiveRecord extends CActiveRecord
 					$indexAllowed = true;
 				}				
 				break;
+			case 'openNoodEnvelop':
+			case 'postPassage':
+				if ($hikeStatus > EventNames::STATUS_introductie AND
+					$rolPlayer == DeelnemersEvent::ROL_organisatie) {
+						$indexAllowed = true;
+				}			
+				break;	
 			case 'qrCheck':
 			case 'bonuspunten':
-			case 'openNoodEnvelop':
 			case 'openVragenAntwoorden':
-			case 'postPassage':
-				if ($hikeStatus >= EventNames::STATUS_opstart AND
+				if ($hikeStatus <> EventNames::STATUS_opstart AND
 					$rolPlayer == DeelnemersEvent::ROL_organisatie) {
 						$indexAllowed = true;
 				}		
