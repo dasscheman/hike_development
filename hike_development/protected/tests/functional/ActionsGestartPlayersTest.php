@@ -60,7 +60,7 @@ class ActionGestartPlayersTest extends WebTestCase
 
     public function testLoginAndGameOverview()
     {
-		if (Yii::app()->user->isGuest )
+		if (Yii::app()->user->isGuest)
 			$this->login();
 
 		if (Yii::app()->user->name != "deelnemera") {
@@ -78,7 +78,7 @@ class ActionGestartPlayersTest extends WebTestCase
     ##Game Overview:
     public function testVragenControleren()
     {
-		if (Yii::app()->user->isGuest )
+		if (Yii::app()->user->isGuest)
 			$this->login();
 
 		if (Yii::app()->user->name != "deelnemera") {
@@ -103,7 +103,7 @@ class ActionGestartPlayersTest extends WebTestCase
 
     public function testBonuspuntenGeven()
     {
-		if (Yii::app()->user->isGuest )
+		if (Yii::app()->user->isGuest)
 			$this->login();
 
 		if (Yii::app()->user->name != "deelnemera") {
@@ -122,7 +122,7 @@ class ActionGestartPlayersTest extends WebTestCase
 
     public function testBeantwoordeVragenBekijken()
     {
-		if (Yii::app()->user->isGuest )
+		if (Yii::app()->user->isGuest)
 			$this->login();
 
 		if (Yii::app()->user->name != "deelnemera") {
@@ -141,7 +141,7 @@ class ActionGestartPlayersTest extends WebTestCase
 
     public function testGeopendeHintsBekijken()
     {
-		if (Yii::app()->user->isGuest )
+		if (Yii::app()->user->isGuest)
 			$this->login();
 
 		if (Yii::app()->user->name != "deelnemera") {
@@ -160,7 +160,7 @@ class ActionGestartPlayersTest extends WebTestCase
 
     public function testBonuspuntenBekijken()
     {
-		if (Yii::app()->user->isGuest )
+		if (Yii::app()->user->isGuest)
 			$this->login();
 
 		if (Yii::app()->user->name != "deelnemera") {
@@ -179,7 +179,7 @@ class ActionGestartPlayersTest extends WebTestCase
 
     public function testGepasserdePostenBekijken()
     {
-		if (Yii::app()->user->isGuest )
+		if (Yii::app()->user->isGuest)
 			$this->login();
 
 		if (Yii::app()->user->name != "deelnemera") {
@@ -198,7 +198,7 @@ class ActionGestartPlayersTest extends WebTestCase
 
     public function testGecheckteStillePostenBekijken()
     {
-		if (Yii::app()->user->isGuest )
+		if (Yii::app()->user->isGuest)
 			$this->login();
 
 		if (Yii::app()->user->name != "deelnemera") {
@@ -218,7 +218,7 @@ class ActionGestartPlayersTest extends WebTestCase
     ## Group Overview
     public function testLoadGroupOverview()
 	{
-		if (Yii::app()->user->isGuest )
+		if (Yii::app()->user->isGuest)
 			$this->login();
 
 		if (Yii::app()->user->name != "deelnemera") {
@@ -242,7 +242,7 @@ class ActionGestartPlayersTest extends WebTestCase
 
     public function testPostBinnenkomst()
 	{
-		if (Yii::app()->user->isGuest )
+		if (Yii::app()->user->isGuest)
 			$this->login();
 
 		if (Yii::app()->user->name != "deelnemera") {
@@ -261,7 +261,7 @@ class ActionGestartPlayersTest extends WebTestCase
 
 	public function testGroupsVragenBekijken()
 	{
-		if (Yii::app()->user->isGuest )
+		if (Yii::app()->user->isGuest)
 			$this->login();
 
 		if (Yii::app()->user->name != "deelnemera") {
@@ -299,7 +299,7 @@ class ActionGestartPlayersTest extends WebTestCase
 
 	public function testGroupsBeantwoordenVragenBekijken()
 	{
-		if (Yii::app()->user->isGuest )
+		if (Yii::app()->user->isGuest)
 			$this->login();
 
 		if (Yii::app()->user->name != "deelnemera") {
@@ -324,7 +324,7 @@ class ActionGestartPlayersTest extends WebTestCase
 		$scoreHintBegin = NoodEnvelop::model()->getNoodEnvelopScore(3, 5);
 		$scoreTotalBegin = Groups::model()->getTotalScoreGroup(3, 5);
 
-		if (Yii::app()->user->isGuest )
+		if (Yii::app()->user->isGuest)
 			$this->login();
 
 		if (Yii::app()->user->name != "deelnemera") {
@@ -364,7 +364,7 @@ class ActionGestartPlayersTest extends WebTestCase
 
 	public function testGroupsBonuspuntenBekijken()
 	{
-		if (Yii::app()->user->isGuest )
+		if (Yii::app()->user->isGuest)
 			$this->login();
 
 		if (Yii::app()->user->name != "deelnemera") {
@@ -385,7 +385,7 @@ class ActionGestartPlayersTest extends WebTestCase
 
 	public function testGroupsStillePostenBekijken()
 	{
-		if (Yii::app()->user->isGuest )
+		if (Yii::app()->user->isGuest)
 			$this->login();
 
 		if (Yii::app()->user->name != "deelnemera") {
@@ -405,7 +405,7 @@ class ActionGestartPlayersTest extends WebTestCase
     ## Startup Overview
     public function testLoginAndStartupOverview()
     {
-		if (Yii::app()->user->isGuest )
+		if (Yii::app()->user->isGuest)
 			$this->login();
 
 		if (Yii::app()->user->name != "deelnemera") {
@@ -420,7 +420,7 @@ class ActionGestartPlayersTest extends WebTestCase
 
     public function testIntroductieBekijken()
     {
-		if (Yii::app()->user->isGuest )
+		if (Yii::app()->user->isGuest)
 			$this->login();
 
 		if (Yii::app()->user->name != "deelnemera") {
@@ -438,7 +438,7 @@ class ActionGestartPlayersTest extends WebTestCase
 
     public function testRouteBeheren()
     {
-		if (Yii::app()->user->isGuest )
+		if (Yii::app()->user->isGuest)
 			$this->login();
 
 		if (Yii::app()->user->name != "deelnemera") {
@@ -456,7 +456,7 @@ class ActionGestartPlayersTest extends WebTestCase
 
     public function testPostenBeheren()
     {
-		if (Yii::app()->user->isGuest )
+		if (Yii::app()->user->isGuest)
 			$this->login();
 
 		if (Yii::app()->user->name != "deelnemera") {
@@ -474,7 +474,7 @@ class ActionGestartPlayersTest extends WebTestCase
 
     public function testVragenOverzicht()
     {
-		if (Yii::app()->user->isGuest )
+		if (Yii::app()->user->isGuest)
 			$this->login();
 
 		if (Yii::app()->user->name != "deelnemera") {
@@ -492,7 +492,7 @@ class ActionGestartPlayersTest extends WebTestCase
 
     public function testHintsOverzicht()
     {
-		if (Yii::app()->user->isGuest )
+		if (Yii::app()->user->isGuest)
 			$this->login();
 
 		if (Yii::app()->user->name != "deelnemera") {
@@ -510,7 +510,7 @@ class ActionGestartPlayersTest extends WebTestCase
 
     public function testStillePostenOverzicht()
     {
-		if (Yii::app()->user->isGuest )
+		if (Yii::app()->user->isGuest)
 			$this->login();
 
 		if (Yii::app()->user->name != "deelnemera") {
@@ -528,7 +528,7 @@ class ActionGestartPlayersTest extends WebTestCase
 
     public function testDeelnemersToevoegen()
     {
-		if (Yii::app()->user->isGuest )
+		if (Yii::app()->user->isGuest)
 			$this->login();
 
 		if (Yii::app()->user->name != "deelnemera") {
@@ -547,7 +547,7 @@ class ActionGestartPlayersTest extends WebTestCase
 
     public function testGroepAanmaken()
     {
-		if (Yii::app()->user->isGuest )
+		if (Yii::app()->user->isGuest)
 			$this->login();
 
 		if (Yii::app()->user->name != "deelnemera") {
@@ -566,7 +566,7 @@ class ActionGestartPlayersTest extends WebTestCase
 
     public function testDagVeranderen()
     {
-		if (Yii::app()->user->isGuest )
+		if (Yii::app()->user->isGuest)
 			$this->login();
 
 		if (Yii::app()->user->name != "deelnemera") {
@@ -585,7 +585,7 @@ class ActionGestartPlayersTest extends WebTestCase
 
     public function testStatusVeranderen()
     {
-		if (Yii::app()->user->isGuest )
+		if (Yii::app()->user->isGuest)
 			$this->login();
 
 		if (Yii::app()->user->name != "deelnemera") {

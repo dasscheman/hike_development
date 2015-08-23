@@ -39,7 +39,9 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		$this->check("id=LoginForm_rememberMe");
 		$this->click("name=yt0");
 		$this->waitForPageToLoad("30000");
-		$this->assertTrue(Yii::app()->user->name == "organisatie");
+		$this->assertContains("organisatie", Yii::app()->user->name);
+		$this->assertContains("testorganisatie", Yii::app()->user->name);
+		//$this->assertTrue(Yii::app()->user->name == "organisatie");
     }
 
     public function logout()
@@ -59,7 +61,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
     public function testLoginAndGameOverview()
     {
-		if (Yii::app()->user->isGuest )
+		if (Yii::app()->user->isGuest)
 			$this->login();
 
 		if (Yii::app()->user->name != "organisatie") {
@@ -76,7 +78,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
     {
 		$scoreVragenBegin = OpenVragenAntwoorden::model()->getOpenVragenScore(3, 5);
 		$scoreTotalBegin = Groups::model()->getTotalScoreGroup(3, 5);
-		if (Yii::app()->user->isGuest )
+		if (Yii::app()->user->isGuest)
 			$this->login();
 
 		if (Yii::app()->user->name != "organisatie") {
@@ -111,7 +113,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
     {
 		$scoreBonuspuntenBegin = Bonuspunten::model()->getBonuspuntenScore(3, 5);
 		$scoreTotalBegin = Groups::model()->getTotalScoreGroup(3, 5);
-		if (Yii::app()->user->isGuest )
+		if (Yii::app()->user->isGuest)
 			$this->login();
 
 		if (Yii::app()->user->name != "organisatie") {
@@ -148,7 +150,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
     public function testBeantwoordeVragen()
     {
-		if (Yii::app()->user->isGuest )
+		if (Yii::app()->user->isGuest)
 			$this->login();
 
 		if (Yii::app()->user->name != "organisatie") {
@@ -171,7 +173,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
     public function testGeopendeHintsBekijken()
     {
-		if (Yii::app()->user->isGuest )
+		if (Yii::app()->user->isGuest)
 			$this->login();
 
 		if (Yii::app()->user->name != "organisatie") {
@@ -194,7 +196,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
     public function testBonuspuntenBekijken()
     {
-		if (Yii::app()->user->isGuest )
+		if (Yii::app()->user->isGuest)
 			$this->login();
 
 		if (Yii::app()->user->name != "organisatie") {
@@ -216,7 +218,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
     public function testGepasserdePostenBekijken()
     {
-		if (Yii::app()->user->isGuest )
+		if (Yii::app()->user->isGuest)
 			$this->login();
 
 		if (Yii::app()->user->name != "organisatie") {
@@ -240,7 +242,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
     public function testGecheckteStillePostenBekijken()
     {
-		if (Yii::app()->user->isGuest )
+		if (Yii::app()->user->isGuest)
 			$this->login();
 
 		if (Yii::app()->user->name != "organisatie") {
@@ -262,7 +264,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
     ## Group Overview
     public function testLoadGroupOverview()
 	{
-		if (Yii::app()->user->isGuest )
+		if (Yii::app()->user->isGuest)
 			$this->login();
 
 		if (Yii::app()->user->name != "organisatie") {
@@ -282,7 +284,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 	{
 		$scorePostenBegin = PostPassage::model()->getPostScore(3, 6);
 		$scoreTotalBegin = Groups::model()->getTotalScoreGroup(3, 6);
-		if (Yii::app()->user->isGuest )
+		if (Yii::app()->user->isGuest)
 			$this->login();
 
 		if (Yii::app()->user->name != "organisatie") {
@@ -313,7 +315,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
 	public function testGroupsVragenBekijken()
 	{
-		if (Yii::app()->user->isGuest )
+		if (Yii::app()->user->isGuest)
 			$this->login();
 
 		if (Yii::app()->user->name != "organisatie") {
@@ -335,7 +337,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
 	public function testGroupsBeantwoordenVragenBekijken()
 	{
-		if (Yii::app()->user->isGuest )
+		if (Yii::app()->user->isGuest)
 			$this->login();
 
 		if (Yii::app()->user->name != "organisatie") {
@@ -357,7 +359,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
 	public function testGroupsHintsBekijken()
 	{
-		if (Yii::app()->user->isGuest )
+		if (Yii::app()->user->isGuest)
 			$this->login();
 
 		if (Yii::app()->user->name != "organisatie") {
@@ -378,7 +380,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
 	public function testGroupsBonuspuntenBekijken()
 	{
-		if (Yii::app()->user->isGuest )
+		if (Yii::app()->user->isGuest)
 			$this->login();
 
 		if (Yii::app()->user->name != "organisatie") {
@@ -399,7 +401,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
 	public function testGroupsStillePostenBekijken()
 	{
-		if (Yii::app()->user->isGuest )
+		if (Yii::app()->user->isGuest)
 			$this->login();
 
 		if (Yii::app()->user->name != "organisatie") {
@@ -422,7 +424,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
 	public function testLoginAndStartupOverview()
     {
-		if (Yii::app()->user->isGuest )
+		if (Yii::app()->user->isGuest)
 			$this->login();
 
 		if (Yii::app()->user->name != "organisatie") {
@@ -437,7 +439,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
     public function testIntroductieBekijken()
     {
-		if (Yii::app()->user->isGuest )
+		if (Yii::app()->user->isGuest)
 			$this->login();
 
 		if (Yii::app()->user->name != "organisatie") {
@@ -607,7 +609,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
     public function testGroepAanmaken()
     {
-		if (Yii::app()->user->isGuest )
+		if (Yii::app()->user->isGuest)
 			$this->login();
 
 		if (Yii::app()->user->name != "organisatie") {
