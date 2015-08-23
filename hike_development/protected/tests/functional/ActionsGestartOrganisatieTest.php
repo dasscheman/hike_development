@@ -40,8 +40,8 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		$this->click("name=yt0");
 		$this->waitForPageToLoad("30000");
 		$this->assertContains("hike_development/index-test.php", $this->getLocation());
-		$this->assertTrue(Yii::app()->user->getName() == "organisatie");
-		$this->assertEquals(1, Yii::app()->user->id);
+		//$this->assertTrue(Yii::app()->user->getName() == "organisatie");
+		$this->assertEquals("organisatie", Yii::app()->user->getName());
 		$this->assertContains(1, Yii::app()->user->id);
 		$this->assertContains("testorganisatie", Yii::app()->user->id);
     }
