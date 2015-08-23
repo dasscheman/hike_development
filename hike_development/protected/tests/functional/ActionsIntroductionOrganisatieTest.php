@@ -106,7 +106,7 @@ class ActionIntroductionOrganisatieTest extends WebTestCase
 		$this->click("link=Bonuspunten Geven");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=bonuspunten/create&event_id=2", $this->getLocation());
-		$this->select("name=Bonuspunten[group_ID]", "label=groep A gestart");
+		$this->select("name=Bonuspunten[group_ID]", "label=groep A beindigd");
 		$this->type("id=Bonuspunten_omschrijving", "bonuspunten group a");
 		$this->type("id=Bonuspunten_score", 3);
 		$this->click("name=yt0");
@@ -114,7 +114,7 @@ class ActionIntroductionOrganisatieTest extends WebTestCase
 
 		$this->open("hike_development/index-test.php?r=bonuspunten/create&event_id=2", $this->getLocation());
         $this->waitForPageToLoad ( "30000" );
-		$this->select("id=Bonuspunten_group_ID", "label=groep B gestart");
+		$this->select("id=Bonuspunten_group_ID", "label=groep B beindigd");
 		$this->type("id=Bonuspunten_omschrijving", "bonuspunten group b");
 		$this->type("id=Bonuspunten_score", 2);
 		$this->click("name=yt0");
