@@ -39,7 +39,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		$this->check("id=LoginForm_rememberMe");
 		$this->click("name=yt0");
 		$this->waitForPageToLoad("30000");
-		$this->assertContains("1", Yii::app()->user->id);
+		$this->assertEquals(1, Yii::app()->user->id);
 		$this->assertContains(1, Yii::app()->user->id);
 		$this->assertContains("testorganisatie", Yii::app()->user->id);
 		//$this->assertTrue(Yii::app()->user->name == "organisatie");
