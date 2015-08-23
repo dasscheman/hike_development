@@ -693,7 +693,6 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
     	$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=3");
         $this->waitForPageToLoad ( "30000" );
-		$this->assertContains("ASDFASDFASDF", $this->getBodyText());
 		$this->assertContains("hike_development/index-test.php?r=startup/startupOverview&event_id=3", $this->getLocation());
 		$this->assertFalse($this->isElementPresent("link=Status Veranderen"));
 		$this->open("hike_development/index-test.php?r=eventNames/changeStatus&event_id=3");
