@@ -2,7 +2,8 @@
 
 class ActionIntroductionPlayersTest extends WebTestCase
 {
-   /*
+ 
+    /*
      *	For debugging use:
      * 	$this->assertContains("ASDFASDFASDF", $this->getBodyText());
      *
@@ -11,24 +12,40 @@ class ActionIntroductionPlayersTest extends WebTestCase
      *
      *  Check of een link wel bestaat:
      *  $this->assertTrue($this->isElementPresent("link=NG_011986.11"));
+ 	 *
+	 * DATA:
+	 * event_id = 2;
+	 * route_id = 3, 4;
+	 * group_id = 3, 4;
+	 * bonuspunten_id = 4, 5, 6;
+	 * openVragen_id = 8, 9;
+	 * noodenvelop_id = 5;
+	 * qr_id = 5, 6;
+	 * post_id = 8, 9;
      */
 
     protected function setUp()
     {
         $this->setBrowser('*firefox');
         $this->setBrowserUrl('http://localhost/');
-        $this->shareSession(true);
+        $this->shareSession(false);
     }
 
     public function login()
     {
+		$this->pause(3);
+		$this->open("hike_development/index-test.php?r=site/logout");
+        $this->waitForPageToLoad ( "30000" );
 		$this->open("hike_development/index-test.php?r=site/login");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=site/login", $this->getLocation());
 		$this->type("id=LoginForm_username", "deelnemera");
 		$this->type("id=LoginForm_password", "test");
+		$this->check("id=LoginForm_rememberMe");
 		$this->click("name=yt0");
 		$this->waitForPageToLoad("30000");
+		$this->assertContains("hike_development/index-test.php", $this->getLocation());
+		$this->assertContains("Gebruikersnaam: deelnemera", $this->getBodyText());
     }
 
     public function testLoadPage()
@@ -40,8 +57,7 @@ class ActionIntroductionPlayersTest extends WebTestCase
 
     public function testLoginAndGameOverview()
     {
-		if (Yii::app()->user->isGuest )
-			$this->login();
+		$this->login();
 
 		$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=2");
 		$this->waitForPageToLoad ( "30000" );
@@ -53,8 +69,7 @@ class ActionIntroductionPlayersTest extends WebTestCase
     ##Game Overview:
     public function testVragenControleren()
     {
-		if (Yii::app()->user->isGuest )
-			$this->login();
+		$this->login();
 
     	$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=2");
         $this->waitForPageToLoad ( "30000" );
@@ -73,8 +88,7 @@ class ActionIntroductionPlayersTest extends WebTestCase
 
     public function testBonuspuntenGeven()
     {
-		if (Yii::app()->user->isGuest )
-			$this->login();
+		$this->login();
 
     	$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=2");
         $this->waitForPageToLoad ( "30000" );
@@ -87,8 +101,7 @@ class ActionIntroductionPlayersTest extends WebTestCase
 
     public function testBeantwoordeVragenBekijken()
     {
-		if (Yii::app()->user->isGuest )
-			$this->login();
+		$this->login();
 
     	$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=2");
         $this->waitForPageToLoad ( "30000" );
@@ -101,8 +114,7 @@ class ActionIntroductionPlayersTest extends WebTestCase
 
     public function testGeopendeHintsBekijken()
     {
-		if (Yii::app()->user->isGuest )
-			$this->login();
+		$this->login();
 
     	$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=2");
         $this->waitForPageToLoad ( "30000" );
@@ -115,8 +127,7 @@ class ActionIntroductionPlayersTest extends WebTestCase
 
     public function testBonuspuntenBekijken()
     {
-		if (Yii::app()->user->isGuest )
-			$this->login();
+		$this->login();
 
     	$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=2");
         $this->waitForPageToLoad ( "30000" );
@@ -129,8 +140,7 @@ class ActionIntroductionPlayersTest extends WebTestCase
 
     public function testGepasserdePostenBekijken()
     {
-		if (Yii::app()->user->isGuest )
-			$this->login();
+		$this->login();
 
     	$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=2");
         $this->waitForPageToLoad ( "30000" );
@@ -143,8 +153,7 @@ class ActionIntroductionPlayersTest extends WebTestCase
 
     public function testGecheckteStillePostenBekijken()
     {
-		if (Yii::app()->user->isGuest )
-			$this->login();
+		$this->login();
 
     	$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=2");
         $this->waitForPageToLoad ( "30000" );
@@ -158,18 +167,17 @@ class ActionIntroductionPlayersTest extends WebTestCase
     ## Group Overview
     public function testLoadGroupOverview()
 	{
-		if (Yii::app()->user->isGuest )
-			$this->login();
+		$this->login();
 
 		# bekijken van gegevens van andere groep.
-		$this->open("hike_development/index-test.php?r=game/groupOverview&event_id=2&group_id=6");
+		$this->open("hike_development/index-test.php?r=game/groupOverview&event_id=2&group_id=4");
 		$this->waitForPageToLoad ( "30000" );
         $this->assertContains("Dat mag dus niet...", $this->getBodyText());
 
 		# bekijken van gegevens van eigen groep.
-    	$this->open("hike_development/index-test.php?r=game/groupOverview&event_id=2&group_id=5");
+    	$this->open("hike_development/index-test.php?r=game/groupOverview&event_id=2&group_id=3");
 		$this->waitForPageToLoad ( "30000" );
-		$this->assertContains("hike_development/index-test.php?r=game/groupOverview&event_id=2&group_id=5", $this->getLocation());
+		$this->assertContains("hike_development/index-test.php?r=game/groupOverview&event_id=2&group_id=3", $this->getLocation());
 		$this->assertContains("Posten Overzicht", $this->getBodyText());
 		$this->assertContains("Te Controleren Vragen", $this->getBodyText());
 		$this->assertContains("Geopende Hints", $this->getBodyText());
@@ -177,63 +185,60 @@ class ActionIntroductionPlayersTest extends WebTestCase
 
     public function testPostBinnenkomst()
 	{
-		if (Yii::app()->user->isGuest )
-			$this->login();
+		$this->login();
 
-    	$this->open("hike_development/index-test.php?r=game/groupOverview&event_id=2&group_id=5");
+    	$this->open("hike_development/index-test.php?r=game/groupOverview&event_id=2&group_id=3");
 		$this->waitForPageToLoad ( "30000" );
-		$this->assertContains("hike_development/index-test.php?r=game/groupOverview&event_id=2&group_id=5", $this->getLocation());
+		$this->assertContains("hike_development/index-test.php?r=game/groupOverview&event_id=2&group_id=3", $this->getLocation());
 		$this->assertFalse($this->isElementPresent("link=Binnenkomst Post"));
-		$this->open("hike_development/index-test.php?r=postPassage/create&event_id=2&group_id=5");
+		$this->open("hike_development/index-test.php?r=postPassage/create&event_id=2&group_id=3");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("Dat mag dus niet...", $this->getBodyText());
 	}
 
 	public function testGroupsVragenBekijken()
 	{
-		if (Yii::app()->user->isGuest )
-			$this->login();
+		$this->login();
 
-    	$this->open("hike_development/index-test.php?r=game/groupOverview&event_id=2&group_id=5");
+    	$this->open("hike_development/index-test.php?r=game/groupOverview&event_id=2&group_id=3");
 		$this->waitForPageToLoad ( "30000" );
-		$this->assertContains("hike_development/index-test.php?r=game/groupOverview&event_id=2&group_id=5", $this->getLocation());
+		$this->assertContains("hike_development/index-test.php?r=game/groupOverview&event_id=2&group_id=3", $this->getLocation());
 		$this->assertTrue($this->isElementPresent("link=Vragen"));
 		$this->click("link=Vragen");
         $this->waitForPageToLoad ( "30000" );
-		$this->assertContains("hike_development/index-test.php?r=openVragen/viewPlayers&event_id=2&group_id=5", $this->getLocation());
-		
-		$this->open("hike_development/index-test.php?r=openVragenAntwoorden/update&event_id=2&group_id=6&vraag_id=1");
+		$this->assertContains("hike_development/index-test.php?r=openVragen/viewPlayers&event_id=2&group_id=3", $this->getLocation());
+
+		$this->open("hike_development/index-test.php?r=openVragenAntwoorden/update&event_id=2&group_id=4&vraag_id=1");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("Dat mag dus niet...", $this->getBodyText());
 
-		$this->open("hike_development/index-test.php?r=openVragenAntwoorden/update&event_id=2&group_id=5&vraag_id=1");
+		$this->open("hike_development/index-test.php?r=openVragenAntwoorden/update&event_id=2&group_id=3&vraag_id=1");
         $this->waitForPageToLoad ( "30000" );
 		$this->type("name=OpenVragenAntwoorden[antwoord_spelers]", "update A");
 		$this->click("name=yt0");
 
-		$this->open("hike_development/index-test.php?r=openVragenAntwoorden/create&event_id=2&group_id=5&vraag_id=3");
+		$this->open("hike_development/index-test.php?r=openVragenAntwoorden/create&event_id=2&group_id=3&vraag_id=3");
         $this->waitForPageToLoad ( "30000" );
 		$this->type("name=OpenVragenAntwoorden[antwoord_spelers]", "create C");
 		$this->click("name=yt0");
 		$this->waitForPageToLoad("30000");
 
-		$this->open("hike_development/index-test.php?r=openVragenAntwoorden/viewPlayers&event_id=2&group_id=5");
+		$this->open("hike_development/index-test.php?r=openVragenAntwoorden/viewPlayers&event_id=2&group_id=3");
 		$this->assertContains("create C", $this->getBodyText());
 		$this->assertContains("update A", $this->getBodyText());
 	}
 
 	public function testGroupsBeantwoordenVragenBekijken()
 	{
-		if (Yii::app()->user->isGuest )
-			$this->login();
+		$this->login();
 
-    	$this->open("hike_development/index-test.php?r=game/groupOverview&event_id=2&group_id=5");
+    	$this->open("hike_development/index-test.php?r=game/groupOverview&event_id=2&group_id=3");
 		$this->waitForPageToLoad ( "30000" );
-		$this->assertContains("hike_development/index-test.php?r=game/groupOverview&event_id=2&group_id=5", $this->getLocation());
+		$this->assertContains("hike_development/index-test.php?r=game/groupOverview&event_id=2&group_id=3", $this->getLocation());
 		$this->assertTrue($this->isElementPresent("link=Beantwoorde Vragen"));
 		$this->click("link=Beantwoorde Vragen");
         $this->waitForPageToLoad ( "30000" );
-		$this->assertContains("hike_development/index-test.php?r=openVragenAntwoorden/viewPlayers&event_id=2&group_id=5", $this->getLocation());
+		$this->assertContains("hike_development/index-test.php?r=openVragenAntwoorden/viewPlayers&event_id=2&group_id=3", $this->getLocation());
 		$this->assertContains("Hoofdletter b", $this->getBodyText());
 		$this->assertContains("deelnemera", $this->getBodyText());
 		$this->assertNotContains("deelnemerb", $this->getBodyText());
@@ -241,61 +246,73 @@ class ActionIntroductionPlayersTest extends WebTestCase
 
 	public function testGroupsHintsBekijken()
 	{
-		if (Yii::app()->user->isGuest )
-			$this->login();
+		$scoreHintBegin = NoodEnvelop::model()->getNoodEnvelopScore(3, 5);
+		$scoreTotalBegin = Groups::model()->getTotalScoreGroup(3, 5);
 
-    	$this->open("hike_development/index-test.php?r=game/groupOverview&event_id=2&group_id=5");
-		$this->waitForPageToLoad ( "30000" );
-		$this->assertContains("hike_development/index-test.php?r=game/groupOverview&event_id=2&group_id=5", $this->getLocation());
-		$this->assertFalse($this->isElementPresent("link=Hints"));
-		$this->open("hike_development/index-test.php?r=noodEnvelop/viewPlayers&event_id=2&group_id=5");
-        $this->waitForPageToLoad ( "30000" );
-		$this->assertContains("Dat mag dus niet...", $this->getBodyText());
+		$this->login();
 
-    	$this->open("hike_development/index-test.php?r=openNoodEnvelop/create&nood_envelop_id=2&event_id=2&group_id=5");
+    	$this->open("hike_development/index-test.php?r=game/groupOverview&event_id=2&group_id=3");
 		$this->waitForPageToLoad ( "30000" );
-		$this->assertContains("Dat mag dus niet...", $this->getBodyText());
-		
-		$this->open("hike_development/index-test.php?r=openNoodEnvelop/create&nood_envelop_id=3&event_id=2&group_id=6");
+		$this->assertContains("hike_development/index-test.php?r=game/groupOverview&event_id=2&group_id=3", $this->getLocation());
+		$this->assertTrue($this->isElementPresent("link=Hints"));
+		$this->click("link=Hints");
         $this->waitForPageToLoad ( "30000" );
-		$this->assertContains("Dat mag dus niet...", $this->getBodyText());
+		$this->assertContains("hike_development/index-test.php?r=noodEnvelop/viewPlayers&event_id=2&group_id=3", $this->getLocation());
+
+		$this->assertContains("Hint gestart players", $this->getBodyText());
+		$this->assertContains("GEOPEND", $this->getBodyText());
+		$this->assertTrue($this->isElementPresent("id=yt0"));
+		$this->assertEquals("OPENEN", $this->getValue("id=yt0"));
+    	$this->open("hike_development/index-test.php?r=openNoodEnvelop/create&nood_envelop_id=2&event_id=2&group_id=3");
+		$this->waitForPageToLoad ( "30000" );
+		$this->assertContains("hike_development/index-test.php?r=openNoodEnvelop/create&nood_envelop_id=2&event_id=2&group_id=3", $this->getLocation());
+		$this->open("hike_development/index-test.php?r=openNoodEnvelop/create&nood_envelop_id=3&event_id=2&group_id=4");
+        $this->waitForPageToLoad ( "30000" );
+		$this->assertContains("hike_development/index-test.php?r=openNoodEnvelop/create&nood_envelop_id=3&event_id=2&group_id=4", $this->getLocation());
+		$this->assertContains("Hint gestart players", $this->getBodyText());
+		$this->assertNotContains("Hint gestart players groep B", $this->getBodyText());
+
+
+		$scoreHintEnd = NoodEnvelop::model()->getNoodEnvelopScore(3, 5);
+		$scoreTotalEnd = Groups::model()->getTotalScoreGroup(3, 5);
+		$this->assertEquals(0, $scoreHintBegin);
+		$this->assertEquals(5, $scoreHintEnd);
+		$this->assertEquals(5, $scoreHintEnd-$scoreHintBegin);
+		$this->assertEquals(5, $scoreTotalEnd-$scoreTotalBegin);
 	}
 
 	public function testGroupsBonuspuntenBekijken()
 	{
-		if (Yii::app()->user->isGuest )
-			$this->login();
+		$this->login();
 
-    	$this->open("hike_development/index-test.php?r=game/groupOverview&event_id=2&group_id=5");
+    	$this->open("hike_development/index-test.php?r=game/groupOverview&event_id=2&group_id=3");
 		$this->waitForPageToLoad ( "30000" );
-		$this->assertContains("hike_development/index-test.php?r=game/groupOverview&event_id=2&group_id=5", $this->getLocation());
+		$this->assertContains("hike_development/index-test.php?r=game/groupOverview&event_id=2&group_id=3", $this->getLocation());
 		$this->assertTrue($this->isElementPresent("link=Bonuspunten"));
 		$this->click("link=Bonuspunten");
         $this->waitForPageToLoad ( "30000" );
-		$this->assertContains("hike_development/index-test.php?r=bonuspunten/viewPlayers&event_id=2&group_id=5", $this->getLocation());
+		$this->assertContains("hike_development/index-test.php?r=bonuspunten/viewPlayers&event_id=2&group_id=3", $this->getLocation());
 		$this->assertContains("bonus gestart players groep A", $this->getBodyText());
 		$this->assertNotContains("bonus gestart players groep B", $this->getBodyText());
 	}
 
 	public function testGroupsStillePostenBekijken()
 	{
-		if (Yii::app()->user->isGuest )
-			$this->login();
+		$this->login();
 
-    	$this->open("hike_development/index-test.php?r=game/groupOverview&event_id=2&group_id=5");
+    	$this->open("hike_development/index-test.php?r=game/groupOverview&event_id=2&group_id=3");
 		$this->waitForPageToLoad ( "30000" );
-		$this->assertContains("hike_development/index-test.php?r=game/groupOverview&event_id=2&group_id=5", $this->getLocation());
+		$this->assertContains("hike_development/index-test.php?r=game/groupOverview&event_id=2&group_id=3", $this->getLocation());
 		$this->assertTrue($this->isElementPresent("link=Stille Posten"));
 		$this->click("link=Stille Posten");
         $this->waitForPageToLoad ( "30000" );
-		$this->assertContains("hike_development/index-test.php?r=qrCheck/viewPlayers&event_id=2&group_id=5", $this->getLocation());
+		$this->assertContains("hike_development/index-test.php?r=qrCheck/viewPlayers&event_id=2&group_id=3", $this->getLocation());
 		$this->assertContains("gestart organisatie", $this->getBodyText());
 	}
     ## Startup Overview
     public function testLoginAndStartupOverview()
     {
-		if (Yii::app()->user->isGuest )
-			$this->login();
+		$this->login();
 
 		$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=2");
 		$this->waitForPageToLoad ( "30000" );
@@ -304,8 +321,7 @@ class ActionIntroductionPlayersTest extends WebTestCase
 
     public function testIntroductieBekijken()
     {
-		if (Yii::app()->user->isGuest )
-			$this->login();
+		$this->login();
 
     	$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=2");
         $this->waitForPageToLoad ( "30000" );
@@ -317,8 +333,7 @@ class ActionIntroductionPlayersTest extends WebTestCase
 
     public function testRouteBeheren()
     {
-		if (Yii::app()->user->isGuest )
-			$this->login();
+		$this->login();
 
     	$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=2");
         $this->waitForPageToLoad ( "30000" );
@@ -330,8 +345,7 @@ class ActionIntroductionPlayersTest extends WebTestCase
 
     public function testPostenBeheren()
     {
-		if (Yii::app()->user->isGuest )
-			$this->login();
+		$this->login();
 
     	$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=2");
         $this->waitForPageToLoad ( "30000" );
@@ -343,8 +357,7 @@ class ActionIntroductionPlayersTest extends WebTestCase
 
     public function testVragenOverzicht()
     {
-		if (Yii::app()->user->isGuest )
-			$this->login();
+		$this->login();
 
     	$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=2");
         $this->waitForPageToLoad ( "30000" );
@@ -356,8 +369,7 @@ class ActionIntroductionPlayersTest extends WebTestCase
 
     public function testHintsOverzicht()
     {
-		if (Yii::app()->user->isGuest )
-			$this->login();
+		$this->login();
 
     	$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=2");
         $this->waitForPageToLoad ( "30000" );
@@ -369,8 +381,7 @@ class ActionIntroductionPlayersTest extends WebTestCase
 
     public function testStillePostenOverzicht()
     {
-		if (Yii::app()->user->isGuest )
-			$this->login();
+		$this->login();
 
     	$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=2");
         $this->waitForPageToLoad ( "30000" );
@@ -382,8 +393,7 @@ class ActionIntroductionPlayersTest extends WebTestCase
 
     public function testDeelnemersToevoegen()
     {
-		if (Yii::app()->user->isGuest )
-			$this->login();
+		$this->login();
 
     	$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=2");
         $this->waitForPageToLoad ( "30000" );
@@ -396,8 +406,7 @@ class ActionIntroductionPlayersTest extends WebTestCase
 
     public function testGroepAanmaken()
     {
-		if (Yii::app()->user->isGuest )
-			$this->login();
+		$this->login();
 
     	$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=2");
         $this->waitForPageToLoad ( "30000" );
@@ -410,8 +419,7 @@ class ActionIntroductionPlayersTest extends WebTestCase
 
     public function testDagVeranderen()
     {
-		if (Yii::app()->user->isGuest )
-			$this->login();
+		$this->login();
 
     	$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=2");
         $this->waitForPageToLoad ( "30000" );
@@ -424,8 +432,7 @@ class ActionIntroductionPlayersTest extends WebTestCase
 
     public function testStatusVeranderen()
     {
-		if (Yii::app()->user->isGuest )
-			$this->login();
+		$this->login();
 
     	$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=2");
         $this->waitForPageToLoad ( "30000" );

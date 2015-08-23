@@ -1,28 +1,12 @@
 <phpunit bootstrap="bootstrap.php"
-	colors="false"
+	colors="true"
 	convertErrorsToExceptions="true"
 	convertNoticesToExceptions="true"
 	convertWarningsToExceptions="true"
-	stopOnFailure="false">
+	stopOnFailure="true">
 
 	<selenium>
 		<browser name="Firefox" browser="*firefox" />
 	</selenium>
-	<testsuites>
-	  <testsuite name="HikeWithStatusOpstart">
-		<file>./trunk/tests/travis/tests/functional/ActionsOpstartOrganisatieTest.php</file>
-		<file>./trunk/tests/travis/tests/functional/ActionsOpstartPlayersTest.php</file>
-	  </testsuite>
-
-	  <testsuite name="HikeWithStatusIntroduction">
-		<file>./trunk/tests/travis/tests/functional/ActionsIntroductionOrganisatieTest.php</file>
-		<file>./trunk/tests/travis/tests/functional/ActionsIntroductionPlayersTest.php</file>
-	  </testsuite>
-
-	  <testsuite name="HikeWithStatusGestart">
-		<file>./trunk/tests/travis/tests/functional/ActionsGestartOrganisatieTest.php</file>
-		<file>./trunk/tests/travis/tests/functional/ActionsGestartPlayersTest.php</file>
-	  </testsuite>
-
-	</testsuites>
+	
 </phpunit>
