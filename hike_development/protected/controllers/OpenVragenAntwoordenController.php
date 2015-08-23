@@ -264,13 +264,16 @@ class OpenVragenAntwoordenController extends Controller
 	 */
 	public function actionIndex()
 	{
+		$event_id = $_GET['event_id'];
+		$where = "event_ID = $event_id";
 		$dataProvider=new CActiveDataProvider('OpenVragenAntwoorden',
-						       array('criteria'=>array(
-									       'order'=>'create_time DESC',
-										),
-							     'pagination'=>array('pageSize'=>20,),
-							     )
-						       );
+								array('criteria'=>array(
+										'condition'=>$where,
+										'order'=>'create_time DESC',
+								),
+									'pagination'=>array('pageSize'=>20,),
+							    )
+						    );
 		$this->layout='//layouts/column1';
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,

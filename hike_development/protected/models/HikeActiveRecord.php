@@ -119,7 +119,7 @@ abstract class HikeActiveRecord extends CActiveRecord
 			case 'openNoodEnvelop':
 			case 'openVragenAntwoorden':
 			case 'postPassage':
-				if ($hikeStatus <> EventNames::STATUS_opstart AND
+				if ($hikeStatus >= EventNames::STATUS_opstart AND
 					$rolPlayer == DeelnemersEvent::ROL_organisatie) {
 						$indexAllowed = true;
 				}		

@@ -163,7 +163,12 @@ class PostPassageController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('PostPassage');
+		$event_id = $_GET['event_id'];
+		$where = "event_ID = $event_id";
+
+		$dataProvider=new CActiveDataProvider('PostPassage',
+			array('criteria'=>array(
+					'condition'=>$where,)));
 		$this->layout='//layouts/column1';
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
