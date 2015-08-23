@@ -53,6 +53,11 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
+		if (Yii::app()->user->name != 'organisatie') {
+			$this->logout();
+			$this->login();
+		}
+
 		$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=3");
 		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=3", $this->getLocation());
     }
@@ -64,6 +69,11 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		$scoreTotalBegin = Groups::model()->getTotalScoreGroup(3, 5);
 		if (Yii::app()->user->isGuest )
 			$this->login();
+
+		if (Yii::app()->user->name != 'organisatie') {
+			$this->logout();
+			$this->login();
+		}
 
     	$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=3");
         $this->waitForPageToLoad ( "30000" );
@@ -94,6 +104,11 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		$scoreTotalBegin = Groups::model()->getTotalScoreGroup(3, 5);
 		if (Yii::app()->user->isGuest )
 			$this->login();
+
+		if (Yii::app()->user->name != 'organisatie') {
+			$this->logout();
+			$this->login();
+		}
 
     	$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=3");
         $this->waitForPageToLoad ( "30000" );
@@ -127,6 +142,11 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
+		if (Yii::app()->user->name != 'organisatie') {
+			$this->logout();
+			$this->login();
+		}
+
     	$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=3");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=3", $this->getLocation());
@@ -144,6 +164,11 @@ class ActionGestartOrganisatieTest extends WebTestCase
     {
 		if (Yii::app()->user->isGuest )
 			$this->login();
+
+		if (Yii::app()->user->name != 'organisatie') {
+			$this->logout();
+			$this->login();
+		}
 
     	$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=3");
         $this->waitForPageToLoad ( "30000" );
@@ -163,6 +188,11 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
+		if (Yii::app()->user->name != 'organisatie') {
+			$this->logout();
+			$this->login();
+		}
+
     	$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=3");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=3", $this->getLocation());
@@ -179,6 +209,11 @@ class ActionGestartOrganisatieTest extends WebTestCase
     {
 		if (Yii::app()->user->isGuest )
 			$this->login();
+
+		if (Yii::app()->user->name != 'organisatie') {
+			$this->logout();
+			$this->login();
+		}
 
     	$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=3");
         $this->waitForPageToLoad ( "30000" );
@@ -199,6 +234,11 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
+		if (Yii::app()->user->name != 'organisatie') {
+			$this->logout();
+			$this->login();
+		}
+
     	$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=3");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=3", $this->getLocation());
@@ -216,6 +256,11 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
+		if (Yii::app()->user->name != 'organisatie') {
+			$this->logout();
+			$this->login();
+		}
+
     	$this->open("hike_development/index-test.php?r=game/groupOverview&event_id=3&group_id=5");
 		$this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=game/groupOverview&event_id=3&group_id=5", $this->getLocation());
@@ -230,6 +275,11 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		$scoreTotalBegin = Groups::model()->getTotalScoreGroup(3, 6);
 		if (Yii::app()->user->isGuest )
 			$this->login();
+
+		if (Yii::app()->user->name != 'organisatie') {
+			$this->logout();
+			$this->login();
+		}
 
     	$this->open("hike_development/index-test.php?r=game/groupOverview&event_id=3&group_id=6");
 		$this->waitForPageToLoad ( "30000" );
@@ -257,6 +307,11 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
+		if (Yii::app()->user->name != 'organisatie') {
+			$this->logout();
+			$this->login();
+		}
+
     	$this->open("hike_development/index-test.php?r=game/groupOverview&event_id=3&group_id=5");
 		$this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=game/groupOverview&event_id=3&group_id=5", $this->getLocation());
@@ -273,6 +328,11 @@ class ActionGestartOrganisatieTest extends WebTestCase
 	{
 		if (Yii::app()->user->isGuest )
 			$this->login();
+
+		if (Yii::app()->user->name != 'organisatie') {
+			$this->logout();
+			$this->login();
+		}
 
     	$this->open("hike_development/index-test.php?r=game/groupOverview&event_id=3&group_id=5");
 		$this->waitForPageToLoad ( "30000" );
@@ -291,6 +351,11 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
+		if (Yii::app()->user->name != 'organisatie') {
+			$this->logout();
+			$this->login();
+		}
+
     	$this->open("hike_development/index-test.php?r=game/groupOverview&event_id=3&group_id=5");
 		$this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=game/groupOverview&event_id=3&group_id=5", $this->getLocation());
@@ -307,6 +372,11 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
+		if (Yii::app()->user->name != 'organisatie') {
+			$this->logout();
+			$this->login();
+		}
+
     	$this->open("hike_development/index-test.php?r=game/groupOverview&event_id=3&group_id=5");
 		$this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=game/groupOverview&event_id=3&group_id=5", $this->getLocation());
@@ -322,6 +392,11 @@ class ActionGestartOrganisatieTest extends WebTestCase
 	{
 		if (Yii::app()->user->isGuest )
 			$this->login();
+
+		if (Yii::app()->user->name != 'organisatie') {
+			$this->logout();
+			$this->login();
+		}
 
     	$this->open("hike_development/index-test.php?r=game/groupOverview&event_id=3&group_id=5");
 		$this->waitForPageToLoad ( "30000" );
@@ -341,6 +416,11 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
+		if (Yii::app()->user->name != 'organisatie') {
+			$this->logout();
+			$this->login();
+		}
+
 		$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=3");
 		$this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=startup/startupOverview&event_id=3", $this->getLocation());
@@ -350,6 +430,11 @@ class ActionGestartOrganisatieTest extends WebTestCase
     {
 		if (Yii::app()->user->isGuest )
 			$this->login();
+
+		if (Yii::app()->user->name != 'organisatie') {
+			$this->logout();
+			$this->login();
+		}
 
     	$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=3");
         $this->waitForPageToLoad ( "30000" );
@@ -375,6 +460,11 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		if (Yii::app()->user->isGuest)
 			$this->login();
 
+		if (Yii::app()->user->name != 'organisatie') {
+			$this->logout();
+			$this->login();
+		}
+
     	$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=3");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=startup/startupOverview&event_id=3", $this->getLocation());
@@ -398,6 +488,11 @@ class ActionGestartOrganisatieTest extends WebTestCase
     {
 		if (Yii::app()->user->isGuest)
 			$this->login();
+
+		if (Yii::app()->user->name != 'organisatie') {
+			$this->logout();
+			$this->login();
+		}
 
     	$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=3");
         $this->waitForPageToLoad ( "30000" );
@@ -425,6 +520,11 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		if (Yii::app()->user->isGuest)
 			$this->login();
 
+		if (Yii::app()->user->name != 'organisatie') {
+			$this->logout();
+			$this->login();
+		}
+
     	$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=3");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=startup/startupOverview&event_id=3", $this->getLocation());
@@ -442,6 +542,11 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		if (Yii::app()->user->isGuest)
 			$this->login();
 
+		if (Yii::app()->user->name != 'organisatie') {
+			$this->logout();
+			$this->login();
+		}
+
     	$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=3");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=startup/startupOverview&event_id=3", $this->getLocation());
@@ -457,6 +562,11 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		if (Yii::app()->user->isGuest)
 			$this->login();
 
+		if (Yii::app()->user->name != 'organisatie') {
+			$this->logout();
+			$this->login();
+		}
+
     	$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=3");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=startup/startupOverview&event_id=3", $this->getLocation());
@@ -466,11 +576,16 @@ class ActionGestartOrganisatieTest extends WebTestCase
         $this->assertContains("1wDlYLbS8Ws9EutrUMjNv6", $this->getBodyText());
         $this->assertContains("2wDlYLbS8Ws9EutrUMjNv6", $this->getBodyText());
 	}
-/*
+
     public function testDeelnemersToevoegen()
     {
 		if (Yii::app()->user->isGuest)
 			$this->login();
+
+		if (Yii::app()->user->name != 'organisatie') {
+			$this->logout();
+			$this->login();
+		}
 
     	$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=3");
         $this->waitForPageToLoad ( "30000" );
@@ -486,6 +601,11 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
+		if (Yii::app()->user->name != 'organisatie') {
+			$this->logout();
+			$this->login();
+		}
+
     	$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=3");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=startup/startupOverview&event_id=3", $this->getLocation());
@@ -499,6 +619,11 @@ class ActionGestartOrganisatieTest extends WebTestCase
     {
 		if (Yii::app()->user->isGuest)
 			$this->login();
+
+		if (Yii::app()->user->name != 'organisatie') {
+			$this->logout();
+			$this->login();
+		}
 
     	$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=3");
         $this->waitForPageToLoad ( "30000" );
@@ -554,6 +679,11 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		if (Yii::app()->user->isGuest)
 			$this->login();
 
+		if (Yii::app()->user->name != 'organisatie') {
+			$this->logout();
+			$this->login();
+		}
+
     	$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=3");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("ASDFASDFASDF", $this->getBodyText());
@@ -584,5 +714,5 @@ class ActionGestartOrganisatieTest extends WebTestCase
         $this->assertContains("Tijd over (minuten): nog niet gestart", $this->getBodyText());
         $this->assertContains("Status van Hike: Gestart", $this->getBodyText());
         $this->assertContains("Actieve dag: 2015-02-27", $this->getBodyText());
-	}*/
+	}
 }
