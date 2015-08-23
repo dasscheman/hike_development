@@ -93,7 +93,6 @@ class GameController extends Controller
 		}
 
 		$where = "user_ID = $user_id";
-
 		$deelnemersEventDataProvider =new CActiveDataProvider('DeelnemersEvent',
 		    array(
 			'criteria'=>array(

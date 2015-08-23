@@ -41,6 +41,13 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		$this->waitForPageToLoad("30000");
     }
 
+    public function logout()
+    {
+		$this->open("hike_development/index-test.php?r=site/logout");
+        $this->waitForPageToLoad ( "30000" );
+		$this->assertContains("hike_development/index-test.php", $this->getLocation());
+    }
+
     public function testLoadPage()
     {
     	$this->open('hike_development/index-test.php');

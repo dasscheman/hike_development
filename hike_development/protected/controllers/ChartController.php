@@ -78,12 +78,8 @@ class ChartController extends Controller
 		/**
 		 * Als admin is ingelogd, dan moet alles getoont worden.
 		 */
-		if($user_id <> 1)
-		    $where = "user_ID = $user_id";
-		else
-		    $where = "";
-		    
-		$deelnemersEventDataProvider =new CActiveDataProvider('DeelnemersEvent',
+		$where = "user_ID = $user_id";
+ 		$deelnemersEventDataProvider =new CActiveDataProvider('DeelnemersEvent',
 		    array(
 			'criteria'=>array(
 			    'condition'=>$where,
