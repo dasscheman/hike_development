@@ -32,7 +32,7 @@ class ActionOpstartPlayersTest extends WebTestCase
 
     public function login()
     {
-
+		$this->pause(3);
 		$this->open("hike_development/index-test.php?r=site/logout");
         $this->waitForPageToLoad ( "30000" );
 		$this->open("hike_development/index-test.php?r=site/login");
