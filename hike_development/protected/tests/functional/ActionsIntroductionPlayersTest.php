@@ -216,14 +216,14 @@ class ActionIntroductionPlayersTest extends WebTestCase
 		$this->type("name=OpenVragenAntwoorden[antwoord_spelers]", "update H");
 		$this->click("name=yt0");
 
-		$this->open("hike_development/index-test.php?r=openVragenAntwoorden/create&event_id=2&group_id=3&vraag_id=9");
+		$this->open("hike_development/index-test.php?r=openVragenAntwoorden/create&event_id=2&group_id=3&vraag_id=12");
         $this->waitForPageToLoad ( "30000" );
-		$this->type("name=OpenVragenAntwoorden[antwoord_spelers]", "create I");
+		$this->type("name=OpenVragenAntwoorden[antwoord_spelers]", "create L");
 		$this->click("name=yt0");
 		$this->waitForPageToLoad("30000");
 
 		$this->open("hike_development/index-test.php?r=openVragenAntwoorden/viewPlayers&event_id=2&group_id=3");
-		$this->assertContains("create I", $this->getBodyText());
+		$this->assertContains("create L", $this->getBodyText());
 		$this->assertContains("update H", $this->getBodyText());
 	}
 

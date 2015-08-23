@@ -260,16 +260,8 @@ class OpenVragenController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$event_id = $_GET['event_id'];
-		$where = "event_ID = $event_id";
+		$vragenData=new OpenVragen();
 
-		//$vragenData=new OpenVragen();
-		$vragenData=new CActiveDataProvider('OpenVragen',
-			array('criteria'=>array(
-					'condition'=>$where,),
-				'pagination'=>array('pageSize'=>20,),
-			)
-		);
 		$this->layout='//layouts/column1';
 
 		$this->render('index',array(

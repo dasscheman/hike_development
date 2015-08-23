@@ -149,11 +149,11 @@ class ActionIntroductionOrganisatieTest extends WebTestCase
     	$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=2");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=2", $this->getLocation());
-		$this->assertTrue($this->isElementPresent("link=Geopende Hints"));
+		$this->assertFalse($this->isElementPresent("link=Geopende Hints"));
 		$this->open("hike_development/index-test.php?r=openNoodEnvelop/index&event_id=2");
 		$this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=openNoodEnvelop/index&event_id=2", $this->getLocation());
-        $this->assertContains("Er zijn geen geopende hints", $this->getBodyText());
+        $this->assertContains("Dat mag dus niet...", $this->getBodyText());
 
 	}
 
