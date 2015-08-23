@@ -344,7 +344,7 @@ class ActionGestartPlayersTest extends WebTestCase
 		$this->assertEquals("OPENEN", $this->getValue("id=yt0"));
     	$this->open("hike_development/index-test.php?r=openNoodEnvelop/create&nood_envelop_id=2&event_id=3&group_id=5");
 		$this->waitForPageToLoad ( "30000" );
-		$this->assertContains("hike_development/index-test.php?r=gopenNoodEnvelop/create&nood_envelop_id=2&event_id=3&group_id=5", $this->getLocation());
+		$this->assertContains("hike_development/index-test.php?r=openNoodEnvelop/create&nood_envelop_id=2&event_id=3&group_id=5", $this->getLocation());
 		$this->open("hike_development/index-test.php?r=openNoodEnvelop/create&nood_envelop_id=3&event_id=3&group_id=6");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=openNoodEnvelop/create&nood_envelop_id=3&event_id=3&group_id=6", $this->getLocation());
