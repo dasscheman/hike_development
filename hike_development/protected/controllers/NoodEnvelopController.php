@@ -206,17 +206,7 @@ class NoodEnvelopController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$event_id = $_GET['event_id'];
-		$where = "event_ID = $event_id";
-
-		$hintsData=new CActiveDataProvider('NoodEnvelop',
-			array('criteria'=>array(
-					'condition'=>$where,),
-				'pagination'=>array('pageSize'=>20,),
-			)
-		);
-
-		//$hintsData=new NoodEnvelop();
+		$hintsData=new NoodEnvelop();
 	
 		$this->layout='//layouts/column1';
 

@@ -238,7 +238,7 @@ class ActionIntroductionPlayersTest extends WebTestCase
 		$this->click("link=Beantwoorde Vragen");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=openVragenAntwoorden/viewPlayers&event_id=2&group_id=3", $this->getLocation());
-		$this->assertContains("Hoofdletter H", $this->getBodyText());
+		$this->assertContains("Hoofdletter h", $this->getBodyText());
 		$this->assertContains("deelnemera", $this->getBodyText());
 		$this->assertNotContains("deelnemerb", $this->getBodyText());
 	}

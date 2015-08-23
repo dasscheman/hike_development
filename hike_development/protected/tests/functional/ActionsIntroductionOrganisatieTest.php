@@ -170,7 +170,8 @@ class ActionIntroductionOrganisatieTest extends WebTestCase
 		$this->assertContains("hike_development/index-test.php?r=bonuspunten/index&event_id=2", $this->getLocation());
 
 		$this->assertContains("Bonuspunten Overzicht", $this->getBodyText());
-		$this->assertContains("bonus introductie organisatie", $this->getBodyText());
+		$this->assertContains("bonus intro players groep A", $this->getBodyText());
+		$this->assertContains("bonus intro players groep B", $this->getBodyText());
 	}
 
     public function testGepasserdePostenBekijken()
