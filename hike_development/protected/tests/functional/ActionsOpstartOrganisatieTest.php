@@ -43,7 +43,7 @@ class ActionOpstartOrganisatieTest extends WebTestCase
 		$this->click("name=yt0");
 		$this->waitForPageToLoad("30000");
 		$this->assertContains("hike_development/index-test.php", $this->getLocation());
-		$this->assertContains("Gebruikersnaam: deelnemera", $this->getBodyText());
+		$this->assertContains("Gebruikersnaam: organisatie", $this->getBodyText());
     }
 
     public function testLoadPage()
