@@ -486,7 +486,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		$this->assertTrue($this->isElementPresent("link=Dag Veranderen"));
 		$this->open("hike_development/index-test.php?r=eventNames/changeDay&event_id=3");
         $this->waitForPageToLoad ( "30000" );
-		$this->type("name=EventNames[max_time]", "label=23:00:00");
+		$this->type("name=EventNames[max_time]", "value=23:00:00");
 		$this->click("name=yt0");
 		$this->waitForPageToLoad("30000");
 
@@ -497,7 +497,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
 		$this->open("hike_development/index-test.php?r=eventNames/changeDay&event_id=3");
         $this->waitForPageToLoad ( "30000" );
-		$this->type("name=EventNames[max_time]", "label=24:00:00");
+		$this->type("name=EventNames[max_time]", "value=24:00:00");
 		$this->click("name=yt0");
 		$this->waitForPageToLoad("30000");
 
@@ -508,7 +508,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
 		$this->open("hike_development/index-test.php?r=eventNames/changeDay&event_id=3");
         $this->waitForPageToLoad ( "30000" );
-		$this->select("name=EventNames[active_day]", "label=2015-02-26");
+		$this->select("name=EventNames[active_day]", "value=2015-02-26");
 		$this->click("name=yt0");
 		$this->waitForPageToLoad("30000");
 
@@ -521,7 +521,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
 		$this->open("hike_development/index-test.php?r=eventNames/changeDay&event_id=3");
         $this->waitForPageToLoad ( "30000" );
-		$this->select("name=EventNames[active_day]", "label=2015-02-27");
+		$this->select("name=EventNames[active_day]", "value=2015-02-27");
 		$this->click("name=yt0");
 		$this->waitForPageToLoad("30000");
 
@@ -548,8 +548,9 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		$this->click("name=yt0");
 		$this->waitForPageToLoad("30000");
 
-		$this->assertContains("hike_development/index-test.php?r=startup/startupOverview&event_id=3", $this->getLocation());
-        $this->assertNotContains("Tijd over (minuten): 784", $this->getBodyText());
+		$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=3");
+		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=3", $this->getLocation());
+		$this->assertNotContains("Tijd over (minuten): 784", $this->getBodyText());
         $this->assertNotContains("Tijd over (minuten): nog niet gestart", $this->getBodyText());
         $this->assertContains("Status van Hike: Opstart", $this->getBodyText());
         $this->assertNotContains("Actieve dag: 2015-02-27", $this->getBodyText());
@@ -561,8 +562,9 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		$this->click("name=yt0");
 		$this->waitForPageToLoad("30000");
 
-		$this->assertContains("hike_development/index-test.php?r=startup/startupOverview&event_id=3", $this->getLocation());
-        $this->assertContains("Tijd over (minuten): 784", $this->getBodyText());
+		$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=3");
+		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=3", $this->getLocation());
+		$this->assertContains("Tijd over (minuten): 784", $this->getBodyText());
         $this->assertContains("Tijd over (minuten): nog niet gestart", $this->getBodyText());
         $this->assertContains("Status van Hike: Gestart", $this->getBodyText());
         $this->assertContains("Actieve dag: 2015-02-27", $this->getBodyText());

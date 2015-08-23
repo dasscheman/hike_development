@@ -49,7 +49,13 @@
                                               </td>
                         </tr>
             <?php   }
-                } ?>			
+                } else { ?>
+					<tr>
+						<td colspan="4" style="text-align:center;">
+							<b><?php echo CHtml::encode('Er is geen maximum tijd voor vandaag'); ?></b>		
+						</td>
+					</tr>
+            <?php   } ?>
 			<tr>
 			      	  <td style="text-align:right">	
 						<?php echo CHtml::encode('Score Posten'); ?>		

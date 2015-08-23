@@ -83,17 +83,18 @@ class Users extends HikeActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('username, voornaam, achternaam, password, password_repeat',
+			/*array('username, voornaam, achternaam, password, password_repeat',
 			      'required',
 			      'on' => 'create',   // Scenarios when the validation rule should be used
 			      'message' => 'Niet alle velden zijn gevuld!!',  // Error message
-			      ),
-			array('password, password_repeat',
+			      ),*/
+			/*array('password, password_repeat',
 			      'required',
-			      'on' => 'changePassword',   // Scenarios when the validation rule should be used
-			      'message' => 'Niet alle velden zijn gevuld!!',  // Error message
-			      ),
-			//array('username, voornaam, achternaam, email, password_current, password_repeat', 'required'),
+			      'on'=>'changePassword',   // Scenarios when the validation rule should be used
+			      'message'=>'Niet alle velden zijn gevuld!!',  // Error message
+			      ),*/
+			//array('password','allowEmpty'=>false),
+			array('username, voornaam, achternaam, email', 'required'),
 			array('create_user_ID, update_user_ID', 'numerical', 'integerOnly'=>true),
 			array('username, voornaam, achternaam, email, password, macadres', 'length', 'max'=>255),
 			array('birthdate, last_login_time, create_time, update_time, password_repeat', 'safe'),
@@ -224,7 +225,7 @@ class Users extends HikeActiveRecord
 		$criteria->compare('last_login_time',$this->last_login_time,true);
 		$criteria->compare('create_time',$this->create_time,true);
 		$criteria->compare('create_user_ID',$this->create_user_ID);
-		$criteria->compare('update_time',$this->update_time,true);
+		$criteria->compare('update_time',$this->update_time,true);		$model->password_repeat = $model->password;
 		$criteria->compare('update_user_ID',$this->update_user_ID);
 
 		return new CActiveDataProvider($this, array(
