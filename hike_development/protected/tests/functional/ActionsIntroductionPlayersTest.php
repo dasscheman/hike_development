@@ -213,6 +213,7 @@ class ActionIntroductionPlayersTest extends WebTestCase
 
 		$this->open("hike_development/index-test.php?r=openVragenAntwoorden/update&event_id=2&group_id=3&vraag_id=4");
         $this->waitForPageToLoad ( "30000" );
+		$this->assertContains("BLABLABLA", $this->getBodyText());
 		$this->type("name=OpenVragenAntwoorden[antwoord_spelers]", "update H");
 		$this->click("name=yt0");
 
@@ -295,6 +296,26 @@ class ActionIntroductionPlayersTest extends WebTestCase
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=qrCheck/viewPlayers&event_id=2&group_id=3", $this->getLocation());
 		$this->assertContains("Dat mag dus niet...", $this->getBodyText());
+	}
+
+	public function testGroupsStillePostenChecken()
+	{
+
+		$scoreQrBegin = QrCheck::model()->getQrScore(2, 3);
+		$scoreTotalBegin = Groups::model()->getTotalScoreGroup(2, 3);
+		$this->login();
+
+		$this->open("hike_development/index-test.php?r=qrCheck/create&event_id=2&qr_code=55DlYLbS8Ws9EutrUMjNv6");
+        $this->waitForPageToLoad ( "30000" );
+		$this->assertContains("hike_development/index-test.php?r=qrCheck/viewPlayers&event_id=2&group_id=3", $this->getLocation());
+		$this->assertContains("introductie players", $this->getBodyText());
+
+		$scoreQrEnd = NoodEnvelop::model()->getNoodEnvelopScore(2, 3);
+		$scoreTotalEnd = Groups::model()->getTotalScoreGroup(2, 3);
+		$this->assertEquals(0, $scoreQrBegin);
+		$this->assertEquals(5, $scoreQrEnd);
+		$this->assertEquals(5, $scoreQrEnd-$scoreQrBegin);
+		$this->assertEquals(5, $scoreTotalEnd-$scoreTotalBegin);
 	}
     ## Startup Overview
     public function testLoginAndStartupOverview()

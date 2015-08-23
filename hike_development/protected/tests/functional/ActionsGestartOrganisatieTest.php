@@ -494,7 +494,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=3");
 		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=3", $this->getLocation());
         $this->assertContains("Tijd over (minuten): 724", $this->getBodyText());
-        $this->assertContains("Tijd over (minuten): nog niet gestart", $this->getBodyText());
+        $this->assertContains("Tijd over (minuten): 1380", $this->getBodyText());
 
 		$this->open("hike_development/index-test.php?r=eventNames/changeDay&event_id=3");
         $this->waitForPageToLoad ( "30000" );

@@ -65,8 +65,8 @@ class ActionIntroductionOrganisatieTest extends WebTestCase
     ##Game Overview:
     public function testVragenControleren()
     {
-		$scoreVragenBegin = OpenVragenAntwoorden::model()->getOpenVragenScore(3, 5);
-		$scoreTotalBegin = Groups::model()->getTotalScoreGroup(3, 5);
+		$scoreVragenBegin = OpenVragenAntwoorden::model()->getOpenVragenScore(2, 3);
+		$scoreTotalBegin = Groups::model()->getTotalScoreGroup(2, 3);
 		
 		$this->login();
 
@@ -83,8 +83,8 @@ class ActionIntroductionOrganisatieTest extends WebTestCase
 		$this->open("hike_development/index-test.php?r=openVragenAntwoorden/antwoordGoedOfFout&id=5&goedfout=1&event_id=2");
 		$this->waitForPageToLoad ( "30000" );
 
-		$scoreVragenEnd = OpenVragenAntwoorden::model()->getOpenVragenScore(3, 5);
-		$scoreTotalEnd = Groups::model()->getTotalScoreGroup(3, 5);
+		$scoreVragenEnd = OpenVragenAntwoorden::model()->getOpenVragenScore(2, 3);
+		$scoreTotalEnd = Groups::model()->getTotalScoreGroup(2, 3);
 		$this->assertEquals(0, $scoreVragenBegin);
 		$this->assertEquals(5, $scoreVragenEnd);
 		$this->assertEquals(5, $scoreVragenEnd-$scoreVragenBegin);
@@ -94,8 +94,8 @@ class ActionIntroductionOrganisatieTest extends WebTestCase
 
     public function testBonuspuntenGeven()
     {
-		$scoreBonuspuntenBegin = Bonuspunten::model()->getBonuspuntenScore(3, 5);
-		$scoreTotalBegin = Groups::model()->getTotalScoreGroup(3, 5);
+		$scoreBonuspuntenBegin = Bonuspunten::model()->getBonuspuntenScore(2, 3);
+		$scoreTotalBegin = Groups::model()->getTotalScoreGroup(2, 3);
 		$this->login();
 
     	$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=2");
@@ -119,8 +119,8 @@ class ActionIntroductionOrganisatieTest extends WebTestCase
 		$this->click("name=yt0");
 		$this->waitForPageToLoad("30000");
 
-		$scoreBonuspuntenEnd = Bonuspunten::model()->getBonuspuntenScore(3, 5);
-		$scoreTotalEnd = Groups::model()->getTotalScoreGroup(3, 5);
+		$scoreBonuspuntenEnd = Bonuspunten::model()->getBonuspuntenScore(2, 3);
+		$scoreTotalEnd = Groups::model()->getTotalScoreGroup(2, 3);
 		$this->assertEquals(3, $scoreBonuspuntenEnd-$scoreBonuspuntenBegin);
 		$this->assertEquals(3, $scoreTotalEnd-$scoreTotalBegin);
     }

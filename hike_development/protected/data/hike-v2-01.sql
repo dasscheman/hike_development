@@ -447,7 +447,10 @@ INSERT INTO `tbl_qr` (`qr_ID`, `qr_name`, `qr_code`, `event_ID`, `route_ID`, `qr
 (5, 'intro', '1wDlYLbS8Ws9EutrUMjNv6', 2, 4, 1, 7, '2014-08-30 14:44:11', 1, '2014-08-30 14:44:11', 2),
 (6, 'introIntroductie', '2wDlYLbS8Ws9EutrUMjNv6', 2, 3, 1, 7, '2014-08-30 14:44:11', 1, '2014-08-30 14:44:11', 2),
 (7, 'beindigd', '1wDlYLbS8Ws9EutrUMjNv6', 4, 8, 1, 7, '2014-08-30 14:44:11', 1, '2014-08-30 14:44:11', 2),
-(8, 'beindigdIntroductie', '2wDlYLbS8Ws9EutrUMjNv6', 4, 7, 1, 7, '2014-08-30 14:44:11', 1, '2014-08-30 14:44:11', 2);
+(8, 'beindigdIntroductie', '2wDlYLbS8Ws9EutrUMjNv6', 4, 7, 1, 7, '2014-08-30 14:44:11', 1, '2014-08-30 14:44:11', 2),
+(9, 'gestart players', '33DlYLbS8Ws9EutrUMjNv6', 3, 6, 2, 7, '2014-08-30 14:44:11', 1, '2014-08-30 14:44:11', 2),
+(9, 'introductie players', '55DlYLbS8Ws9EutrUMjNv6', 2, 3, 3, 7, '2014-08-30 14:44:11', 1, '2014-08-30 14:44:11', 2);
+
 
 -- (4, 'Vrijdag - En vraag niet naar de weg', '6hUg3eWLzE4qOcvoFwId1K', 6, 18, 4, 3, '2014-08-30 14:44:42', 2, '2014-08-30 14:45:32', 2),
 -- (5, 'Vrijdag - Meneer van Dalen wacht op antwoord', 'swqYfNxRPvikX6KE41cTmH', 6, 19, 5, 3, '2014-08-30 14:45:01', 2, '2014-08-30 14:45:46', 2),
