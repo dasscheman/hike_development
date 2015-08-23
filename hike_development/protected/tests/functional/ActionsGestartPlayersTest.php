@@ -495,6 +495,5 @@ class ActionGestartPlayersTest extends WebTestCase
 		$this->assertContains("hike_development/index-test.php?r=openNoodEnvelop/create&nood_envelop_id=3&event_id=3&group_id=6", $this->getLocation());
 		$this->assertContains("Hint gestart players", $this->getBodyText());
 		$this->assertNotContains("Hint gestart players groep B", $this->getBodyText());
-
-
+	}
 }
