@@ -27,7 +27,7 @@ class ActionGestartPlayersTest extends WebTestCase
     {
         $this->setBrowser('*firefox');
         $this->setBrowserUrl('http://localhost/');
-        $this->shareSession(true);
+        $this->shareSession(false);
     }
 
     public function login()

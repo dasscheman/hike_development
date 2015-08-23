@@ -27,11 +27,12 @@ class ActionOpstartPlayersTest extends WebTestCase
     {
         $this->setBrowser('*firefox');
         $this->setBrowserUrl('http://localhost/');
-        $this->shareSession(true);
+        $this->shareSession(false);
     }
 
     public function login()
     {
+
 		$this->open("hike_development/index-test.php?r=site/logout");
         $this->waitForPageToLoad ( "30000" );
 		$this->open("hike_development/index-test.php?r=site/login");
