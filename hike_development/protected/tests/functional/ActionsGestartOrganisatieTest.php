@@ -642,7 +642,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		$this->click("name=yt0");
 		$this->waitForPageToLoad("30000");
 
-		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=3", $this->getLocation());
+		$this->assertContains("hike_development/index-test.php?r=startup/startupOverview&event_id=3", $this->getLocation());
         $this->assertContains("Tijd over (minuten): 724", $this->getBodyText());
         $this->assertContains("Tijd over (minuten): nog niet gestart", $this->getBodyText());
 
@@ -652,7 +652,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		$this->click("name=yt0");
 		$this->waitForPageToLoad("30000");
 
-		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=3", $this->getLocation());
+		$this->assertContains("hike_development/index-test.php?r=startup/startupOverview&event_id=3", $this->getLocation());
         $this->assertContains("Tijd over (minuten): 784", $this->getBodyText());
         $this->assertContains("Tijd over (minuten): nog niet gestart", $this->getBodyText());
 
@@ -702,7 +702,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		$this->click("name=yt0");
 		$this->waitForPageToLoad("30000");
 
-		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=3", $this->getLocation());
+		$this->assertContains("hike_development/index-test.php?r=startup/startupOverview&event_id=3", $this->getLocation());
         $this->assertNotContains("Tijd over (minuten): 784", $this->getBodyText());
         $this->assertNotContains("Tijd over (minuten): nog niet gestart", $this->getBodyText());
         $this->assertContains("Status van Hike: Opstart", $this->getBodyText());
@@ -715,7 +715,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		$this->click("name=yt0");
 		$this->waitForPageToLoad("30000");
 
-		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=3", $this->getLocation());
+		$this->assertContains("hike_development/index-test.php?r=startup/startupOverview&event_id=3", $this->getLocation());
         $this->assertContains("Tijd over (minuten): 784", $this->getBodyText());
         $this->assertContains("Tijd over (minuten): nog niet gestart", $this->getBodyText());
         $this->assertContains("Status van Hike: Gestart", $this->getBodyText());

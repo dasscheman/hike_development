@@ -523,7 +523,7 @@ class ActionGestartPlayersTest extends WebTestCase
 		$this->open("hike_development/index-test.php?r=qr/index&event_id=3");
         $this->assertContains("Dat mag dus niet...", $this->getBodyText());
 	}
-/*
+
     public function testDeelnemersToevoegen()
     {
 		if (Yii::app()->user->isGuest )
@@ -598,5 +598,5 @@ class ActionGestartPlayersTest extends WebTestCase
 		$this->open("hike_development/index-test.php?r=eventNames/changeStatus&event_id=3");
         $this->waitForPageToLoad ( "30000" );
         $this->assertContains("Dat mag dus niet...", $this->getBodyText());
-	}*/
+	}
 }
