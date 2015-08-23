@@ -39,6 +39,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		$this->check("id=LoginForm_rememberMe");
 		$this->click("name=yt0");
 		$this->waitForPageToLoad("30000");
+		$this->assertTrue(Yii::app()->user->name == "organisatie");
     }
 
     public function logout()
@@ -46,6 +47,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		$this->open("hike_development/index-test.php?r=site/logout");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php", $this->getLocation());
+		$this->assertTrue(Yii::app()->user->isGuest);
     }
 
     public function testLoadPage()
@@ -60,7 +62,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-		if (Yii::app()->user->name != 'organisatie') {
+		if (Yii::app()->user->name != "organisatie") {
 			$this->logout();
 			$this->login();
 		}
@@ -77,7 +79,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-		if (Yii::app()->user->name != 'organisatie') {
+		if (Yii::app()->user->name != "organisatie") {
 			$this->logout();
 			$this->login();
 		}
@@ -112,7 +114,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-		if (Yii::app()->user->name != 'organisatie') {
+		if (Yii::app()->user->name != "organisatie") {
 			$this->logout();
 			$this->login();
 		}
@@ -149,7 +151,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-		if (Yii::app()->user->name != 'organisatie') {
+		if (Yii::app()->user->name != "organisatie") {
 			$this->logout();
 			$this->login();
 		}
@@ -172,7 +174,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-		if (Yii::app()->user->name != 'organisatie') {
+		if (Yii::app()->user->name != "organisatie") {
 			$this->logout();
 			$this->login();
 		}
@@ -195,7 +197,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-		if (Yii::app()->user->name != 'organisatie') {
+		if (Yii::app()->user->name != "organisatie") {
 			$this->logout();
 			$this->login();
 		}
@@ -217,7 +219,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-		if (Yii::app()->user->name != 'organisatie') {
+		if (Yii::app()->user->name != "organisatie") {
 			$this->logout();
 			$this->login();
 		}
@@ -241,7 +243,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-		if (Yii::app()->user->name != 'organisatie') {
+		if (Yii::app()->user->name != "organisatie") {
 			$this->logout();
 			$this->login();
 		}
@@ -263,7 +265,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-		if (Yii::app()->user->name != 'organisatie') {
+		if (Yii::app()->user->name != "organisatie") {
 			$this->logout();
 			$this->login();
 		}
@@ -283,7 +285,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-		if (Yii::app()->user->name != 'organisatie') {
+		if (Yii::app()->user->name != "organisatie") {
 			$this->logout();
 			$this->login();
 		}
@@ -314,7 +316,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-		if (Yii::app()->user->name != 'organisatie') {
+		if (Yii::app()->user->name != "organisatie") {
 			$this->logout();
 			$this->login();
 		}
@@ -336,7 +338,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-		if (Yii::app()->user->name != 'organisatie') {
+		if (Yii::app()->user->name != "organisatie") {
 			$this->logout();
 			$this->login();
 		}
@@ -358,7 +360,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-		if (Yii::app()->user->name != 'organisatie') {
+		if (Yii::app()->user->name != "organisatie") {
 			$this->logout();
 			$this->login();
 		}
@@ -379,7 +381,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-		if (Yii::app()->user->name != 'organisatie') {
+		if (Yii::app()->user->name != "organisatie") {
 			$this->logout();
 			$this->login();
 		}
@@ -400,7 +402,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-		if (Yii::app()->user->name != 'organisatie') {
+		if (Yii::app()->user->name != "organisatie") {
 			$this->logout();
 			$this->login();
 		}
@@ -423,7 +425,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-		if (Yii::app()->user->name != 'organisatie') {
+		if (Yii::app()->user->name != "organisatie") {
 			$this->logout();
 			$this->login();
 		}
@@ -438,7 +440,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-		if (Yii::app()->user->name != 'organisatie') {
+		if (Yii::app()->user->name != "organisatie") {
 			$this->logout();
 			$this->login();
 		}
@@ -467,7 +469,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		if (Yii::app()->user->isGuest)
 			$this->login();
 
-		if (Yii::app()->user->name != 'organisatie') {
+		if (Yii::app()->user->name != "organisatie") {
 			$this->logout();
 			$this->login();
 		}
@@ -496,7 +498,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		if (Yii::app()->user->isGuest)
 			$this->login();
 
-		if (Yii::app()->user->name != 'organisatie') {
+		if (Yii::app()->user->name != "organisatie") {
 			$this->logout();
 			$this->login();
 		}
@@ -527,7 +529,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		if (Yii::app()->user->isGuest)
 			$this->login();
 
-		if (Yii::app()->user->name != 'organisatie') {
+		if (Yii::app()->user->name != "organisatie") {
 			$this->logout();
 			$this->login();
 		}
@@ -549,7 +551,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		if (Yii::app()->user->isGuest)
 			$this->login();
 
-		if (Yii::app()->user->name != 'organisatie') {
+		if (Yii::app()->user->name != "organisatie") {
 			$this->logout();
 			$this->login();
 		}
@@ -569,7 +571,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		if (Yii::app()->user->isGuest)
 			$this->login();
 
-		if (Yii::app()->user->name != 'organisatie') {
+		if (Yii::app()->user->name != "organisatie") {
 			$this->logout();
 			$this->login();
 		}
@@ -589,7 +591,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		if (Yii::app()->user->isGuest)
 			$this->login();
 
-		if (Yii::app()->user->name != 'organisatie') {
+		if (Yii::app()->user->name != "organisatie") {
 			$this->logout();
 			$this->login();
 		}
@@ -608,7 +610,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-		if (Yii::app()->user->name != 'organisatie') {
+		if (Yii::app()->user->name != "organisatie") {
 			$this->logout();
 			$this->login();
 		}
@@ -627,7 +629,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		if (Yii::app()->user->isGuest)
 			$this->login();
 
-		if (Yii::app()->user->name != 'organisatie') {
+		if (Yii::app()->user->name != "organisatie") {
 			$this->logout();
 			$this->login();
 		}
@@ -686,7 +688,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		if (Yii::app()->user->isGuest)
 			$this->login();
 
-		if (Yii::app()->user->name != 'organisatie') {
+		if (Yii::app()->user->name != "organisatie") {
 			$this->logout();
 			$this->login();
 		}

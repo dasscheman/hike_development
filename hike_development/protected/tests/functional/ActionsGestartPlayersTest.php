@@ -40,6 +40,7 @@ class ActionGestartPlayersTest extends WebTestCase
 		$this->check("id=LoginForm_rememberMe");
 		$this->click("name=yt0");
 		$this->waitForPageToLoad("30000");
+		$this->assertTrue(Yii::app()->user->name == "deelnemera");
     }
 
     public function logout()
@@ -47,6 +48,7 @@ class ActionGestartPlayersTest extends WebTestCase
 		$this->open("hike_development/index-test.php?r=site/logout");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php", $this->getLocation());
+		$this->assertTrue(Yii::app()->user->isGuest);
     }
 
     public function testLoadPage()
@@ -61,7 +63,7 @@ class ActionGestartPlayersTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-		if (Yii::app()->user->name != 'deelnemera') {
+		if (Yii::app()->user->name != "deelnemera") {
 			$this->logout();
 			$this->login();
 		}
@@ -79,7 +81,7 @@ class ActionGestartPlayersTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-		if (Yii::app()->user->name != 'deelnemera') {
+		if (Yii::app()->user->name != "deelnemera") {
 			$this->logout();
 			$this->login();
 		}
@@ -104,7 +106,7 @@ class ActionGestartPlayersTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-		if (Yii::app()->user->name != 'deelnemera') {
+		if (Yii::app()->user->name != "deelnemera") {
 			$this->logout();
 			$this->login();
 		}
@@ -123,7 +125,7 @@ class ActionGestartPlayersTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-		if (Yii::app()->user->name != 'deelnemera') {
+		if (Yii::app()->user->name != "deelnemera") {
 			$this->logout();
 			$this->login();
 		}
@@ -142,7 +144,7 @@ class ActionGestartPlayersTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-		if (Yii::app()->user->name != 'deelnemera') {
+		if (Yii::app()->user->name != "deelnemera") {
 			$this->logout();
 			$this->login();
 		}
@@ -161,7 +163,7 @@ class ActionGestartPlayersTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-		if (Yii::app()->user->name != 'deelnemera') {
+		if (Yii::app()->user->name != "deelnemera") {
 			$this->logout();
 			$this->login();
 		}
@@ -180,7 +182,7 @@ class ActionGestartPlayersTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-		if (Yii::app()->user->name != 'deelnemera') {
+		if (Yii::app()->user->name != "deelnemera") {
 			$this->logout();
 			$this->login();
 		}
@@ -199,7 +201,7 @@ class ActionGestartPlayersTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-		if (Yii::app()->user->name != 'deelnemera') {
+		if (Yii::app()->user->name != "deelnemera") {
 			$this->logout();
 			$this->login();
 		}
@@ -219,7 +221,7 @@ class ActionGestartPlayersTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-		if (Yii::app()->user->name != 'deelnemera') {
+		if (Yii::app()->user->name != "deelnemera") {
 			$this->logout();
 			$this->login();
 		}
@@ -243,7 +245,7 @@ class ActionGestartPlayersTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-		if (Yii::app()->user->name != 'deelnemera') {
+		if (Yii::app()->user->name != "deelnemera") {
 			$this->logout();
 			$this->login();
 		}
@@ -262,7 +264,7 @@ class ActionGestartPlayersTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-		if (Yii::app()->user->name != 'deelnemera') {
+		if (Yii::app()->user->name != "deelnemera") {
 			$this->logout();
 			$this->login();
 		}
@@ -300,7 +302,7 @@ class ActionGestartPlayersTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-		if (Yii::app()->user->name != 'deelnemera') {
+		if (Yii::app()->user->name != "deelnemera") {
 			$this->logout();
 			$this->login();
 		}
@@ -325,7 +327,7 @@ class ActionGestartPlayersTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-		if (Yii::app()->user->name != 'deelnemera') {
+		if (Yii::app()->user->name != "deelnemera") {
 			$this->logout();
 			$this->login();
 		}
@@ -365,7 +367,7 @@ class ActionGestartPlayersTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-		if (Yii::app()->user->name != 'deelnemera') {
+		if (Yii::app()->user->name != "deelnemera") {
 			$this->logout();
 			$this->login();
 		}
@@ -386,7 +388,7 @@ class ActionGestartPlayersTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-		if (Yii::app()->user->name != 'deelnemera') {
+		if (Yii::app()->user->name != "deelnemera") {
 			$this->logout();
 			$this->login();
 		}
@@ -406,7 +408,7 @@ class ActionGestartPlayersTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-		if (Yii::app()->user->name != 'deelnemera') {
+		if (Yii::app()->user->name != "deelnemera") {
 			$this->logout();
 			$this->login();
 		}
@@ -421,7 +423,7 @@ class ActionGestartPlayersTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-		if (Yii::app()->user->name != 'deelnemera') {
+		if (Yii::app()->user->name != "deelnemera") {
 			$this->logout();
 			$this->login();
 		}
@@ -439,7 +441,7 @@ class ActionGestartPlayersTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-		if (Yii::app()->user->name != 'deelnemera') {
+		if (Yii::app()->user->name != "deelnemera") {
 			$this->logout();
 			$this->login();
 		}
@@ -457,7 +459,7 @@ class ActionGestartPlayersTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-		if (Yii::app()->user->name != 'deelnemera') {
+		if (Yii::app()->user->name != "deelnemera") {
 			$this->logout();
 			$this->login();
 		}
@@ -475,7 +477,7 @@ class ActionGestartPlayersTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-		if (Yii::app()->user->name != 'deelnemera') {
+		if (Yii::app()->user->name != "deelnemera") {
 			$this->logout();
 			$this->login();
 		}
@@ -493,7 +495,7 @@ class ActionGestartPlayersTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-		if (Yii::app()->user->name != 'deelnemera') {
+		if (Yii::app()->user->name != "deelnemera") {
 			$this->logout();
 			$this->login();
 		}
@@ -511,7 +513,7 @@ class ActionGestartPlayersTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-		if (Yii::app()->user->name != 'deelnemera') {
+		if (Yii::app()->user->name != "deelnemera") {
 			$this->logout();
 			$this->login();
 		}
@@ -529,7 +531,7 @@ class ActionGestartPlayersTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-		if (Yii::app()->user->name != 'deelnemera') {
+		if (Yii::app()->user->name != "deelnemera") {
 			$this->logout();
 			$this->login();
 		}
@@ -548,7 +550,7 @@ class ActionGestartPlayersTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-		if (Yii::app()->user->name != 'deelnemera') {
+		if (Yii::app()->user->name != "deelnemera") {
 			$this->logout();
 			$this->login();
 		}
@@ -567,7 +569,7 @@ class ActionGestartPlayersTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-		if (Yii::app()->user->name != 'deelnemera') {
+		if (Yii::app()->user->name != "deelnemera") {
 			$this->logout();
 			$this->login();
 		}
@@ -586,7 +588,7 @@ class ActionGestartPlayersTest extends WebTestCase
 		if (Yii::app()->user->isGuest )
 			$this->login();
 
-		if (Yii::app()->user->name != 'deelnemera') {
+		if (Yii::app()->user->name != "deelnemera") {
 			$this->logout();
 			$this->login();
 		}
