@@ -34,8 +34,8 @@ before_script:
 script:
 #  - phpunit --verbose --debug --coverage-text --configuration ./hike_development/protected/tests/phpunit.xml ./hike_development/protected/tests/travis/tests/
 #  - phpunit --verbose --debug --coverage-text --configuration ./hike_development/protected/tests/phpunit.xml ./hike_development/protected/tests/functional/
-#  - phpunit --verbose --debug --coverage-text --configuration ./hike_development/protected/tests/phpunit.xml ./hike_development/protected/tests/functional/ActionsOpstartOrganisatieTest.php
-#  - phpunit --verbose --debug --coverage-text --configuration ./hike_development/protected/tests/phpunit.xml ./hike_development/protected/tests/functional/ActionsOpstartPlayersTest.php
+  - phpunit --verbose --debug --coverage-text --configuration ./hike_development/protected/tests/phpunit.xml ./hike_development/protected/tests/functional/ActionsOpstartOrganisatieTest.php
+  - phpunit --verbose --debug --coverage-text --configuration ./hike_development/protected/tests/phpunit.xml ./hike_development/protected/tests/functional/ActionsOpstartPlayersTest.php
 #  - phpunit --verbose --debug --coverage-text --configuration ./hike_development/protected/tests/phpunit.xml ./hike_development/protected/tests/functional/ActionsIntroductionOrganisatieTest.php
 #  - phpunit --verbose --debug --coverage-text --configuration ./hike_development/protected/tests/phpunit.xml ./hike_development/protected/tests/functional/ActionsIntroductionPlayersTest.php
   - phpunit --verbose --debug --coverage-text --configuration ./hike_development/protected/tests/phpunit.xml ./hike_development/protected/tests/functional/ActionsGestartOrganisatieTest.php

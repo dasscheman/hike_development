@@ -559,6 +559,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
         $this->waitForPageToLoad ( "30000" );
 		$this->select("name=EventNames[status]", "label=Gestart");
+		$this->type("name=EventNames[max_time]", "value=24:00:00");
 		$this->click("name=yt0");
 		$this->waitForPageToLoad("30000");
 
