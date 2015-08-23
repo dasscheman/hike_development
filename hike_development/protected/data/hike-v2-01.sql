@@ -302,7 +302,7 @@ INSERT INTO `tbl_open_vragen` (`open_vragen_ID`, `open_vragen_name`, `event_ID`,
 (6, 'Hoofdletter f', 1, 1, 1, 'Vraag voor status opstart players introvraag', 'Hoofdletter a? ', 'A', 5, '2014-08-25 22:09:39', 1, '2014-09-05 10:55:13', 1),
 (7, 'Hoofdletter g', 1, 2, 1, 'Vraag voor status opstart players', 'Hoofdletter b? ', 'B ', 5, '2014-08-25 22:11:30', 1, '2014-08-28 21:05:07', 1),
 (8, 'Hoofdletter h', 2, 3, 1, 'Vraag voor status introductie introvraag', 'Hoofdletter h? ', 'H', 5, '2014-08-25 22:09:39', 1, '2014-09-05 10:55:13', 1),
-(9, 'Hoofdletter i', 2, 4, 1, 'Vraag voor status introductie players', 'Hoofdletter i? ', 'I ', 5, '2014-08-25 22:11:30', 1, '2014-08-28 21:05:07', 1),
+(9, 'Hoofdletter i', 2, 3, 2, 'Vraag voor status introductie players', 'Hoofdletter i? ', 'I ', 5, '2014-08-25 22:11:30', 1, '2014-08-28 21:05:07', 1),
 (10, 'Hoofdletter j', 4, 7, 1, 'Vraag voor status beindigd introvraag', 'Hoofdletter j? ', 'J', 5, '2014-08-25 22:09:39', 1, '2014-09-05 10:55:13', 1),
 (11, 'Hoofdletter k', 4, 8, 1, 'Vraag voor status beindigd players', 'Hoofdletter k? ', 'K', 5, '2014-08-25 22:11:30', 1, '2014-08-28 21:05:07', 1);
 
