@@ -466,7 +466,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
         $this->assertContains("1wDlYLbS8Ws9EutrUMjNv6", $this->getBodyText());
         $this->assertContains("2wDlYLbS8Ws9EutrUMjNv6", $this->getBodyText());
 	}
-
+/*
     public function testDeelnemersToevoegen()
     {
 		if (Yii::app()->user->isGuest)
@@ -494,7 +494,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
         $this->waitForPageToLoad ( "30000" );
         $this->assertContains("Dat mag dus niet...", $this->getBodyText());
 	}
-/*
+
     public function testDagVeranderen()
     {
 		if (Yii::app()->user->isGuest)

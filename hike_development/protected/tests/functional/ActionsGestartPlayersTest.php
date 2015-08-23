@@ -37,6 +37,7 @@ class ActionGestartPlayersTest extends WebTestCase
 		$this->assertContains("hike_development/index-test.php?r=site/login", $this->getLocation());
 		$this->type("id=LoginForm_username", "deelnemera");
 		$this->type("id=LoginForm_password", "test");
+		$this->check("id=LoginForm_rememberMe");
 		$this->click("name=yt0");
 		$this->waitForPageToLoad("30000");
     }
@@ -50,7 +51,7 @@ class ActionGestartPlayersTest extends WebTestCase
 
     public function testLoginAndGameOverview()
     {
-		if (Yii::app()->user->isGuest )
+		if (Yii::app()->user->name == 'deelnemera')
 			$this->login();
 
 		$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=3");
