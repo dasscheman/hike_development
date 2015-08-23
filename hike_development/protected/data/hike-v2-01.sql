@@ -47,10 +47,12 @@ CREATE TABLE IF NOT EXISTS `tbl_bonuspunten` (
 INSERT INTO `tbl_bonuspunten` (`bouspunten_ID`, `event_ID`, `date`, `post_ID`, `group_ID`, `omschrijving`, `score`, `create_time`, `create_user_ID`, `update_time`, `update_user_ID`) VALUES
 (1, 3, NULL, NULL, 5, 'bonus gestart organisatie', 3, '2015-07-07 07:25:46', 1, '2015-07-07 07:25:46', 1),
 (2, 3, NULL, NULL, 5, 'bonus gestart players groep A', 3, '2015-07-07 07:25:46', 1, '2015-07-07 07:25:46', 1),
-(3, 3, NULL, NULL, 6, 'bonus gestart players groep B', 3, '2015-07-07 07:25:46', 1, '2015-07-07 07:25:46', 1);
+(3, 3, NULL, NULL, 6, 'bonus gestart players groep B', 3, '2015-07-07 07:25:46', 1, '2015-07-07 07:25:46', 1),
 (4, 2, NULL, NULL, 3, 'bonus intro organisatie', 3, '2015-07-07 07:25:46', 1, '2015-07-07 07:25:46', 1),
 (5, 2, NULL, NULL, 3, 'bonus intro players groep A', 3, '2015-07-07 07:25:46', 1, '2015-07-07 07:25:46', 1),
-(6, 2, NULL, NULL, 4, 'bonus intro players groep B', 3, '2015-07-07 07:25:46', 1, '2015-07-07 07:25:46', 1);
+(6, 2, NULL, NULL, 4, 'bonus intro players groep B', 3, '2015-07-07 07:25:46', 1, '2015-07-07 07:25:46', 1),
+(7, 4, NULL, NULL, 7, 'bonus beindigd players groep A', 3, '2015-07-07 07:25:46', 1, '2015-07-07 07:25:46', 1),
+(8, 4, NULL, NULL, 8, 'bonus beindigd players groep B', 3, '2015-07-07 07:25:46', 1, '2015-07-07 07:25:46', 1);
 
 -- --------------------------------------------------------
 
@@ -83,7 +85,10 @@ INSERT INTO `tbl_deelnemers_event` (`deelnemers_ID`, `event_ID`, `user_ID`, `rol
 (6, 2, 3, 3, 4, '2014-08-25 12:49:00', 1, '2014-08-25 12:49:00', 1),
 (7, 3, 1, 1, NULL, '2014-08-25 12:49:00', 1, '2014-08-25 12:49:00', 1),
 (8, 3, 2, 3, 5, '2014-08-25 12:49:00', 1, '2014-08-25 12:49:00', 1),
-(9, 3, 3, 3, 6, '2014-08-25 12:49:00', 1, '2014-08-25 12:49:00', 1);
+(9, 3, 3, 3, 6, '2014-08-25 12:49:00', 1, '2014-08-25 12:49:00', 1),
+(10, 4, 1, 1, NULL, '2014-08-25 12:49:00', 1, '2014-08-25 12:49:00', 1),
+(11, 5, 2, 3, 7, '2014-08-25 12:49:00', 1, '2014-08-25 12:49:00', 1),
+(12, 6, 3, 3, 8, '2014-08-25 12:49:00', 1, '2014-08-25 12:49:00', 1);
 
 -- --------------------------------------------------------
 
@@ -112,7 +117,8 @@ CREATE TABLE IF NOT EXISTS `tbl_event_names` (
 INSERT INTO `tbl_event_names` (`event_ID`, `event_name`, `start_date`, `end_date`, `status`, `active_day`, `max_time`, `create_time`, `create_user_ID`, `update_time`, `update_user_ID`) VALUES
 (1, 'opstart', '2015-02-25', '2015-03-01', 1, NULL, NULL, '2014-08-25 12:47:51', 1, '2015-07-28 16:03:11', 2),
 (2, 'introductie', '2015-02-25', '2015-03-01', 2, NULL, NULL, '2015-02-23 19:45:17', 2, '2015-02-23 19:45:17', 2),
-(3, 'gestart', '2015-02-25', '2015-03-01', 3, '2015-02-27', '24:00:00', '2015-02-23 19:46:08', 2, '2015-07-10 14:36:10', 2);
+(3, 'gestart', '2015-02-25', '2015-03-01', 3, '2015-02-27', '24:00:00', '2015-02-23 19:46:08', 2, '2015-07-10 14:36:10', 2),
+(4, 'beindigd', '2015-02-25', '2015-03-01', 4, NULL, NULL, '2015-02-23 19:46:08', 2, '2015-07-10 14:36:10', 2);
 
 -- --------------------------------------------------------
 
@@ -169,7 +175,9 @@ INSERT INTO `tbl_groups` (`group_ID`, `group_name`, `event_ID`, `create_time`, `
 (3, 'groep A introductie', 2, '2014-08-25 21:45:04', 2, '2014-08-31 21:42:09', 2),
 (4, 'groep B introductie', 2, '2014-08-25 21:45:17', 2, '2014-08-31 11:48:00', 2),
 (5, 'groep A gestart', 3, '2014-08-25 21:45:44', 2, '2014-08-31 11:47:11', 2),
-(6, 'groep B gestart', 3, '2014-08-31 11:48:30', 2, '2014-09-04 20:52:33', 2);
+(6, 'groep B gestart', 3, '2014-08-31 11:48:30', 2, '2014-09-04 20:52:33', 2),
+(7, 'groep A beindigd', 4, '2014-08-25 21:45:44', 2, '2014-08-31 11:47:11', 2),
+(8, 'groep B beindigd', 4, '2014-08-31 11:48:30', 2, '2014-09-04 20:52:33', 2);
 
 -- --------------------------------------------------------
 
@@ -219,7 +227,8 @@ INSERT INTO `tbl_nood_envelop` (`nood_envelop_ID`, `nood_envelop_name`, `event_I
 (2, 'Hint gestart players', 3, 6, 1, '190971, 417461', 'Je had uit de richting van  300 graden moeten komen', 7, '2014-08-30 11:30:06', 1, '2014-08-30 11:30:06', 1),
 (3, 'Hint gestart players groep B', 3, 6, 1, '190971, 417461', 'Je had uit de richting van  300 graden moeten komen', 7, '2014-08-30 11:30:06', 1, '2014-08-30 11:30:06', 1),
 (4, 'Hint opstart', 1, 6, 1, '190971, 417461', 'Je had uit de richting van  300 graden moeten komen', 7, '2014-08-30 11:30:06', 1, '2014-08-30 11:30:06', 1),
-(5, 'Hint intro', 2, 4, 1, '190971, 417461', 'Je had uit de richting van  300 graden moeten komen', 7, '2014-08-30 11:30:06', 1, '2014-08-30 11:30:06', 1);
+(5, 'Hint intro', 2, 4, 1, '190971, 417461', 'Je had uit de richting van  300 graden moeten komen', 7, '2014-08-30 11:30:06', 1, '2014-08-30 11:30:06', 1),
+(6, 'Hint beindigd', 5, 8, 1, '190971, 417461', 'Je had uit de richting van  300 graden moeten komen', 7, '2014-08-30 11:30:06', 1, '2014-08-30 11:30:06', 1);
 
 -- (5, ' ''Coördinaat eerste punt van "Good old..."''', 6, 25, 2030, '190319, 418016', 'Je had moeten komen vanuit de richting 325 graden. ', 5, '2014-08-30 11:31:31', 2, '2014-08-30 11:31:31', 2),
 -- (6, ' ''Coördinaat eerste kruispunt van "Kruispuntjepuzzelen"''', 6, 27, 2050, '191934, 416899', 'Je had uit de richting van  300 graden moeten komen', 5, '2014-08-30 11:36:53', 2, '2014-08-30 11:36:53', 2),
@@ -293,7 +302,9 @@ INSERT INTO `tbl_open_vragen` (`open_vragen_ID`, `open_vragen_name`, `event_ID`,
 (6, 'Hoofdletter f', 1, 1, 1, 'Vraag voor status opstart players introvraag', 'Hoofdletter a? ', 'A', 5, '2014-08-25 22:09:39', 1, '2014-09-05 10:55:13', 1),
 (7, 'Hoofdletter g', 1, 2, 1, 'Vraag voor status opstart players', 'Hoofdletter b? ', 'B ', 5, '2014-08-25 22:11:30', 1, '2014-08-28 21:05:07', 1),
 (8, 'Hoofdletter h', 2, 3, 1, 'Vraag voor status introductie introvraag', 'Hoofdletter h? ', 'H', 5, '2014-08-25 22:09:39', 1, '2014-09-05 10:55:13', 1),
-(9, 'Hoofdletter i', 2, 4, 1, 'Vraag voor status introductie players', 'Hoofdletter i? ', 'I ', 5, '2014-08-25 22:11:30', 1, '2014-08-28 21:05:07', 1);
+(9, 'Hoofdletter i', 2, 4, 1, 'Vraag voor status introductie players', 'Hoofdletter i? ', 'I ', 5, '2014-08-25 22:11:30', 1, '2014-08-28 21:05:07', 1),
+(10, 'Hoofdletter j', 4, 7, 1, 'Vraag voor status beindigd introvraag', 'Hoofdletter j? ', 'J', 5, '2014-08-25 22:09:39', 1, '2014-09-05 10:55:13', 1),
+(11, 'Hoofdletter k', 4, 8, 1, 'Vraag voor status beindigd players', 'Hoofdletter k? ', 'K', 5, '2014-08-25 22:11:30', 1, '2014-08-28 21:05:07', 1);
 
 -- --------------------------------------------------------
 
@@ -356,7 +367,9 @@ INSERT INTO `tbl_posten` (`post_ID`, `post_name`, `event_ID`, `date`, `post_volg
 (6, 'post 1 opstart', 3, '2015-02-28', 1, 13, '2014-08-30 10:53:28', 2, '2015-07-15 12:53:08', 2),
 (7, 'post 2 opstart', 3, '2015-02-28', 2, 13, '2014-08-30 10:54:06', 2, '2015-07-15 12:53:08', 2),
 (8, 'post 1 opstart', 2, '2015-02-28', 1, 13, '2014-08-30 10:53:28', 2, '2015-07-15 12:53:08', 2),
-(9, 'post 2 opstart', 2, '2015-02-28', 2, 13, '2014-08-30 10:54:06', 2, '2015-07-15 12:53:08', 2);
+(9, 'post 2 opstart', 2, '2015-02-28', 2, 13, '2014-08-30 10:54:06', 2, '2015-07-15 12:53:08', 2),
+(10, 'post 1 beindigd', 4, '2015-02-28', 1, 13, '2014-08-30 10:53:28', 2, '2015-07-15 12:53:08', 2),
+(11, 'post 2 beindigd', 4, '2015-02-28', 2, 13, '2014-08-30 10:54:06', 2, '2015-07-15 12:53:08', 2);
 
 -- (3, 'Je weet maar nooit of we ze nog ergens moeten opvangen...', 6, '2014-09-05', 3, 13, '2014-08-30 10:54:43', 2, '2015-07-13 17:40:59', 2),
 -- (4, 'Nog maar een kopjekoffie om op gang te komen', 6, '2014-09-06', 5, 13, '2014-08-30 10:55:45', 2, '2015-07-15 12:53:16', 2),
@@ -429,7 +442,9 @@ INSERT INTO `tbl_qr` (`qr_ID`, `qr_name`, `qr_code`, `event_ID`, `route_ID`, `qr
 (3, 'opstart', '1wDlYLbS8Ws9EutrUMjNv6', 1, 1, 1, 7, '2014-08-30 14:44:11', 1, '2014-08-30 14:44:11', 2),
 (4, 'opstartIntroductie', '2wDlYLbS8Ws9EutrUMjNv6', 1, 2, 1, 7, '2014-08-30 14:44:11', 1, '2014-08-30 14:44:11', 2),
 (5, 'intro', '1wDlYLbS8Ws9EutrUMjNv6', 2, 4, 1, 7, '2014-08-30 14:44:11', 1, '2014-08-30 14:44:11', 2),
-(6, 'introIntroductie', '2wDlYLbS8Ws9EutrUMjNv6', 2, 3, 1, 7, '2014-08-30 14:44:11', 1, '2014-08-30 14:44:11', 2);
+(6, 'introIntroductie', '2wDlYLbS8Ws9EutrUMjNv6', 2, 3, 1, 7, '2014-08-30 14:44:11', 1, '2014-08-30 14:44:11', 2),
+(7, 'beindigd', '1wDlYLbS8Ws9EutrUMjNv6', 4, 8, 1, 7, '2014-08-30 14:44:11', 1, '2014-08-30 14:44:11', 2),
+(8, 'beindigdIntroductie', '2wDlYLbS8Ws9EutrUMjNv6', 4, 7, 1, 7, '2014-08-30 14:44:11', 1, '2014-08-30 14:44:11', 2);
 
 -- (4, 'Vrijdag - En vraag niet naar de weg', '6hUg3eWLzE4qOcvoFwId1K', 6, 18, 4, 3, '2014-08-30 14:44:42', 2, '2014-08-30 14:45:32', 2),
 -- (5, 'Vrijdag - Meneer van Dalen wacht op antwoord', 'swqYfNxRPvikX6KE41cTmH', 6, 19, 5, 3, '2014-08-30 14:45:01', 2, '2014-08-30 14:45:46', 2),
@@ -493,7 +508,9 @@ INSERT INTO `tbl_route` (`route_ID`, `route_name`, `event_ID`, `day_date`, `rout
 (3, 'Introductie', 2, '0000-00-00', 1, NULL, 2, NULL, NULL),
 (4, '9 - Homerun', 2, '2015-02-27', 2, NULL, 2, NULL, NULL),
 (5, 'Introductie', 3, '0000-00-00', 1, NULL, 2, NULL, NULL),
-(6, '9 - Homerun', 3, '2015-02-27', 2, NULL, 2, NULL, NULL);
+(6, '9 - Homerun', 3, '2015-02-27', 2, NULL, 2, NULL, NULL),
+(7, 'Introductie', 4, '0000-00-00', 1, NULL, 2, NULL, NULL),
+(8, '9 - Homerun', 4, '2015-02-27', 2, NULL, 2, NULL, NULL);
 
 -- --------------------------------------------------------
 
