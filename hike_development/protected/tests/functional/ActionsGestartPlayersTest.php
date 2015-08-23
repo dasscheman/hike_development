@@ -47,6 +47,23 @@ class ActionGestartPlayersTest extends WebTestCase
 		$this->assertContains("Gebruikersnaam: deelnemera", $this->getBodyText());
     }
 
+    public function loginOrganisatie()
+    {
+		$this->pause(3);
+		$this->open("hike_development/index-test.php?r=site/logout");
+        $this->waitForPageToLoad ( "30000" );
+		$this->open("hike_development/index-test.php?r=site/login");
+        $this->waitForPageToLoad ( "30000" );
+		$this->assertContains("hike_development/index-test.php?r=site/login", $this->getLocation());
+		$this->type("id=LoginForm_username", "organisatie");
+		$this->type("id=LoginForm_password", "test");
+		$this->check("id=LoginForm_rememberMe");
+		$this->click("name=yt0");
+		$this->waitForPageToLoad("30000");
+		$this->assertContains("hike_development/index-test.php", $this->getLocation());
+		$this->assertContains("Gebruikersnaam: organisatie", $this->getBodyText());
+    }
+
     public function testLoadPage()
     {
     	$this->open('hike_development/index-test.php');
@@ -441,4 +458,43 @@ class ActionGestartPlayersTest extends WebTestCase
         $this->waitForPageToLoad ( "30000" );
         $this->assertContains("Dat mag dus niet...", $this->getBodyText());
 	}
+
+	# time is up:
+    public function testNoTimeLeft()
+    {
+		$this->loginOrganisatie();
+		$this->open("hike_development/index-test.php?r=eventNames/changeDay&event_id=3");
+		$this->assertContains("hike_development/index-test.php?r=eventNames/changeDay&event_id=3", $this->getLocation());
+		$this->type("id=EventNames_max_time", "00:01:00");
+		$this->click("name=yt0");
+		$this->waitForPageToLoad("30000");
+
+		$this->login();
+
+		$this->open("hike_development/index-test.php?r=openVragenAntwoorden/update&event_id=2&group_id=6&vraag_id=1");
+        $this->waitForPageToLoad ( "30000" );
+		$this->assertContains("Dat mag dus niet...", $this->getBodyText());
+
+		$this->open("hike_development/index-test.php?r=openVragenAntwoorden/update&event_id=3&group_id=5&vraag_id=1");
+        $this->waitForPageToLoad ( "30000" );
+		$this->assertContains("Dat mag dus niet...", $this->getBodyText());
+
+		$this->open("hike_development/index-test.php?r=openVragenAntwoorden/create&event_id=3&group_id=5&vraag_id=3");
+        $this->waitForPageToLoad ( "30000" );
+		$this->assertContains("Dat mag dus niet...", $this->getBodyText());
+
+		$this->open("hike_development/index-test.php?r=openVragenAntwoorden/viewPlayers&event_id=3&group_id=5");
+		$this->assertContains("create C", $this->getBodyText());
+		$this->assertContains("update A", $this->getBodyText());
+
+    	$this->open("hike_development/index-test.php?r=openNoodEnvelop/create&nood_envelop_id=2&event_id=3&group_id=5");
+		$this->waitForPageToLoad ( "30000" );
+		$this->assertContains("hike_development/index-test.php?r=openNoodEnvelop/create&nood_envelop_id=2&event_id=3&group_id=5", $this->getLocation());
+		$this->open("hike_development/index-test.php?r=openNoodEnvelop/create&nood_envelop_id=3&event_id=3&group_id=6");
+        $this->waitForPageToLoad ( "30000" );
+		$this->assertContains("hike_development/index-test.php?r=openNoodEnvelop/create&nood_envelop_id=3&event_id=3&group_id=6", $this->getLocation());
+		$this->assertContains("Hint gestart players", $this->getBodyText());
+		$this->assertNotContains("Hint gestart players groep B", $this->getBodyText());
+
+
 }
