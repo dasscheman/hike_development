@@ -215,7 +215,7 @@ INSERT INTO `tbl_nood_envelop` (`nood_envelop_ID`, `nood_envelop_name`, `event_I
 (1, 'Hint gestart organisatie', 3, 6, 1, '190971, 417461', 'Je had uit de richting van  300 graden moeten komen', 7, '2014-08-30 11:30:06', 1, '2014-08-30 11:30:06', 1),
 (2, 'Hint gestart players', 3, 6, 1, '190971, 417461', 'Je had uit de richting van  300 graden moeten komen', 7, '2014-08-30 11:30:06', 1, '2014-08-30 11:30:06', 1),
 (3, 'Hint gestart players groep B', 3, 6, 1, '190971, 417461', 'Je had uit de richting van  300 graden moeten komen', 7, '2014-08-30 11:30:06', 1, '2014-08-30 11:30:06', 1),
-(4, 'Hint opstart', 3, 6, 1, '190971, 417461', 'Je had uit de richting van  300 graden moeten komen', 7, '2014-08-30 11:30:06', 1, '2014-08-30 11:30:06', 1);
+(4, 'Hint opstart', 1, 6, 1, '190971, 417461', 'Je had uit de richting van  300 graden moeten komen', 7, '2014-08-30 11:30:06', 1, '2014-08-30 11:30:06', 1);
 
 -- (5, ' ''Coördinaat eerste punt van "Good old..."''', 6, 25, 2030, '190319, 418016', 'Je had moeten komen vanuit de richting 325 graden. ', 5, '2014-08-30 11:31:31', 2, '2014-08-30 11:31:31', 2),
 -- (6, ' ''Coördinaat eerste kruispunt van "Kruispuntjepuzzelen"''', 6, 27, 2050, '191934, 416899', 'Je had uit de richting van  300 graden moeten komen', 5, '2014-08-30 11:36:53', 2, '2014-08-30 11:36:53', 2),

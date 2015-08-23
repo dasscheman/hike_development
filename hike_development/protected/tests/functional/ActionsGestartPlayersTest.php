@@ -11,6 +11,16 @@ class ActionGestartPlayersTest extends WebTestCase
      *
      *  Check of een link wel bestaat:
      *  $this->assertTrue($this->isElementPresent("link=NG_011986.11"));
+ 	 *
+	 * DATA:
+	 * event_id = 3;
+	 * route_id = 5, 6;
+	 * group_id = 5, 6;
+	 * bonuspunten_id = 1, 2, 3;
+	 * openVragen_id = 1, 2, 3, 4, 5;
+	 * noodenvelop_id = 1, 2, 3, 4;
+	 * qr_id = 1, 2;
+	 * post_id = 1, 2, 3, 4, 5;
      */
 
     protected function setUp()
