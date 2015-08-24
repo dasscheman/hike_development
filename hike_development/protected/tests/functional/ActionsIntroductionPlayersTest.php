@@ -62,7 +62,7 @@ class ActionIntroductionPlayersTest extends WebTestCase
 		$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=2");
 		$this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=2", $this->getLocation());
-// TODO: narekenen: //$this->assertContains("Er is geen maximum tijd voor vandaag", $this->getBodyText());
+		$this->assertContains("Er is geen maximum tijd voor vandaag", $this->getBodyText());
     }
 
     ##Game Overview:

@@ -32,7 +32,8 @@
 				  </td>
 			</tr>
             <?php 
-                if (EventNames::model()->maxTimeSet($data->event_ID)){
+                if (EventNames::model()->maxTimeSet($data->event_ID) AND
+					EventNames::model()->getStatusHike($event_id) == EventNames::STATUS_gestart) {
                     if (PostPassage::model()->timeLeftToday($data->event_ID, $data->group_ID)) { ?>  
                         <tr>
                             <td colspan="4" style="text-align:center;">

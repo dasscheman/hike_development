@@ -369,8 +369,7 @@ abstract class HikeActiveRecord extends CActiveRecord
 				}
 				if (($hikeStatus == EventNames::STATUS_introductie or
 					 $hikeStatus == EventNames::STATUS_gestart) and
-					$rolPlayer == DeelnemersEvent::ROL_organisatie and
-					$groupOfPlayer == $model_id) {
+					$rolPlayer == DeelnemersEvent::ROL_organisatie) {
 						$viewPlayersAllowed = true;
 				}
 
