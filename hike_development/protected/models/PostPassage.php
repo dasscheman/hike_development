@@ -270,13 +270,25 @@ class PostPassage extends HikeActiveRecord
         return $score;
 	}
 	
+	public function isTimeLeftToday($event_id, $group_id)
+	{
+		if (is_string(PostPassage::model()->timeLeftToday($event_id, $group_id)))
+			return true;
+
+		if (PostPassage::model()->timeLeftToday($event_id, $group_id) > 0)
+			return true;
+
+		return false;
+	}
+
+
 	public function timeLeftToday($event_id, $group_id)
 	{
 		$criteriaEvent = new CDbCriteria;
 		$criteriaEvent->condition = 'event_ID = :event_id';
 		$criteriaEvent->params = array(':event_id'=>$event_id);
 		$dataEvent = EventNames::model()->find($criteriaEvent);
-
+	
 		$criteriaPostenPassages = new CDbCriteria;
 		$criteriaPostenPassages->with = array('post');
 

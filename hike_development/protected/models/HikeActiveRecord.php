@@ -250,15 +250,14 @@ abstract class HikeActiveRecord extends CActiveRecord
 			case 'qrCheck':
 			case 'openVragenAntwoorden':
 				if ($hikeStatus == EventNames::STATUS_introductie and
-					$rolPlayer == DeelnemersEvent::ROL_deelnemer and
-				    $groupOfPlayer == $model_id) {
+					$rolPlayer == DeelnemersEvent::ROL_deelnemer) {
 						$createAllowed = true;}
 
 				if ($hikeStatus == EventNames::STATUS_gestart and
 					$rolPlayer == DeelnemersEvent::ROL_deelnemer and
-				    $groupOfPlayer == $model_id and
-					PostPassage::model()->timeLeftToday($event_id, $model_id) > 0 ) {
+					(PostPassage::model()->isTimeLeftToday($event_id, $groupOfPlayer))) {
 						$createAllowed = true;}
+
 				break;
 				// Hier geen break. OpenNoodenvelop en postPassage moeten uitgesloten worden voor de introductie.
 			case 'openNoodEnvelop':
