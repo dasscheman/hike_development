@@ -214,18 +214,11 @@ class ActionBeindigdPlayersTest extends WebTestCase
 
 		$this->open("hike_development/index-test.php?r=openVragenAntwoorden/update&event_id=4&group_id=5&vraag_id=1");
         $this->waitForPageToLoad ( "30000" );
-		$this->type("name=OpenVragenAntwoorden[antwoord_spelers]", "update A");
-		$this->click("name=yt0");
+		$this->assertContains("Dat mag dus niet...", $this->getBodyText());
 
 		$this->open("hike_development/index-test.php?r=openVragenAntwoorden/create&event_id=4&group_id=5&vraag_id=3");
         $this->waitForPageToLoad ( "30000" );
-		$this->type("name=OpenVragenAntwoorden[antwoord_spelers]", "create C");
-		$this->click("name=yt0");
-		$this->waitForPageToLoad("30000");
-
-		$this->open("hike_development/index-test.php?r=openVragenAntwoorden/viewPlayers&event_id=4&group_id=5");
-		$this->assertContains("create C", $this->getBodyText());
-		$this->assertContains("update A", $this->getBodyText());
+		$this->assertContains("Dat mag dus niet...", $this->getBodyText());
 	}
 
 	public function testGroupsBeantwoordenVragenBekijken()

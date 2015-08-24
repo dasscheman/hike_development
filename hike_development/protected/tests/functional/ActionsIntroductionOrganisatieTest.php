@@ -287,7 +287,7 @@ class ActionIntroductionOrganisatieTest extends WebTestCase
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=bonuspunten/viewPlayers&event_id=2&group_id=3", $this->getLocation());
 
-		$this->assertContains("bonus introductie organisatie", $this->getBodyText());
+		$this->assertContains("bonus intro organisatie", $this->getBodyText());
 	}
 
 	public function testGroupsStillePostenBekijken()
@@ -303,7 +303,7 @@ class ActionIntroductionOrganisatieTest extends WebTestCase
 		$this->assertContains("hike_development/index-test.php?r=qrCheck/viewPlayers&event_id=2&group_id=3", $this->getLocation());
 
 		$this->assertContains("introIntroductie", $this->getBodyText());
-		$this->assertContains("2014-08-30 14:44:11", $this->getBodyText());
+		$this->assertContains("2014-08-31 14:03:05", $this->getBodyText());
 	}
     ## Startup Overview
 
@@ -325,8 +325,8 @@ class ActionIntroductionOrganisatieTest extends WebTestCase
 		$this->assertContains("hike_development/index-test.php?r=startup/startupOverview&event_id=2", $this->getLocation());
 		$this->isElementPresent("link=Introductie");
 		$this->open("hike_development/index-test.php?r=route/viewIntroductie&event_id=2");
-        $this->assertContains("Vraag voor ActionsGestartOrganisatie introductie", $this->getBodyText());
-        $this->assertContains("gestart organisatie Introductie", $this->getBodyText());
+        $this->assertContains("Vraag voor status introductie introvraag", $this->getBodyText());
+        $this->assertContains("introIntroductie", $this->getBodyText());
         $this->assertContains("2wDlYLbS8Ws9EutrUMjNv6", $this->getBodyText());
 
 		$this->assertFalse($this->isElementPresent("link=Introductie Vraag Maken"));
@@ -379,12 +379,10 @@ class ActionIntroductionOrganisatieTest extends WebTestCase
 		$this->assertTrue($this->isElementPresent("link=2015-02-28"));
 		$this->assertTrue($this->isElementPresent("link=2015-03-01"));
 		$this->click("link=2015-02-27");
-        $this->assertContains("post 3 gestart organisatie START", $this->getBodyText());
-        $this->assertContains("post 3 gestart organisatie LUNCH", $this->getBodyText());
-        $this->assertContains("post 3 gestart organisatie EIND", $this->getBodyText());
+        $this->assertContains("No results found.", $this->getBodyText());
 		$this->click("link=2015-02-28");
-        $this->assertContains("post 1 gestart organisatie test", $this->getBodyText());
-        $this->assertContains("post 1 gestart organisatie test", $this->getBodyText());
+        $this->assertContains("post 1 introductie", $this->getBodyText());
+        $this->assertContains("post 1 introductie", $this->getBodyText());
 	}
 
     public function testVragenOverzicht()

@@ -113,11 +113,11 @@ $this->menu=array(
 	    <?php 
 		echo "Groepen die ingeschreven staan";
 		$this->widget('zii.widgets.CListView', array(
-		'dataProvider'=>$groupsDataProvider,
-		'itemView'=>'/groups/_view',
-		'enablePagination' => false,
-		'summaryText'=>'', 
-		'emptyText'=>'Er zijn nog geen groepen aangemaakt voor deze hike.',
+			'dataProvider'=>$groupsDataProvider,
+			'itemView'=>'/groups/_view',
+			'enablePagination' => false,
+			'summaryText'=>'', 
+			'emptyText'=>'Er zijn nog geen groepen aangemaakt voor deze hike.',
 	    ));?>
 	    </br>
 	</td>
@@ -125,11 +125,11 @@ $this->menu=array(
 	    <?php
 		echo "Deelnemers die als organisatie meedraaien";
 		$this->widget('zii.widgets.CListView', array(
-		'dataProvider'=>$organisatieDataProvider,
-		'itemView'=>'/deelnemersEvent/_view',
-		'enablePagination' => false,
-		'summaryText'=>'', 
-		'emptyText'=>'Er zijn geen deelenemers ingeschreven als organisatie.',
+			'dataProvider'=>$organisatieDataProvider,
+			'itemView'=>'/deelnemersEvent/_view',
+			'enablePagination' => false,
+			'summaryText'=>'', 
+			'emptyText'=>'Er zijn geen deelenemers ingeschreven als organisatie.',
 	    ));?>
 	    </br>
 	</td>

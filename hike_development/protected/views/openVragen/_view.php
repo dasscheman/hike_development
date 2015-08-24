@@ -17,10 +17,7 @@
 												 'id'=>$data->open_vragen_ID,
 												 'event_id'=>$data->event_ID)); 
 					} else {
-						echo CHtml::encode($data->open_vragen_name),
-										   array('/openVragen/update',
-											 'id'=>$data->open_vragen_ID,
-											 'event_id'=>$data->event_ID);
+						echo CHtml::encode($data->open_vragen_name);
 					}?>
             <br />
 
