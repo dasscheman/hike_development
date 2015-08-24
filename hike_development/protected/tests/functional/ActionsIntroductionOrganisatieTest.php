@@ -470,8 +470,8 @@ class ActionIntroductionOrganisatieTest extends WebTestCase
 
 		$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=2");
 		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=2", $this->getLocation());
-        $this->assertContains("Tijd over (minuten): 724", $this->getBodyText());
-        $this->assertContains("Tijd over (minuten): nog niet gestart", $this->getBodyText());
+        $this->assertContains("Er is geen maximum tijd voor vandaag", $this->getBodyText());
+
 
 		$this->open("hike_development/index-test.php?r=eventNames/changeDay&event_id=2");
         $this->waitForPageToLoad ( "30000" );
@@ -530,8 +530,9 @@ class ActionIntroductionOrganisatieTest extends WebTestCase
 		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=2", $this->getLocation());
 		$this->assertNotContains("Tijd over (minuten): 784", $this->getBodyText());
         $this->assertNotContains("Tijd over (minuten): nog niet gestart", $this->getBodyText());
-        $this->assertContains("Status van Hike: Introductie", $this->getBodyText());
-        $this->assertNotContains("Actieve dag: 2015-02-27", $this->getBodyText());
+        $this->assertContains("groep A introductie", $this->getBodyText());
+        $this->assertContains("groep B introductie", $this->getBodyText());
+
 
 		$this->open("hike_development/index-test.php?r=eventNames/changeStatus&event_id=2");
 

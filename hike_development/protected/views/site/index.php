@@ -36,9 +36,9 @@ $this->menu=array(
         'url'=>array('/users/resendPasswordUser'), 'visible'=>Yii::app()->user->isGuest),
 );
 ?>
-<p>Dit is de nieuwe Hike-APP<i>-beta</i>. Dat <i>-beta</i> betekend dat hij eigenlijk nog niet af, maar wel bruikbaaar. </br>
-Er staan nog een hoop verbeteringen en aanvulling op de planning. Dus opmerkingen en aanvullingen </br>
-zijn welkom en kunnen bij contact ingevuld worden.</br>
+<p>Dit is de Hike-APP<i>v2.01</i>. Je kunt zelf een account aanmaken en dan kun je direct aan de gang om een eigen hike
+op te zetten. Als je een account hebt, dan kun je ook door vrienden uigenodigd worden om mee te doen aan een hike.
+Heb je vragen, dan kun je die stellen via het contact formulier of mailen naar hike-app@biologenkantoor.nl</br>
 </p>
 	<h2>Korte uitleg</h2> 
     Hoewel de helppagina verre van compleet is, staat er toch het een en ander uitgelegd dat handig zou kunnen zijn.   
