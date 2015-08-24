@@ -17,22 +17,23 @@ $this->breadcrumbs=array(
     $activeTab = Route::model()->getDefaultActiveTab($startDate);
 	$count=0;
 
-	if (Route::model()->isActionAllowed("route", "create", $_GET['event_id'])) { 
-		$newButton = CHtml::link(
-                '<span class="fa-stack fa-lg">
-                    <td style="text-align:right;">
-                        <i class="fa fa-plus fa-stack-1x">Nieuw</i>
-                    </td>
-				</span>',
-                    $this->createAbsoluteUrl(
-                        'create',
-                        array('event_id'=>$_GET['event_id'],
-                            'date'=>$startDate)));
-	} else {
-		$newButton = '';
-	}
+
 
 	while(strtotime($startDate) <= strtotime($endDate)) {
+		if (Route::model()->isActionAllowed("route", "create", $_GET['event_id'])) { 
+			$newButton = CHtml::link(
+					'<span class="fa-stack fa-lg">
+						<td style="text-align:right;">
+							<i class="fa fa-plus fa-stack-1x">Nieuw</i>
+						</td>
+					</span>',
+						$this->createAbsoluteUrl(
+							'create',
+							array('event_id'=>$_GET['event_id'],
+								'date'=>$startDate)));
+		} else {
+			$newButton = '';
+		}
 		// dit moet nog een vervangen worden door javascript.
 		//Met de volgende code wordt de active tab onthouden. 		
 		$active=false;

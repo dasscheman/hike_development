@@ -18,8 +18,9 @@
 		<?php echo $form->textField($model,'post_name',array('size'=>60,'maxlength'=>255)); ?>
 		<?php echo $form->error($model,'post_name'); ?>
 	</div>
+<!--
 	<div class="row">
-		<?php echo $form->labelEx($model,'date'); ?>
+		<?php /*echo $form->labelEx($model,'date'); ?>
 		<?php $this->widget('zii.widgets.jui.CJuiDatePicker', array(
                 'model' => $model,
                 'attribute' => 'date',
@@ -34,8 +35,9 @@
                     'maxlength' => '10',    // textField maxlength
                     ),
                ));?>
-		<?php echo $form->error($model,'date'); ?>
+		<?php echo $form->error($model,'date');*/ ?>
 	</div>
+-->
 	<div class="row">
 		<?php //echo $form->labelEx($model,'date'); ?>
 		<?php //echo $form->dropDownList($model,'date',

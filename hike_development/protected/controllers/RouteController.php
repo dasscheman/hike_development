@@ -235,7 +235,7 @@ class RouteController extends Controller
 		}
 		catch(CDbException $e)
 		{		
-			throw new CHttpException(400,"Je kan dit routeonderdeel niet verwijderen.");
+			throw new CHttpException(400,"Je kan dit routeonderdeel niet verwijderen. Verwijder eerst alle onderdelen van deze route (vragen, stille posten)");
 		}
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))

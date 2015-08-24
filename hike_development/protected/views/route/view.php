@@ -40,7 +40,8 @@ $this->menu=array(
 		'linkOptions'=>array(
 			'submit'=>array(
 				'delete',
-				'id'=>$model->route_ID),
+				'id'=>$model->route_ID,
+				'event_id'=>$model->event_ID),
 				'confirm'=>'Are you sure you want to delete this item?'),
 		'visible'=> Route::model()->isActionAllowed('route', 'delete', $_GET['event_id'], $model->route_ID)),
 );

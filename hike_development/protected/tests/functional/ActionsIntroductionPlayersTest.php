@@ -314,7 +314,7 @@ class ActionIntroductionPlayersTest extends WebTestCase
 		$this->assertEquals(7, $scoreQrBegin);
 		$this->assertEquals(14, $scoreQrEnd);
 		$this->assertEquals(7, $scoreQrEnd-$scoreQrBegin);
-		$this->assertEquals(5, $scoreTotalEnd-$scoreTotalBegin);
+		$this->assertEquals(7, $scoreTotalEnd-$scoreTotalBegin);
 	}
     ## Startup Overview
     public function testLoginAndStartupOverview()

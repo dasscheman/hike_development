@@ -83,6 +83,7 @@ class PostenController extends Controller
 		{
 			$model->attributes=$_POST['Posten'];
 			$model->event_ID = $_GET['event_id'];
+			$model->date = $_GET['date'];
 			$model->post_volgorde = Posten::model()->getNewOrderForPosten($_GET['event_id'], $model->date);
 			if($model->save())
 				$this->redirect(array('/startup/startupOverview',
