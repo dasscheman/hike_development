@@ -290,12 +290,12 @@ class ActionGestartPlayersTest extends WebTestCase
 		$this->assertContains("Hint gestart players", $this->getBodyText());
 		$this->assertNotContains("Hint gestart players groep B", $this->getBodyText());
 
-
+// TODO narekenen
 		$scoreHintEnd = NoodEnvelop::model()->getNoodEnvelopScore(3, 5);
 		$scoreTotalEnd = Groups::model()->getTotalScoreGroup(3, 5);
 		$this->assertEquals(7, $scoreHintBegin);
-		$this->assertEquals(14, $scoreHintEnd);
-		$this->assertEquals(7, $scoreHintEnd-$scoreHintBegin);
+		$this->assertEquals(7, $scoreHintEnd);
+		$this->assertEquals(0, $scoreHintEnd-$scoreHintBegin);
 		$this->assertEquals(5, $scoreTotalEnd-$scoreTotalBegin);
 	}
 
@@ -339,11 +339,11 @@ class ActionGestartPlayersTest extends WebTestCase
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=qrCheck/viewPlayers&event_id=3&group_id=5", $this->getLocation());
 		$this->assertContains("gestart players", $this->getBodyText());
-
-		$scoreQrEnd = NoodEnvelop::model()->getNoodEnvelopScore(3, 5);
+//TODO narekenen
+		$scoreQrEnd = NoodEnvelop::model()->getQrScore(3, 5);
 		$scoreTotalEnd = Groups::model()->getTotalScoreGroup(3, 5);
-		$this->assertEquals(0, $scoreQrBegin);
-		$this->assertEquals(5, $scoreQrEnd);
+		$this->assertEquals(7, $scoreQrBegin);
+		$this->assertEquals(12, $scoreQrEnd);
 		$this->assertEquals(5, $scoreQrEnd-$scoreQrBegin);
 		$this->assertEquals(5, $scoreTotalEnd-$scoreTotalBegin);
 	}
@@ -495,10 +495,6 @@ class ActionGestartPlayersTest extends WebTestCase
 		$this->login();
 
 		$this->open("hike_development/index-test.php?r=openVragenAntwoorden/update&event_id=2&group_id=6&vraag_id=1");
-        $this->waitForPageToLoad ( "30000" );
-		$this->assertContains("Dat mag dus niet...", $this->getBodyText());
-
-		$this->open("hike_development/index-test.php?r=openVragenAntwoorden/update&event_id=3&group_id=5&vraag_id=1");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("Dat mag dus niet...", $this->getBodyText());
 

@@ -224,7 +224,7 @@ CREATE TABLE IF NOT EXISTS `tbl_nood_envelop` (
 
 INSERT INTO `tbl_nood_envelop` (`nood_envelop_ID`, `nood_envelop_name`, `event_ID`, `route_ID`, `nood_envelop_volgorde`, `coordinaat`, `opmerkingen`, `score`, `create_time`, `create_user_ID`, `update_time`, `update_user_ID`) VALUES
 (1, 'Hint gestart organisatie', 3, 6, 1, '190971, 417461', 'Je had uit de richting van  300 graden moeten komen', 7, '2014-08-30 11:30:06', 1, '2014-08-30 11:30:06', 1),
-(2, 'Hint gestart players', 3, 6, 1, '190971, 417461', 'Je had uit de richting van  300 graden moeten komen', 7, '2014-08-30 11:30:06', 1, '2014-08-30 11:30:06', 1),
+(2, 'Hint gestart players', 3, 6, 1, '190971, 417461', 'Je had uit de richting van  300 graden moeten komen', 5, '2014-08-30 11:30:06', 1, '2014-08-30 11:30:06', 1),
 (3, 'Hint gestart players groep B', 3, 6, 1, '190971, 417461', 'Je had uit de richting van  300 graden moeten komen', 7, '2014-08-30 11:30:06', 1, '2014-08-30 11:30:06', 1),
 (4, 'Hint opstart', 1, 6, 1, '190971, 417461', 'Je had uit de richting van  300 graden moeten komen', 7, '2014-08-30 11:30:06', 1, '2014-08-30 11:30:06', 1),
 (5, 'Hint intro', 2, 4, 1, '190971, 417461', 'Je had uit de richting van  300 graden moeten komen', 7, '2014-08-30 11:30:06', 1, '2014-08-30 11:30:06', 1),

@@ -232,7 +232,7 @@ class ActionBeindigdPlayersTest extends WebTestCase
 		$this->click("link=Beantwoorde Vragen");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=openVragenAntwoorden/viewPlayers&event_id=4&group_id=7", $this->getLocation());
-		$this->assertContains("Hoofdletter b", $this->getBodyText());
+		$this->assertContains("Hoofdletter g", $this->getBodyText());
 		$this->assertContains("deelnemera", $this->getBodyText());
 		$this->assertNotContains("deelnemerb", $this->getBodyText());
 	}
@@ -252,14 +252,8 @@ class ActionBeindigdPlayersTest extends WebTestCase
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=noodEnvelop/viewPlayers&event_id=4&group_id=7", $this->getLocation());
 
-		$this->assertContains("Hint beindigd", $this->getBodyText());
-		$this->assertContains("GEOPEND", $this->getBodyText());
-		$this->assertTrue($this->isElementPresent("id=yt0"));
-		$this->assertEquals("OPENEN", $this->getValue("id=yt0"));
-    	$this->open("hike_development/index-test.php?r=openNoodEnvelop/create&nood_envelop_id=7&event_id=4&group_id=7");
-		$this->waitForPageToLoad ( "30000" );
-		$this->assertContains("hike_development/index-test.php?r=openNoodEnvelop/create&nood_envelop_id=7&event_id=4&group_id=8", $this->getLocation());
-		$this->assertContains("Dat mag dus niet...", $this->getBodyText());
+		$this->assertNotContains("Hint beindigd", $this->getBodyText());
+		$this->assertNotContains("Er zijn geen hints", $this->getBodyText());
 
 		$this->open("hike_development/index-test.php?r=openNoodEnvelop/create&nood_envelop_id=7&event_id=4&group_id=8");
         $this->waitForPageToLoad ( "30000" );
@@ -273,7 +267,7 @@ class ActionBeindigdPlayersTest extends WebTestCase
 		$scoreHintEnd = NoodEnvelop::model()->getNoodEnvelopScore(3, 5);
 		$scoreTotalEnd = Groups::model()->getTotalScoreGroup(3, 5);
 		$this->assertEquals(0, $scoreHintBegin);
-		$this->assertEquals(5, $scoreHintEnd);
+		$this->assertEquals(0, $scoreHintEnd);
 		$this->assertEquals(0, $scoreHintEnd-$scoreHintBegin);
 		$this->assertEquals(0, $scoreTotalEnd-$scoreTotalBegin);
 	}
