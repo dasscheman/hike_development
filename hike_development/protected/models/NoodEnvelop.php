@@ -56,7 +56,8 @@ class NoodEnvelop extends HikeActiveRecord
 		return array(
 			array('nood_envelop_name, event_ID, route_ID, coordinaat, opmerkingen, score', 'required'),
 			array('event_ID, route_ID, nood_envelop_volgorde, score, create_user_ID, update_user_ID', 'numerical', 'integerOnly'=>true),
-			array('nood_envelop_name, coordinaat, opmerkingen', 'length', 'max'=>255),
+			array('nood_envelop_name, coordinaat', 'length', 'max'=>255),
+			array('opmerkingen', 'length', 'max'=>1050),
 			array('create_time, update_time', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.

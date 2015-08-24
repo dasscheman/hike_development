@@ -248,21 +248,28 @@ abstract class HikeActiveRecord extends CActiveRecord
 			//case 'chart':
 			//case friendList:
 			case 'qrCheck':
-				if (($hikeStatus == EventNames::STATUS_introductie or
-					 $hikeStatus == EventNames::STATUS_gestart) and
-					$rolPlayer == DeelnemersEvent::ROL_deelnemer) {
-						$createAllowed = true;}
 			case 'openVragenAntwoorden':
 				if ($hikeStatus == EventNames::STATUS_introductie and
 					$rolPlayer == DeelnemersEvent::ROL_deelnemer and
 				    $groupOfPlayer == $model_id) {
 						$createAllowed = true;}
+
+				if ($hikeStatus == EventNames::STATUS_gestart and
+					$rolPlayer == DeelnemersEvent::ROL_deelnemer and
+				    $groupOfPlayer == $model_id and
+					PostPassage::model()->timeLeftToday($event_id, $model_id) > 0 ) {
+						$createAllowed = true;}
+				break;
 				// Hier geen break. OpenNoodenvelop en postPassage moeten uitgesloten worden voor de introductie.
 			case 'openNoodEnvelop':
 				if ($hikeStatus == EventNames::STATUS_gestart and
 					$rolPlayer == DeelnemersEvent::ROL_deelnemer and
 				    $groupOfPlayer == $model_id and
-					PostPassage::model()->timeLeftToday($event_id, $model_id)) {
+					PostPassage::model()->timeLeftToday($event_id, $model_id) > 0 ) {
+						$createAllowed = true;}
+
+				if( $hikeStatus == EventNames::STATUS_beindigd and
+					$rolPlayer == DeelnemersEvent::ROL_organisatie) {
 						$createAllowed = true;}
 				break;
 			default:

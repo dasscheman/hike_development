@@ -253,7 +253,7 @@ class ActionBeindigdPlayersTest extends WebTestCase
 		$this->assertContains("hike_development/index-test.php?r=noodEnvelop/viewPlayers&event_id=4&group_id=7", $this->getLocation());
 
 		$this->assertNotContains("Hint beindigd", $this->getBodyText());
-		$this->assertNotContains("Er zijn geen hints", $this->getBodyText());
+		$this->assertContains("Er zijn geen hints", $this->getBodyText());
 
 		$this->open("hike_development/index-test.php?r=openNoodEnvelop/create&nood_envelop_id=7&event_id=4&group_id=8");
         $this->waitForPageToLoad ( "30000" );
@@ -283,8 +283,8 @@ class ActionBeindigdPlayersTest extends WebTestCase
 		$this->click("link=Bonuspunten");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=bonuspunten/viewPlayers&event_id=4&group_id=7", $this->getLocation());
-		$this->assertContains("bonus gestart players groep A", $this->getBodyText());
-		$this->assertNotContains("bonus gestart players groep B", $this->getBodyText());
+		$this->assertContains("bonus beindigd players groep A", $this->getBodyText());
+		$this->assertNotContains("bonus beindigd players groep B", $this->getBodyText());
 	}
 
 	public function testGroupsStillePostenBekijken()
@@ -298,7 +298,7 @@ class ActionBeindigdPlayersTest extends WebTestCase
 		$this->click("link=Stille Posten");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=qrCheck/viewPlayers&event_id=4&group_id=7", $this->getLocation());
-		$this->assertContains("gestart organisatie", $this->getBodyText());
+		$this->assertContains("Je hebt nog geen enkele stille post gecheckt", $this->getBodyText());
 	}
     ## Startup Overview
     public function testLoginAndStartupOverview()

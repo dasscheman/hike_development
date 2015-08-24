@@ -296,7 +296,7 @@ class ActionGestartPlayersTest extends WebTestCase
 		$this->assertEquals(7, $scoreHintBegin);
 		$this->assertEquals(7, $scoreHintEnd);
 		$this->assertEquals(0, $scoreHintEnd-$scoreHintBegin);
-		$this->assertEquals(5, $scoreTotalEnd-$scoreTotalBegin);
+		$this->assertEquals(-5, $scoreTotalEnd-$scoreTotalBegin);
 	}
 
 	public function testGroupsBonuspuntenBekijken()
@@ -340,7 +340,7 @@ class ActionGestartPlayersTest extends WebTestCase
 		$this->assertContains("hike_development/index-test.php?r=qrCheck/viewPlayers&event_id=3&group_id=5", $this->getLocation());
 		$this->assertContains("gestart players", $this->getBodyText());
 //TODO narekenen
-		$scoreQrEnd = NoodEnvelop::model()->getQrScore(3, 5);
+		$scoreQrEnd = QrCheck::model()->getQrScore(3, 5);
 		$scoreTotalEnd = Groups::model()->getTotalScoreGroup(3, 5);
 		$this->assertEquals(7, $scoreQrBegin);
 		$this->assertEquals(12, $scoreQrEnd);
