@@ -225,7 +225,7 @@ class Users extends HikeActiveRecord
 		$criteria->compare('last_login_time',$this->last_login_time,true);
 		$criteria->compare('create_time',$this->create_time,true);
 		$criteria->compare('create_user_ID',$this->create_user_ID);
-		$criteria->compare('update_time',$this->update_time,true);		$model->password_repeat = $model->password;
+		$criteria->compare('update_time',$this->update_time,true);
 		$criteria->compare('update_user_ID',$this->update_user_ID);
 
 		return new CActiveDataProvider($this, array(

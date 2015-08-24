@@ -529,7 +529,16 @@ class ActionIntroductionOrganisatieTest extends WebTestCase
 		$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=2");
 		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=2", $this->getLocation());
 		$this->assertContains("Laatste post: nvt", $this->getBodyText());
-        $this->assertContains("Tijd laatste post:	nvt", $this->getBodyText());
+        $this->assertContains("Tijd laatste post: nvt", $this->getBodyText());
+        $this->assertContains("nog niet gestart", $this->getBodyText());
+
+		$this->open("hike_development/index-test.php?r=eventNames/changeStatus&event_id=2");
+        $this->waitForPageToLoad ( "30000" );
+		$this->select("name=EventNames[status]", "label=Introductie");
+		$this->click("name=yt0");
+		$this->waitForPageToLoad("30000");
+		$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=2");
+		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=2", $this->getLocation());
         $this->assertContains("Er is geen maximum tijd voor vandaag", $this->getBodyText());
 	}
 }
