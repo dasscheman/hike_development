@@ -294,7 +294,7 @@ class ActionIntroductionPlayersTest extends WebTestCase
 		$this->open("hike_development/index-test.php?r=qrCheck/viewPlayers&event_id=2&group_id=3");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=qrCheck/viewPlayers&event_id=2&group_id=3", $this->getLocation());
-		$this->assertContains("introductie players", $this->getBodyText());
+		$this->assertContains("introIntroductie", $this->getBodyText());
 	}
 
 	public function testGroupsStillePostenChecken()
@@ -311,9 +311,9 @@ class ActionIntroductionPlayersTest extends WebTestCase
 
 		$scoreQrEnd = NoodEnvelop::model()->getNoodEnvelopScore(2, 3);
 		$scoreTotalEnd = Groups::model()->getTotalScoreGroup(2, 3);
-		$this->assertEquals(0, $scoreQrBegin);
-		$this->assertEquals(5, $scoreQrEnd);
-		$this->assertEquals(5, $scoreQrEnd-$scoreQrBegin);
+		$this->assertEquals(7, $scoreQrBegin);
+		$this->assertEquals(14, $scoreQrEnd);
+		$this->assertEquals(7, $scoreQrEnd-$scoreQrBegin);
 		$this->assertEquals(5, $scoreTotalEnd-$scoreTotalBegin);
 	}
     ## Startup Overview
