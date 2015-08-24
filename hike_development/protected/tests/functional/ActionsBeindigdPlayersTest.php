@@ -168,16 +168,16 @@ class ActionBeindigdPlayersTest extends WebTestCase
 		$this->login();
 
 		# bekijken van gegevens van andere groep.
-		$this->open("hike_development/index-test.php?r=game/groupOverview&event_id=4&group_id=6");
+		$this->open("hike_development/index-test.php?r=game/groupOverview&event_id=4&group_id=8");
 		$this->waitForPageToLoad ( "30000" );
 		$this->assertContains("Posten Overzicht", $this->getBodyText());
 		$this->assertContains("Te Controleren Vragen", $this->getBodyText());
 		$this->assertContains("Geopende Hints", $this->getBodyText());
 
 		# bekijken van gegevens van eigen groep.
-    	$this->open("hike_development/index-test.php?r=game/groupOverview&event_id=4&group_id=5");
+    	$this->open("hike_development/index-test.php?r=game/groupOverview&event_id=4&group_id=7");
 		$this->waitForPageToLoad ( "30000" );
-		$this->assertContains("hike_development/index-test.php?r=game/groupOverview&event_id=4&group_id=5", $this->getLocation());
+		$this->assertContains("hike_development/index-test.php?r=game/groupOverview&event_id=4&group_id=7", $this->getLocation());
 		$this->assertContains("Posten Overzicht", $this->getBodyText());
 		$this->assertContains("Te Controleren Vragen", $this->getBodyText());
 		$this->assertContains("Geopende Hints", $this->getBodyText());
@@ -187,11 +187,11 @@ class ActionBeindigdPlayersTest extends WebTestCase
 	{
 		$this->login();
 
-    	$this->open("hike_development/index-test.php?r=game/groupOverview&event_id=4&group_id=5");
+    	$this->open("hike_development/index-test.php?r=game/groupOverview&event_id=4&group_id=7");
 		$this->waitForPageToLoad ( "30000" );
-		$this->assertContains("hike_development/index-test.php?r=game/groupOverview&event_id=4&group_id=5", $this->getLocation());
+		$this->assertContains("hike_development/index-test.php?r=game/groupOverview&event_id=4&group_id=7", $this->getLocation());
 		$this->assertFalse($this->isElementPresent("link=Binnenkomst Post"));
-		$this->open("hike_development/index-test.php?r=postPassage/create&event_id=4&group_id=5");
+		$this->open("hike_development/index-test.php?r=postPassage/create&event_id=4&group_id=7");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("Dat mag dus niet...", $this->getBodyText());
 	}
@@ -200,23 +200,23 @@ class ActionBeindigdPlayersTest extends WebTestCase
 	{
 		$this->login();
 
-    	$this->open("hike_development/index-test.php?r=game/groupOverview&event_id=4&group_id=5");
+    	$this->open("hike_development/index-test.php?r=game/groupOverview&event_id=4&group_id=7");
 		$this->waitForPageToLoad ( "30000" );
-		$this->assertContains("hike_development/index-test.php?r=game/groupOverview&event_id=4&group_id=5", $this->getLocation());
+		$this->assertContains("hike_development/index-test.php?r=game/groupOverview&event_id=4&group_id=7", $this->getLocation());
 		$this->assertTrue($this->isElementPresent("link=Vragen"));
 		$this->click("link=Vragen");
         $this->waitForPageToLoad ( "30000" );
-		$this->assertContains("hike_development/index-test.php?r=openVragen/viewPlayers&event_id=4&group_id=5", $this->getLocation());
+		$this->assertContains("hike_development/index-test.php?r=openVragen/viewPlayers&event_id=4&group_id=7", $this->getLocation());
 
-		$this->open("hike_development/index-test.php?r=openVragenAntwoorden/update&event_id=2&group_id=6&vraag_id=1");
+		$this->open("hike_development/index-test.php?r=openVragenAntwoorden/update&event_id=2&group_id=8&vraag_id=1");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("Dat mag dus niet...", $this->getBodyText());
 
-		$this->open("hike_development/index-test.php?r=openVragenAntwoorden/update&event_id=4&group_id=5&vraag_id=1");
+		$this->open("hike_development/index-test.php?r=openVragenAntwoorden/update&event_id=4&group_id=7&vraag_id=1");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("Dat mag dus niet...", $this->getBodyText());
 
-		$this->open("hike_development/index-test.php?r=openVragenAntwoorden/create&event_id=4&group_id=5&vraag_id=3");
+		$this->open("hike_development/index-test.php?r=openVragenAntwoorden/create&event_id=4&group_id=7&vraag_id=3");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("Dat mag dus niet...", $this->getBodyText());
 	}
@@ -225,13 +225,13 @@ class ActionBeindigdPlayersTest extends WebTestCase
 	{
 		$this->login();
 
-    	$this->open("hike_development/index-test.php?r=game/groupOverview&event_id=4&group_id=5");
+    	$this->open("hike_development/index-test.php?r=game/groupOverview&event_id=4&group_id=7");
 		$this->waitForPageToLoad ( "30000" );
-		$this->assertContains("hike_development/index-test.php?r=game/groupOverview&event_id=4&group_id=5", $this->getLocation());
+		$this->assertContains("hike_development/index-test.php?r=game/groupOverview&event_id=4&group_id=7", $this->getLocation());
 		$this->assertTrue($this->isElementPresent("link=Beantwoorde Vragen"));
 		$this->click("link=Beantwoorde Vragen");
         $this->waitForPageToLoad ( "30000" );
-		$this->assertContains("hike_development/index-test.php?r=openVragenAntwoorden/viewPlayers&event_id=4&group_id=5", $this->getLocation());
+		$this->assertContains("hike_development/index-test.php?r=openVragenAntwoorden/viewPlayers&event_id=4&group_id=7", $this->getLocation());
 		$this->assertContains("Hoofdletter b", $this->getBodyText());
 		$this->assertContains("deelnemera", $this->getBodyText());
 		$this->assertNotContains("deelnemerb", $this->getBodyText());
@@ -244,47 +244,51 @@ class ActionBeindigdPlayersTest extends WebTestCase
 
 		$this->login();
 
-    	$this->open("hike_development/index-test.php?r=game/groupOverview&event_id=4&group_id=5");
+    	$this->open("hike_development/index-test.php?r=game/groupOverview&event_id=4&group_id=7");
 		$this->waitForPageToLoad ( "30000" );
-		$this->assertContains("hike_development/index-test.php?r=game/groupOverview&event_id=4&group_id=5", $this->getLocation());
+		$this->assertContains("hike_development/index-test.php?r=game/groupOverview&event_id=4&group_id=7", $this->getLocation());
 		$this->assertTrue($this->isElementPresent("link=Hints"));
 		$this->click("link=Hints");
         $this->waitForPageToLoad ( "30000" );
-		$this->assertContains("hike_development/index-test.php?r=noodEnvelop/viewPlayers&event_id=4&group_id=5", $this->getLocation());
+		$this->assertContains("hike_development/index-test.php?r=noodEnvelop/viewPlayers&event_id=4&group_id=7", $this->getLocation());
 
-		$this->assertContains("Hint gestart players", $this->getBodyText());
+		$this->assertContains("Hint beindigd", $this->getBodyText());
 		$this->assertContains("GEOPEND", $this->getBodyText());
 		$this->assertTrue($this->isElementPresent("id=yt0"));
 		$this->assertEquals("OPENEN", $this->getValue("id=yt0"));
-    	$this->open("hike_development/index-test.php?r=openNoodEnvelop/create&nood_envelop_id=2&event_id=4&group_id=5");
+    	$this->open("hike_development/index-test.php?r=openNoodEnvelop/create&nood_envelop_id=7&event_id=4&group_id=7");
 		$this->waitForPageToLoad ( "30000" );
-		$this->assertContains("hike_development/index-test.php?r=openNoodEnvelop/create&nood_envelop_id=3&event_id=4&group_id=6", $this->getLocation());
-		$this->open("hike_development/index-test.php?r=openNoodEnvelop/create&nood_envelop_id=3&event_id=4&group_id=6");
+		$this->assertContains("hike_development/index-test.php?r=openNoodEnvelop/create&nood_envelop_id=7&event_id=4&group_id=8", $this->getLocation());
+		$this->assertContains("Dat mag dus niet...", $this->getBodyText());
+
+		$this->open("hike_development/index-test.php?r=openNoodEnvelop/create&nood_envelop_id=7&event_id=4&group_id=8");
         $this->waitForPageToLoad ( "30000" );
-		$this->assertContains("hike_development/index-test.php?r=openNoodEnvelop/create&nood_envelop_id=2&event_id=4&group_id=5", $this->getLocation());
-		$this->assertContains("Hint gestart players", $this->getBodyText());
-		$this->assertNotContains("Hint gestart players groep B", $this->getBodyText());
+		$this->assertContains("Dat mag dus niet...", $this->getBodyText());
+
+		$this->assertContains("hike_development/index-test.php?r=openNoodEnvelop/create&nood_envelop_id=6&event_id=4&group_id=7", $this->getLocation());
+        $this->waitForPageToLoad ( "30000" );
+		$this->assertContains("Dat mag dus niet...", $this->getBodyText());
 
 
 		$scoreHintEnd = NoodEnvelop::model()->getNoodEnvelopScore(3, 5);
 		$scoreTotalEnd = Groups::model()->getTotalScoreGroup(3, 5);
 		$this->assertEquals(0, $scoreHintBegin);
 		$this->assertEquals(5, $scoreHintEnd);
-		$this->assertEquals(5, $scoreHintEnd-$scoreHintBegin);
-		$this->assertEquals(5, $scoreTotalEnd-$scoreTotalBegin);
+		$this->assertEquals(0, $scoreHintEnd-$scoreHintBegin);
+		$this->assertEquals(0, $scoreTotalEnd-$scoreTotalBegin);
 	}
 
 	public function testGroupsBonuspuntenBekijken()
 	{
 		$this->login();
 
-    	$this->open("hike_development/index-test.php?r=game/groupOverview&event_id=4&group_id=5");
+    	$this->open("hike_development/index-test.php?r=game/groupOverview&event_id=4&group_id=7");
 		$this->waitForPageToLoad ( "30000" );
-		$this->assertContains("hike_development/index-test.php?r=game/groupOverview&event_id=4&group_id=5", $this->getLocation());
+		$this->assertContains("hike_development/index-test.php?r=game/groupOverview&event_id=4&group_id=7", $this->getLocation());
 		$this->assertTrue($this->isElementPresent("link=Bonuspunten"));
 		$this->click("link=Bonuspunten");
         $this->waitForPageToLoad ( "30000" );
-		$this->assertContains("hike_development/index-test.php?r=bonuspunten/viewPlayers&event_id=4&group_id=5", $this->getLocation());
+		$this->assertContains("hike_development/index-test.php?r=bonuspunten/viewPlayers&event_id=4&group_id=7", $this->getLocation());
 		$this->assertContains("bonus gestart players groep A", $this->getBodyText());
 		$this->assertNotContains("bonus gestart players groep B", $this->getBodyText());
 	}
@@ -293,13 +297,13 @@ class ActionBeindigdPlayersTest extends WebTestCase
 	{
 		$this->login();
 
-    	$this->open("hike_development/index-test.php?r=game/groupOverview&event_id=4&group_id=5");
+    	$this->open("hike_development/index-test.php?r=game/groupOverview&event_id=4&group_id=7");
 		$this->waitForPageToLoad ( "30000" );
-		$this->assertContains("hike_development/index-test.php?r=game/groupOverview&event_id=4&group_id=5", $this->getLocation());
+		$this->assertContains("hike_development/index-test.php?r=game/groupOverview&event_id=4&group_id=7", $this->getLocation());
 		$this->assertTrue($this->isElementPresent("link=Stille Posten"));
 		$this->click("link=Stille Posten");
         $this->waitForPageToLoad ( "30000" );
-		$this->assertContains("hike_development/index-test.php?r=qrCheck/viewPlayers&event_id=4&group_id=5", $this->getLocation());
+		$this->assertContains("hike_development/index-test.php?r=qrCheck/viewPlayers&event_id=4&group_id=7", $this->getLocation());
 		$this->assertContains("gestart organisatie", $this->getBodyText());
 	}
     ## Startup Overview

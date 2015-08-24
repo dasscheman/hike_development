@@ -228,7 +228,8 @@ INSERT INTO `tbl_nood_envelop` (`nood_envelop_ID`, `nood_envelop_name`, `event_I
 (3, 'Hint gestart players groep B', 3, 6, 1, '190971, 417461', 'Je had uit de richting van  300 graden moeten komen', 7, '2014-08-30 11:30:06', 1, '2014-08-30 11:30:06', 1),
 (4, 'Hint opstart', 1, 6, 1, '190971, 417461', 'Je had uit de richting van  300 graden moeten komen', 7, '2014-08-30 11:30:06', 1, '2014-08-30 11:30:06', 1),
 (5, 'Hint intro', 2, 4, 1, '190971, 417461', 'Je had uit de richting van  300 graden moeten komen', 7, '2014-08-30 11:30:06', 1, '2014-08-30 11:30:06', 1),
-(6, 'Hint beindigd', 4, 8, 1, '190971, 417461', 'Je had uit de richting van  300 graden moeten komen', 7, '2014-08-30 11:30:06', 1, '2014-08-30 11:30:06', 1);
+(6, 'Hint beindigd', 4, 8, 1, '190971, 417461', 'Je had uit de richting van  300 graden moeten komen', 7, '2014-08-30 11:30:06', 1, '2014-08-30 11:30:06', 1),
+(7, 'Hint beindigd2', 4, 8, 2, '190971, 417461', 'Je had uit de richting van  300 graden moeten komen', 7, '2014-08-30 11:30:06', 1, '2014-08-30 11:30:06', 1);
 
 -- (5, ' ''Coördinaat eerste punt van "Good old..."''', 6, 25, 2030, '190319, 418016', 'Je had moeten komen vanuit de richting 325 graden. ', 5, '2014-08-30 11:31:31', 2, '2014-08-30 11:31:31', 2),
 -- (6, ' ''Coördinaat eerste kruispunt van "Kruispuntjepuzzelen"''', 6, 27, 2050, '191934, 416899', 'Je had uit de richting van  300 graden moeten komen', 5, '2014-08-30 11:36:53', 2, '2014-08-30 11:36:53', 2),
@@ -262,7 +263,8 @@ CREATE TABLE IF NOT EXISTS `tbl_open_nood_envelop` (
 --
 
 INSERT INTO `tbl_open_nood_envelop` (`open_nood_envelop_ID`, `nood_envelop_ID`, `event_ID`, `group_ID`, `opened`, `create_time`, `create_user_ID`, `update_time`, `update_user_ID`) VALUES
-(1, 1, 3, 5, 1, '2014-09-05 21:03:04', 2, '2014-09-05 21:03:04', 2);
+(1, 1, 3, 5, 1, '2014-09-05 21:03:04', 2, '2014-09-05 21:03:04', 2),
+(2, 6, 4, 7, 1, '2014-09-05 21:03:04', 2, '2014-09-05 21:03:04', 2);
 -- (2, 14, 6, 6, 1, '2014-09-05 21:43:15', 26, '2014-09-05 21:43:15', 26),
 -- (3, 17, 6, 8, 1, '2014-09-05 22:55:27', 29, '2014-09-05 22:55:27', 29),
 -- (4, 29, 6, 6, 1, '2014-09-06 01:27:51', 27, '2014-09-06 01:27:51', 27);
@@ -337,7 +339,9 @@ INSERT INTO `tbl_open_vragen_antwoorden` (`open_vragen_antwoorden_ID`, `open_vra
 (3, 2, 3, 6, 'B', 0, 0, '2014-08-31 13:49:10', 2, '2014-08-31 13:50:22', 1),
 (4, 8, 2, 3, 'H', 0, 0, '2014-08-31 13:46:28', 2, '2014-08-31 13:48:55', 1),
 (5, 9, 2, 3, 'I', 0, 0, '2014-08-31 13:49:10', 2, '2014-08-31 13:50:22', 1),
-(6, 8, 2, 4, 'H', 0, 0, '2014-08-31 13:46:28', 2, '2014-08-31 13:48:55', 1);
+(6, 8, 2, 4, 'H', 0, 0, '2014-08-31 13:46:28', 2, '2014-08-31 13:48:55', 1),
+(7, 10, 4, 3, 'H', 0, 0, '2014-08-31 13:46:28', 2, '2014-08-31 13:48:55', 1),
+(8, 11, 4, 3, 'I', 0, 0, '2014-08-31 13:49:10', 2, '2014-08-31 13:50:22', 1);
 
 -- --------------------------------------------------------
 

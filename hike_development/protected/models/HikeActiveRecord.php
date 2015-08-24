@@ -220,9 +220,10 @@ abstract class HikeActiveRecord extends CActiveRecord
 
 		switch ($controller_id) {
 			case 'bonuspunten':
-				if ($hikeStatus == EventNames::STATUS_introductie and
+				if ($hikeStatus >= EventNames::STATUS_introductie and
 					$rolPlayer == DeelnemersEvent::ROL_organisatie) {
 					$createAllowed = true;}
+				break;
 			case 'postPassage':
 				if ($hikeStatus == EventNames::STATUS_gestart and
 					$rolPlayer <= DeelnemersEvent::ROL_post) {
@@ -246,8 +247,12 @@ abstract class HikeActiveRecord extends CActiveRecord
 				break;
 			//case 'chart':
 			//case friendList:
-			case 'openVragenAntwoorden':
 			case 'qrCheck':
+				if (($hikeStatus == EventNames::STATUS_introductie or
+					 $hikeStatus == EventNames::STATUS_gestart) and
+					$rolPlayer == DeelnemersEvent::ROL_deelnemer) {
+						$createAllowed = true;}
+			case 'openVragenAntwoorden':
 				if ($hikeStatus == EventNames::STATUS_introductie and
 					$rolPlayer == DeelnemersEvent::ROL_deelnemer and
 				    $groupOfPlayer == $model_id) {
@@ -356,21 +361,37 @@ abstract class HikeActiveRecord extends CActiveRecord
 			case 'qrCheck':
 			case 'openVragen':
 			case 'openVragenAntwoorden':
-				if ($hikeStatus == EventNames::STATUS_introductie and
+				if (($hikeStatus == EventNames::STATUS_introductie or
+					 $hikeStatus == EventNames::STATUS_gestart) and
 					$rolPlayer == DeelnemersEvent::ROL_deelnemer and
 					$groupOfPlayer == $model_id) {
 						$viewPlayersAllowed = true;
 				}
+				if (($hikeStatus == EventNames::STATUS_introductie or
+					 $hikeStatus == EventNames::STATUS_gestart) and
+					$rolPlayer == DeelnemersEvent::ROL_organisatie and
+					$groupOfPlayer == $model_id) {
+						$viewPlayersAllowed = true;
+				}
+
+				if (($hikeStatus == EventNames::STATUS_introductie or
+					 $hikeStatus == EventNames::STATUS_gestart) and
+					$rolPlayer == DeelnemersEvent::ROL_post) {
+						$viewPlayersAllowed = true;
+				}
+				if ($hikeStatus == EventNames::STATUS_beindigd) {
+						$viewPlayersAllowed = true;
+				}
+				break;
 			case 'noodEnvelop':
 			case 'openNoodEnvelop':
 			case 'postPassage':
-				if ($hikeStatus >= EventNames::STATUS_gestart AND
+				if ($hikeStatus == EventNames::STATUS_gestart AND
 					$rolPlayer == DeelnemersEvent::ROL_organisatie) {
 						$viewPlayersAllowed = true;
 				}
-				if (($hikeStatus == EventNames::STATUS_introductie or
-					 $hikeStatus == EventNames::STATUS_gestart) and
-				   $rolPlayer == DeelnemersEvent::ROL_post) {
+				if ($hikeStatus == EventNames::STATUS_gestart and
+				    $rolPlayer == DeelnemersEvent::ROL_post) {
 						$viewPlayersAllowed = true;
 				} 
 				if ($hikeStatus == EventNames::STATUS_beindigd) {

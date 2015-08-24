@@ -395,10 +395,12 @@ class ActionIntroductionOrganisatieTest extends WebTestCase
 		$this->isElementPresent("link=Vragen Overzicht");
 		$this->open("hike_development/index-test.php?r=openVragen/index&event_id=2");
         $this->waitForPageToLoad ( "30000" );
-        $this->assertContains("Hoofdletter E", $this->getBodyText());
-        $this->assertContains("0000-00-00", $this->getBodyText());
-        $this->assertContains("Hoofdletter a", $this->getBodyText());
-        $this->assertContains("2015-02-27", $this->getBodyText());
+        $this->assertNotContains("Hoofdletter e", $this->getBodyText());
+        $this->assertNotContains("Hoofdletter f", $this->getBodyText());
+        $this->assertNotContains("Hoofdletter j", $this->getBodyText());
+        $this->assertContains("Hoofdletter h", $this->getBodyText());
+        $this->assertContains("Hoofdletter i", $this->getBodyText());
+        $this->assertContains("Hoofdletter l", $this->getBodyText());
 	}
 
     public function testHintsOverzicht()

@@ -274,8 +274,8 @@ class ActionGestartPlayersTest extends WebTestCase
 		$this->click("link=Hints");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=noodEnvelop/viewPlayers&event_id=3&group_id=5", $this->getLocation());
-
 		$this->assertContains("Er zijn geen hints", $this->getBodyText());
+		
 		$this->assertContains("GEOPEND", $this->getBodyText());
 		$this->assertTrue($this->isElementPresent("id=yt0"));
 		$this->assertEquals("OPENEN", $this->getValue("id=yt0"));
