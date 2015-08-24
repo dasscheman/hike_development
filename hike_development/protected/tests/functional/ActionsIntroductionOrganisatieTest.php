@@ -475,40 +475,20 @@ class ActionIntroductionOrganisatieTest extends WebTestCase
 
 		$this->open("hike_development/index-test.php?r=eventNames/changeDay&event_id=2");
         $this->waitForPageToLoad ( "30000" );
-		$this->type("id=EventNames_max_time", "24:00:00");
-		$this->click("name=yt0");
-		$this->waitForPageToLoad("30000");
+        $this->assertContains("Dat mag dus niet...", $this->getBodyText());
 
 		$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=2");
 		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=2", $this->getLocation());
-		$this->assertContains("Tijd over (minuten): 784", $this->getBodyText());
-        $this->assertContains("Tijd over (minuten): nog niet gestart", $this->getBodyText());
+		$this->assertContains("Er is geen maximum tijd voor vandaag", $this->getBodyText());
 
 		$this->open("hike_development/index-test.php?r=eventNames/changeDay&event_id=2");
         $this->waitForPageToLoad ( "30000" );
-		$this->select("name=EventNames[active_day]", "value=2015-02-26");
-		$this->click("name=yt0");
-		$this->waitForPageToLoad("30000");
+        $this->assertContains("Dat mag dus niet...", $this->getBodyText());
 
 		$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=2");
 		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=2", $this->getLocation());
 		$this->assertNotContains("Tijd over (minuten): 784", $this->getBodyText());
-        $this->assertContains("Tijd over (minuten): nog niet gestart", $this->getBodyText());
-        $this->assertContains("Status van Hike: Gestart", $this->getBodyText());
-        $this->assertContains("Actieve dag: 2015-02-26", $this->getBodyText());
-
-		$this->open("hike_development/index-test.php?r=eventNames/changeDay&event_id=2");
-        $this->waitForPageToLoad ( "30000" );
-		$this->select("name=EventNames[active_day]", "value=2015-02-27");
-		$this->click("name=yt0");
-		$this->waitForPageToLoad("30000");
-
-		$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=2");
-		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=2", $this->getLocation());
-		$this->assertContains("Tijd over (minuten): 784", $this->getBodyText());
-        $this->assertContains("Tijd over (minuten): nog niet gestart", $this->getBodyText());
-        $this->assertContains("Status van Hike: Gestart", $this->getBodyText());
-        $this->assertContains("Actieve dag: 2015-02-27", $this->getBodyText());
+        $this->assertContains("Er is geen maximum tijd voor vandaag", $this->getBodyText());
 	}
 
     public function testStatusVeranderen()
