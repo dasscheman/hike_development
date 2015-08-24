@@ -131,9 +131,11 @@ class RouteController extends Controller
 			// Wanneer er een route onderdeel aangemaakt wordt, dan moet er gecheckt woren of er voor die dag al een 
 			// begin aangemaakt is.  Als dat niet het geval is dan moet die nog aangemaakt worden.
 			if (!Posten::model()->startPostExist($_GET['event_id'], $_GET['date'])) {
+
 				$modelStartPost = new Posten;
+				$modelStartPost->event_ID = $_GET['event_id'];
 				$modelStartPost->post_name = 'Dag Start';
-				$modelStartPost->date = $_GET['event_id'];
+				$modelStartPost->date = $_GET['date'];
 				$modelStartPost->post_volgorde = 1;
 				$modelStartPost->score = 0;
 			}
@@ -146,6 +148,11 @@ class RouteController extends Controller
 
 			if($valid)
 			{
+				$model->save(false);
+				if (isset($modelStartPost))
+				{
+					$modelStartPost->save(false);
+				}
 				// QR record can only be set after the routemodel save.
 				// Because route_ID is not available before save.
 				// Furthermore it is not a problem when route record is saved and

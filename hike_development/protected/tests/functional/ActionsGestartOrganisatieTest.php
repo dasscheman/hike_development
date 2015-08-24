@@ -510,7 +510,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
 		$this->open("hike_development/index-test.php?r=eventNames/changeDay&event_id=3");
         $this->waitForPageToLoad ( "30000" );
-		$this->select("id=active_day", "2015-02-26");
+		$this->type("id=active_day", "2015-02-26");
 		$this->click("name=yt0");
 		$this->waitForPageToLoad("30000");
 
@@ -523,7 +523,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
 		$this->open("hike_development/index-test.php?r=eventNames/changeDay&event_id=3");
         $this->waitForPageToLoad ( "30000" );
-		$this->select("id=active_day", "2015-02-27");
+		$this->type("id=active_day", "2015-02-27");
 		$this->click("name=yt0");
 		$this->waitForPageToLoad("30000");
 
@@ -566,7 +566,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
 		$this->assertContains("hike_development/index-test.php?r=eventNames/changeDay&event_id=3", $this->getLocation());
 
-		$this->select("id=active_day", "2015-02-27");		
+		$this->type("id=active_day", "2015-02-27");		
 		$this->type("id=EventNames_max_time", "24:00:00");
 		$this->click("name=yt0");
 		$this->waitForPageToLoad("30000");

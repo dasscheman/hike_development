@@ -309,7 +309,7 @@ class ActionIntroductionPlayersTest extends WebTestCase
 		$this->assertContains("http://localhost/hike_development/index-test.php?r=qrCheck/viewPlayers&event_id=2&group_id=3", $this->getLocation());
 		$this->assertContains("introductie players", $this->getBodyText());
 
-		$scoreQrEnd = NoodEnvelop::model()->getNoodEnvelopScore(2, 3);
+		$scoreQrEnd = QrCheck::model()->getQrScore(2, 3);
 		$scoreTotalEnd = Groups::model()->getTotalScoreGroup(2, 3);
 		$this->assertEquals(7, $scoreQrBegin);
 		$this->assertEquals(14, $scoreQrEnd);
