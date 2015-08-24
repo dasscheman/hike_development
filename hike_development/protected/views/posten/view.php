@@ -11,7 +11,7 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Delete Posten', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->post_ID),'confirm'=>'Are you sure you want to delete this item?')),
+	array('label'=>'Delete Posten', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->post_ID,'post_id'=>$model->post_ID,'event_id'=>$model->event_ID),'confirm'=>'Are you sure you want to delete this item?')),
 );
 ?>
 

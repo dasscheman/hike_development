@@ -59,8 +59,8 @@
 			<tr style="height: 75%">
 				<td style="width: 30%">
 					<div class="zone" style="height: 48mm;vertical-align: middle;text-align: center;">
-						<!-- <qrcode value="<?php //echo $num."\n".$nom."\n".$date; ?>" ec="Q" style="width: 37mm; border: none;" ></qrcode>-->
-						<img src="http://www.mobile-barcodes.com/qr-code-generator/generator.php?str=http://www.hike-app.nl/<?php echo $link ?>&barcode=url" alt="QR Code" style="border:none; width: 48mm" />
+						<qrcode value="http://www.hike-app.nl/<?php echo $link ?>" ec="Q" style="width: 37mm; border: none;" ></qrcode>
+						<!--<img src="http://www.mobile-barcodes.com/qr-code-generator/generator.php?str=http://www.hike-app.nl/<?php //echo $link ?>&barcode=url" alt="QR Code" style="border:none; width: 48mm" /> -->
 
 					</div>
 				</td>

@@ -192,7 +192,7 @@ class QrController extends Controller
 		    array(
 			'criteria'=>array(
 			    'condition'=>$where,
-			    'order'=>'qr_volgorde ASC',
+			    'order'=>'route_ID ASC, qr_volgorde ASC',
 			    ),
 			'pagination'=>array(
 				'pageSize'=>15,
