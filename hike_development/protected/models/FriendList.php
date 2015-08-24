@@ -188,7 +188,7 @@ class FriendList extends HikeActiveRecord
 		// de huidige gebruiker wordt er ook uitgefilterd.
 		$criteria->addCondition("t.user_ID IN ( SELECT friends_with_user_ID
 								FROM `tbl_friend_list`
-								WHERE user_ID =:currentuser)
+								WHERE user_ID =:currentuser AND status =2)
 					AND t.user_ID <>:currentuser");
 		$criteria->order = username;
 		$criteria->params = array(':currentuser'=>Yii::app()->user->id);

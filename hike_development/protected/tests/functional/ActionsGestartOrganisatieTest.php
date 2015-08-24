@@ -509,7 +509,8 @@ class ActionGestartOrganisatieTest extends WebTestCase
 //$this->assertContains("Tijd over (minuten): nog niet gestart", $this->getBodyText());
 
 		$this->open("hike_development/index-test.php?r=eventNames/changeDay&event_id=3");
-        $this->waitForPageToLoad ( "30000" );;
+        $this->waitForPageToLoad ( "30000" );
+		$this->assertContains("BLALBLA", $this->getBodyText());
 		$this->select("id=EventNames_active_day", "2015-02-26");
 		$this->click("name=yt0");
 		$this->waitForPageToLoad("30000");
@@ -565,6 +566,8 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		$this->waitForPageToLoad("30000");
 
 		$this->assertContains("hike_development/index-test.php?r=eventNames/changeDay&event_id=3", $this->getLocation());
+
+		$this->select("id=EventNames_active_day", "2015-02-27");		
 		$this->type("id=EventNames_max_time", "24:00:00");
 		$this->click("name=yt0");
 		$this->waitForPageToLoad("30000");
