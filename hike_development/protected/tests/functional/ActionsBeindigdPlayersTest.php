@@ -170,7 +170,9 @@ class ActionBeindigdPlayersTest extends WebTestCase
 		# bekijken van gegevens van andere groep.
 		$this->open("hike_development/index-test.php?r=game/groupOverview&event_id=4&group_id=6");
 		$this->waitForPageToLoad ( "30000" );
-        $this->assertContains("Dat mag dus niet...", $this->getBodyText());
+		$this->assertContains("Posten Overzicht", $this->getBodyText());
+		$this->assertContains("Te Controleren Vragen", $this->getBodyText());
+		$this->assertContains("Geopende Hints", $this->getBodyText());
 
 		# bekijken van gegevens van eigen groep.
     	$this->open("hike_development/index-test.php?r=game/groupOverview&event_id=4&group_id=5");

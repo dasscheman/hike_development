@@ -179,6 +179,10 @@ class DeelnemersEvent extends HikeActiveRecord
 					$hikeStatus == EventNames::STATUS_introductie)) {
 					$actionAllowed = true;
 				}
+				if ($rolPlayer == DeelnemersEvent::ROL_deelnemer &&
+					$hikeStatus == EventNames::STATUS_beindigd) {
+					$actionAllowed = true;
+				}
 			}
 		}
 		//Startup overview is only allowed when player is organisation

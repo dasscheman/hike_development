@@ -293,9 +293,9 @@ class ActionGestartPlayersTest extends WebTestCase
 
 		$scoreHintEnd = NoodEnvelop::model()->getNoodEnvelopScore(3, 5);
 		$scoreTotalEnd = Groups::model()->getTotalScoreGroup(3, 5);
-		$this->assertEquals(0, $scoreHintBegin);
-		$this->assertEquals(5, $scoreHintEnd);
-		$this->assertEquals(5, $scoreHintEnd-$scoreHintBegin);
+		$this->assertEquals(7, $scoreHintBegin);
+		$this->assertEquals(14, $scoreHintEnd);
+		$this->assertEquals(7, $scoreHintEnd-$scoreHintBegin);
 		$this->assertEquals(5, $scoreTotalEnd-$scoreTotalBegin);
 	}
 

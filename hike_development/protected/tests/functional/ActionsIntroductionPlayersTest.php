@@ -278,8 +278,8 @@ class ActionIntroductionPlayersTest extends WebTestCase
 		$this->click("link=Bonuspunten");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=bonuspunten/viewPlayers&event_id=2&group_id=3", $this->getLocation());
-		$this->assertContains("bonus beindigd players groep A", $this->getBodyText());
-		$this->assertNotContains("bonus beindigd players groep B", $this->getBodyText());
+		$this->assertContains("bonus intro players groep A", $this->getBodyText());
+		$this->assertNotContains("bonus intro players groep B", $this->getBodyText());
 	}
 
 	public function testGroupsStillePostenBekijken()

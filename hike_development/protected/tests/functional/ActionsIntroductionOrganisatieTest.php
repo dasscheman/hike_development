@@ -224,7 +224,7 @@ class ActionIntroductionOrganisatieTest extends WebTestCase
 		$this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=game/groupOverview&event_id=2&group_id=4", $this->getLocation());
 		$this->assertFalse($this->isElementPresent("link=Binnenkomst Post"));
-		$this->assertContains("hike_development/index-test.php?r=postPassage/create&event_id=2&group_id=4");
+		$this->open("hike_development/index-test.php?r=postPassage/create&event_id=2&group_id=4");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=postPassage/create&event_id=2&group_id=4", $this->getLocation());
         $this->assertContains("Dat mag dus niet...", $this->getBodyText());
