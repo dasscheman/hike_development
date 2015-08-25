@@ -262,8 +262,8 @@ class ActionBeindigdPlayersTest extends WebTestCase
 
 		$scoreHintEnd = NoodEnvelop::model()->getNoodEnvelopScore(3, 5);
 		$scoreTotalEnd = Groups::model()->getTotalScoreGroup(3, 5);
-		$this->assertEquals(0, $scoreHintBegin);
-		$this->assertEquals(0, $scoreHintEnd);
+		$this->assertEquals(5, $scoreHintBegin);
+		$this->assertEquals(5, $scoreHintEnd);
 		$this->assertEquals(0, $scoreHintEnd-$scoreHintBegin);
 		$this->assertEquals(0, $scoreTotalEnd-$scoreTotalBegin);
 	}
