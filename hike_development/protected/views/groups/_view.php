@@ -18,7 +18,11 @@
 	{
 		if ($printSeparator)
 			echo " - ";
-		echo CHtml::encode(Users::model()->getUserName($player->user_ID));
+		echo CHtml::link(CHtml::encode(Users::model()->getUserName($player->user_ID)),
+			   array('/deelnemersEvent/update',
+				 'event_id'=>$player->event_ID,
+				 'id'=>$player->deelnemers_ID));
+		//echo CHtml::encode(Users::model()->getUserName($player->user_ID));
 		$printSeparator = true;
 	}?>
 </div>

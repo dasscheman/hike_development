@@ -186,7 +186,7 @@ abstract class HikeActiveRecord extends CActiveRecord
 				if ($hikeStatus == EventNames::STATUS_gestart and
 					$rolPlayer == DeelnemersEvent::ROL_deelnemer and
 				    $groupOfPlayer == $model_id and
-					PostPassage::model()->timeLeftToday($event_id, $model_id)) {
+					PostPassage::model()->isTimeLeftToday($event_id, $model_id)) {
 						$updateAllowed = true;}
 				break;
 			case 'postPassage':
@@ -235,6 +235,12 @@ abstract class HikeActiveRecord extends CActiveRecord
 			case 'qr':
 			case 'groups':
 			case 'deelnemersEvent':
+				if (($hikeStatus == EventNames::STATUS_opstart or
+					 $hikeStatus == EventNames::STATUS_introductie) and
+					$rolPlayer == DeelnemersEvent::ROL_organisatie) {
+					$createAllowed = true;
+				}
+				break;
 			case 'route':
 				if( $hikeStatus == EventNames::STATUS_opstart and
 					$rolPlayer == DeelnemersEvent::ROL_organisatie) {

@@ -275,7 +275,7 @@ class ActionGestartPlayersTest extends WebTestCase
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=noodEnvelop/viewPlayers&event_id=3&group_id=5", $this->getLocation());
 		$this->assertContains("Hint gestart players", $this->getBodyText());
-		
+
 		$this->assertContains("GEOPEND", $this->getBodyText());
 		$this->assertTrue($this->isElementPresent("id=yt0"));
 		$this->assertEquals("OPENEN", $this->getValue("id=yt0"));
@@ -343,9 +343,9 @@ class ActionGestartPlayersTest extends WebTestCase
 		$scoreQrEnd = QrCheck::model()->getQrScore(3, 5);
 		$scoreTotalEnd = Groups::model()->getTotalScoreGroup(3, 5);
 		$this->assertEquals(7, $scoreQrBegin);
-		$this->assertEquals(12, $scoreQrEnd);
-		$this->assertEquals(5, $scoreQrEnd-$scoreQrBegin);
-		$this->assertEquals(5, $scoreTotalEnd-$scoreTotalBegin);
+		$this->assertEquals(14, $scoreQrEnd);
+		$this->assertEquals(7, $scoreQrEnd-$scoreQrBegin);
+		$this->assertEquals(7, $scoreTotalEnd-$scoreTotalBegin);
 	}
     ## Startup Overview
     public function testLoginAndStartupOverview()
@@ -506,13 +506,9 @@ class ActionGestartPlayersTest extends WebTestCase
 		$this->assertContains("create C", $this->getBodyText());
 		$this->assertContains("update A", $this->getBodyText());
 
-    	$this->open("hike_development/index-test.php?r=openNoodEnvelop/create&nood_envelop_id=2&event_id=3&group_id=5");
+		$this->open("hike_development/index-test.php?r=qrCheck/create&event_id=3&qr_code=33DlYLbS8Ws9EutrUMjNv6");
 		$this->waitForPageToLoad ( "30000" );
-		$this->assertContains("hike_development/index-test.php?r=openNoodEnvelop/create&nood_envelop_id=2&event_id=3&group_id=5", $this->getLocation());
-		$this->open("hike_development/index-test.php?r=openNoodEnvelop/create&nood_envelop_id=3&event_id=3&group_id=6");
-        $this->waitForPageToLoad ( "30000" );
-		$this->assertContains("hike_development/index-test.php?r=openNoodEnvelop/create&nood_envelop_id=3&event_id=3&group_id=6", $this->getLocation());
-		$this->assertContains("Hint gestart players", $this->getBodyText());
-		$this->assertNotContains("Hint gestart players groep B", $this->getBodyText());
+		$this->assertContains("hike_development/index-test.php?r=qrCheck/create&event_id=3&qr_code=33DlYLbS8Ws9EutrUMjNv6", $this->getLocation());
+		$this->assertContains("Dat mag dus niet...", $this->getBodyText());
 	}
 }

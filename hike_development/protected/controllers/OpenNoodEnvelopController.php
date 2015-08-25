@@ -78,7 +78,6 @@ class OpenNoodEnvelopController extends Controller
 		$event_id=$_GET['event_id'];
 		$group_id=$_GET['group_id'];
 		$model=new OpenNoodEnvelop;
-
 		
 		$noodEnvelop = NoodEnvelop::model()->find('nood_envelop_ID =:nood_envelop_Id',
 						array(':nood_envelop_Id' => $nood_envelop_id));

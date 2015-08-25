@@ -128,6 +128,9 @@ class DeelnemersEventController extends Controller
 		if(isset($_POST['DeelnemersEvent']))
 		{
 			$model->attributes=$_POST['DeelnemersEvent'];
+			if ($model->rol <> DeelnemersEvent::ROL_deelnemer) {
+				$model->group_ID = "";
+			}
 			if($model->save())
 				//$this->redirect(array('view','id'=>$model->deelnemers_ID));
 				$this->redirect(array('/startup/startupOverview',
