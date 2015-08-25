@@ -20,7 +20,7 @@ class ActionBeindigdPlayersTest extends WebTestCase
 	 * openVragen_id = 10, 11;
 	 * noodenvelop_id = 6;
 	 * qr_id = 7, 8;
-	 * post_id = 10, 11; 
+	 * post_id = 10, 11;
      */
 
     protected function setUp()
@@ -232,9 +232,9 @@ class ActionBeindigdPlayersTest extends WebTestCase
 		$this->click("link=Beantwoorde Vragen");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=openVragenAntwoorden/viewPlayers&event_id=4&group_id=7", $this->getLocation());
-		$this->assertContains("Hoofdletter g", $this->getBodyText());
-		$this->assertContains("deelnemera", $this->getBodyText());
-		$this->assertNotContains("deelnemerb", $this->getBodyText());
+		$this->assertContains("Er zijn geen vragen beantwoord", $this->getBodyText());
+
+
 	}
 
 	public function testGroupsHintsBekijken()
@@ -255,14 +255,10 @@ class ActionBeindigdPlayersTest extends WebTestCase
 		$this->assertNotContains("Hint beindigd", $this->getBodyText());
 		$this->assertContains("Er zijn geen hints", $this->getBodyText());
 
-		$this->open("hike_development/index-test.php?r=openNoodEnvelop/create&nood_envelop_id=7&event_id=4&group_id=8");
-        $this->waitForPageToLoad ( "30000" );
+		$this->open("hike_development/index-test.php?r=qrCheck/create&event_id=4&qr_code=1wDlYLbS8Ws9EutrUMjNv6");
+		$this->waitForPageToLoad ( "30000" );
+		$this->assertContains("hike_development/index-test.php?r=openNoodEnvelop/create&nood_envelop_id=7&event_id=4&group_id=7", $this->getLocation());
 		$this->assertContains("Dat mag dus niet...", $this->getBodyText());
-
-		$this->assertContains("hike_development/index-test.php?r=openNoodEnvelop/create&nood_envelop_id=6&event_id=4&group_id=7", $this->getLocation());
-        $this->waitForPageToLoad ( "30000" );
-		$this->assertContains("Dat mag dus niet...", $this->getBodyText());
-
 
 		$scoreHintEnd = NoodEnvelop::model()->getNoodEnvelopScore(3, 5);
 		$scoreTotalEnd = Groups::model()->getTotalScoreGroup(3, 5);
