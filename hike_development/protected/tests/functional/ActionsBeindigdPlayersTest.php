@@ -257,7 +257,7 @@ class ActionBeindigdPlayersTest extends WebTestCase
 
 		$this->open("hike_development/index-test.php?r=qrCheck/create&event_id=4&qr_code=1wDlYLbS8Ws9EutrUMjNv6");
 		$this->waitForPageToLoad ( "30000" );
-		$this->assertContains("hike_development/index-test.php?r=openNoodEnvelop/create&nood_envelop_id=7&event_id=4&group_id=7", $this->getLocation());
+		$this->assertContains("hike_development/index-test.php?r=qrCheck/create&event_id=4&qr_code=1wDlYLbS8Ws9EutrUMjNv6", $this->getLocation());
 		$this->assertContains("Dat mag dus niet...", $this->getBodyText());
 
 		$scoreHintEnd = NoodEnvelop::model()->getNoodEnvelopScore(3, 5);

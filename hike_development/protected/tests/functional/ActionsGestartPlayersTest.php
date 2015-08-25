@@ -344,7 +344,7 @@ class ActionGestartPlayersTest extends WebTestCase
 		$scoreTotalEnd = Groups::model()->getTotalScoreGroup(3, 5);
 		$this->assertEquals(7, $scoreQrBegin);
 		$this->assertEquals(14, $scoreQrEnd);
-		$this->assertEquals(5, $scoreQrEnd-$scoreQrBegin);
+		$this->assertEquals(7, $scoreQrEnd-$scoreQrBegin);
 		$this->assertEquals(5, $scoreTotalEnd-$scoreTotalBegin);
 	}
     ## Startup Overview
@@ -508,7 +508,7 @@ class ActionGestartPlayersTest extends WebTestCase
 
 		$this->open("hike_development/index-test.php?r=qrCheck/create&event_id=3&qr_code=33DlYLbS8Ws9EutrUMjNv6");
 		$this->waitForPageToLoad ( "30000" );
-		$this->assertContains("hike_development/index-test.php?r=openNoodEnvelop/create&nood_envelop_id=9&event_id=3&group_id=5", $this->getLocation());
+		$this->assertContains("hike_development/index-test.php?r=qrCheck/create&event_id=3&qr_code=33DlYLbS8Ws9EutrUMjNv6", $this->getLocation());
 		$this->assertContains("Dat mag dus niet...", $this->getBodyText());
 	}
 }
