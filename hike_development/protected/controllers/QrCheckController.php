@@ -28,7 +28,7 @@ class QrCheckController extends Controller
 	 */
 	public function accessRules()
 	{
-		return array(		
+		return array(
 			array('deny',  // deny all guest users
 				'users'=>array('?'),
 			),
@@ -39,14 +39,14 @@ class QrCheckController extends Controller
 			array(	'deny',  // deny if group_id is not set
 				'actions'=>array('update', 'viewPlayers'),
 				'expression'=> '!isset($_GET["group_id"])',
-			),		
+			),
             array(	'allow', // allow admin user to perform 'viewplayers' actions
                 'actions'=>array('index', 'update', 'delete', 'create'),
                 'expression'=> 'QrCheck::model()->isActionAllowed(
                     Yii::app()->controller->id,
                     Yii::app()->controller->action->id,
                     $_GET["event_id"])',
-            ),	
+            ),
             array(	'allow', // allow admin user to perform 'viewplayers' actions
                 'actions'=>array('viewPlayers'),
                 'expression'=> 'QrCheck::model()->isActionAllowed(
@@ -79,24 +79,29 @@ class QrCheckController extends Controller
 	public function actionCreate()
 	{
 		$qr_code = $_GET['qr_code'];
-		$event_id = $_GET['event_id'];	
+		$event_id = $_GET['event_id'];
 		$groupPlayer = DeelnemersEvent::model()->getGroupOfPlayer($event_id,
 									  Yii::app()->user->id);
-		
+
 		$model=new QrCheck;
-			
+
 		$qr = Qr::model()->find('event_ID =:event_id AND
 					 qr_code =:qr_code',
 				  array(':event_id' => $event_id,
 				        ':qr_code'  => $qr_code));
-		$model->qr_ID = $qr->qr_ID;
-		$model->event_ID = $qr->event_ID;
-		$model->group_ID = $groupPlayer;
-		
+		if (!isset($qr->qr_code)){
+			throw new CHttpException(403,"Ongeldige QR code.");
+		}
+			$model->qr_ID = $qr->qr_ID;
+			$model->event_ID = $qr->event_ID;
+			$model->group_ID = $groupPlayer;
+
 		if($model->save())
 			$this->redirect(array('viewPlayers','event_id'=>$model->event_ID,
-						      'group_id'=>$model->group_ID));
-			
+							  'group_id'=>$model->group_ID));
+
+
+
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 /*
@@ -166,8 +171,8 @@ class QrCheckController extends Controller
 				'pagination'=>array('pageSize'=>20,),
 			)
 		);
-		
-		$this->layout='//layouts/column1';	
+
+		$this->layout='//layouts/column1';
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -187,18 +192,18 @@ class QrCheckController extends Controller
 			'model'=>$model,
 		));
 	}
-	
+
 	/**
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed
 	 */
 	public function actionViewPlayers()
 	{
-		$event_id = $_GET['event_id'];   
+		$event_id = $_GET['event_id'];
 		$group_id = $_GET['group_id'];
-		
+
 		//$day_id = EventNames::model()->getActiveDayOfHike($event_id);
-			
+
 		$where = "event_ID = $event_id AND group_ID = $group_id";
 		$qrCheckDataProvider=new CActiveDataProvider('QrCheck',
 		    array(
@@ -214,7 +219,7 @@ class QrCheckController extends Controller
 			'qrCheckDataProvider'=>$qrCheckDataProvider,
 		));
 	}
-	
+
 	/**
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.

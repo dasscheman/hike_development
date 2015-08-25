@@ -57,6 +57,9 @@ class QrCheck extends HikeActiveRecord
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('qr_check_ID, qr_ID, event_ID, group_ID, create_time, create_user_ID, update_time, update_user_ID', 'safe', 'on'=>'search'),
+			array('qr_ID',
+			      'ext.UniqueAttributesValidator',
+			      'with'=>'group_ID'),
 		);
 	}
 
@@ -117,18 +120,18 @@ class QrCheck extends HikeActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
-	
+
 	/**
 	 * Check if actions are allowed. These checks are not only use in the controllers,
-	 * but also for the visability of the menu items. 
+	 * but also for the visability of the menu items.
 	 */
-	
+
     function isActionAllowed($controller_id = null, $action_id = null, $event_id = null, $group_id = null)
     {
 		$actionAllowed = parent::isActionAllowed($controller_id, $action_id, $event_id, $group_id);
-  
+
 		$hikeStatus = EventNames::model()->getStatusHike($event_id);
-		$rolPlayer = DeelnemersEvent::model()->getRolOfPlayer($event_id, Yii::app()->user->id);    
+		$rolPlayer = DeelnemersEvent::model()->getRolOfPlayer($event_id, Yii::app()->user->id);
 		return $actionAllowed;
 	}
 
@@ -136,14 +139,14 @@ class QrCheck extends HikeActiveRecord
      * Checks if qr id is used by any group.
      */
     public function isQrUsed($qr_id)
-	{              
+	{
 		$criteria = new CDbCriteria;
 		$criteria->condition="qr_ID =$qr_id";
 		return QrCheck::model()->exists($criteria);
 	}
 
 	public function existQrCodeForGroup($event_id, $qr_id, $groupPlayer)
-	{              
+	{
 		$criteria = new CDbCriteria;
 		$criteria->select='qr_check_ID as qr_check_ID';
 		//$criteria->select='score as score';                           //Aangepast voor hike
@@ -156,7 +159,7 @@ class QrCheck extends HikeActiveRecord
 		else
 			{ return(false);}
 	}
-	
+
 	/**
 	 * Returns de score voor het checken van de stillen posten voor een groep
 	 */
