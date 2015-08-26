@@ -5,10 +5,10 @@
 <h1>Tussenstand</h1>
 
 <p>
-	Dit bevindt zich nog in experimentele fase. 
+	Dit bevindt zich nog in experimentele fase.
 </p>
 <?php
-    $timestamp=CDateTimeParser::parse('05/09/2014 19:15:00','dd/MM/yyyy hh:mm:ss');
+    $timestamp=CDateTimeParser::parse('25/08/2015 19:15:00','dd/MM/yyyy hh:mm:ss');
     $mintimestamp = $timestamp *1000;
 	$this->Widget('ext.highcharts.HighchartsWidget',
 		      array('options'=>array('chart' => array('type' => 'line'),
@@ -23,7 +23,7 @@
 					     'series' => $testarr,
 					     'tooltip' => array('headerFormat'=>'<b>{series.name}</b><br>',
 								'pointFormat'=>'{point.x:%A %e %b %Y %H:%M} - {point.y:.0f} punten'),
-				
+
      )
    )
 );
