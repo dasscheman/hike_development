@@ -190,7 +190,7 @@ abstract class HikeActiveRecord extends CActiveRecord
 						$updateAllowed = true;}
 				break;
 			case 'postPassage':
-				if ($hikeStatus == EventNames::STATUS_introductie and
+				if ($hikeStatus == EventNames::STATUS_gestart and
 					$rolPlayer == DeelnemersEvent::ROL_organisatie) {
 					$updateAllowed = true;}
 				break;

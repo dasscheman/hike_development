@@ -144,7 +144,14 @@ class PostPassage extends HikeActiveRecord
 		$actionAllowed = parent::isActionAllowed($controller_id, $action_id, $event_id, $group_id);
   
 		$hikeStatus = EventNames::model()->getStatusHike($event_id);
-		$rolPlayer = DeelnemersEvent::model()->getRolOfPlayer($event_id, Yii::app()->user->id);    
+		$rolPlayer = DeelnemersEvent::model()->getRolOfPlayer($event_id, Yii::app()->user->id);
+
+		if ($action_id == 'updateVertrek' and
+			$hikeStatus == EventNames::STATUS_gestart and
+			$rolPlayer == DeelnemersEvent::ROL_organisatie) {
+				$actionAllowed = true;
+		}
+
 		return $actionAllowed;
 	}
 
@@ -313,8 +320,16 @@ class PostPassage extends HikeActiveRecord
 
 		foreach($dataPostPassages as $obj)
 		{
-			// Als count 1 is dan is het de start post en moeten 
-			// we alleen naar de vertrektijd mee te nemen naar de volgende post.
+			if ($aantalPosten == 1 && (strtotime($obj->vertrek))) {
+				// Als $aantalPosten 1 is dan is het de start post en moeten 
+				// we alleen naar de vertrektijd gebruiken.
+				// De deelnemers zijn niet op een post, dus ze zijn nog aan het lopen.
+				// Daarom moet de huidige tijd min de laatste vertrektijd van elkaar 
+				// afgetrokken worden en opgeteld worden bij totaltime.
+				$timeLastStint = strtotime(date('Y-m-d H:i:s')) - strtotime($obj->vertrek);		
+				$totalTime = $totalTime + $timeLastStint;
+			}
+			
 			if ($count > 1) {
 				$to_time = strtotime($obj->binnenkomst);
 				$from_time = strtotime($timeLeftLastPost);
@@ -322,20 +337,19 @@ class PostPassage extends HikeActiveRecord
 				$totalTime = $totalTime + $timeLastStint;
 
 				if ($count == $aantalPosten && (strtotime($obj->vertrek))) {
+
 					// Hier wordt de laatste post gecontroleerd.
 					// De deelnemers zijn niet op een post, dus ze zijn nog aan het lopen.
 					// Daarom moet de huidige tijd min de laatste vertrektijd van elkaar 
 					// afgetrokken worden en opgeteld worden bij totaltime.
-					$timeLastStint = strtotime(date('Y-m-d H:i:s')) - strtotime($timeLeftLastPost);		
+					$timeLastStint = strtotime(date('Y-m-d H:i:s')) - strtotime($obj->vertrek);		
 					$totalTime = $totalTime + $timeLastStint;
 				}
 			}
 
-			// Als count 1 is dan is het de start post en moeten 
-			// we alleen naar de vertrektijd mee te nemen naar de volgende post.
 			$timeLeftLastPost = $obj->vertrek;
 			$count++;
         }
-		return round((strtotime("1970-01-01 $dataEvent->max_time UTC") - $totalTime) / 60,2);
+		return round((strtotime("1970-01-01 $dataEvent->max_time UTC") - $totalTime) / 60, 0);
 	}
 }
