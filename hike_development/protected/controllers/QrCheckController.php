@@ -92,9 +92,18 @@ class QrCheckController extends Controller
 		if (!isset($qr->qr_code)){
 			throw new CHttpException(403,"Ongeldige QR code.");
 		}
-			$model->qr_ID = $qr->qr_ID;
-			$model->event_ID = $qr->event_ID;
-			$model->group_ID = $groupPlayer;
+
+		$qrCheck = QrCheck::model()->find('event_ID =:event_id AND qr_ID =:qr_id AND group_ID =:group_id',
+									array(':event_id' => $qr->event_ID,
+										  ':qr_id'  => $qr->qr_ID,
+										  ':group_id'  => $groupPlayer));
+		if (isset($qrCheck->qr_code)){
+			throw new CHttpException(403,"Jullie groep heeft deze code al gescand");
+		}
+
+		$model->qr_ID = $qr->qr_ID;
+		$model->event_ID = $qr->event_ID;
+		$model->group_ID = $groupPlayer;
 
 		if($model->save())
 			$this->redirect(array('viewPlayers','event_id'=>$model->event_ID,
