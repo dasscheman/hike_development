@@ -113,7 +113,7 @@ class StartupController extends Controller
 	public function actionStartupOverview()
 	{       
 		$event_Id = $_GET['event_id'];
-		$where = "event_ID = $event_Id and rol = 1";
+		$where = "event_ID = $event_Id and rol <= 2";
 		$organisatieDataProvider=new CActiveDataProvider(
 			'DeelnemersEvent',
 			array(

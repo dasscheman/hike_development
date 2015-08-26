@@ -18,7 +18,7 @@
 	<br />
 	<?php
 
-    if($data->rol == 2)
+    if($data->rol == 3)
 	{
 		?>
 		<b><?php echo CHtml::encode($data->getAttributeLabel('group_ID')); ?>:</b>
