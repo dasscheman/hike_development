@@ -6,16 +6,30 @@
 <div class="view">
       <table >
 			<tr>
-				  <td colspan="4" style="text-align:center; height:40px">								 
-						<div style="font-family:verdana; font-size:23px;">
-							  <b><?php echo CHtml::encode($data->group_name); ?></b><sup>
-							  <?php echo CHtml::link('<i class="fa fa-search-plus fa-inverse"></i>',
-										 array('groupOverview',
-										   'event_id'=>$data->event_ID,
-										   'group_id'=>$data->group_ID)); ?></sup></div>
-						
-				  </td>
+				<td colspan="4" style="text-align:center; height:40px">								 
+					  <div style="font-family:verdana; font-size:23px;">
+							<b><?php echo CHtml::encode($data->group_name); ?></b><sup>
+							<?php echo CHtml::link('<i class="fa fa-search-plus fa-inverse"></i>',
+									   array('groupOverview',
+										 'event_id'=>$data->event_ID,
+										 'group_id'=>$data->group_ID)); ?></sup></div>
+					  
+				</td>
 			</tr>
+			<tr>	
+				<td colspan="4" style="text-align:center">
+					<?php
+					$printSeparator = false;
+					foreach ($data->deelnemersEvents as $player )
+					{
+						if ($printSeparator)
+							echo " - ";
+						echo CHtml::encode(Users::model()->getUserName($player->user_ID));
+						$printSeparator = true;
+					}?>
+				</td>
+			</tr>
+
 			<tr>
 				  <td colspan="4" style="text-align:center;">
 						<b><?php echo CHtml::encode('Laatste post'); ?>: </b>		
