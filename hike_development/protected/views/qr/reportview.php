@@ -22,7 +22,7 @@
 	$qr_name = $model->qr_name;
 	$score = $model->score;
     // localhost: $link = "hike/index.php?r=qrCheck/create%26event_id=".$event_id."%26qr_code=".$qr_code;
-	$link = "index.php?r=qrCheck/create%26event_id=".$event_id."%26qr_code=".$qr_code;
+	$link = "index.php?r=qrCheck/create&event_id=".$event_id."&qr_code=".$qr_code;
 	$num = 'CMD01-'.date('ymd');
 	$site = 'www.debison.nl';
 ?>
