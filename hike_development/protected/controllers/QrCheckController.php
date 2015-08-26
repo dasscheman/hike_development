@@ -97,7 +97,7 @@ class QrCheckController extends Controller
 									array(':event_id' => $qr->event_ID,
 										  ':qr_id'  => $qr->qr_ID,
 										  ':group_id'  => $groupPlayer));
-		if (isset($qrCheck->qr_code)){
+		if (isset($qrCheck->qr_check_ID)){
 			throw new CHttpException(403,"Jullie groep heeft deze code al gescand");
 		}
 
