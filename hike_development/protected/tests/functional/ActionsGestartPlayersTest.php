@@ -230,8 +230,7 @@ class ActionGestartPlayersTest extends WebTestCase
 
 		$this->open("hike_development/index-test.php?r=openVragenAntwoorden/update&event_id=3&group_id=5&vraag_id=1");
         $this->waitForPageToLoad ( "30000" );
-		$this->type("name=OpenVragenAntwoorden[antwoord_spelers]", "update A");
-		$this->click("name=yt0");
+		$this->assertContains("Dat mag dus niet...", $this->getBodyText());
 
 		$this->open("hike_development/index-test.php?r=openVragenAntwoorden/create&event_id=3&group_id=5&vraag_id=3");
         $this->waitForPageToLoad ( "30000" );
@@ -241,7 +240,17 @@ class ActionGestartPlayersTest extends WebTestCase
 
 		$this->open("hike_development/index-test.php?r=openVragenAntwoorden/viewPlayers&event_id=3&group_id=5");
 		$this->assertContains("create C", $this->getBodyText());
+
+		$this->open("hike_development/index-test.php?r=openVragenAntwoorden/update&event_id=3&group_id=5&vraag_id=3");
+        $this->waitForPageToLoad ( "30000" );
+		$this->type("name=OpenVragenAntwoorden[antwoord_spelers]", "update A");
+		$this->click("name=yt0");
+		$this->waitForPageToLoad("30000");
+
+		$this->open("hike_development/index-test.php?r=openVragenAntwoorden/viewPlayers&event_id=3&group_id=5");
+		$this->waitForPageToLoad("30000");
 		$this->assertContains("update A", $this->getBodyText());
+
 	}
 
 	public function testGroupsBeantwoordenVragenBekijken()
@@ -503,7 +512,7 @@ class ActionGestartPlayersTest extends WebTestCase
 		$this->assertContains("Dat mag dus niet...", $this->getBodyText());
 
 		$this->open("hike_development/index-test.php?r=openVragenAntwoorden/viewPlayers&event_id=3&group_id=5");
-		$this->assertContains("create C", $this->getBodyText());
+		$this->assertNotContains("create C", $this->getBodyText());
 		$this->assertContains("update A", $this->getBodyText());
 
 		$this->open("hike_development/index-test.php?r=qrCheck/create&event_id=3&qr_code=33DlYLbS8Ws9EutrUMjNv6");

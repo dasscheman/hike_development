@@ -13,7 +13,11 @@
     <div class="row buttons">
        
     <?php   
-        if(OpenVragenAntwoorden::model()->isVraagBeantwoord($data->event_ID,
+        if(OpenVragenAntwoorden::model()->isActionAllowed('openVragenAntwoorden',
+												'create',
+												$data->event_ID,
+												$_GET['group_id']) &&
+			OpenVragenAntwoorden::model()->isVraagBeantwoord($data->event_ID,
                                                             $_GET['group_id'],
                                                             $data->open_vragen_ID) == 'Nee')
         {
@@ -29,7 +33,11 @@
                                        'vraag_id'=>$data->open_vragen_ID)); 
         }
 		else
-        {   if(OpenVragenAntwoorden::model()->isVraagGecontroleerd($data->event_ID,
+        {   if(OpenVragenAntwoorden::model()->isActionAllowed('openVragenAntwoorden',
+												'update',
+												$data->event_ID,
+												$_GET['group_id']) &&
+			   OpenVragenAntwoorden::model()->isVraagGecontroleerd($data->event_ID,
                                                                    $_GET['group_id'],
                                                                    $data->open_vragen_ID) == 'Nee')
             {
