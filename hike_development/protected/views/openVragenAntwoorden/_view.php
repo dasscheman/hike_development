@@ -8,29 +8,29 @@
 
 <div class="view">
 
-           
+
 <table>
-  <td>    
-  
+  <td>
+
 <!--	<b><?php //echo CHtml::encode($data->getAttributeLabel('open_vragen_antwoorden_ID')); ?>:</b>
 	<?php //echo CHtml::link(CHtml::encode($data->open_vragen_antwoorden_ID), array('view', 'id'=>$data->open_vragen_antwoorden_ID)); ?>
 	<br />
 -->
-    <?php   
-	if(OpenVragenAntwoorden::model()->isActionAllowed('openVragenAntwoorden', 'update', $data->event_ID))
-            {
-				echo CHtml::link('<span class="fa-stack fa-lg">
-										<i class="fa fa-circle fa-stack-2x fa-green"></i>
-										<i class="fa fa-file-o fa-stack-1x"></i>
-										<i class="fa fa-blue fa-text-right fa-09x"> Bewerken</i>
-										<i class="fa fa-refresh fa-stack-up-15p fa-blue fa-06x"> </i>
-								  </span>', 
-								  array('/openVragenAntwoorden/updateOrganisatie',
-										'event_id'=>$data->event_ID,
-										'group_id'=>$data->group_ID,
-										'vraag_id'=>$data->open_vragen_ID));
-			} ?>
-		<br />		
+    <?php
+	if(OpenVragenAntwoorden::model()->isActionAllowed('openVragenAntwoorden', 'updateOrganisatie', $data->event_ID))
+		{
+			echo CHtml::link('<span class="fa-stack fa-lg">
+									<i class="fa fa-circle fa-stack-2x fa-green"></i>
+									<i class="fa fa-file-o fa-stack-1x"></i>
+									<i class="fa fa-blue fa-text-right fa-09x"> Bewerken</i>
+									<i class="fa fa-refresh fa-stack-up-15p fa-blue fa-06x"> </i>
+							  </span>',
+							  array('/openVragenAntwoorden/updateOrganisatie',
+									'event_id'=>$data->event_ID,
+									'group_id'=>$data->group_ID,
+									'vraag_id'=>$data->open_vragen_ID));
+		} ?>
+		<br />
 <!--	<b><?php //echo CHtml::encode('Vraag Nummer'); ?>:</b>
 	<?php //echo CHtml::encode(OpenVragen::model()->getVraagVolgorde($data->open_vragen_ID)); ?>
 	<br />
@@ -38,14 +38,14 @@
 	<b><?php echo CHtml::encode('Hike Dag'); ?>:</b>
 	<?php echo CHtml::encode(OpenVragen::model()->getVraagDag($data->open_vragen_ID)); ?>
 	<br />
-	
+
 	<b><?php echo CHtml::encode('Route Onderdeel'); ?>:</b>
 	<?php echo CHtml::encode(OpenVragen::model()->getRouteOnderdeelVraag($data->open_vragen_ID)); ?>
 	<br />
-	
+
 	<b><?php echo CHtml::encode('Vraag Omschrijving'); ?>:</b>
 	<?php echo CHtml::encode(OpenVragen::model()->getOpenVragenName($data->open_vragen_ID)); ?>
-	<br />	
+	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('checked')); ?>:</b>
 	<?php echo CHtml::encode(GeneralFunctions::getJaNeeText($data->checked)); ?>
@@ -75,14 +75,14 @@
 	<b><?php echo CHtml::encode($data->getAttributeLabel('correct')); ?>:</b>
 	<?php echo CHtml::encode(GeneralFunctions::getJaNeeText($data->correct)); ?>
 	<br />
-	
+
 	<b><?php echo CHtml::encode($data->getAttributeLabel('create_user_ID')); ?>:</b>
 	<?php echo CHtml::encode(Users::model()->getUserName($data->create_user_ID)); ?>
 	<br />
-	
+
   </td>
 </table>
-	
+
 
 	<?php /*
 	<b><?php echo CHtml::encode($data->getAttributeLabel('score')); ?>:</b>

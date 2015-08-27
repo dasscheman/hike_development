@@ -160,6 +160,14 @@ class OpenVragenAntwoorden extends HikeActiveRecord
                     $rolPlayer == DeelnemersEvent::ROL_organisatie) {
                     $actionAllowed = true;
                 }
+				break;
+			case 'updateOrganisatie':
+                if (($hikeStatus == EventNames::STATUS_introductie OR
+                    $hikeStatus == EventNames::STATUS_gestart) AND
+                    $rolPlayer == DeelnemersEvent::ROL_organisatie) {
+                    $actionAllowed = true;
+                }
+				break;
         }
 		return $actionAllowed;
     }
