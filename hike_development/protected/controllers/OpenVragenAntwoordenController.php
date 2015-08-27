@@ -186,6 +186,11 @@ class OpenVragenAntwoordenController extends Controller
 								      ':vraag_id'=>$_GET['vraag_id']));
 		}
 
+		if(isset($data->open_vragen_antwoorden_ID) && $data->checked)
+		{
+			throw new CHttpException(403,"Vraag is al gecontroleerd!!");
+		}
+
 		if(isset($data->open_vragen_antwoorden_ID))
 		{
 			$id = $data->open_vragen_antwoorden_ID;
