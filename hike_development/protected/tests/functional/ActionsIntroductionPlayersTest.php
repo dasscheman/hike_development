@@ -2,7 +2,7 @@
 
 class ActionIntroductionPlayersTest extends WebTestCase
 {
- 
+
     /*
      *	For debugging use:
      * 	$this->assertContains("ASDFASDFASDF", $this->getBodyText());
@@ -313,7 +313,9 @@ class ActionIntroductionPlayersTest extends WebTestCase
 		$scoreQrBegin = QrCheck::model()->getQrScore(2, 3);
 		$scoreTotalBegin = Groups::model()->getTotalScoreGroup(2, 3);
 		$this->login();
-
+		//check status & date
+		$this->assertContains("introductie", EventNames::model()->getStatusHike(2));
+		$this->assertContains("0000-00-00", EventNames::model()->getActiveDayOfHike(2));
 		$this->open("hike_development/index-test.php?r=qrCheck/create&event_id=2&qr_code=55DlYLbS8Ws9EutrUMjNv6");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("/hike_development/index-test.php?r=qrCheck/viewPlayers&event_id=2&group_id=3", $this->getLocation());
