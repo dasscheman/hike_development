@@ -93,6 +93,10 @@ class QrCheckController extends Controller
 			throw new CHttpException(403,"Ongeldige QR code.");
 		}
 
+		if (Route::model()->getDayOfRouteId($qr->route_ID) <> EventNames::model()->getActiveDayOfHike($event_id)){
+			throw new CHttpException(403,"Deze Qr code is niet voor vandaag...");
+		}
+
 		$qrCheck = QrCheck::model()->find('event_ID =:event_id AND qr_ID =:qr_id AND group_ID =:group_id',
 									array(':event_id' => $qr->event_ID,
 										  ':qr_id'  => $qr->qr_ID,
