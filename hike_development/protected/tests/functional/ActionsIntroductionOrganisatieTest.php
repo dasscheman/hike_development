@@ -67,7 +67,7 @@ class ActionIntroductionOrganisatieTest extends WebTestCase
     {
 		$scoreVragenBegin = OpenVragenAntwoorden::model()->getOpenVragenScore(2, 3);
 		$scoreTotalBegin = Groups::model()->getTotalScoreGroup(2, 3);
-		
+
 		$this->login();
 
     	$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=2");
@@ -139,7 +139,7 @@ class ActionIntroductionOrganisatieTest extends WebTestCase
 
 		$this->assertContains("Alle beantwoorde vragen", $this->getBodyText());
 		$this->assertContains("Hoofdletter h", $this->getBodyText());
-		$this->assertContains("Hoofdletter i", $this->getBodyText());    	
+		$this->assertContains("Hoofdletter i", $this->getBodyText());
 	}
 
     public function testGeopendeHintsBekijken()
@@ -463,7 +463,7 @@ class ActionIntroductionOrganisatieTest extends WebTestCase
 
     	$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=2");
         $this->waitForPageToLoad ( "30000" );
-		$this->assertContains("hike_development/index-test.php?r=startup/startupOverview&event_id=2", $this->getLocation());	
+		$this->assertContains("hike_development/index-test.php?r=startup/startupOverview&event_id=2", $this->getLocation());
 		$this->assertFalse($this->isElementPresent("link=Dag Veranderen"));
 		$this->open("hike_development/index-test.php?r=eventNames/changeDay&event_id=2");
         $this->assertContains("Dat mag dus niet...", $this->getBodyText());
@@ -495,12 +495,13 @@ class ActionIntroductionOrganisatieTest extends WebTestCase
     {
 		$this->login();
 
+		//$this->assertContains(EventNames::model()->getActiveDayOfHike(2), "0000-00-00");
+
     	$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=2");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=startup/startupOverview&event_id=2", $this->getLocation());
 		$this->assertTrue($this->isElementPresent("link=Status Veranderen"));
 		$this->open("hike_development/index-test.php?r=eventNames/changeStatus&event_id=2");
-
         $this->waitForPageToLoad ( "30000" );
 		$this->select("name=EventNames[status]", "label=Opstart");
 		$this->click("name=yt0");
@@ -540,5 +541,7 @@ class ActionIntroductionOrganisatieTest extends WebTestCase
 		$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=2");
 		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=2", $this->getLocation());
         $this->assertContains("Er is geen maximum tijd voor vandaag", $this->getBodyText());
+
+		//$this->assertContains(EventNames::model()->getActiveDayOfHike(2), "0000-00-00");
 	}
 }
