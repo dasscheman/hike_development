@@ -28,14 +28,14 @@ class EventNamesController extends Controller
      */
     public function accessRules()
     {
-        return array(		
+        return array(
             array(	'deny',  // deny all guest users
                 'users'=>array('?'),),
             array(	'allow', // allow authenticated user to perform 'create' and 'update' actions
                 'actions'=>array('create'),
                 //'actions'=>array('dynamicDays', 'create'),
                 'users'=>array('@'),
-            ),	
+            ),
          /*   array(	'allow',  // allow all users to perform 'index' and 'view' actions
                 'actions'=>array('admin'),
                 'users'=>array('admin'),
@@ -83,14 +83,14 @@ class EventNamesController extends Controller
         if(isset($_POST['EventNames']))
         {
             $model->attributes=$_POST['EventNames'];
-            $model->event_ID = EventNames::model()->determineNewHikeId();	    
+            $model->event_ID = EventNames::model()->determineNewHikeId();
             $model->status = 1;
 
             $modelDeelnemersEvent->event_ID = $model->event_ID;
             $modelDeelnemersEvent->user_ID = Yii::app()->user->id;
             $modelDeelnemersEvent->rol = 1;
             $modelDeelnemersEvent->group_ID = NULL;
-            
+
             $modelRoute->day_date = 1;
             $modelRoute->route_name = "Introductie";
             $modelRoute->event_ID = $model->event_ID;
@@ -110,7 +110,7 @@ class EventNamesController extends Controller
                 $this->redirect(array('startup/startupOverview','event_id'=>$model->event_ID));
             }
         }
-            
+
         $this->render('create',array(
         'model'=>$model,
     ));
@@ -157,7 +157,7 @@ class EventNamesController extends Controller
         {
             $model->attributes=$_POST['EventNames'];
 			if($model->status == EventNames::STATUS_introductie) {
-				$model->active_day = NULL;
+				$model->active_day = "0000-00-00";
 			}
             if($model->save()){
 				if ($model->status == EventNames::STATUS_gestart){
@@ -172,7 +172,7 @@ class EventNamesController extends Controller
             'model'=>$model,
         ));
     }
-    
+
     /**
      * Updates a particular model.
      * If update is successful, the browser will be redirected to the 'view' page.
@@ -196,7 +196,7 @@ class EventNamesController extends Controller
             'model'=>$model,
         ));
     }
-    
+
     /**
      * Deletes a particular model.
      * If deletion is successful, the browser will be redirected to the 'admin' page.
@@ -212,7 +212,7 @@ class EventNamesController extends Controller
         {
             throw new CHttpException(400,"Je kan deze hike niet deleten.");
         }
-        
+
         // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
         if(!isset($_GET['ajax']))
             $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
@@ -271,7 +271,7 @@ class EventNamesController extends Controller
             Yii::app()->end();
         }
     }
-  
+
     /*
      * Deze actie wordt gebruikt voor de form velden. Op basis van een hike
      * en status wordt bepaald welke dagen actief kunnen zijn.
@@ -285,19 +285,19 @@ class EventNamesController extends Controller
                                 array(':event_Id' =>$_POST['event_id'],
                                   ':day_id'=>8));
             $mainarr = array();
-            
+
             foreach($data as $obj)
             {
                 //De dag naam moet gekoppeld worden aan de day_id:
                 $mainarr["$obj->day_ID"] = DayNames::model()->getDayName($obj->day_ID);
             }
-            
+
             foreach($mainarr as $value=>$name)
             {
                 echo CHtml::tag('option', array('value'=>$value), CHtml::encode($name),true);
-            }	
+            }
         }
-        
+
         if($_POST['status']==2)
         {
             //$data = HikeDagen::model()->getDayNamesAvailable($_POST['event_id']);
@@ -305,20 +305,20 @@ class EventNamesController extends Controller
                                 array(':event_Id' =>$_POST['event_id'],
                                   ':day_id'=>8));
             $mainarr = array();
-            
+
             foreach($data as $obj)
             {
                 //De dag naam moet gekoppeld worden aan de day_id:
                 $mainarr["$obj->day_ID"] = DayNames::model()->getDayName($obj->day_ID);
             }
-            
+
             foreach($mainarr as $value=>$name)
             {
                 echo CHtml::tag('option', array('value'=>$value), CHtml::encode($name),true);
             }
                                 /*
             $data = CHtml::listData($data,'day_ID','day_ID');
-      
+
             foreach($data as $value=>$name)
             {
                 echo CHtml::tag('option', array('value'=>$value), CHtml::encode($name),true);
