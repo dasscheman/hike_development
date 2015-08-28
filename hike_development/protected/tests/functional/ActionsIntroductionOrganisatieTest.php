@@ -496,7 +496,7 @@ class ActionIntroductionOrganisatieTest extends WebTestCase
 		$this->login();
 
 		//$this->assertContains(EventNames::model()->getActiveDayOfHike(2), "0000-00-00");
-
+/*
     	$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=2");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=startup/startupOverview&event_id=2", $this->getLocation());
@@ -541,7 +541,7 @@ class ActionIntroductionOrganisatieTest extends WebTestCase
 		$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=2");
 		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=2", $this->getLocation());
         $this->assertContains("Er is geen maximum tijd voor vandaag", $this->getBodyText());
-
+*/
 		//$this->assertContains(EventNames::model()->getActiveDayOfHike(2), "0000-00-00");
 	}
 }
