@@ -317,7 +317,6 @@ class ActionIntroductionPlayersTest extends WebTestCase
 		$this->open("hike_development/index-test.php?r=qrCheck/create&event_id=2&qr_code=55DlYLbS8Ws9EutrUMjNv6");
         $this->waitForPageToLoad ( "30000" );
 
-		$this->assertContains("DINGEN", $this->getBodyText());
 		$this->assertContains("/hike_development/index-test.php?r=qrCheck/viewPlayers&event_id=2&group_id=3", $this->getLocation());
 		$this->assertContains("introductie players", $this->getBodyText());
 
