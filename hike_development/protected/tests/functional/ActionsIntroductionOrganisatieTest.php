@@ -495,8 +495,6 @@ class ActionIntroductionOrganisatieTest extends WebTestCase
     {
 		$this->login();
 
-		//$this->assertContains(EventNames::model()->getActiveDayOfHike(2), "0000-00-00");
-/*
     	$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=2");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=startup/startupOverview&event_id=2", $this->getLocation());
@@ -514,7 +512,7 @@ class ActionIntroductionOrganisatieTest extends WebTestCase
         $this->assertContains("groep A introductie", $this->getBodyText());
         $this->assertContains("groep B introductie", $this->getBodyText());
 
-
+/*
 		$this->open("hike_development/index-test.php?r=eventNames/changeStatus&event_id=2");
 
         $this->waitForPageToLoad ( "30000" );
@@ -523,6 +521,7 @@ class ActionIntroductionOrganisatieTest extends WebTestCase
 		$this->waitForPageToLoad("30000");
 
 		$this->assertContains("hike_development/index-test.php?r=eventNames/changeDay&event_id=2", $this->getLocation());
+		$this->type("id=active_day", "2015-02-27");
 		$this->type("id=EventNames_max_time", "24:00:00");
 		$this->click("name=yt0");
 		$this->waitForPageToLoad("30000");
@@ -531,7 +530,7 @@ class ActionIntroductionOrganisatieTest extends WebTestCase
 		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=2", $this->getLocation());
 		$this->assertContains("Laatste post: nvt", $this->getBodyText());
         $this->assertContains("Tijd laatste post: nvt", $this->getBodyText());
-        $this->assertContains("nog niet gestart", $this->getBodyText());
+        $this->assertContains("nog niet gestart", $this->getBodyText());*/
 
 		$this->open("hike_development/index-test.php?r=eventNames/changeStatus&event_id=2");
         $this->waitForPageToLoad ( "30000" );
@@ -540,8 +539,7 @@ class ActionIntroductionOrganisatieTest extends WebTestCase
 		$this->waitForPageToLoad("30000");
 		$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=2");
 		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=2", $this->getLocation());
+        $this->assertContains("TEST", $this->getBodyText());
         $this->assertContains("Er is geen maximum tijd voor vandaag", $this->getBodyText());
-*/
-		//$this->assertContains(EventNames::model()->getActiveDayOfHike(2), "0000-00-00");
 	}
 }
