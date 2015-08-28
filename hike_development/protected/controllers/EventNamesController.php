@@ -156,7 +156,7 @@ class EventNamesController extends Controller
         if(isset($_POST['EventNames']))
         {
             $model->attributes=$_POST['EventNames'];
-			if($model->status == EventNames::STATUS_introductie) {
+			if($model->attributes['status'] == EventNames::STATUS_introductie) {
 				$model->active_day = "0000-00-00";
 			}
             if($model->save()){
