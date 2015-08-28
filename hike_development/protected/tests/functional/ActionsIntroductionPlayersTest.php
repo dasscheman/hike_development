@@ -313,8 +313,7 @@ class ActionIntroductionPlayersTest extends WebTestCase
 		$scoreQrBegin = QrCheck::model()->getQrScore(2, 3);
 		$scoreTotalBegin = Groups::model()->getTotalScoreGroup(2, 3);
 		$this->login();
-		//check status & date
-		$this->assertContains('EventNames::STATUS_introductie', EventNames::model()->getStatusHike(2));
+		//check date
 		$this->assertContains("0000-00-00", EventNames::model()->getActiveDayOfHike(2));
 		$this->open("hike_development/index-test.php?r=qrCheck/create&event_id=2&qr_code=55DlYLbS8Ws9EutrUMjNv6");
         $this->waitForPageToLoad ( "30000" );
