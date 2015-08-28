@@ -234,15 +234,15 @@ class EventNames extends HikeActiveRecord
 		{
 			if($this->status<>self::STATUS_gestart)
 			{
-			// Als de status anders dan 2 (opgestart) dan moet active day geleegd worden
+				// Als de status anders dan 2 (opgestart) dan moet active day geleegd worden
 				$this->active_day = "";
 				$this->max_time = null;
 			}
 
 			if($this->status == self::STATUS_introductie)
 			{
-			// Als de status 1 (introductie) dan moet avtive day introductie worden
-			$this->active_day = null;
+				// Als de status 1 (introductie) dan moet avtive day introductie worden
+				$this->active_day = "0000-00-00";
 			}
 			return(true);
 		}
