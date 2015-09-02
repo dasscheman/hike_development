@@ -90,7 +90,7 @@ class DeelnemersEventController extends Controller
 			$message->subject = 'Inschrijving Hike';
 			$message->from = 'noreply@biologenkantoor.nl';
 			$message->setBody($params, 'text/html');                 
-			$message->addTo($model->email);
+			$message->addTo(Users::model()->getUserEmail($model->user_ID));
 			if($model->save() && Yii::app()->mail->send($message)) {
 				$this->redirect(array('/startup/startupOverview',
 							  'event_id'=>$model->event_ID));

@@ -14,5 +14,5 @@ $this->menu=array(
 ?>
 
 <h1>Gebruiker Toevoegen</h1>
-
+<h4>Na het invullen en submitten van je gegevens krijg een email met je wachtwoord.</h4>
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

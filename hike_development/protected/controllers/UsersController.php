@@ -82,8 +82,15 @@ class UsersController extends Controller
 		if(isset($_POST['Users']))
 		{
 			$model->attributes=$_POST['Users'];
-			if($model->save())
-				$this->redirect(array('site/index')); 
+
+			$newWachtwoord = GeneralFunctions::randomString(4);
+			$model->password =$newWachtwoord;
+			$model->password_repeat = $newWachtwoord;
+			$emailSend = Users::model()->sendEmailWithNewPassword($model, $newWachtwoord);
+			if($emailSend && $model->save())
+			{
+				$this->redirect(array('site/index'));
+			}
 		}
 
 		$this->render('create',array(
@@ -161,7 +168,6 @@ class UsersController extends Controller
 					$this->redirect(array('site/index'));
 				}
 			}
-			echo "DAT MAG niet"; 
 		}
 		$this->render('updateGetNewPass',array(
 			'model'=>$tempModel,
