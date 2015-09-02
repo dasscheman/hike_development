@@ -79,11 +79,22 @@ class DeelnemersEventController extends Controller
 		if(isset($_POST['DeelnemersEvent']))
 		{
 			$model->attributes=$_POST['DeelnemersEvent'];
-			if($model->save())
-				//$this->redirect(array('view','id'=>$model->deelnemers_ID));
+			$message = new YiiMailMessage(); 
+			$message->view = "sendInschrijving"; 
+			$params = array('mailEventId'=>$model->event_ID,
+							'mailUsersId'=>$model->user_ID,
+							'mailRol'=>$model->rol,
+							'mailGroupId'=>$model->group_ID,
+							'mailOrganisatie'=>$model->create_user_ID);  
+			
+			$message->subject = 'Inschrijving Hike';
+			$message->from = 'noreply@biologenkantoor.nl';
+			$message->setBody($params, 'text/html');                 
+			$message->addTo($model->email);
+			if($model->save() && Yii::app()->mail->send($message)) {
 				$this->redirect(array('/startup/startupOverview',
-						      'event_id'=>$model->event_ID));
-		
+							  'event_id'=>$model->event_ID));
+			}
 		}
 
 		$this->layout='//layouts/column1';

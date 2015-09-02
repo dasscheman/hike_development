@@ -116,7 +116,7 @@ class GeneralFunctions
 		
 	public static function randomString($length)
 	{
-		$chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+		$chars = "abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ0123456789";
 		return substr(str_shuffle($chars),0,$length);
 	}
 }

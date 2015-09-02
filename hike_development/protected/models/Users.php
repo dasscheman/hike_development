@@ -356,6 +356,23 @@ class Users extends HikeActiveRecord
 		} else {
 			return "nvt";}	
 	}
+   	
+   	/**
+	* Retrieves username
+	*/
+	public function getUserEmail($user_Id)
+	{
+		$criteria = new CDbCriteria();
+		$criteria->condition = 'user_ID =:id';
+		$criteria->params=array(':id' => $user_Id);
+		
+		if (Users::model()->exists($criteria))
+		{
+            $data = Users::model()->find($criteria);
+			return $data->email;
+		} else {
+			return "nvt";}	
+	}
 
 	public function sendEmailWithNewPassword($model, $newWachtwoord)
 	{
@@ -364,7 +381,7 @@ class Users extends HikeActiveRecord
 		//this points to the file test.php inside the view path
 		$message->view = "resendPassword"; 
 		//$users = Users::model()->findByPk($model->user_id);  
-		$params              = array('newMailUsers'=>$model->username,
+		$params = array('newMailUsers'=>$model->username,
 					     'newWachtwoord'=>$newWachtwoord);  
         
 		$message->subject    = 'Wachtwoord Hike-app';
