@@ -61,6 +61,7 @@ class OpenVragen extends HikeActiveRecord
 			      create_user_ID, update_user_ID', 'numerical', 'integerOnly'=>true),
 			array('open_vragen_name, vraag, goede_antwoord', 'length', 'max'=>255),
 			array('create_time, update_time', 'safe'),
+			array('open_vragen_name', 'ext.UniqueAttributesValidator', 'with'=>'event_ID,route_ID'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('open_vragen_ID, open_vragen_name, event_ID,

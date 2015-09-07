@@ -57,6 +57,8 @@ class Qr extends HikeActiveRecord
 			array('event_ID, route_ID, qr_volgorde, score, create_user_ID, update_user_ID', 'numerical', 'integerOnly'=>true),
 			array('qr_name, qr_code', 'length', 'max'=>255),
 			array('create_time, update_time', 'safe'),
+			array('qr_name', 'ext.UniqueAttributesValidator', 'with'=>'event_ID,route_ID'),
+			array('qr_code', 'ext.UniqueAttributesValidator', 'with'=>'event_ID,route_ID'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('qr_ID, qr_name, qr_code, event_ID, route_ID, qr_volgorde, score, create_time, create_user_ID, update_time, update_user_ID', 'safe', 'on'=>'search'),

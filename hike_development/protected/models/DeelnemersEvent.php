@@ -61,7 +61,7 @@ class DeelnemersEvent extends HikeActiveRecord
 			//array('event_ID, user_ID, rol, group_ID, create_user_ID, update_user_ID', 'numerical', 'integerOnly'=>true),
 			array('event_ID, user_ID, rol, group_ID', 'numerical', 'integerOnly'=>true),
 			//array('create_time, update_time', 'safe'),
-			array('event_ID', 'ext.UniqueAttributesValidator', 'with'=>'user_ID'),
+			array('user_ID', 'ext.UniqueAttributesValidator', 'with'=>'event_ID'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('deelnemers_ID, event_ID, user_ID, rol, group_ID,

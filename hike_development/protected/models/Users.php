@@ -377,10 +377,8 @@ class Users extends HikeActiveRecord
 	public function sendEmailWithNewPassword($model, $newWachtwoord)
 	{
 		$message = new YiiMailMessage(); 
-		
 		//this points to the file test.php inside the view path
 		$message->view = "resendPassword"; 
-		//$users = Users::model()->findByPk($model->user_id);  
 		$params = array('newMailUsers'=>$model->username,
 					     'newWachtwoord'=>$newWachtwoord);  
         
@@ -388,7 +386,9 @@ class Users extends HikeActiveRecord
 		$message->from = 'noreply@biologenkantoor.nl';
 		$message->setBody($params, 'text/html');                 
 		$message->addTo($model->email);
-		Yii::app()->mail->send($message);
-		return true;
+		if(Yii::app()->mail->send($message)){
+			return true;
+		}
+        throw new CHttpException(400,"Er is geen email verstuurd.");
 	}
 }

@@ -61,9 +61,9 @@ class Groups extends HikeActiveRecord
 			// Please remove those attributes that should not be searched.
 			array('group_ID, event_ID, group_name, create_time, create_user_ID,
 			      update_time, update_user_ID', 'safe', 'on'=>'search'),
-		        array('event_ID',
+		        array('group_name',
 			      'ext.UniqueAttributesValidator',
-			      'with'=>'group_name'),
+			      'with'=>'event_ID'),
 		);
 	}
 

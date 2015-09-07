@@ -54,6 +54,7 @@ class OpenNoodEnvelop extends HikeActiveRecord
 			array('event_ID, nood_envelop_ID, group_ID', 'required'),
 			array('event_ID, nood_envelop_ID, group_ID, opened, create_user_ID, update_user_ID', 'numerical', 'integerOnly'=>true),
 			array('create_time, update_time', 'safe'),
+			array('open_nood_envelop_ID', 'ext.UniqueAttributesValidator', 'with'=>'group_ID'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('open_nood_envelop_ID, event_ID, nood_envelop_ID, group_ID, opened, create_time, create_user_ID, update_time, update_user_ID', 'safe', 'on'=>'search'),

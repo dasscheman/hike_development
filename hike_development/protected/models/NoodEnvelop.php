@@ -59,6 +59,7 @@ class NoodEnvelop extends HikeActiveRecord
 			array('nood_envelop_name, coordinaat', 'length', 'max'=>255),
 			array('opmerkingen', 'length', 'max'=>1050),
 			array('create_time, update_time', 'safe'),
+			array('nood_envelop_name', 'ext.UniqueAttributesValidator', 'with'=>'event_ID,route_ID'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('nood_envelop_ID, nood_envelop_name, event_ID, route_ID, nood_envelop_volgorde, coordinaat, opmerkingen, score, create_time, create_user_ID, update_time, update_user_ID', 'safe', 'on'=>'search'),

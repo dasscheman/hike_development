@@ -65,9 +65,9 @@ class PostPassage extends HikeActiveRecord
 			      gepasseerd, binnenkomst, vertrek, create_time,
 			      create_user_ID, update_time, update_user_ID', 'safe',
 			      'on'=>'search'),
-		        array('event_ID',
+		        array('post_ID',
 			      'ext.UniqueAttributesValidator',
-			      'with'=>'group_ID,post_ID'),
+			      'with'=>'group_ID'),
 		);
 	}
 

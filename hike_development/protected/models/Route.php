@@ -58,6 +58,7 @@ class Route extends HikeActiveRecord
 			array('event_ID, route_volgorde,
 			      create_user_ID, update_user_ID', 'numerical',
 			      'integerOnly'=>true),
+			array('route_name', 'ext.UniqueAttributesValidator', 'with'=>'event_ID,day_date'),
 			array('create_time, update_time', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
