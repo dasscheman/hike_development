@@ -228,6 +228,7 @@ class QrCheckController extends Controller
 			    'pageSize'=>40,
 			),
 		));
+		$this->layout='//layouts/column1';
 		$this->render('viewPlayers',array(
 			'qrCheckDataProvider'=>$qrCheckDataProvider,
 		));

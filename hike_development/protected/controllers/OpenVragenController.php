@@ -131,6 +131,8 @@ class OpenVragenController extends Controller
 				)
 			);			
 		}
+
+		$this->layout='//layouts/column1';
 		$this->render('viewPlayers',array(
 			'openVragenDataProvider'=>$openVragenDataProvider,
 		));

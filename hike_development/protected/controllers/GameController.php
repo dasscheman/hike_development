@@ -149,8 +149,8 @@ class GameController extends Controller
 		$postPassageDataProvider=new CActiveDataProvider('PostPassage',
 		array(
 		    'criteria'=>array(
-			'condition'=>$ppwhere,
-			//'order'=>'group_ID DESC',
+				'condition'=>$ppwhere,
+				'order'=>'binnenkomst DESC',
 			),
 		    'pagination'=>array(
 			'pageSize'=>10,
@@ -162,7 +162,8 @@ class GameController extends Controller
 		$teControlerenOpenVragenDataProvider=new CActiveDataProvider('OpenVragenAntwoorden',
 		    array(
 			 'criteria'=>array(
-				'condition'=>$ovwhere
+				'condition'=>$ovwhere,
+				'order'=>'create_time DESC',
 			    ),
 			'pagination'=>array(
 			    'pageSize'=>10,
@@ -174,7 +175,7 @@ class GameController extends Controller
 		    array(
 			'criteria'=>array(
 			    'condition'=>$newhere,
-			    //'order'=>'group_ID DESC',
+				'order'=>'create_time DESC',
 			    ),
 			'pagination'=>array(
 			    'pageSize'=>30,

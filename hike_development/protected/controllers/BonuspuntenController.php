@@ -193,7 +193,7 @@ class BonuspuntenController extends Controller
 			    'pageSize'=>10,
 			),
 		));
-		
+		$this->layout='//layouts/column1';
 		$this->render('viewPlayers',array(
 			'bonuspuntenDataProvider'=>$bonuspuntenDataProvider,
 		));

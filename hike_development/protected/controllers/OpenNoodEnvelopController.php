@@ -88,9 +88,9 @@ class OpenNoodEnvelopController extends Controller
 		$model->opened = 1;
 		
 		if($model->save())
-				$this->redirect(array('/game/groupOverview',
-						      'event_id'=>$_GET['event_id'],
-						      'group_id'=>$_GET['group_id']));
+			$this->redirect(array('/game/groupOverview',
+						  'event_id'=>$_GET['event_id'],
+						  'group_id'=>$_GET['group_id']));
 						
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);

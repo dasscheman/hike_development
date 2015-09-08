@@ -348,3 +348,9 @@ a:visited {color:#ffffff ;}  /* visited link */
 a:hover {color:#0000FF;}  /* mouse over link */
 a:active {color:#ffffff;}  /* selected link */
 
+table.detail-view { border:1px solid #fff !important; }
+table.detail-view tbody tr:nth-child(even) { background:#93D762; border-color:#fff; }
+table.detail-view tbody tr:nth-child(odd) { background:#B3E38F;  border-color:#fff; }
+table.detail-view tbody td { border-color:#fff; min-width:25%; }
+table.detail-view tbody tr.header { background:#62C41B; }
+table.detail-view tbody tr.header th { text-align:left; min-width:20%; }

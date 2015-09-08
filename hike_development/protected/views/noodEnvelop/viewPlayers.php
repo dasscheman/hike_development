@@ -26,11 +26,54 @@ $this->breadcrumbs=array(
      Dus als je perongeluk een verkeerde hint open maakt, dan heb je 
      pech. </center> 
 <i> Je ziet alleen de hints van vandaag.</i>
-<?php $this->widget('zii.widgets.CListView', array(
-				'dataProvider'=>$noodEnvelopDataProvider,
-				'itemView'=>'/noodEnvelop/_viewPlayers',
-				'enablePagination' => false,
-				'summaryText'=>'', 
-				'emptyText'=>'Er zijn geen hints',
-
-)); ?>
+<?php 
+	foreach($noodEnvelopDataProvider->data as $obj){
+		$hintData[]['header']='Hint naam: ' . $obj->nood_envelop_name;
+		if(!OpenNoodEnvelop::model()->isEnvelopOpenByGroup($obj->nood_envelop_ID,
+										  $_GET['event_id'],
+										  $_GET['group_id']))
+		{
+			$hintData[] = array(
+				'oneRow'=>true,
+				'type'=>'raw',
+				'name'=>CHtml::button('OPENEN',
+						array('submit' => array('/openNoodEnvelop/create',
+							  'nood_envelop_id'=>$obj->nood_envelop_ID,
+							  'event_id'=>$_GET['event_id'],
+							  'group_id'=>$_GET['group_id']),
+						'confirm'=>'Weet je zeker dat je deze envelop open wilt maken?'))
+			);		   
+		} else {
+			$hintData[] = array(
+				'oneRow'=>true,
+				'type'=>'raw',
+				'value'=>"GEOPEND");
+		}
+		$hintData[] = array(
+			'name'=>'Hike dag',
+			'oneRow'=>false,
+			'type'=>'raw',
+			'value'=>Route::model()->getDayOfRouteId($obj->route_ID)
+		);
+		$hintData[] = array(
+			'name'=>'Route onderdeel',
+			'oneRow'=>false,
+			'type'=>'raw',
+			'value'=>Route::model()->getRouteName($obj->route_ID)
+		);
+		$hintData[] = array(
+			'name'=>'Strafpunten',
+			'oneRow'=>true,
+			'type'=>'raw',
+			'value'=>$obj->score
+		);
+	}
+	if (!isset($hinttData)){
+		$hintData[] = array(
+				'value'=>'Geen vragen voor vandaag',
+				'oneRow'=>true);
+	}
+	$this->widget('ext.widgets.DetailView4Col', array(
+		'data'=>$noodEnvelopDataProvider,
+		'attributes'=>$hintData,
+	)); ?>

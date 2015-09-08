@@ -111,6 +111,7 @@ class NoodEnvelopController extends Controller
 				),
 			)
 		);
+		$this->layout='/layouts/column1';
 		$this->render('viewPlayers',array(
 			'noodEnvelopDataProvider'=>$noodEnvelopDataProvider,
 		));

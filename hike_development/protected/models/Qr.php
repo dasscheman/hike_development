@@ -208,7 +208,7 @@ class Qr extends HikeActiveRecord
 		return($UniqueQrCode);
 	}
 	
-		public function getQrCode($event_id, $qr_id)
+	public function getQrCode($event_id, $qr_id)
 	{	
 		$data = Qr::model()->find('event_ID = :event_Id AND qr_ID=:qr_id', 
 						    array(':event_Id' => $event_id, 
@@ -340,4 +340,5 @@ class Qr extends HikeActiveRecord
         return isset($data->score) ?
             $data->score : 0;
     }
+
 }

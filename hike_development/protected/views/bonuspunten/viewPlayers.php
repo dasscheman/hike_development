@@ -21,7 +21,35 @@ $this->menu=array(
 							array('target'=>'_blank')); ?>
 				 </small></sup></h1>
 
-<?php $this->widget('zii.widgets.CListView', array(
-	'dataProvider'=>$bonuspuntenDataProvider,
-	'itemView'=>'_viewPlayers',
-)); ?>
+<?php
+	foreach($bonuspuntenDataProvider->data as $obj){
+		$bonuspuntenData[]['header']='Bonuspunten: ' . $obj->omschrijving;
+
+		$bonuspuntenData[] = array(
+			'name'=>$obj->getAttributeLabel('date'),
+			'oneRow'=>false,
+			'type'=>'raw',
+			'value'=>$obj->date
+		);
+		$bonuspuntenData[] = array(
+			'name'=>$obj->getAttributeLabel('post'),
+			'oneRow'=>false,
+			'type'=>'raw',
+			'value'=>Posten::model()->getPostName($obj->post_ID)
+		);
+		$bonuspuntenData[] = array(
+			'name'=>$obj->getAttributeLabel('score'),
+			'oneRow'=>true,
+			'type'=>'raw',
+			'value'=>$obj->score
+		);
+	}
+	if (!isset($bonuspuntenData)){
+		$bonuspuntenData[] = array(
+				'value'=>'Geen vragen voor vandaag',
+				'oneRow'=>true);
+	}
+	$this->widget('ext.widgets.DetailView4Col', array(
+		'data'=>$bonuspuntenDataProvider,
+		'attributes'=>$bonuspuntenData,
+	)); ?>

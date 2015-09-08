@@ -111,7 +111,7 @@ class OpenVragenAntwoordenController extends Controller
 			    'pageSize'=>30,
 			),
 		));
-
+		$this->layout='//layouts/column1';
 		$this->render('viewPlayers',array(
 			'openVragenAntwoordenDataProvider'=>$openVragenAntwoordenDataProvider,
 		));

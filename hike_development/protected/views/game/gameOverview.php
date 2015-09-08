@@ -121,7 +121,7 @@ $this->menu=array(
     <?php } ?>
 </table>
 <center>Dit is een overzicht van alle groepjes die meedoen. Het symbool <i class="fa fa-search-plus fa-inverse"></i>
-betekend dat je daar meer details van je groep kan bekijken.
+betekent dat je daar meer details van je groep kan bekijken.
 
 Je kunt zien wat de score is van een groepje voor een bepaald onderdeel, maar
 je kunt niet precies zien welke vragen of hints deze groep heeft beantwoord of
