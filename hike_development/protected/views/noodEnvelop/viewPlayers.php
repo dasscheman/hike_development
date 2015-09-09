@@ -70,7 +70,7 @@ $this->breadcrumbs=array(
 	}
 	if (!isset($hinttData)){
 		$hintData[] = array(
-				'value'=>'Geen vragen voor vandaag',
+				'value'=>'Er zijn geen hints',
 				'oneRow'=>true);
 	}
 	$this->widget('ext.widgets.DetailView4Col', array(

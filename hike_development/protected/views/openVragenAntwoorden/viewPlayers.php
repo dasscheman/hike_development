@@ -80,10 +80,28 @@ $this->breadcrumbs=array(
 			'type'=>'raw',
 			'value'=>GeneralFunctions::getJaNeeText($obj->correct)
 		);
+		$vraagtData[] = array(
+			'name'=>$obj->getAttributeLabel('create_user_ID'),
+			'oneRow'=>false,
+			'type'=>'raw',
+			'value'=>Users::model()->getUserName($obj->create_user_ID)
+		);
+		$vraagtData[] = array(
+			'name'=>$obj->getAttributeLabel('create_time'),
+			'oneRow'=>false,
+			'type'=>'raw',
+			'value'=>$obj->create_time
+		);
+		$vraagtData[] = array(
+			'name'=>OpenVragen::model()->getAttributeLabel('score'),
+			'oneRow'=>true,
+			'type'=>'raw',
+			'value'=>OpenVragen::model()->getOpenVraagScore($obj->open_vragen_ID)
+		);
 	}
 	if (!isset($vraagtData)){
 		$vraagtData[] = array(
-				'value'=>'Geen vragen voor vandaag',
+				'value'=>'Er zijn geen vragen beantwoord',
 				'oneRow'=>true);
 	}
 	$this->widget('ext.widgets.DetailView4Col', array(

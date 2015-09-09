@@ -58,7 +58,7 @@ $this->breadcrumbs=array(
 	}
 	if (!isset($qrData)){
 		$qrData[] = array(
-				'value'=>'Geen vragen voor vandaag',
+				'value'=>'Je hebt nog geen enkele stille post gecheckt',
 				'oneRow'=>true);
 	}
 	$this->widget('ext.widgets.DetailView4Col', array(
