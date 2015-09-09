@@ -14,14 +14,25 @@ $this->menu=array(
 	array('label'=>'<span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x fa-green"></i>
                                 <i class="fa fa-flag-o fa-stack-1x"></i>
-                                <i class="fa fa-blue fa-text-right fa-07x"> Binnenkomst Post</i>
+                                <i class="fa fa-blue fa-text-right fa-07x">Binnenkomst Post</i>
                                 <i class="fa fa-angle-double-down fa-stack-up-3p fa-blue fa-05x"> </i>
                         </span>',
 	      'url'=>array('postPassage/create',
 			   'event_id'=>$event_id,
 			   'group_id'=>$group_id),
-	      'visible'=> PostPassage::model()->isActionAllowed('postPassage', 'create', $event_id, $group_id)),
+	      'visible'=> PostPassage::model()->isActionAllowed('postPassage', 'create', $event_id, "", $group_id)),
 	
+	array('label'=>'<span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x fa-green"></i>
+                                <i class="fa fa-flag-o fa-stack-1x"></i>
+                                <i class="fa fa-blue fa-text-right fa-07x">Dag start</i>
+                                <i class="fa fa-angle-double-down fa-stack-up-3p fa-blue fa-05x"> </i>
+                        </span>',
+	      'url'=>array('postPassage/createDayStart',
+			   'event_id'=>$event_id,
+			   'group_id'=>$group_id),
+	      'visible'=> PostPassage::model()->isActionAllowed('postPassage', 'createDayStart', $event_id, "", $group_id)),
+
 	array('label'=>'<span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x fa-green"></i>
                                 <i class="fa fa-file-o fa-stack-1x"></i>
@@ -31,7 +42,7 @@ $this->menu=array(
 	      'url'=>array('openVragen/viewPlayers',
 			   'event_id'=>$event_id,
 			   'group_id'=>$group_id),
-	      'visible'=> OpenVragen::model()->isActionAllowed('openVragen', 'viewPlayers', $event_id, $group_id)),
+	      'visible'=> OpenVragen::model()->isActionAllowed('openVragen', 'viewPlayers', $event_id)),
 	
 	array('label'=>'<span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x fa-green"></i>
@@ -42,7 +53,7 @@ $this->menu=array(
 	      'url'=>array('openVragenAntwoorden/viewPlayers',
 			   'event_id'=>$event_id,
 			   'group_id'=>$group_id),
-	      'visible'=> OpenVragenAntwoorden::model()->isActionAllowed('openVragenAntwoorden', 'viewPlayers', $event_id, $group_id)),
+	      'visible'=> OpenVragenAntwoorden::model()->isActionAllowed('openVragenAntwoorden', 'viewPlayers', $event_id)),
 	
 	array('label'=>'<span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x fa-green"></i>
@@ -54,7 +65,7 @@ $this->menu=array(
 			   'event_id'=>$event_id,
 			   'group_id'=>$group_id,
 			   'set_message'=>false),
-	      'visible'=> NoodEnvelop::model()->isActionAllowed('noodEnvelop', 'viewPlayers', $event_id, $group_id)),
+	      'visible'=> NoodEnvelop::model()->isActionAllowed('noodEnvelop', 'viewPlayers', $event_id)),
 	
 	array('label'=>'<span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x fa-green"></i>
@@ -65,7 +76,7 @@ $this->menu=array(
 	      'url'=>array('bonuspunten/viewPlayers',
 			   'event_id'=>$event_id,
 			   'group_id'=>$group_id),
-	      'visible'=> Bonuspunten::model()->isActionAllowed('bonuspunten', 'viewPlayers', $event_id, $group_id)),
+	      'visible'=> Bonuspunten::model()->isActionAllowed('bonuspunten', 'viewPlayers', $event_id)),
 	
 	array('label'=>'<span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x fa-green"></i>
@@ -76,7 +87,7 @@ $this->menu=array(
 	      'url'=>array('qrCheck/viewPlayers',
 			   'event_id'=>$event_id,
 			   'group_id'=>$group_id),
-	      'visible'=> QrCheck::model()->isActionAllowed('qrCheck', 'viewPlayers', $event_id, $group_id)),
+	      'visible'=> QrCheck::model()->isActionAllowed('qrCheck', 'viewPlayers', $event_id)),
 ); 
    
 ?>
@@ -115,68 +126,66 @@ $this->menu=array(
 </table>
 
 <?php
-
 	foreach($postPassageDataProvider->data as $obj){
-			$postData[]['header']='Postnaam: ' . Posten::model()->getPostName($obj->post_ID);
-			
-			if(PostPassage::model()->isActionAllowed('postPassage', 'update', $obj->event_ID) and !$obj->vertrek)
-			{
-				$postData[] = array(
-					'oneRow'=>true,
-					'type'=>'raw',
-					'value'=>CHtml::link('<span class="fa-stack fa-lg">
-												<i class="fa fa-circle fa-stack-2x fa-green"></i>
-												<i class="fa fa-flag-o fa-stack-1x"></i>
-												<i class="fa fa-blue fa-text-right fa-09x">Vertrek Post</i>
-												<i class="fa fa-angle-double-up fa-stack-up-15p fa-blue fa-06x"> </i>
-											  </span>', 
-											array('postPassage/updateVertrek',
-												  'id'=>$obj->posten_passage_ID,
-												  'event_id'=>$obj->event_ID)),
-				);
-			}
+		$postData[]['header']='Post naam: ' . Posten::model()->getPostName($obj->post_ID);
+		if(PostPassage::model()->isActionAllowed('postPassage', 'updateVertrek', $obj->event_ID, $obj->posten_passage_ID, $group_id) and !$obj->vertrek)
+		{
 			$postData[] = array(
-				'name'=>'group',
-				'oneRow'=>false,
-				'type'=>'raw',
-				'value'=>Groups::model()->getGroupName($obj->group_ID)
-			);
-			$postData[] = array(
-				'name'=>'Gepasseerd',
-				'oneRow'=>false,
-				'type'=>'raw',
-				'value'=>GeneralFunctions::getJaNeeText($obj->gepasseerd)
-			);
-			$postData[] = array(
-				'name'=>'Binnenkomst',
-				'oneRow'=>false,
-				'type'=>'raw',
-				'value'=>$obj->binnenkomst
-			);
-			$postData[] = array(
-				'name'=>'Vetrek',
-				'oneRow'=>false,
-				'type'=>'raw',
-				'value'=>$obj->vertrek
-			);
-			$postData[] = array(
-				'name'=>'Ingecheckt door',
-				'oneRow'=>false,
-				'type'=>'raw',
-				'value'=>Users::model()->getUserName($obj->create_user_ID)
-			);
-			$postData[] = array(
-				'name'=>'Laatst bijgewerkt',
-				'oneRow'=>false,
-				'type'=>'raw',
-				'value'=>Users::model()->getUserName($obj->update_user_ID)
-			);
-			$postData[] = array(
-				'name'=>'score',
 				'oneRow'=>true,
 				'type'=>'raw',
-				'value'=>Posten::model()->getPostScore($obj->post_ID)
+				'value'=>CHtml::link('<span class="fa-stack fa-lg">
+											<i class="fa fa-circle fa-stack-2x fa-green"></i>
+											<i class="fa fa-flag-o fa-stack-1x"></i>
+											<i class="fa fa-blue fa-text-right fa-09x">Vertrek Post</i>
+											<i class="fa fa-angle-double-up fa-stack-up-15p fa-blue fa-06x"> </i>
+										  </span>', 
+										array('postPassage/updateVertrek',
+											  'id'=>$obj->posten_passage_ID,
+											  'event_id'=>$obj->event_ID)),
 			);
+		}
+		$postData[] = array(
+			'name'=>'group',
+			'oneRow'=>false,
+			'type'=>'raw',
+			'value'=>Groups::model()->getGroupName($obj->group_ID)
+		);
+		$postData[] = array(
+			'name'=>'Gepasseerd',
+			'oneRow'=>false,
+			'type'=>'raw',
+			'value'=>GeneralFunctions::getJaNeeText($obj->gepasseerd)
+		);
+		$postData[] = array(
+			'name'=>'Binnenkomst',
+			'oneRow'=>false,
+			'type'=>'raw',
+			'value'=>$obj->binnenkomst
+		);
+		$postData[] = array(
+			'name'=>'Vetrek',
+			'oneRow'=>false,
+			'type'=>'raw',
+			'value'=>$obj->vertrek
+		);
+		$postData[] = array(
+			'name'=>'Ingecheckt door',
+			'oneRow'=>false,
+			'type'=>'raw',
+			'value'=>Users::model()->getUserName($obj->create_user_ID)
+		);
+		$postData[] = array(
+			'name'=>'Laatst bijgewerkt',
+			'oneRow'=>false,
+			'type'=>'raw',
+			'value'=>Users::model()->getUserName($obj->update_user_ID)
+		);
+		$postData[] = array(
+			'name'=>'score',
+			'oneRow'=>true,
+			'type'=>'raw',
+			'value'=>Posten::model()->getPostScore($obj->post_ID)
+		);
 	}
 
 	if (!isset($postData)){

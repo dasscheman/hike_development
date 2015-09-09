@@ -139,16 +139,44 @@ class PostPassage extends HikeActiveRecord
 	 * Check if actions are allowed. These checks are not only use in the controllers,
 	 * but also for the visability of the menu items. 
 	 */
-    function isActionAllowed($controller_id = null, $action_id = null, $event_id = null, $group_id = null)
+    function isActionAllowed($controller_id = null, $action_id = null, $event_id = null, $model_id = null, $group_id = null)
     {
-		$actionAllowed = parent::isActionAllowed($controller_id, $action_id, $event_id, $group_id);
-  
+		$actionAllowed = parent::isActionAllowed($controller_id, $action_id, $event_id, $model_id);
 		$hikeStatus = EventNames::model()->getStatusHike($event_id);
 		$rolPlayer = DeelnemersEvent::model()->getRolOfPlayer($event_id, Yii::app()->user->id);
+		if ($rolPlayer == DeelnemersEvent::ROL_deelnemer) {
+			$groupOfPlayer = DeelnemersEvent::model()->getGroupOfPlayer($event_id, Yii::app()->user->id);
+		}
+/*		if ($action_id == 'create') {
+var_dump(
+	Posten::model()->existPostForActiveDay($event_id),
+	!PostPassage::model()->isFirstPostOfDayForGroup($event_id, $group_id),
+	!PostPassage::model()->notAllPostsOfDayPassedByGroup($event_id, $group_id),
+	PostPassage::model()->notAllPostsOfDayPassedByGroup($event_id, $group_id));
+} exit;*/
+		if ($action_id == 'create' and
+			$hikeStatus == EventNames::STATUS_gestart and
+			$rolPlayer <= DeelnemersEvent::ROL_post and
+			Posten::model()->existPostForActiveDay($event_id) and
+			!PostPassage::model()->isFirstPostOfDayForGroup($event_id, $group_id) and
+			PostPassage::model()->notAllPostsOfDayPassedByGroup($event_id, $group_id)) {
+				$actionAllowed = true;
+		}
+
+		if ($action_id == 'createDayStart' and
+			$hikeStatus == EventNames::STATUS_gestart and
+			$rolPlayer == DeelnemersEvent::ROL_organisatie and
+			Posten::model()->existPostForActiveDay($event_id) and
+			PostPassage::model()->isFirstPostOfDayForGroup($event_id, $group_id)) {
+				$actionAllowed = true;
+		}
 
 		if ($action_id == 'updateVertrek' and
 			$hikeStatus == EventNames::STATUS_gestart and
-			$rolPlayer == DeelnemersEvent::ROL_organisatie) {
+			$rolPlayer <= DeelnemersEvent::ROL_post and
+			Posten::model()->existPostForActiveDay($event_id) and
+			PostPassage::model()->notAllPostsOfDayPassedByGroup($event_id, $group_id) and
+			!PostPassage::model()->isFirstPostOfDayForGroup($event_id, $group_id)) {
 				$actionAllowed = true;
 		}
 
@@ -351,5 +379,52 @@ class PostPassage extends HikeActiveRecord
 			$count++;
         }
 		return round((strtotime("1970-01-01 $dataEvent->max_time UTC") - $totalTime) / 60, 0);
+	}
+
+	public function isFirstPostOfDayForGroup($event_id, $group_id)
+	{
+		$date = EventNames::model()->getActiveDayOfHike($event_id);
+
+		$criteria = new CDbCriteria();
+		$criteria->condition = 'event_ID =:event_id AND date =:date';
+		$criteria->params=array(':event_id' => $event_id, ':date' =>$date);
+		$criteria->order = "post_volgorde DESC";
+		$dataPosten = Posten::model()->findAll($criteria);
+		
+    	foreach($dataPosten as $obj)
+        {
+            $criteria = new CDbCriteria();
+			$criteria->condition = 'event_ID =:event_id AND post_ID =:post_id AND group_ID =:group_id';
+			$criteria->params=array(':event_id' => $event_id, ':post_id' =>$obj->post_ID, ':group_id' =>$group_id);
+			$dataPostenPassage = PostPassage::model()->find($criteria);
+
+			if (isset($dataPostenPassage->posten_passage_ID)) {
+				return false;
+			}
+        }
+		return true;
+	}
+
+	public function notAllPostsOfDayPassedByGroup($event_id, $group_id)
+	{
+		$date = EventNames::model()->getActiveDayOfHike($event_id);
+
+		$criteria = new CDbCriteria();
+		$criteria->condition = 'event_ID =:event_id AND date =:date';
+		$criteria->params=array(':event_id' => $event_id, ':date' =>$date);
+		$criteria->order = "post_volgorde DESC";
+		$dataPosten = Posten::model()->findAll($criteria);
+
+    	foreach($dataPosten as $obj)
+        {
+            $criteria = new CDbCriteria();
+			$criteria->condition = 'event_ID =:event_id AND post_ID =:post_id AND group_ID =:group_id';
+			$criteria->params=array(':event_id' => $event_id, ':post_id' =>$obj->post_ID, ':group_id' =>$group_id);
+			$dataPostenPassage = PostPassage::model()->find($criteria);
+			if (!isset($dataPostenPassage->posten_passage_ID)) {
+				return true;
+			}
+        }
+		return false;
 	}
 }

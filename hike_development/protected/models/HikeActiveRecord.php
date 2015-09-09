@@ -224,11 +224,6 @@ abstract class HikeActiveRecord extends CActiveRecord
 					$rolPlayer == DeelnemersEvent::ROL_organisatie) {
 					$createAllowed = true;}
 				break;
-			case 'postPassage':
-				if ($hikeStatus == EventNames::STATUS_gestart and
-					$rolPlayer <= DeelnemersEvent::ROL_post) {
-					$createAllowed = true;}
-				break;
 			case 'noodEnvelop':
 			case 'openVragen':
 			case 'posten':

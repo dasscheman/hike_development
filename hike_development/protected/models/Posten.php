@@ -324,7 +324,43 @@ class Posten extends HikeActiveRecord
 			return false;
 		}
 	}
-	
+
+	public function getStartPost($event_id)
+	{
+		$date = EventNames::model()->getActiveDayOfHike($event_id);
+
+		$criteria = new CDbCriteria();
+		$criteria->condition = 'event_ID =:event_id AND date =:date';
+		$criteria->params=array(':event_id' => $event_id, ':date' =>$date);
+		$criteria->order = "post_volgorde ASC";
+		$data = Posten::model()->find($criteria);
+
+		if (isset($data->post_ID))
+		{
+			return $data->post_ID;
+		} else {
+			return false;
+		}
+	}
+
+	public function existPostForActiveDay($event_id)
+	{
+		$date = EventNames::model()->getActiveDayOfHike($event_id);
+
+		$criteria = new CDbCriteria();
+		$criteria->condition = 'event_ID =:event_id AND date =:date';
+		$criteria->params=array(':event_id' => $event_id, ':date' =>$date);
+		$criteria->order = "post_volgorde ASC";
+		$data = Posten::model()->find($criteria);
+
+		if (isset($data->post_ID))
+		{
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	public function startPostExist($event_id, $date)
 	{
 		$criteria = new CDbCriteria();

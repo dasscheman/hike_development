@@ -41,11 +41,13 @@ class PostPassageController extends Controller
 				'expression'=> '!isset($_GET["group_id"])',
 			),		
             array(	'allow', // allow admin user to perform 'viewplayers' actions
-                'actions'=>array('index', 'update', 'delete', 'create', 'updateVertrek'),
+                'actions'=>array('index', 'update', 'delete', 'create', 'createDayStart', 'updateVertrek'),
                 'expression'=> 'PostPassage::model()->isActionAllowed(
                     Yii::app()->controller->id,
                     Yii::app()->controller->action->id,
-                    $_GET["event_id"])',
+                    $_GET["event_id"],
+					"",
+					$_GET["group_id"])',
             ),		
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -86,6 +88,35 @@ class PostPassageController extends Controller
 		}
 	
 		$this->render('create',array(
+			'model'=>$model,
+		));
+	}
+
+	/**
+	 * Creates a new model.
+	 * If creation is successful, the browser will be redirected to the 'groupOverview' page.
+	 */
+	public function actionCreateDayStart()
+	{
+		$model=new PostPassage;
+
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+	    
+		if(isset($_POST['PostPassage']))
+		{
+			$model->attributes=$_POST['PostPassage'];
+			$model->post_ID = Posten::model()->getStartPost($_GET['event_id']);
+			$model->event_ID = $_GET['event_id'];
+			$model->group_ID = $_GET['group_id'];
+
+			if($model->save())
+				$this->redirect(array('/game/groupOverview',
+						      'event_id'=>$model->event_ID,
+						      'group_id'=>$model->group_ID));
+		}
+	
+		$this->render('createDayStart',array(
 			'model'=>$model,
 		));
 	}
