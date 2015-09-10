@@ -101,6 +101,7 @@ class SiteController extends Controller
 				$this->refresh();
 			}
 		}
+		$this->layout='//layouts/column2fb';
 		$this->render('contact',array('model'=>$model));
 	}
 

@@ -14,8 +14,10 @@
 <div class="view">
     <table>
         <td style="text-align:right;" width="50%">
-            <?php echo CHtml::link('PDF fomulier genereren', array('qr/report', 'event_id'=>$data->event_ID,
-                                             'id'=>$data->qr_ID)); ?>
+            <?php echo CHtml::link('PDF fomulier genereren', array('qr/report',
+											'event_id'=>$data->event_ID,
+                                            'id'=>$data->qr_ID,
+                                            'qr_code'=>$data->qr_code)); ?>
             <br />
 
             <b><?php echo CHtml::encode($data->getAttributeLabel('route_ID')); ?>:</b>

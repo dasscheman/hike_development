@@ -221,11 +221,15 @@ class QrController extends Controller
 		));
 	}
 
-
 	public function actionReport()
 	{
 		$id = $_GET['id'];
-		$this->renderPartial("reportview", $id);
+		$model=Qr::model()->findByPk($id);
+		if ($model->qr_code == $_GET['qr_code'] and
+			$model->event_ID == $_GET['event_id']) {
+			$this->renderPartial("reportview", $id);
+		}
+		throw new CHttpException(404,'Ongeldige QR code, daarom kun je deze QR niet printen.');
 	}
 
 	/**

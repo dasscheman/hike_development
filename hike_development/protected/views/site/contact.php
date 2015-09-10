@@ -17,14 +17,11 @@ $this->breadcrumbs=array(
 </div>
 
 <?php else: ?>
-<p>
-Als je een bug gevonden hebt dan kun je die <a href="http://bugs.biologenkantoor.nl" target="_blank">HIER</a> melden
-login met hiketester@biologenkantoor.nl en hiketester.
-</p>
-<p>
-Als je vragen of opmerkingen hebt dan kan je dat hier kwijt.
-</p>
-
+<h4>
+	<p>
+		Als je vragen of opmerkingen hebt dan kan je dat hier kwijt.
+	</p>
+</h4>
 <div class="form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
@@ -34,7 +31,7 @@ Als je vragen of opmerkingen hebt dan kan je dat hier kwijt.
 		'validateOnSubmit'=>true,
 	),
 )); ?>
-		
+
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
 
 	<?php echo $form->errorSummary($model); ?>
