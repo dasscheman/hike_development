@@ -262,7 +262,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		$this->assertFalse($this->isElementPresent("link=Dag start"));
 		$this->click("link=Binnenkomst Post");
         $this->waitForPageToLoad ( "30000" );
-		$this->assertContains("hike_development/index-test.php?r=postPassage/createDayStart&event_id=3&group_id=6", $this->getLocation());
+		$this->assertContains("hike_development/index-test.php?r=postPassage/create&event_id=3&group_id=6", $this->getLocation());
 
 		$this->select("name=PostPassage[post_ID]", "label=post 3 gestart organisatie LUNCH");
 		$this->type("name=PostPassage[vertrek]", "2015-02-27 13:43");
