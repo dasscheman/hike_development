@@ -232,7 +232,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		$this->assertContains("hike_development/index-test.php?r=game/groupOverview&event_id=3&group_id=6", $this->getLocation());
 		$this->assertFalse($this->isElementPresent("link=Binnenkomst Post"));
 		$this->assertTrue($this->isElementPresent("link=Dag start"));
-		$this->click("link=Binnenkomst Post");
+		$this->click("link=Dag start");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=postPassage/createDayStart&event_id=3&group_id=6", $this->getLocation());
 
@@ -258,8 +258,8 @@ class ActionGestartOrganisatieTest extends WebTestCase
     	$this->open("hike_development/index-test.php?r=game/groupOverview&event_id=3&group_id=6");
 		$this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=game/groupOverview&event_id=3&group_id=6", $this->getLocation());
-		$this->assertFalse($this->isElementPresent("link=Binnenkomst Post"));
-		$this->assertTrue($this->isElementPresent("link=Dag start"));
+		$this->assertTrue($this->isElementPresent("link=Binnenkomst Post"));
+		$this->assertFalse($this->isElementPresent("link=Dag start"));
 		$this->click("link=Binnenkomst Post");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=postPassage/createDayStart&event_id=3&group_id=6", $this->getLocation());
