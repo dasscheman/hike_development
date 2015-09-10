@@ -10,7 +10,7 @@ $event_id = $_GET['event_id'];
 $group_id = $_GET['group_id'];
 
 $this->menu=array(
-	
+
 	array('label'=>'<span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x fa-green"></i>
                                 <i class="fa fa-flag-o fa-stack-1x"></i>
@@ -21,7 +21,7 @@ $this->menu=array(
 			   'event_id'=>$event_id,
 			   'group_id'=>$group_id),
 	      'visible'=> PostPassage::model()->isActionAllowed('postPassage', 'create', $event_id, "", $group_id)),
-	
+
 	array('label'=>'<span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x fa-green"></i>
                                 <i class="fa fa-flag-o fa-stack-1x"></i>
@@ -38,35 +38,35 @@ $this->menu=array(
                                 <i class="fa fa-file-o fa-stack-1x"></i>
                                 <i class="fa fa-blue fa-text-right fa-07x">Vragen</i>
                                 <i class="fa fa-question fa-stack-6p fa-05x fa-blue"> </i>
-                        </span>', 
+                        </span>',
 	      'url'=>array('openVragen/viewPlayers',
 			   'event_id'=>$event_id,
 			   'group_id'=>$group_id),
-	      'visible'=> OpenVragen::model()->isActionAllowed('openVragen', 'viewPlayers', $event_id, $group_id)),
-	
+	      'visible'=> OpenVragen::model()->isActionAllowed('openVragen', 'viewPlayers', $event_id, "", $group_id)),
+
 	array('label'=>'<span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x fa-green"></i>
                                 <i class="fa fa-file-o fa-stack-1x"></i>
                                 <i class="fa fa-blue fa-text-right fa-07x"> Beantwoorde Vragen</i>
                                 <i class="fa fa-list-ol fa-stack-8p fa-05x fa-blue"> </i>
-                        </span>', 
+                        </span>',
 	      'url'=>array('openVragenAntwoorden/viewPlayers',
 			   'event_id'=>$event_id,
 			   'group_id'=>$group_id),
-	      'visible'=> OpenVragenAntwoorden::model()->isActionAllowed('openVragenAntwoorden', 'viewPlayers', $group_id)),
-	
+	      'visible'=> OpenVragenAntwoorden::model()->isActionAllowed('openVragenAntwoorden', 'viewPlayers',  $event_id, "",$group_id)),
+
 	array('label'=>'<span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x fa-green"></i>
                                 <i class="fa fa-dropbox fa-stack-1x"></i>
                                 <i class="fa fa-blue fa-text-right fa-07x">Hints</i>
                                 <i class="fa fa-question fa-stack-up-21p fa-06x fa-blue"> </i>
-                        </span>', 
+                        </span>',
 	      'url'=>array('noodEnvelop/viewPlayers',
 			   'event_id'=>$event_id,
 			   'group_id'=>$group_id,
 			   'set_message'=>false),
 	      'visible'=> NoodEnvelop::model()->isActionAllowed('noodEnvelop', 'viewPlayers', $event_id)),
-	
+
 	array('label'=>'<span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x fa-green"></i>
                                 <i class="fa fa-sun-o fa-stack-1x"></i>
@@ -76,8 +76,8 @@ $this->menu=array(
 	      'url'=>array('bonuspunten/viewPlayers',
 			   'event_id'=>$event_id,
 			   'group_id'=>$group_id),
-	      'visible'=> Bonuspunten::model()->isActionAllowed('bonuspunten', 'viewPlayers', $event_id, $group_id)),
-	
+	      'visible'=> Bonuspunten::model()->isActionAllowed('bonuspunten', 'viewPlayers', $event_id, "", $group_id)),
+
 	array('label'=>'<span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x fa-green"></i>
                                 <i class="fa fa-qrcode fa-stack-1x"></i>
@@ -87,9 +87,9 @@ $this->menu=array(
 	      'url'=>array('qrCheck/viewPlayers',
 			   'event_id'=>$event_id,
 			   'group_id'=>$group_id),
-	      'visible'=> QrCheck::model()->isActionAllowed('qrCheck', 'viewPlayers', $event_id, $group_id)),
-); 
-   
+	      'visible'=> QrCheck::model()->isActionAllowed('qrCheck', 'viewPlayers', $event_id, "", $group_id)),
+);
+
 ?>
 <table>
     <tr>
@@ -97,7 +97,7 @@ $this->menu=array(
 			<h2><?php echo Groups::model()->getGroupName($group_id) ?> </h2>
         </td>
 	</td>
-	<?php 
+	<?php
 		if (EventNames::model()->getStatusHike($event_id) == EventNames::STATUS_gestart) {
 	   		if (PostPassage::model()->timeLeftToday($event_id, $group_id)) {?>
     <tr>
@@ -118,7 +118,7 @@ $this->menu=array(
 					array('target'=>'_blank')); ?>
 				</small></sup>
 			</h3>
-        </td>		    
+        </td>
     </tr>
 	<tr>
 		<td style="text-align:center">Een lijstje met posten die jullie gepasseerd zijn</td>
@@ -138,7 +138,7 @@ $this->menu=array(
 											<i class="fa fa-flag-o fa-stack-1x"></i>
 											<i class="fa fa-blue fa-text-right fa-09x">Vertrek Post</i>
 											<i class="fa fa-angle-double-up fa-stack-up-15p fa-blue fa-06x"> </i>
-										  </span>', 
+										  </span>',
 										array('postPassage/updateVertrek',
 											  'id'=>$obj->posten_passage_ID,
 											  'event_id'=>$obj->event_ID)),
@@ -197,25 +197,26 @@ $this->menu=array(
 		'data'=>$postPassageDataProvider,
 		'attributes'=>$postData,
 	)); ?>
-		
+
 	<h3>Te Controleren Vragen
 		<sup><small>
 			<?php echo CHtml::link('<i class="fa fa-question-circle fa-inverse"></i>',
 			array('/site/help#TecontrolerenVragen'),
 			array('target'=>'_blank')); ?>
 		 </small></sup>
-	</h3>	
-	<center> Een lijstje met vragen die jullie beantwoord hebben, maar nog niet 	
-		gecontroleerd zijn door de organisatie. Zolang de vraag nog niet beantwoord 	
-		is kan het antwoord aangepast worden. Daarna niet meer en de vraag zal dan	
+	</h3>
+	<center> Een lijstje met vragen die jullie beantwoord hebben, maar nog niet
+		gecontroleerd zijn door de organisatie. Zolang de vraag nog niet beantwoord
+		is kan het antwoord aangepast worden. Daarna niet meer en de vraag zal dan
 		ook uit dit lijstje verdwijnen.</center>
-	
-	<?php 
+
+	<?php
 	foreach($teControlerenOpenVragenDataProvider->data as $obj){
 		$vraagData[]['header']='Vraag naam: ' . OpenVragen::model()->getOpenVragenName($obj->open_vragen_ID);
 		if (OpenVragenAntwoorden::model()->isActionAllowed('openVragenAntwoorden',
 												'update',
 												$obj->event_ID,
+												"",
 												$obj->group_ID) &&
 			OpenVragenAntwoorden::model()->isVraagGecontroleerd($obj->event_ID,
 																$obj->group_ID,
@@ -235,7 +236,7 @@ $this->menu=array(
 										'group_id'=>$obj->group_ID,
 										'vraag_id'=>$obj->open_vragen_ID)),
 			);
-		} 
+		}
 		$vraagData[] = array(
 			'name'=>'Hike dag',
 			'oneRow'=>false,
@@ -294,7 +295,7 @@ $this->menu=array(
 	</h3>
 
 	<center> Een lijstje met hints die jullie geopend hebben. </center>
-	<?php 
+	<?php
 	foreach($openNoodEnvelopDataProvider->data as $obj){
 		$hintData[]['header']='Hint naam: ' . NoodEnvelop::model()->getNoodEnvelopName($obj->nood_envelop_ID);
 		if (OpenNoodEnvelop::model()->isActionAllowed('openNoodEnvelop',
@@ -313,7 +314,7 @@ $this->menu=array(
 							'event_id'=>$obj->event_ID,
 							'group_id'=>$obj->group_ID))
 			);
-		}		
+		}
 
 		$hintData[] = array(
 			'name'=>'Hike dag',
@@ -327,7 +328,7 @@ $this->menu=array(
 			'type'=>'raw',
 			'value'=>NoodEnvelop::model()->getRouteNameOfEnvelopId($obj->nood_envelop_ID)
 		);
-	
+
 		$hintData[] = array(
 			'name'=>'Opmerkingen',
 			'oneRow'=>true,
@@ -363,7 +364,7 @@ $this->menu=array(
 			'oneRow'=>true,
 			'type'=>'raw',
 			'value'=>NoodEnvelop::model()->getNoodEnvelopScore($obj->nood_envelop_ID)
-		); 
+		);
 	}
 	if (!isset($hintData)){
 		$hintData[] = array(
@@ -374,4 +375,3 @@ $this->menu=array(
 		'data'=>$openNoodEnvelopDataProvider,
 		'attributes'=>$hintData,
 	)); ?>
-

@@ -185,15 +185,15 @@ class Users extends HikeActiveRecord
     /**
      * Only the actions specific to the model User are here defined.
      */
-    function isActionAllowed($controller_id = null, $action_id = null, $event_id = null, $group_id = null)
+    function isActionAllowed($controller_id = null, $action_id = null, $event_id = null, $model_id = null, $group_id = null)
     {
-		$actionAllowed = parent::isActionAllowed($controller_id, $action_id, $event_id, $group_id);
-        
+		$actionAllowed = parent::isActionAllowed($controller_id, $action_id, $event_id, $model_id, $group_id);
+
         if ($controller_id == 'users'){
            if (in_array($action_id, array('decline', 'accept'))) {
 					return true;
 			}
-        }   
+        }
 		return false;
     }
 
@@ -308,7 +308,7 @@ class Users extends HikeActiveRecord
             $this->password = $this->hashPassword($this->password);
         }
 	}
-    
+
 	/**
 	* Generates the password hash.
 	* @param string password
@@ -318,7 +318,7 @@ class Users extends HikeActiveRecord
 	{
 		return md5($password);
 	}
-	
+
 	/**
 	* Checks if the given password is correct.
 	* @param string the password to be validated
@@ -328,7 +328,7 @@ class Users extends HikeActiveRecord
 	{
 		return $this->hashPassword($password)===$this->password;
 	}
-   
+
    	/**
 	* Retrieves a list of users
 	* @return array an array of all available users'.
@@ -337,9 +337,9 @@ class Users extends HikeActiveRecord
 	{
 		$data	= Users::model()->findAll();
 		$list = CHtml::listData($data, 'user_ID', 'username');
-		return $list;        
+		return $list;
 	}
-   	
+
    	/**
 	* Retrieves username
 	*/
@@ -348,15 +348,15 @@ class Users extends HikeActiveRecord
 		$criteria = new CDbCriteria();
 		$criteria->condition = 'user_ID =:id';
 		$criteria->params=array(':id' => $user_Id);
-		
+
 		if (Users::model()->exists($criteria))
 		{
             $data = Users::model()->find($criteria);
 			return $data->username;
 		} else {
-			return "nvt";}	
+			return "nvt";}
 	}
-   	
+
    	/**
 	* Retrieves username
 	*/
@@ -365,26 +365,26 @@ class Users extends HikeActiveRecord
 		$criteria = new CDbCriteria();
 		$criteria->condition = 'user_ID =:id';
 		$criteria->params=array(':id' => $user_Id);
-		
+
 		if (Users::model()->exists($criteria))
 		{
             $data = Users::model()->find($criteria);
 			return $data->email;
 		} else {
-			return "nvt";}	
+			return "nvt";}
 	}
 
 	public function sendEmailWithNewPassword($model, $newWachtwoord)
 	{
-		$message = new YiiMailMessage(); 
+		$message = new YiiMailMessage();
 		//this points to the file test.php inside the view path
-		$message->view = "resendPassword"; 
+		$message->view = "resendPassword";
 		$params = array('newMailUsers'=>$model->username,
-					     'newWachtwoord'=>$newWachtwoord);  
-        
+					     'newWachtwoord'=>$newWachtwoord);
+
 		$message->subject    = 'Wachtwoord Hike-app';
 		$message->from = 'noreply@biologenkantoor.nl';
-		$message->setBody($params, 'text/html');                 
+		$message->setBody($params, 'text/html');
 		$message->addTo($model->email);
 		if(Yii::app()->mail->send($message)){
 			return true;

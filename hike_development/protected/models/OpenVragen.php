@@ -166,32 +166,33 @@ class OpenVragen extends HikeActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
-	
+
 	/**
 	 * Check if actions are allowed. These checks are not only use in the controllers,
-	 * but also for the visability of the menu items. 
+	 * but also for the visability of the menu items.
 	 */
-    function isActionAllowed($controller_id = null, 
-							 $action_id = null, 
+    function isActionAllowed($controller_id = null,
+							 $action_id = null,
 							 $event_id = null,
 							 $model_id = null,
-							 $date = null, 
+							 $group_id = null,
+							 $date = null,
 							 $order = null,
 							 $move = null)
     {
 		$actionAllowed = parent::isActionAllowed($controller_id, $action_id, $event_id, $model_id);
-  
+
 		$hikeStatus = EventNames::model()->getStatusHike($event_id);
-		$rolPlayer = DeelnemersEvent::model()->getRolOfPlayer($event_id, Yii::app()->user->id);  
+		$rolPlayer = DeelnemersEvent::model()->getRolOfPlayer($event_id, Yii::app()->user->id);
 		$route_id = OpenVragen::model()->getRouteIdVraag($model_id);
-		
-		if ($action_id == 'moveUpDownVraag' and 
+
+		if ($action_id == 'moveUpDownVraag' and
 			$hikeStatus == EventNames::STATUS_opstart and
 			$rolPlayer == DeelnemersEvent::ROL_organisatie) {
 				$actionAllowed = true;
 		}
 
-		if ($action_id == 'createIntroductie' and 
+		if ($action_id == 'createIntroductie' and
 			$hikeStatus == EventNames::STATUS_opstart and
 			$rolPlayer == DeelnemersEvent::ROL_organisatie) {
 				$actionAllowed = true;
@@ -212,7 +213,7 @@ class OpenVragen extends HikeActiveRecord
 																			   $route_id);
 			}
 			if ($move == 'down') {
-				$nextOrderExist = OpenVragen::model()->lowerOrderNumberExists($event_id, 
+				$nextOrderExist = OpenVragen::model()->lowerOrderNumberExists($event_id,
 																			  $model_id,
 																			  $order,
 																			  $route_id);
@@ -221,7 +222,7 @@ class OpenVragen extends HikeActiveRecord
 				$actionAllowed = true;
 			}
 		}
-		
+
 		return $actionAllowed;
 	}
 
@@ -230,18 +231,18 @@ class OpenVragen extends HikeActiveRecord
 	 */
 	public function getOpenVragenIdOptions($event_Id)
 	{
-		$data = OpenVragen::model()->findAll('event_ID =:event_Id', array(':event_Id' => $event_Id)); 
+		$data = OpenVragen::model()->findAll('event_ID =:event_Id', array(':event_Id' => $event_Id));
 			$list = CHtml::listData($data, 'open_vragen_ID', 'open_vragen_name');
-		return $list;       
+		return $list;
 	}
-	
+
 	/**
 	 *TODO: check of dit de manier en de plek is voor deze dataprovider.
 	 */
 	public function openVragenAllDataProvider($event_id)
 	{
 	     $where = "event_ID = $event_id";
-     
+
 	     $dataProvider=new CActiveDataProvider('OpenVragen',
 		 array(
 		     'criteria'=>array(
@@ -253,10 +254,10 @@ class OpenVragen extends HikeActiveRecord
 		     ),
 	     ));
 	     return $dataProvider;
-       
+
 	 }
-	 
-	 	
+
+
 	/**
 	 * Returns lijst met beschikbare vragenen.
 	 */
@@ -264,9 +265,9 @@ class OpenVragen extends HikeActiveRecord
 	{
 		$data = OpenVragen::model()->findAll('event_ID = $event_id');
 		$list = CHtml::listData($data, '$open_vragen_ID', '$open_vragen_name');
-		return $list;  
+		return $list;
 	}
-	 
+
 	 /**
 	  * Returns omschrijving (naam) van een vraag.
 	  * TODO: moet niet een list returnen.
@@ -274,91 +275,91 @@ class OpenVragen extends HikeActiveRecord
 	 public function getOpenVragenName($vraag_id)
 	 {
 		$data = OpenVragen::model()->find('open_vragen_ID =:vraag_id',
-						  array(':vraag_id' => $vraag_id)); 
+						  array(':vraag_id' => $vraag_id));
 		return $data->open_vragen_name;
 	 }
-	 
+
 	public function getOpenVraag($vraag_id)
 	{
 		$data = OpenVragen::model()->find('open_vragen_ID =:vraag_id',
-						  array(':vraag_id' => $vraag_id)); 
-		return $data->vraag;     
+						  array(':vraag_id' => $vraag_id));
+		return $data->vraag;
 	}
-	
+
 	/**
 	 * Zelfde als hierboven 1 van de twee moet weg.
 	 */
 	public function getOpenVraagAntwoord($vraag_id)
 	{
 		$data = OpenVragen::model()->find('open_vragen_ID =:vraag_id',
-						  array(':vraag_id' => $vraag_id)); 
+						  array(':vraag_id' => $vraag_id));
 		//$list = CHtml::listData($data, 'open_vragen_ID', 'goede_antwoord');
-		return $data->goede_antwoord;     
+		return $data->goede_antwoord;
 	}
-	
+
 	/**
 	 * Returns score voor een vraag.
 	 */
 	public function getOpenVraagScore($vraag_id)
 	{
 		$data = OpenVragen::model()->find('open_vragen_ID =:vraag_id',
-						  array(':vraag_id' => $vraag_id)); 
+						  array(':vraag_id' => $vraag_id));
         return isset($data->score) ?
-            $data->score : 0;   
+            $data->score : 0;
 	}
-	
+
 	/**
 	 * Returns volgnummer van een vraag.
 	 */
 	public function	getVraagVolgorde($vraag_id)
 	{
 		$data = OpenVragen::model()->find('open_vragen_ID =:vraag_id',
-						  array(':vraag_id' => $vraag_id)); 
-		return $data->vraag_volgorde;     
+						  array(':vraag_id' => $vraag_id));
+		return $data->vraag_volgorde;
 	}
-	
+
 	/**
 	 * Returns Dag van een vraag.
 	 */
 	public function	getVraagDag($vraag_id)
 	{
 		$data = OpenVragen::model()->find('open_vragen_ID =:vraag_id',
-						  array(':vraag_id' => $vraag_id)); 
-		
+						  array(':vraag_id' => $vraag_id));
+
 		if(isset($data->route_ID))
 		{
 			$date = Route::model()->getDayOfRouteId($data->route_ID);
 			return $date;
 		}
 		else
-			{return;}	
+			{return;}
 	}
-	
+
 	/**
 	 * Returns Route onderdeel van vraag
 	 */
 	public function	getRouteOnderdeelVraag($vraag_id)
 	{
 		$data = OpenVragen::model()->find('open_vragen_ID =:vraag_id',
-						  array(':vraag_id' => $vraag_id)); 
-		$day = Route::model()->getRouteName($data->route_ID);     
+						  array(':vraag_id' => $vraag_id));
+		$day = Route::model()->getRouteName($data->route_ID);
 		return $day;
 	}
-	
+
 	/**
 	 * Returns Route ID van vraag
 	 */
 	public function	getRouteIdVraag($vraag_id)
 	{
 		$data = OpenVragen::model()->find('open_vragen_ID =:vraag_id',
-						  array(':vraag_id' => $vraag_id)); 
+						  array(':vraag_id' => $vraag_id));
 		if(isset($data->route_ID)){
 			return $data->route_ID;
 		} else {
 			return false;
 		}
 	}
-	
+
 	public function getNewOrderForIntroductieVragen($event_id)
 	{
         $route_id = Route::model()->getIntroductieRouteId($event_id);
@@ -368,13 +369,13 @@ class OpenVragen extends HikeActiveRecord
 		$criteria->params=array(':event_id' => $event_id, ':route_id' =>$route_id);
 		$criteria->order = "vraag_volgorde DESC";
 		$criteria->limit = 1;
-		
+
 		if (OpenVragen::model()->exists($criteria))
 		{	$data = OpenVragen::model()->findAll($criteria);
 			$newOrder = $data[0]->vraag_volgorde+1;
 		} else {
 			$newOrder = 1;}
-		
+
 		return $newOrder;
 	}
 
@@ -386,13 +387,13 @@ class OpenVragen extends HikeActiveRecord
 		$criteria->params=array(':event_id' => $event_id, ':route_id' =>$route_id);
 		$criteria->order = "vraag_volgorde DESC";
 		$criteria->limit = 1;
-		
+
 		if (OpenVragen::model()->exists($criteria))
 		{	$data = OpenVragen::model()->findAll($criteria);
 			$newOrder = $data[0]->vraag_volgorde+1;
 		} else {
 			$newOrder = 1;}
-		
+
 		return $newOrder;
 	}
 
@@ -401,7 +402,7 @@ class OpenVragen extends HikeActiveRecord
         $criteria = new CDbCriteria();
 		$criteria->condition = 'event_ID =:event_id AND route_ID =:route_id';
 		$criteria->params=array(':event_id' => $event_id, ':route_id' =>$route_id);
-		
+
 		return OpenVragen::model()->count($criteria);
 	}
 
@@ -409,9 +410,9 @@ class OpenVragen extends HikeActiveRecord
 	{
 		$criteria = new CDbCriteria();
 		$criteria->condition = 'event_ID =:event_id AND open_vragen_ID !=:id AND route_ID=:route_id AND vraag_volgorde >=:order';
-		$criteria->params=array(':event_id' => $event_id, 
+		$criteria->params=array(':event_id' => $event_id,
 								':id' => $id,
-								':route_id' => $route_id, 
+								':route_id' => $route_id,
 								':order' => $vraag_order);
 
 		if (OpenVragen::model()->exists($criteria)) {
@@ -420,14 +421,14 @@ class OpenVragen extends HikeActiveRecord
 			return false;
 		}
 	}
- 
+
 	public function higherOrderNumberExists($event_id, $id, $vraag_order, $route_id)
 	{
 		$criteria = new CDbCriteria();
 		$criteria->condition = 'event_ID =:event_id AND open_vragen_ID !=:id AND route_ID =:route_id AND vraag_volgorde <=:order';
-		$criteria->params=array(':event_id' => $event_id, 
+		$criteria->params=array(':event_id' => $event_id,
 								':id' => $id,
-								':route_id' => $route_id, 
+								':route_id' => $route_id,
 								':order' => $vraag_order);
 
 		if (OpenVragen::model()->exists($criteria)) {

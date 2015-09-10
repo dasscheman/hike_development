@@ -32,17 +32,18 @@ class RouteController extends Controller
 			array(
 				'deny', // deny all users
 				'users'=>array('?'),
-			),		
+			),
 			array(
 				'allow', // allow authenticated user to perform 'create'
 				'actions'=>array('view'),
-				'users'=>array('@'),),	
-			array(	'allow', // only when $_GET are set		
+				'users'=>array('@'),),
+			array(	'allow', // only when $_GET are set
 					'actions'=>array('moveUpDown'),
 					'expression'=> 'Route::model()->isActionAllowed(
 						Yii::app()->controller->id,
 						Yii::app()->controller->action->id,
 						$_GET["event_id"],
+						"",
 						"",
 						$_GET["date"],
 						$_GET["volgorde"],
@@ -52,14 +53,13 @@ class RouteController extends Controller
 					'expression'=> 'Route::model()->isActionAllowed(
 						Yii::app()->controller->id,
 						Yii::app()->controller->action->id,
-						$_GET["event_id"], 
-						"")'),
+						$_GET["event_id"])'),
 			array(
 				'deny', //deny all users
 				'users'=>array('*'),),
 		);
 	}
-	
+
 	/**
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed
@@ -72,7 +72,7 @@ class RouteController extends Controller
 		$where = "event_ID = $event_id AND route_ID =$route_id";
 
 		$vragenDataProvider=new CActiveDataProvider('OpenVragen',
-			array(			
+			array(
 			'criteria'=>array(
 				'condition'=>$where,
 				'order'=>'vraag_volgorde ASC',
@@ -83,7 +83,7 @@ class RouteController extends Controller
 		));
 
 		$envelopDataProvider=new CActiveDataProvider('NoodEnvelop',
-			array(			
+			array(
 			'criteria'=>array(
 				'condition'=>$where,
 				'order'=>'nood_envelop_volgorde ASC',
@@ -101,7 +101,7 @@ class RouteController extends Controller
 			'pagination'=>array(
 				'pageSize'=>15,
 			),
-		)); 
+		));
 		$this->render('view',array(
 			'model'=>$this->loadModel($route_id),
 			'vragenDataProvider'=>$vragenDataProvider,
@@ -128,7 +128,7 @@ class RouteController extends Controller
 			$model->event_ID = $_GET['event_id'];
 			$model->route_volgorde = Route::model()->getNewOrderForDateRoute($_GET['event_id'], $_GET['date']);
 
-			// Wanneer er een route onderdeel aangemaakt wordt, dan moet er gecheckt woren of er voor die dag al een 
+			// Wanneer er een route onderdeel aangemaakt wordt, dan moet er gecheckt woren of er voor die dag al een
 			// begin aangemaakt is.  Als dat niet het geval is dan moet die nog aangemaakt worden.
 			if (!Posten::model()->startPostExist($_GET['event_id'], $_GET['date'])) {
 
@@ -139,7 +139,7 @@ class RouteController extends Controller
 				$modelStartPost->post_volgorde = 1;
 				$modelStartPost->score = 0;
 			}
-			
+
 			// validate BOTH $model, $modelStartPost.
 			$valid=$model->validate();
 			if (isset($modelStartPost)) {
@@ -191,11 +191,11 @@ class RouteController extends Controller
 
 		if(isset($_POST['Route']))
 		{
-			$model->attributes=$_POST['Route'];		
-			// Wanneer er een route onderdeel aangepast wordt (datum), dan moet er gecheckt woren of er voor 
+			$model->attributes=$_POST['Route'];
+			// Wanneer er een route onderdeel aangepast wordt (datum), dan moet er gecheckt woren of er voor
 			// die dag al een begin post aangemaakt is.  Als dat niet het geval is dan moet die nog aangemaakt worden.
 //Volgens mij toch niet nodig, zou mee moeten gaan met de Mysql cascade!!
-			
+
 			/*if (!Posten::model()->startPostExist($_GET['event_id'], $_GET['date'])) {
 				$modelStartPost = new Posten;
 				$modelStartPost->post_name = 'Dag Start';
@@ -203,14 +203,14 @@ class RouteController extends Controller
 				$modelStartPost->post_volgorde = 1;
 				$modelStartPost->score = 0;
 			}
-			
+
 			// validate BOTH $model, $modelStartPost and $qrModel.
 			$valid=$model->validate();
 			if (isset($modelStartPost)) {
 				$valid=$modelStartPost->validate() && $valid;
 			}*/
 			//if($valid)*/
-			if($model->save())			
+			if($model->save())
 			{
 				$this->redirect(array('/route/index',
 							  'event_id'=>$model->event_ID));
@@ -234,7 +234,7 @@ class RouteController extends Controller
 			$this->loadModel($id)->delete();
 		}
 		catch(CDbException $e)
-		{		
+		{
 			throw new CHttpException(400,"Je kan dit routeonderdeel niet verwijderen. Verwijder eerst alle onderdelen van deze route (vragen, stille posten)");
 		}
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
@@ -260,7 +260,7 @@ class RouteController extends Controller
 			'endDate'=>$endDate
 		);
 		$this->layout='//layouts/column1';
-		$this->render('index', $dataModel);		
+		$this->render('index', $dataModel);
 	}
 
 
@@ -303,7 +303,7 @@ class RouteController extends Controller
 			'qrData'=>$qrDataProvider
 		);
 
-		$this->render('viewIntroductie', $dataModel);		
+		$this->render('viewIntroductie', $dataModel);
 	}
 
 	/**
@@ -350,10 +350,10 @@ class RouteController extends Controller
 	}
 
 	/*
-	 * Deze actie wordt gebruikt voor de grid velden.  
+	 * Deze actie wordt gebruikt voor de grid velden. 
 	 */
 	public function actionMoveUpDown()
-	{	
+	{
 		$event_id = $_GET['event_id'];
 		$route_id = $_GET['route_id'];
 		$date = $_GET['date'];
@@ -401,7 +401,7 @@ class RouteController extends Controller
 		//if(!isset($_GET['ajax'])) $this->render('grid_view', $params);
 		//$this->renderPartial('index', $dataModel);
 		$this->layout='//layouts/column1';
-		$this->render('index', $dataModel);	
+		$this->render('index', $dataModel);
 
 	}
 }

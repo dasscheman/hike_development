@@ -18,7 +18,7 @@ class PostenController extends Controller
 		return array(
 			'accessControl', // perform access control for CRUD operations
 			// Vanuit de view 'index'wordt er gebruik gemaakt van een GET request om te deleten.
-			// Daarom is het volgende stuk uitgepijpt. 
+			// Daarom is het volgende stuk uitgepijpt.
 			//'postOnly + delete', // we only allow deletion via POST request
 		);
 	}
@@ -30,15 +30,16 @@ class PostenController extends Controller
 	 */
 	public function accessRules()
 	{
-		return array(			
+		return array(
 			array('deny',  // deny all users
-				'users'=>array('?'),),	
-			array(	'allow', // only when $_GET are set		
+				'users'=>array('?'),),
+			array(	'allow', // only when $_GET are set
 					'actions'=>array('moveUpDown'),
 					'expression'=> 'Posten::model()->isActionAllowed(
 						Yii::app()->controller->id,
 						Yii::app()->controller->action->id,
 						$_GET["event_id"],
+						"",
 						"",
 						$_GET["date"],
 						$_GET["volgorde"],
@@ -50,7 +51,7 @@ class PostenController extends Controller
                     Yii::app()->controller->id,
                     Yii::app()->controller->action->id,
                     $_GET["event_id"])',
-            ),		
+            ),
 			array('deny',  // deny all users
 				'users'=>array('*'),),
 		);
@@ -134,7 +135,7 @@ class PostenController extends Controller
 			$this->loadModel($post_id)->delete();
 		}
 		catch(CDbException $e)
-		{		
+		{
 			throw new CHttpException(400,"Je kan deze post niet verwijderen.");
 		}
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
@@ -148,20 +149,20 @@ class PostenController extends Controller
 	 * Lists all models.
 	 */
 	public function actionIndex()
-	{	
+	{
 		$event_Id = $_GET['event_id'];
 		$startDate=EventNames::model()->getStartDate($event_Id);
 		$endDate=EventNames::model()->getEndDate($event_Id);
-		
+
 		$postenData=new Posten('searchPostDate');
-	
+
 		$dataModel=array(
 			'postenData'=>$postenData,
 			'startDate'=>$startDate,
 			'endDate'=>$endDate
 		);
 		$this->layout='//layouts/column1';
-		$this->render('index', $dataModel);	
+		$this->render('index', $dataModel);
 	}
 
 	/**
@@ -208,17 +209,17 @@ class PostenController extends Controller
 	}
 
 	public function actionMoveUpDown()
-    {	
+    {
 		$event_id = $_GET['event_id'];
 		$post_id = $_GET['post_id'];
 		$date = $_GET['date'];
 		$post_volgorde = $_GET['volgorde'];
 		$up_down = $_GET['up_down'];
-	
+
 		$currentModel = Posten::model()->findByPk($post_id);
-	
+
 		$criteria = new CDbCriteria;
-	
+
 		if ($up_down=='up')
 		{
 			$criteria->condition = 'event_ID =:event_id AND date =:date AND post_volgorde <:order';
@@ -237,15 +238,15 @@ class PostenController extends Controller
 		$tempCurrentVolgorde = $currentModel->post_volgorde;
 		$currentModel->post_volgorde = $previousModel[0]->post_volgorde;
 		$previousModel[0]->post_volgorde = $tempCurrentVolgorde;
-	
+
 		$currentModel->save();
 		$previousModel[0]->save();
 
 		$startDate=EventNames::model()->getStartDate($event_id);
 		$endDate=EventNames::model()->getEndDate($event_id);
-		
+
 		$postenData=new Posten('searchPostDate');
-	
+
 		$dataModel=array(
 			'postenData'=>$postenData,
 			'startDate'=>$startDate,
@@ -254,6 +255,6 @@ class PostenController extends Controller
 		//if(!isset($_GET['ajax'])) $this->render('grid_view', $params);
 		//$this->renderPartial('index', $dataModel);
 		$this->layout='//layouts/column1';
-		$this->render('index', $dataModel);	
+		$this->render('index', $dataModel);
    }
 }

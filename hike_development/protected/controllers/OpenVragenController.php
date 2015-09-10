@@ -28,14 +28,14 @@ class OpenVragenController extends Controller
 	 */
 	public function accessRules()
 	{
-		return array(			
+		return array(
 			array('deny',  // deny all users
 				'users'=>array('?'),
 			),
 			array(	'allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array('dynamicRouteOnderdeel'),
 				'users'=>array('@'),
-			),	
+			),
 			array(	'deny',  // deny if event_id is not set
 				'actions'=>array('delete'),
 				'expression'=> '!isset($_GET["vraag_id"])',
@@ -43,14 +43,15 @@ class OpenVragenController extends Controller
 			array(	'deny',  // deny if event_id is not set
 				'actions'=>array('create'),
 				'expression'=> '!isset($_GET["route_id"])',
-			),	
-			array(	'allow', // only when $_GET are set		
+			),
+			array(	'allow', // only when $_GET are set
 				'actions'=>array('moveUpDown'),
 				'expression'=> 'OpenVragen::model()->isActionAllowed(
 					Yii::app()->controller->id,
 					Yii::app()->controller->action->id,
 					$_GET["event_id"],
 					$_GET["vraag_id"],
+					"",
 					$_GET["date"],
 					$_GET["volgorde"],
 					$_GET["up_down"])'),
@@ -66,9 +67,10 @@ class OpenVragenController extends Controller
                 'expression'=> 'OpenVragen::model()->isActionAllowed(
                     Yii::app()->controller->id,
                     Yii::app()->controller->action->id,
-                    $_GET["event_id"], 
+                    $_GET["event_id"],
+					"",
 					$_GET["group_id"])',
-            ),	
+            ),
 			array(	'deny',  // deny all users
 				'users'=>array('*'),
 			),
@@ -86,17 +88,17 @@ class OpenVragenController extends Controller
 		));
 	}
 
-	
-		
+
+
 	public function actionViewPlayers()
-	{       
+	{
 		$event_id = $_GET['event_id'];
 		/**
 		 * Alleen de vragen van een active dag van een gestarte hike
 		 * kunnen worden getoond. Er worden exeptions gezet als niet
-		 * voldaan wordt. 
-		 */	
-		
+		 * voldaan wordt.
+		 */
+
 		if (EventNames::model()->getStatusHike($event_id) == EventNames::STATUS_introductie) {
 			$openVragenDataProvider=new CActiveDataProvider('OpenVragen',
 				array(
@@ -104,10 +106,10 @@ class OpenVragenController extends Controller
 						 'join'=>'JOIN tbl_route route ON route.route_ID = t.route_ID',
 						 'condition'=>'route.route_name =:name
 										AND route.event_ID =:event_id',
-						 'params'=>array(':name'=>'Introductie', 
+						 'params'=>array(':name'=>'Introductie',
 										  ':event_id'=>$event_id),
 						 'order'=>'route_ID ASC, vraag_volgorde ASC'
-						),  	
+						),
 					'pagination'=>array(
 						'pageSize'=>30,
 					),
@@ -118,18 +120,18 @@ class OpenVragenController extends Controller
 			$openVragenDataProvider=new CActiveDataProvider('OpenVragen',
 				array(
 					'criteria'=>array(
-						 'join'=>'JOIN tbl_route route ON route.route_ID = t.route_ID', 
+						 'join'=>'JOIN tbl_route route ON route.route_ID = t.route_ID',
 						 'condition'=>'route.day_date =:active_day
 										AND route.event_ID =:event_id',
-						 'params'=>array(':active_day'=>$active_day, 
+						 'params'=>array(':active_day'=>$active_day,
 										  ':event_id'=>$event_id),
 						 'order'=>'route_ID ASC, vraag_volgorde ASC'
-						),	  	
+						),
 					'pagination'=>array(
 						'pageSize'=>30,
 					),
 				)
-			);			
+			);
 		}
 
 		$this->layout='//layouts/column1';
@@ -152,7 +154,7 @@ class OpenVragenController extends Controller
 		{
 			$model->attributes=$_POST['OpenVragen'];
 
-			
+
 			$model->event_ID = $_GET['event_id'];
 			$model->route_ID = $_GET['route_id'];
 			$model->vraag_volgorde = OpenVragen::model()->getNewOrderForVragen(
@@ -181,7 +183,7 @@ class OpenVragenController extends Controller
 		{
 			$model->attributes=$_POST['OpenVragen'];
 
-			
+
 			$model->event_ID = $_GET['event_id'];
 			$model->route_ID = Route::model()-> getIntroductieRouteId($_GET['event_id']);
 			$model->vraag_volgorde = OpenVragen::model()->getNewOrderForIntroductieVragen($_GET['event_id']);
@@ -240,10 +242,10 @@ class OpenVragenController extends Controller
 			$this->loadModel($_GET['vraag_id'])->delete();
 		}
 		catch(CDbException $e)
-		{		
+		{
 			throw new CHttpException(400,"Je kan deze vraag niet verwijderen.");
 		}
-		
+
 		if (Route::model()->routeIdIntroduction($_GET['route_id'])){
 			$this->redirect(isset($_POST['returnUrl']) ?
 					$_POST['returnUrl'] : array('/route/viewIntroductie',
@@ -313,11 +315,11 @@ class OpenVragenController extends Controller
 			Yii::app()->end();
 		}
 	}
-	
+
 	/*
 	 * Deze actie wordt gebruikt voor de form velden. Op basis van een hike
-	 * en een dag wordt bepaald welke route onderdelen er beschikbaar zijn. 
-	 * Returns list with available techniek names, for a day and event. 
+	 * en een dag wordt bepaald welke route onderdelen er beschikbaar zijn.
+	 * Returns list with available techniek names, for a day and event.
 	 */
 	public function actionDynamicRouteOnderdeel()
 	{
@@ -327,21 +329,21 @@ class OpenVragenController extends Controller
 						array(':day_id'=>$day_id,
 						      ':event_id'=>$event_id));
 		$mainarr = array();
-		
+
 		foreach($data as $obj)
 		{
 			//De post naam moet gekoppeld worden aan de post_id:
 			$mainarr["$obj->route_techniek_ID"] = RouteTechniek::model()->getRouteTechniekName($obj->route_techniek_ID);
 		}
-		
+
 		foreach($mainarr as $value=>$name)
 		{
 			echo CHtml::tag('option', array('value'=>$value), CHtml::encode($name),true);
-		}	
+		}
 	}
 
 	public function actionMoveUpDown()
-    {	
+    {
 		$event_id = $_GET['event_id'];
 		$vraag_id = $_GET['vraag_id'];
 		$vraag_volgorde = $_GET['volgorde'];
@@ -349,24 +351,24 @@ class OpenVragenController extends Controller
 		$route_id = OpenVragen::model()->getRouteIdVraag($vraag_id);
 		$currentModel = OpenVragen::model()->findByPk($vraag_id);
 		$criteria = new CDbCriteria;
-	
+
 		if ($up_down=='up')
 		{
-			$criteria->condition = 'event_ID =:event_id AND 
-									open_vragen_ID !=:id AND 
-									route_ID=:route_id AND 
+			$criteria->condition = 'event_ID =:event_id AND
+									open_vragen_ID !=:id AND
+									route_ID=:route_id AND
 									vraag_volgorde <=:order';
 			$criteria->params=array(':event_id' => $event_id,
 									':id' => $vraag_id,
-									':route_id' => $route_id, 
+									':route_id' => $route_id,
 									':order' => $vraag_volgorde);
 			$criteria->order= 'vraag_volgorde DESC';
 		}
 		if ($up_down=='down')
 		{
-			$criteria->condition = 'event_ID =:event_id AND 
-									open_vragen_ID !=:id AND 
-									route_ID=:route_id AND 
+			$criteria->condition = 'event_ID =:event_id AND
+									open_vragen_ID !=:id AND
+									route_ID=:route_id AND
 									vraag_volgorde >=:order';
 			$criteria->params=array(':event_id' => $event_id,
 									':id' => $vraag_id,
@@ -376,23 +378,23 @@ class OpenVragenController extends Controller
 		}
 		$criteria->limit=1;
 		$previousModel = OpenVragen::model()->find($criteria);
-	
+
 		$tempCurrentVolgorde = $currentModel->vraag_volgorde;
 		$currentModel->vraag_volgorde = $previousModel->vraag_volgorde;
 		$previousModel->vraag_volgorde = $tempCurrentVolgorde;
-	
+
 		$currentModel->save();
 		$previousModel->save();
-		
+
 		if (Route::model()->routeIdIntroduction($currentModel->route_ID))
-		{			
-			$this->redirect(array('route/viewIntroductie', 
+		{
+			$this->redirect(array('route/viewIntroductie',
 			"route_id"=>$currentModel->route_ID,
 			"event_id"=>$currentModel->event_ID));
-		}	
+		}
 		else
 		{
-			$this->redirect(array('route/view', 
+			$this->redirect(array('route/view',
 			"route_id"=>$currentModel->route_ID,
 			"event_id"=>$currentModel->event_ID,));
 		}

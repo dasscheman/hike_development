@@ -20,7 +20,7 @@ $this->breadcrumbs=array(
 
 
 	while(strtotime($startDate) <= strtotime($endDate)) {
-		if (Route::model()->isActionAllowed("route", "create", $_GET['event_id'])) { 
+		if (Route::model()->isActionAllowed("route", "create", $_GET['event_id'])) {
 			$newButton = CHtml::link(
 					'<span class="fa-stack fa-lg">
 						<td style="text-align:right;">
@@ -35,7 +35,7 @@ $this->breadcrumbs=array(
 			$newButton = '';
 		}
 		// dit moet nog een vervangen worden door javascript.
-		//Met de volgende code wordt de active tab onthouden. 		
+		//Met de volgende code wordt de active tab onthouden.
 		$active=false;
 		if (isset($activeTab))
 		{
@@ -75,7 +75,7 @@ $this->breadcrumbs=array(
                             'value'=>'Users::model()->getUserName($data->create_user_ID)'),
                        	array(
                             'header'=>'Laatst Bijgewerkt',
-                            'value'=>'Users::model()->getUserName($data->update_user_ID)'),  
+                            'value'=>'Users::model()->getUserName($data->update_user_ID)'),
                         'route_volgorde',
 						array(
 							'header'=>'Opties',
@@ -103,12 +103,13 @@ $this->breadcrumbs=array(
 										"route_id"=>$data->route_ID,
 										"volgorde"=>$data->route_volgorde))',
                                     'visible'=>'Route::model()->isActionAllowed(
-										"route", 
-										"moveUpDown", 
+										"route",
+										"moveUpDown",
                                         $data->event_ID,
 										"",
+										"",
                                         $data->day_date,
-                                        $data->route_volgorde, 
+                                        $data->route_volgorde,
 										"up")',
 								),
 								'omlaag' => array(
@@ -127,8 +128,9 @@ $this->breadcrumbs=array(
 										"moveUpDown",
                                         $data->event_ID,
 										"",
+										"",
                                         $data->day_date,
-                                        $data->route_volgorde, 
+                                        $data->route_volgorde,
 										"down")',
 								),
 							),
@@ -145,7 +147,7 @@ $this->breadcrumbs=array(
 		if ($count == 10) {
 			break;
 		}
-	} 
+	}
 
 $this->widget('bootstrap.widgets.TbTabs', array(
 	'tabs'=>$dataArray

@@ -127,7 +127,7 @@ class Posten extends HikeActiveRecord
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
-	}   
+	}
 
 	public function searchPosten($event_id)
 	{
@@ -154,15 +154,15 @@ class Posten extends HikeActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
-	
-		
+
+
     public function searchPostDate($event_id, $startDate)
     {
 		// Warning: Please modify the following code to remove attributes that
 		// should not be searched.
-	
+
 		$criteria=new CDbCriteria;
-	
+
 		$criteria->compare('post_ID',$this->post_ID);
 		$criteria->compare('post_name',$this->post_name,true);
 		$criteria->compare('event_ID',$this->event_ID);
@@ -177,7 +177,7 @@ class Posten extends HikeActiveRecord
 		$criteria->compare('create_user_ID',$this->create_user_ID);
 		$criteria->compare('update_time',$this->update_time,true);
 		$criteria->compare('update_user_ID',$this->update_user_ID);
-	
+
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 			'pagination'=>array('pageSize'=>50)
@@ -186,30 +186,31 @@ class Posten extends HikeActiveRecord
 
 	/**
 	 * Check if actions are allowed. These checks are not only use in the controllers,
-	 * but also for the visability of the menu items. 
+	 * but also for the visability of the menu items.
 	 */
 
-    function isActionAllowed($controller_id = null, 
-							 $action_id = null, 
+    function isActionAllowed($controller_id = null,
+							 $action_id = null,
 							 $event_id = null,
 							 $model_id = null,
-							 $date = null, 
+							 $group_id = null,
+							 $date = null,
 							 $order = null,
 							 $move = null)
     {
 		$actionAllowed = parent::isActionAllowed($controller_id, $action_id, $event_id, $model_id);
-  
+
 		$hikeStatus = EventNames::model()->getStatusHike($event_id);
-		$rolPlayer = DeelnemersEvent::model()->getRolOfPlayer($event_id, Yii::app()->user->id);  
+		$rolPlayer = DeelnemersEvent::model()->getRolOfPlayer($event_id, Yii::app()->user->id);
 
 		if ($action_id == 'moveUpDown'){
 			if (!isset($date)){
 				return $actionAllowed;
-			}		
+			}
 			if ($hikeStatus != EventNames::STATUS_opstart or
 				$rolPlayer != DeelnemersEvent::ROL_organisatie) {
 					return $actionAllowed;
-			}	
+			}
 			if ($move == 'up'){
 				$nextOrderExist = Posten::model()->higherOrderNumberExists($event_id,
 																		   $date,
@@ -224,7 +225,7 @@ class Posten extends HikeActiveRecord
 				$actionAllowed = true;
 			}
 		}
-		
+
 		return $actionAllowed;
 	}
 
@@ -234,45 +235,45 @@ class Posten extends HikeActiveRecord
     */
     public function getPostNameOptions($event_Id)
     {
-    	$data = Posten::model()->findAll('event_ID =:event_Id', array(':event_Id' => $event_Id)); 
+    	$data = Posten::model()->findAll('event_ID =:event_Id', array(':event_Id' => $event_Id));
         $list = CHtml::listData($data, 'post_ID', 'post_name');
-        return $list;        
+        return $list;
     }
-	
+
     public function getPostNameOptionsToday($event_id)
-    {	
+    {
 		$active_day = EventNames::model()->getActiveDayOfHike($event_id);
-			
+
     	$data = Posten::model()->findAll('event_ID =:event_id AND
-										  date =:active_day', array(':event_id' => $event_id, 
-																    ':active_day' => $active_day)); 
+										  date =:active_day', array(':event_id' => $event_id,
+																    ':active_day' => $active_day));
         $list = CHtml::listData($data, 'post_ID', 'post_name');
-        return $list;        
+        return $list;
     }
-   	
+
     /**
     * Retrieves the score of an post.
     */
     public function getPostScore($post_Id)
     {
-    	$data = Posten::model()->find('post_ID =:post_Id', array(':post_Id' => $post_Id));   
+    	$data = Posten::model()->find('post_ID =:post_Id', array(':post_Id' => $post_Id));
         return isset($data->score) ?
             $data->score : 0;
     }
-   	
+
     /**
     * Haald de post naam op aan de hand van een post ID.
     */
     public function getPostName($post_Id)
     {
-    	$data = Posten::model()->find('post_ID =:post_Id', array(':post_Id' => $post_Id));   
+    	$data = Posten::model()->find('post_ID =:post_Id', array(':post_Id' => $post_Id));
         return isset($data->post_name) ?
             $data->post_name : "nvt";
     }
 
     public function getDatePost($post_Id)
     {
-    	$data = Posten::model()->find('post_ID =:post_Id', array(':post_Id' => $post_Id));   
+    	$data = Posten::model()->find('post_ID =:post_Id', array(':post_Id' => $post_Id));
         return isset($data->date) ?
             $data->date : "nvt";
     }
@@ -285,13 +286,13 @@ class Posten extends HikeActiveRecord
 		$criteria->params=array(':event_id' => $event_id, ':date' =>$date);
 		$criteria->order = "post_volgorde DESC";
 		$criteria->limit = 1;
-		
+
 		if (Posten::model()->exists($criteria))
 		{	$data = Posten::model()->findAll($criteria);
 			$newOrder = $data[0]->post_volgorde+1;
 		} else {
 			$newOrder = 1;}
-		
+
 		return $newOrder;
 	}
 
@@ -302,14 +303,14 @@ class Posten extends HikeActiveRecord
 		$criteria = new CDbCriteria();
 		$criteria->condition = 'event_ID =:event_id AND date =:date AND post_volgorde >:order';
 		$criteria->params=array(':event_id' => $event_id, ':date' => $date, ':order' => $post_order);
-		
+
 		if (Posten::model()->exists($criteria)){
 			return true;
 		} else {
 			return false;
 		}
 	}
- 
+
 	public function higherOrderNumberExists($event_id,
 											$date,
 											$post_order)
@@ -317,7 +318,7 @@ class Posten extends HikeActiveRecord
 		$criteria = new CDbCriteria();
 		$criteria->condition = 'event_ID =:event_id AND date =:date AND post_volgorde <:order';
 		$criteria->params=array(':event_id' => $event_id, ':date' => $date, ':order' => $post_order);
-		
+
 		if (Posten::model()->exists($criteria)){
 			return true;
 		} else {
@@ -366,18 +367,18 @@ class Posten extends HikeActiveRecord
 		$criteria = new CDbCriteria();
 		$criteria->condition = 'event_ID =:event_id AND date =:date';
 		$criteria->params=array(':event_id' => $event_id, ':date' => $date);
-		
+
 		if (Posten::model()->exists($criteria))
 			return true;
 		else
 			return false;
 	}
-	
+
 	public function setActiveTab($date)
 	{
 		$this->_activeTab = $date;
 	}
-	
+
 	public function getActiveTab()
 	{
 		return $this->_activeTab;
@@ -390,5 +391,5 @@ class Posten extends HikeActiveRecord
 		else
 			return $date;
 	}
-	
+
 }

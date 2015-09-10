@@ -43,10 +43,11 @@ abstract class HikeActiveRecord extends CActiveRecord
 	// access it by Yii::app()->user->isActionAllowed($this->id, $this->action->id, $event_id)
 	// $this->id is same as Yii::app()->controller->id)
 	// $this->action->id is same as Yii::app()->controller->action->id)
-	function isActionAllowed($controller_id = null, 
-							 $action_id = null, 
-							 $event_id = null, 
-							 $model_id = null)
+	function isActionAllowed($controller_id = null,
+							 $action_id = null,
+							 $event_id = null,
+							 $model_id = null,
+							 $group_id = null)
 	{
 		$actionAllowed = false;
 
@@ -61,29 +62,29 @@ abstract class HikeActiveRecord extends CActiveRecord
 		if ($event_id == null && isset($_GET['event_id'])) {
 			$event_id = $_GET['event_id'];
 		}
-		
+
 		switch ($action_id)
 		{
 			case 'index':
 				$actionAllowed = HikeActiveRecord::setIndexAllowed($controller_id, $action_id, $event_id);
 				break;
 			case 'view':
-				$actionAllowed = HikeActiveRecord::setViewAllowed($controller_id, $action_id, $event_id);
+				$actionAllowed = HikeActiveRecord::setViewAllowed($controller_id, $action_id, $event_id, $model_id, $group_id);
 				break;
 			case 'create':
-				$actionAllowed = HikeActiveRecord::setCreateAllowed($controller_id, $action_id, $event_id, $model_id);
+				$actionAllowed = HikeActiveRecord::setCreateAllowed($controller_id, $action_id, $event_id, $model_id, $group_id);
 				break;
 			case 'createIntroductie':
 				$actionAllowed = HikeActiveRecord::setCreateIntroductieAllowed($controller_id, $action_id, $event_id);
 				break;
 			case 'update':
-				$actionAllowed = HikeActiveRecord::setUpdateAllowed($controller_id, $action_id, $event_id, $model_id);
+				$actionAllowed = HikeActiveRecord::setUpdateAllowed($controller_id, $action_id, $event_id, $model_id, $group_id);
 				break;
 			case 'delete':
 				$actionAllowed = HikeActiveRecord::setDeleteAllowed($controller_id, $action_id, $event_id, $model_id);
 				break;
 			case 'viewPlayers':
-				$actionAllowed = HikeActiveRecord::setViewPlayersAllowed($controller_id, $action_id, $event_id, $model_id);
+				$actionAllowed = HikeActiveRecord::setViewPlayersAllowed($controller_id, $action_id, $event_id, $model_id, $group_id);
 				break;
 			default:
 		}
@@ -112,29 +113,29 @@ abstract class HikeActiveRecord extends CActiveRecord
 			case 'startup':
 				if ($rolPlayer == DeelnemersEvent::ROL_organisatie) {
 					$indexAllowed = true;
-				}				
+				}
 				break;
 			case 'openNoodEnvelop':
 			case 'postPassage':
 				if ($hikeStatus > EventNames::STATUS_introductie AND
 					$rolPlayer == DeelnemersEvent::ROL_organisatie) {
 						$indexAllowed = true;
-				}			
-				break;	
+				}
+				break;
 			case 'qrCheck':
 			case 'bonuspunten':
 			case 'openVragenAntwoorden':
 				if ($hikeStatus <> EventNames::STATUS_opstart AND
 					$rolPlayer == DeelnemersEvent::ROL_organisatie) {
 						$indexAllowed = true;
-				}		
+				}
 			//case users:
-			default:		
+			default:
 		}
 		return $indexAllowed;
 	}
 
-	function setUpdateAllowed($controller_id = null, $action_id = null, $event_id = null, $model_id = null)
+	function setUpdateAllowed($controller_id = null, $action_id = null, $event_id = null, $model_id = null, $group_id = null)
 	{
 		$updateAllowed = false;
 		$hikeStatus = EventNames::model()->getStatusHike($event_id);
@@ -181,12 +182,12 @@ abstract class HikeActiveRecord extends CActiveRecord
 			case 'openVragenAntwoorden':
 				if ($hikeStatus == EventNames::STATUS_introductie and
 					$rolPlayer == DeelnemersEvent::ROL_deelnemer and
-				    $groupOfPlayer == $model_id) {
+				    $groupOfPlayer == $group_id) {
 						$updateAllowed = true;}
 				if ($hikeStatus == EventNames::STATUS_gestart and
 					$rolPlayer == DeelnemersEvent::ROL_deelnemer and
-				    $groupOfPlayer == $model_id and
-					PostPassage::model()->isTimeLeftToday($event_id, $model_id)) {
+				    $groupOfPlayer == $group_id and
+					PostPassage::model()->isTimeLeftToday($event_id, $group_id)) {
 						$updateAllowed = true;}
 				break;
 			case 'postPassage':
@@ -204,12 +205,12 @@ abstract class HikeActiveRecord extends CActiveRecord
 			//	break;
 			case 'users':
 				break;
-			default:		
+			default:
 		}
-		return $updateAllowed;	
+		return $updateAllowed;
 	}
 
-	function setCreateAllowed($controller_id = null, $action_id = null, $event_id = null, $model_id = null)
+	function setCreateAllowed($controller_id = null, $action_id = null, $event_id = null, $model_id = null, $group_id = null)
 	{
 		$createAllowed = false;
 		$hikeStatus = EventNames::model()->getStatusHike($event_id);
@@ -269,8 +270,8 @@ abstract class HikeActiveRecord extends CActiveRecord
 			case 'openNoodEnvelop':
 				if ($hikeStatus == EventNames::STATUS_gestart and
 					$rolPlayer == DeelnemersEvent::ROL_deelnemer and
-				    $groupOfPlayer == $model_id and
-					PostPassage::model()->timeLeftToday($event_id, $model_id) > 0 ) {
+				    $groupOfPlayer == $group_id and
+					PostPassage::model()->timeLeftToday($event_id, $group_id) > 0 ) {
 						$createAllowed = true;}
 
 				if (($hikeStatus == EventNames::STATUS_introductie or
@@ -280,7 +281,7 @@ abstract class HikeActiveRecord extends CActiveRecord
 				break;
 			default:
 		}
-		return $createAllowed;	
+		return $createAllowed;
 	}
 
 	function setDeleteAllowed($controller_id = null, $action_id = null, $event_id = null, $model_id = null)
@@ -317,12 +318,12 @@ abstract class HikeActiveRecord extends CActiveRecord
 				break;
 			case 'users':
 				break;
-			default:		
+			default:
 		}
 		return $deleteAllowed;
 	}
 
-	function setViewAllowed($controller_id = null, $action_id = null, $event_id = null, $group_id = null)
+	function setViewAllowed($controller_id = null, $action_id = null, $event_id = null, $model_id = null, $group_id = null)
 	{
 		$viewAllowed = false;
 		$hikeStatus = EventNames::model()->getStatusHike($event_id);
@@ -347,7 +348,7 @@ abstract class HikeActiveRecord extends CActiveRecord
 			case 'postPassage':
 			case 'qrCheck':
 				if ($rolPlayer == DeelnemersEvent::ROL_organisatie) {
-					$viewAllowed = true;}				
+					$viewAllowed = true;}
 				if (($hikeStatus == EventNames::STATUS_introductie or
 					 $hikeStatus == EventNames::STATUS_gestart) and
 					$rolPlayer == DeelnemersEvent::ROL_post) {
@@ -356,12 +357,12 @@ abstract class HikeActiveRecord extends CActiveRecord
 					$viewAllowed = true;}
 			case 'users':
 				break;
-			default:		
+			default:
 		}
 		return $viewAllowed;
 	}
 
-	function setViewPlayersAllowed($controller_id = null, $action_id = null, $event_id = null, $model_id = null)
+	function setViewPlayersAllowed($controller_id = null, $action_id = null, $event_id = null, $model_id = null, $group_id = null)
 	{
 		$viewPlayersAllowed = false;
 		$hikeStatus = EventNames::model()->getStatusHike($event_id);
@@ -377,7 +378,7 @@ abstract class HikeActiveRecord extends CActiveRecord
 				if (($hikeStatus == EventNames::STATUS_introductie or
 					 $hikeStatus == EventNames::STATUS_gestart) and
 					$rolPlayer == DeelnemersEvent::ROL_deelnemer and
-					$groupOfPlayer == $model_id) {
+					$groupOfPlayer == $group_id) {
 						$viewPlayersAllowed = true;
 				}
 				if (($hikeStatus == EventNames::STATUS_introductie or
@@ -405,20 +406,20 @@ abstract class HikeActiveRecord extends CActiveRecord
 				if ($hikeStatus == EventNames::STATUS_gestart and
 				    $rolPlayer == DeelnemersEvent::ROL_post) {
 						$viewPlayersAllowed = true;
-				} 
+				}
 				if ($hikeStatus == EventNames::STATUS_beindigd) {
 						$viewPlayersAllowed = true;
 				}
 
 				if ($hikeStatus == EventNames::STATUS_gestart and
 					$rolPlayer == DeelnemersEvent::ROL_deelnemer and
-					$groupOfPlayer == $model_id) {
+					$groupOfPlayer == $group_id) {
 						$viewPlayersAllowed = true;
 				}
 				break;
 			default:
-		}		
-		return $viewPlayersAllowed;	
+		}
+		return $viewPlayersAllowed;
 	}
 
 	function setCreateIntroductieAllowed($controller_id = null, $action_id = null, $event_id = null)
@@ -437,6 +438,6 @@ abstract class HikeActiveRecord extends CActiveRecord
 				break;
 		}
 		return $createInroductieAllowed;
-	}	
+	}
 }
 ?>

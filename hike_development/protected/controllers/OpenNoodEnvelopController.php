@@ -28,14 +28,14 @@ class OpenNoodEnvelopController extends Controller
 	 */
 	public function accessRules()
 	{
-		return array(			
+		return array(
 			array('deny',  // deny all users
 				'users'=>array('?'),
-			),		
+			),
 			array(	'deny',  // deny if event_id is not set
 				'actions'=>array('update', 'create'),
 				'expression'=> '!isset($_GET["group_id"])',
-			),	
+			),
             array(	'allow', // allow admin user to perform 'viewplayers' actions
                 'actions'=>array('index', 'update', 'delete'),
                 'expression'=> 'OpenNoodEnvelop::model()->isActionAllowed(
@@ -49,8 +49,9 @@ class OpenNoodEnvelopController extends Controller
                     Yii::app()->controller->id,
                     Yii::app()->controller->action->id,
                     $_GET["event_id"],
+					"",
 					$_GET["group_id"])',
-            ),		
+            ),
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
@@ -78,7 +79,7 @@ class OpenNoodEnvelopController extends Controller
 		$event_id=$_GET['event_id'];
 		$group_id=$_GET['group_id'];
 		$model=new OpenNoodEnvelop;
-		
+
 		$noodEnvelop = NoodEnvelop::model()->find('nood_envelop_ID =:nood_envelop_Id',
 						array(':nood_envelop_Id' => $nood_envelop_id));
 
@@ -86,12 +87,12 @@ class OpenNoodEnvelopController extends Controller
 		$model->nood_envelop_ID = $nood_envelop_id;
 		$model->group_ID = $group_id;
 		$model->opened = 1;
-		
+
 		if($model->save())
 			$this->redirect(array('/game/groupOverview',
 						  'event_id'=>$_GET['event_id'],
 						  'group_id'=>$_GET['group_id']));
-						
+
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 		/*

@@ -28,29 +28,30 @@ class NoodEnvelopController extends Controller
 	 */
 	public function accessRules()
 	{
-		return array(			
+		return array(
 			array('deny',  // deny all guest users
 				'users'=>array('?'),
 			),
 			array(	'deny',  // deny if event_id is not set
 				'actions'=>array('create'),
 				'expression'=> '!isset($_GET["route_id"])',
-			),							
+			),
 			array(	'deny',  // deny if event_id is not set
 				'actions'=>array('delete', 'update'),
 				'expression'=> '!isset($_GET["nood_envelop_id"])',
-			),						
+			),
 			array(	'deny',  // deny if group_id is not set
 				'actions'=>array('viewPlayers'),
 				'expression'=> '!isset($_GET["group_id"])',
-			),	
-			array(	'allow', // only when $_GET are set		
+			),
+			array(	'allow', // only when $_GET are set
 					'actions'=>array('moveUpDown'),
 					'expression'=> 'NoodEnvelop::model()->isActionAllowed(
 						Yii::app()->controller->id,
 						Yii::app()->controller->action->id,
 						$_GET["event_id"],
 						$_GET["nood_envelop_id"],
+						"",
 						$_GET["date"],
 						$_GET["volgorde"],
 						$_GET["up_down"])'),
@@ -60,15 +61,16 @@ class NoodEnvelopController extends Controller
                     Yii::app()->controller->id,
                     Yii::app()->controller->action->id,
                     $_GET["event_id"],
+					"",
                     $_GET["group_id"])',
-			),	
+			),
 			array('allow', // allow authenticated user to perform 'index' actions
 				'actions'=>array('create', 'index', 'update', 'delete'),
 				'expression'=> 'NoodEnvelop::model()->isActionAllowed(
                     Yii::app()->controller->id,
                     Yii::app()->controller->action->id,
                     $_GET["event_id"])',
-			),						
+			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
@@ -92,20 +94,20 @@ class NoodEnvelopController extends Controller
 	 */
 	public function actionViewPlayers()
 	{
-		$event_id = $_GET['event_id'];   
-		
+		$event_id = $_GET['event_id'];
+
 		$active_day = EventNames::model()->getActiveDayOfHike($event_id);
-			
+
 		$noodEnvelopDataProvider=new CActiveDataProvider('NoodEnvelop',
 		    array(
 				'criteria'=>array(
-					 'join'=>'JOIN tbl_route route ON route.route_ID = t.route_ID', 
+					 'join'=>'JOIN tbl_route route ON route.route_ID = t.route_ID',
 					 'condition'=>'route.day_date =:active_day
 									AND route.event_ID =:event_id',
-					 'params'=>array(':active_day'=>$active_day, 
+					 'params'=>array(':active_day'=>$active_day,
 									  ':event_id'=>$event_id),
 					 'order'=>'route_ID ASC, nood_envelop_volgorde ASC'
-					),	
+					),
 				'pagination'=>array(
 					'pageSize'=>30,
 				),
@@ -116,7 +118,7 @@ class NoodEnvelopController extends Controller
 			'noodEnvelopDataProvider'=>$noodEnvelopDataProvider,
 		));
 	}
-	
+
 	/**
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
@@ -191,7 +193,7 @@ class NoodEnvelopController extends Controller
 			$this->loadModel($nood_envelop_ID)->delete();
 		}
 		catch(CDbException $e)
-		{		
+		{
 			throw new CHttpException(400,"Je kan deze hint niet verwijderen.");
 		}
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
@@ -208,7 +210,7 @@ class NoodEnvelopController extends Controller
 	public function actionIndex()
 	{
 		$hintsData=new NoodEnvelop();
-	
+
 		$this->layout='//layouts/column1';
 
 		$this->render('index',array(
@@ -261,17 +263,17 @@ class NoodEnvelopController extends Controller
 	}
 
 	public function actionMoveUpDown()
-    {	
+    {
 		$event_id = $_GET['event_id'];
 		$nood_envelop_id = $_GET['nood_envelop_id'];
 		$nood_envelop_volgorde = $_GET['volgorde'];
 		$up_down = $_GET['up_down'];
 		$route_id = NoodEnvelop::model()->getRouteIdOfEnvelop($_GET['nood_envelop_id']);
-	
+
 		$currentModel = NoodEnvelop::model()->findByPk($nood_envelop_id);
-	
+
 		$criteria = new CDbCriteria;
-	
+
 		if ($up_down=='up')
 		{
 			$criteria->condition = 'event_ID =:event_id AND route_ID=:route_id AND nood_envelop_volgorde <:order';
@@ -281,28 +283,28 @@ class NoodEnvelopController extends Controller
 		if ($up_down=='down')
 		{
 			$criteria->condition = 'event_ID =:event_id AND route_ID=:route_id AND nood_envelop_volgorde >:order';
-			$criteria->params=array(':event_id' => $event_id, ':route_id' => $route_id , ':order' => $nood_envelop_volgorde);			
+			$criteria->params=array(':event_id' => $event_id, ':route_id' => $route_id , ':order' => $nood_envelop_volgorde);
 			$criteria->order= 'nood_envelop_volgorde ASC';
 		}
 			$criteria->limit=1;
 		$previousModel = NoodEnvelop::model()->findAll($criteria);
-	
+
 		$tempCurrentVolgorde = $currentModel->nood_envelop_volgorde;
 		$currentModel->nood_envelop_volgorde = $previousModel[0]->nood_envelop_volgorde;
 		$previousModel[0]->nood_envelop_volgorde = $tempCurrentVolgorde;
-	
+
 		$currentModel->save();
 		$previousModel[0]->save();
-		
+
 		if (Route::model()->routeIdIntroduction($currentModel->route_ID))
-		{			
-			$this->redirect(array('route/viewIntroductie', 
+		{
+			$this->redirect(array('route/viewIntroductie',
 				"route_id"=>$currentModel->route_ID,
 				"event_id"=>$currentModel->event_ID,));
-		}	
+		}
 		else
 		{
-			$this->redirect(array('route/view', 
+			$this->redirect(array('route/view',
 				"route_id"=>$currentModel->route_ID,
 				"event_id"=>$currentModel->event_ID,));
 		}

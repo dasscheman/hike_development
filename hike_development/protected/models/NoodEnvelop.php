@@ -131,7 +131,7 @@ class NoodEnvelop extends HikeActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
-	
+
 	public function searchHints($event_id)
 	{
 		// Warning: Please modify the following code to remove attributes that
@@ -159,38 +159,39 @@ class NoodEnvelop extends HikeActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
-	    
-	function isActionAllowed($controller_id = null, 
-							 $action_id = null, 
+
+	function isActionAllowed($controller_id = null,
+							 $action_id = null,
 							 $event_id = null,
 							 $model_id = null,
-							 $date = null, 
+							 $group_id = null,
+							 $date = null,
 							 $order = null,
 							 $move = null)
     {
 		$actionAllowed = parent::isActionAllowed($controller_id, $action_id, $event_id, $model_id);
-  
+
 		$hikeStatus = EventNames::model()->getStatusHike($event_id);
-		$rolPlayer = DeelnemersEvent::model()->getRolOfPlayer($event_id, Yii::app()->user->id);  
+		$rolPlayer = DeelnemersEvent::model()->getRolOfPlayer($event_id, Yii::app()->user->id);
 		$route_id = NoodEnvelop::model()->getRouteIdOfEnvelop($model_id);
 
 		if ($action_id == 'moveUpDown'){
 			if (!isset($order) || !isset($route_id)){
 				return $actionAllowed;
-			}		
+			}
 			if ($hikeStatus != EventNames::STATUS_opstart or
 				$rolPlayer != DeelnemersEvent::ROL_organisatie) {
 					return $actionAllowed;
-			}	
-			
+			}
+
 			if ($move == 'up'){
-				$nextOrderExist = NoodEnvelop::model()->higherOrderNumberExists($event_id, 
+				$nextOrderExist = NoodEnvelop::model()->higherOrderNumberExists($event_id,
 																				$model_id,
 																				$order,
 																				$route_id);
 			}
 			if ($move == 'down'){
-				$nextOrderExist = NoodEnvelop::model()->lowererOrderNumberExists($event_id, 
+				$nextOrderExist = NoodEnvelop::model()->lowererOrderNumberExists($event_id,
 																				 $model_id,
 																				 $order,
 																				 $route_id);
@@ -199,10 +200,10 @@ class NoodEnvelop extends HikeActiveRecord
 				$actionAllowed = true;
 			}
 		}
-		
+
 		return $actionAllowed;
 	}
-	
+
 	public function getNoodEnvelopName($envelop_id)
 	{
 		$criteria = new CDbCriteria;
@@ -213,13 +214,13 @@ class NoodEnvelop extends HikeActiveRecord
 		else
 			{return;}
 	}
-	
+
     /**
     * Retrieves the score of an post.
     */
     public function getNoodEnvelopScore($envelop_id)
     {
-    	$data = NoodEnvelop::model()->find('nood_envelop_ID =:envelop_id', array(':envelop_id' => $envelop_id));   
+    	$data = NoodEnvelop::model()->find('nood_envelop_ID =:envelop_id', array(':envelop_id' => $envelop_id));
         return isset($data->score) ?
             $data->score : 0;
     }
@@ -232,9 +233,9 @@ class NoodEnvelop extends HikeActiveRecord
 		if(isset($data->coordinaat))
 			{return($data->coordinaat);}
 		else
-			{return;}		
+			{return;}
 	}
-	
+
 	public function getOpmerkingen($envelop_id)
 	{
 		$criteria = new CDbCriteria;
@@ -243,9 +244,9 @@ class NoodEnvelop extends HikeActiveRecord
 		if(isset($data->opmerkingen))
 			{return($data->opmerkingen);}
 		else
-			{return;}		
+			{return;}
 	}
-		
+
 	public function getEventDayOfEnvelop($envelop_id)
 	{
 		$criteria = new CDbCriteria;
@@ -257,20 +258,20 @@ class NoodEnvelop extends HikeActiveRecord
 			return $date;
 		}
 		else
-			{return;}		
+			{return;}
 	}
-	
+
 	public function getRouteIdOfEnvelop($envelop_id)
 	{
 		$data = NoodEnvelop::model()->find('nood_envelop_ID =:envelop_id',
-						  array(':envelop_id' => $envelop_id)); 
+						  array(':envelop_id' => $envelop_id));
 		if(isset($data->route_ID)){
 			return $data->route_ID;
 		} else {
 			return false;
 		}
 	}
-	
+
 	public function getNoodEnvelopVolgnummer($envelop_id)
 	{
 		$criteria = new CDbCriteria;
@@ -279,15 +280,15 @@ class NoodEnvelop extends HikeActiveRecord
 		if(isset($data->nood_envelop_volgorde))
 			{return($data->nood_envelop_volgorde);}
 		else
-			{return('Geen Hint volgnummer beschikbaar.');}		
+			{return('Geen Hint volgnummer beschikbaar.');}
 	}
-	
+
 	public function getNumberNoodEnvelopRouteId($event_id, $route_id)
 	{
         $criteria = new CDbCriteria();
 		$criteria->condition = 'event_ID =:event_id AND route_ID =:route_id';
 		$criteria->params=array(':event_id' => $event_id, ':route_id' =>$route_id);
-		
+
 		return NoodEnvelop::model()->count($criteria);
 	}
 
@@ -299,7 +300,7 @@ class NoodEnvelop extends HikeActiveRecord
 		if(isset($data->route_ID))
 			{return(Route::model()->getRouteName($data->route_ID));}
 		else
-			{return('Geen Hint volgnummer beschikbaar.');}		
+			{return('Geen Hint volgnummer beschikbaar.');}
 	}
 
 	public function getNewOrderForNoodEnvelop($event_id, $route_id)
@@ -309,14 +310,14 @@ class NoodEnvelop extends HikeActiveRecord
 		$criteria->params=array(':event_id' => $event_id, ':route_id' =>$route_id);
 		$criteria->order = "nood_envelop_volgorde DESC";
 		$criteria->limit = 1;
-		
+
 		if (NoodEnvelop::model()->exists($criteria))
 		{
 			$data = NoodEnvelop::model()->findAll($criteria);
 			$newOrder = $data[0]->nood_envelop_volgorde+1;
 		} else {
 			$newOrder = 1;}
-		
+
 		return $newOrder;
 	}
 
@@ -325,23 +326,23 @@ class NoodEnvelop extends HikeActiveRecord
 		$criteria = new CDbCriteria();
 		$criteria->condition = 'event_ID =:event_id AND nood_envelop_ID !=:id AND route_ID=:route_id AND nood_envelop_volgorde >=:order';
 		$criteria->params=array(':event_id' => $event_id,
-								':id' => $id, 
+								':id' => $id,
 								':route_id' => $route_id ,
 								':order' => intval($envelop_order));
-		
+
 		if (NoodEnvelop::model()->exists($criteria))
 			return true;
 		else
 			return false;
 	}
- 
+
 	public function higherOrderNumberExists($event_id, $id, $envelop_order, $route_id)
 	{
 		$criteria = new CDbCriteria();
 		$criteria->condition = 'event_ID =:event_id AND nood_envelop_ID !=:id AND route_ID =:route_id AND nood_envelop_volgorde <=:order';
 		$criteria->params=array(':event_id' => $event_id,
 								':id' => $id,
-								':route_id' => $route_id, 
+								':route_id' => $route_id,
 								':order' => intval($envelop_order));
 
 		if (NoodEnvelop::model()->exists($criteria))

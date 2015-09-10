@@ -26,7 +26,7 @@
 	<b><?php echo CHtml::encode($data->getAttributeLabel('score')); ?>:</b>
 	<?php echo CHtml::encode($data->score); ?>
 	<br />
-    <?php    
+    <?php
     echo CHtml::link(
             "Verwijderen",
             "#",
@@ -35,16 +35,17 @@
                 'nood_envelop_id'=>$data->nood_envelop_ID,
                 'event_id'=>$data->event_ID,
                 'route_id'=>$data->route_ID),
-            "confirm"=>"Weet je zeker dat je deze hint wilt verwijderen?")) 
+            "confirm"=>"Weet je zeker dat je deze hint wilt verwijderen?"))
 
     ?><br /><?php
     if (NoodEnvelop::model()->isActionAllowed(
-										"noodEnvelop", 
-										"moveUpDown", 
+										"noodEnvelop",
+										"moveUpDown",
                                         $data->event_ID,
 										$data->nood_envelop_ID,
-                                        "",
-                                        $data->nood_envelop_volgorde, 
+                                        "", //grou_id
+										"", //date
+                                        $data->nood_envelop_volgorde,
 										"up")) {
         echo CHtml::link(
             "Omhoog",
@@ -55,18 +56,19 @@
                     'event_id'=>$data->event_ID,
                     'nood_envelop_id'=>$data->nood_envelop_ID,
                     'volgorde'=>$data->nood_envelop_volgorde,
-                    'up_down'=>"up"), 
+                    'up_down'=>"up"),
                 "confirm"=>"Weet je zeker dat je deze hint omhoog wilt schuiven?"));
         ?><br /><?php
     }
 
     if (NoodEnvelop::model()->isActionAllowed(
-										"noodEnvelop", 
-										"moveUpDown", 
+										"noodEnvelop",
+										"moveUpDown",
                                         $data->event_ID,
 										$data->nood_envelop_ID,
-                                        "",
-                                        $data->nood_envelop_volgorde, 
+                                        "", //group_id
+										"", //date
+                                        $data->nood_envelop_volgorde,
 										"down"))
 	{
         echo CHtml::link(

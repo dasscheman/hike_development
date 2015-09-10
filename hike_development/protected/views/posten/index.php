@@ -21,11 +21,11 @@ $this->menu=array(
 <h3>
 	Je kunt hier de volgorde van de posten wijzigen.
 </h3>
-<p> 
+<p>
 	Maak voor elke dag een aantal posten aan. .
 	De score is het aantal punten dat een groep krijgt als ze die posten binnenkomen. <br>
 	BELANGRIJK!!<br>
-	Je moet voor elke dag ook een start en eind post maken. Deze zijn nodig om de totale looptijd te berekenen. 
+	Je moet voor elke dag ook een start en eind post maken. Deze zijn nodig om de totale looptijd te berekenen.
 	De score voor de startpost word niet meegenomen, een groep krijgt punten als ze een post binnenkomen.
 
 </p>
@@ -34,7 +34,7 @@ $this->menu=array(
 
 	$count=0;
 	while($startDate <= $endDate) {
-		if (Posten::model()->isActionAllowed("posten", "create", $_GET['event_id'])) { 
+		if (Posten::model()->isActionAllowed("posten", "create", $_GET['event_id'])) {
 			$newButton = CHtml::link(
 					'<span class="fa-stack fa-lg">
 						<td style="text-align:right;">
@@ -50,7 +50,7 @@ $this->menu=array(
 		}
 
 		// dit moet nog een vervangen worden door javascript.
-		//Met de volgende code wordt de active tab onthouden. 		
+		//Met de volgende code wordt de active tab onthouden.
 		$active=false;
 		if (isset($activeTab))
 		{
@@ -62,7 +62,7 @@ $this->menu=array(
 			if ($count==0)
 				$active=true;
 		}
-		
+
 	    $dataArray[$count]=array(
 		    'label' =>$startDate,
 		    'active'=>$active,
@@ -103,9 +103,10 @@ $this->menu=array(
 										"post_id"=>$data->post_ID,
 										"volgorde"=>$data->post_volgorde))',
                                     'visible'=>'Posten::model()->isActionAllowed(
-										"posten", 
-										"moveUpDown", 
+										"posten",
+										"moveUpDown",
                                         $data->event_ID,
+										"",
 										"",
                                         $data->date,
                                         $data->post_volgorde,
@@ -127,6 +128,7 @@ $this->menu=array(
 										"moveUpDown",
                                         $data->event_ID,
 										"",
+										"",
                                         $data->date,
                                         $data->post_volgorde,
 										"down")',
@@ -146,7 +148,7 @@ $this->menu=array(
 		if ($count == 10) {
 			break;
 		}
-	} 
+	}
 
 
 
@@ -230,5 +232,5 @@ $this->widget('bootstrap.widgets.TbTabs', array(
                 ),
             ),
     )
-));*/ 
+));*/
 ?>

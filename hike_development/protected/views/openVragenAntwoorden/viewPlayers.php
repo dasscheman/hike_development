@@ -10,20 +10,21 @@ $this->breadcrumbs=array(
 );
 
 ?>
-	
+
 	<h2>Beantwoorde Vragen
 		<sup><small>
 			<?php echo CHtml::link('<i class="fa fa-question-circle fa-inverse"></i>',
 			array('/site/help#BeantwoordeVragen'),
 			array('target'=>'_blank')); ?>
 		 </small></sup>
-	</h2>	
-<?php 
+	</h2>
+<?php
 	foreach($openVragenAntwoordenDataProvider->data as $obj){
 		$vraagtData[]['header']='Vraag naam: ' . OpenVragen::model()->getOpenVragenName($obj->open_vragen_ID);
 		if (OpenVragenAntwoorden::model()->isActionAllowed('openVragenAntwoorden',
 												'update',
 												$obj->event_ID,
+												"",
 												$_GET['group_id']) &&
 			OpenVragenAntwoorden::model()->isVraagGecontroleerd($obj->event_ID,
 																$_GET['group_id'],
@@ -42,8 +43,8 @@ $this->breadcrumbs=array(
 										'event_id'=>$obj->event_ID,
 										'group_id'=>$_GET['group_id'],
 										'vraag_id'=>$obj->open_vragen_ID))
-			); 
-		} 
+			);
+		}
 		$vraagtData[] = array(
 			'name'=>'Hike dag',
 			'oneRow'=>false,

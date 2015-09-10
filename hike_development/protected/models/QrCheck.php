@@ -126,9 +126,9 @@ class QrCheck extends HikeActiveRecord
 	 * but also for the visability of the menu items.
 	 */
 
-    function isActionAllowed($controller_id = null, $action_id = null, $event_id = null, $group_id = null)
+    function isActionAllowed($controller_id = null, $action_id = null, $event_id = null, $model_id = null, $group_id = null)
     {
-		$actionAllowed = parent::isActionAllowed($controller_id, $action_id, $event_id, $group_id);
+		$actionAllowed = parent::isActionAllowed($controller_id, $action_id, $event_id, $model_id, $group_id);
 
 		$hikeStatus = EventNames::model()->getStatusHike($event_id);
 		$rolPlayer = DeelnemersEvent::model()->getRolOfPlayer($event_id, Yii::app()->user->id);

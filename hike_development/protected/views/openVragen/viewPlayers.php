@@ -10,7 +10,7 @@ $this->breadcrumbs=array(
 );
 
 ?>
-	
+
 	<h2>Alle Vragen
 		<sup><small>
 			<?php echo CHtml::link('<i class="fa fa-question-circle fa-inverse"></i>',
@@ -18,12 +18,12 @@ $this->breadcrumbs=array(
 			array('target'=>'_blank')); ?>
 		 </small></sup>
 	</h2>
-	<center> Hier een lijst met vragen. Als je en vraag beantwoordt, dan zal die in 
-		 redelijk korte termijn gecontroleerd worden door de organisatie. En als een 
-		 vraag eenmaal gecontroleerd is, dan kan je hem niet meer wijzigen. Dus 
+	<center> Hier een lijst met vragen. Als je en vraag beantwoordt, dan zal die in
+		 redelijk korte termijn gecontroleerd worden door de organisatie. En als een
+		 vraag eenmaal gecontroleerd is, dan kan je hem niet meer wijzigen. Dus
 		 beantwoord ook alleen vragen als je werkelijk het antwoord denkt te weten.
-	</center>	
-		
+	</center>
+
 <i> Je ziet alleen de vragen van vandaag. Dus op zaterdag kan je niet alsnog vragen invullen voor vrijdag!</i>
 <?php
 	foreach($openVragenDataProvider->data as $obj){
@@ -31,6 +31,7 @@ $this->breadcrumbs=array(
 		if (OpenVragenAntwoorden::model()->isActionAllowed('openVragenAntwoorden',
 															'create',
 															$obj->event_ID,
+															"", //model_id
 															$_GET['group_id']) &&
 			OpenVragenAntwoorden::model()->isVraagBeantwoord($obj->event_ID,
 															$_GET['group_id'],
@@ -44,16 +45,17 @@ $this->breadcrumbs=array(
 										<i class="fa fa-file-o fa-stack-1x"></i>
 										<i class="fa fa-blue fa-text-right fa-09x"> Beantwoorden</i>
 										<i class="fa fa-pencil fa-stack-up-15p fa-blue fa-06x"> </i>
-									  </span>', 
+									  </span>',
 										array('/openVragenAntwoorden/create',
 											  'event_id'=>$obj->event_ID,
 											  'group_id'=>$_GET['group_id'],
 											  'vraag_id'=>$obj->open_vragen_ID))
-			); 
+			);
 		} else {
 			if (OpenVragenAntwoorden::model()->isActionAllowed('openVragenAntwoorden',
 																'update',
 																$obj->event_ID,
+																"", //model_id
 																$_GET['group_id']) &&
 				OpenVragenAntwoorden::model()->isVraagGecontroleerd($obj->event_ID,
 																	$_GET['group_id'],
@@ -67,7 +69,7 @@ $this->breadcrumbs=array(
 											<i class="fa fa-file-o fa-stack-1x"></i>
 											<i class="fa fa-blue fa-text-right fa-09x"> Bewerken</i>
 											<i class="fa fa-refresh fa-stack-up-15p fa-blue fa-06x"> </i>
-										 </span>', 
+										 </span>',
 										 array('/openVragenAntwoorden/update',
 											   'event_id'=>$obj->event_ID,
 											   'group_id'=>$_GET['group_id'],
@@ -86,7 +88,7 @@ $this->breadcrumbs=array(
 			'oneRow'=>false,
 			'type'=>'raw',
 			'value'=>OpenVragen::model()->getRouteOnderdeelVraag($obj->open_vragen_ID)
-		);	
+		);
 		$vraagtData[] = array(
 			'name'=>'Vraag',
 			'oneRow'=>true,

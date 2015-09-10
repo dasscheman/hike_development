@@ -11,11 +11,12 @@
 -->
 
     <div class="row buttons">
-       
-    <?php   
+
+    <?php
         if(OpenVragenAntwoorden::model()->isActionAllowed('openVragenAntwoorden',
 												'create',
 												$data->event_ID,
+												"", //model_id
 												$_GET['group_id']) &&
 			OpenVragenAntwoorden::model()->isVraagBeantwoord($data->event_ID,
                                                             $_GET['group_id'],
@@ -26,16 +27,17 @@
 										<i class="fa fa-file-o fa-stack-1x"></i>
 										<i class="fa fa-blue fa-text-right fa-09x"> Beantwoorden</i>
 										<i class="fa fa-pencil fa-stack-up-15p fa-blue fa-06x"> </i>
-								  </span>', 
+								  </span>',
 								 array('/openVragenAntwoorden/create',
                                        'event_id'=>$data->event_ID,
                                        'group_id'=>$_GET['group_id'],
-                                       'vraag_id'=>$data->open_vragen_ID)); 
+                                       'vraag_id'=>$data->open_vragen_ID));
         }
 		else
         {   if(OpenVragenAntwoorden::model()->isActionAllowed('openVragenAntwoorden',
 												'update',
 												$data->event_ID,
+												"", //model_id
 												$_GET['group_id']) &&
 			   OpenVragenAntwoorden::model()->isVraagGecontroleerd($data->event_ID,
                                                                    $_GET['group_id'],
@@ -46,7 +48,7 @@
 										<i class="fa fa-file-o fa-stack-1x"></i>
 										<i class="fa fa-blue fa-text-right fa-09x"> Bewerken</i>
 										<i class="fa fa-refresh fa-stack-up-15p fa-blue fa-06x"> </i>
-								  </span>', 
+								  </span>',
 								  array('/openVragenAntwoorden/update',
 										'event_id'=>$data->event_ID,
 										'group_id'=>$_GET['group_id'],
@@ -58,22 +60,22 @@
 	<?php //echo CHtml::encode(OpenVragen::model()->getVraagVolgorde($data->open_vragen_ID)); ?>
 	<br />
 -->
-	
+
 	<b><?php echo CHtml::encode($data->getAttributeLabel('open_vragen_name')); ?>:</b>
 	<?php echo CHtml::encode($data->open_vragen_name); ?>
 	<br />
-	
+
 	<b><?php echo CHtml::encode('Hike Dag'); ?>:</b>
 	<?php echo CHtml::encode(OpenVragen::model()->getVraagDag($data->open_vragen_ID)); ?>
 	<br />
-	
+
 	<b><?php echo CHtml::encode('Route Onderdeel'); ?>:</b>
 	<?php echo CHtml::encode(OpenVragen::model()->getRouteOnderdeelVraag($data->open_vragen_ID)); ?>
 	<br />
-	   
+
 <!--
 	<b><?php //echo CHtml::encode($data->getAttributeLabel('event_ID')); ?>:</b>
-	<?php //echo CHtml::encode($data->event_ID); 
+	<?php //echo CHtml::encode($data->event_ID);
          // echo CHtml::encode(EventNames::model()->getEventName($data->event_ID));?>
 	<br />
 
@@ -103,7 +105,7 @@
 	<b><?php echo CHtml::encode($data->getAttributeLabel('score')); ?>:</b>
 	<?php echo CHtml::encode($data->score); ?>
 	<br />
-        	
+
         <b><?php echo CHtml::encode('Beantwoord'); ?>:</b>
 	<?php echo CHtml::encode(OpenVragenAntwoorden::model()->isVraagBeantwoord($data->event_ID,
                                                                                   $_GET['group_id'],
@@ -126,7 +128,7 @@
 <!--
 	<b><?php /*echo CHtml::encode($data->getAttributeLabel('goede_antwoord')); ?>:</b>
 	<?php echo CHtml::encode($data->goede_antwoord); ?>
-	<br /> 
+	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('create_time')); ?>:</b>
 	<?php echo CHtml::encode($data->create_time); ?>
@@ -144,5 +146,5 @@
 	<?php echo CHtml::encode($data->update_user_ID); */?>
 	<br />
 -->
-	
+
 </div>

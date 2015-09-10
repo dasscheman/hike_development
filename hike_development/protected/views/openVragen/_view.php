@@ -15,7 +15,7 @@
 						echo CHtml::link(CHtml::encode($data->open_vragen_name),
 											   array('/openVragen/update',
 												 'id'=>$data->open_vragen_ID,
-												 'event_id'=>$data->event_ID)); 
+												 'event_id'=>$data->event_ID));
 					} else {
 						echo CHtml::encode($data->open_vragen_name);
 					}?>
@@ -34,15 +34,15 @@
             <br />
 
         </td>
-        <td> 
+        <td>
             <b><?php echo CHtml::encode($data->getAttributeLabel('goede_antwoord')); ?>:</b>
             <?php echo CHtml::encode($data->goede_antwoord); ?>
             <br />
-            
+
             <b><?php echo CHtml::encode($data->getAttributeLabel('score')); ?>:</b>
             <?php echo CHtml::encode($data->score); ?>
             <br />
-   
+
             <b><?php echo CHtml::encode($data->getAttributeLabel('vraag_volgorde')); ?>:</b>
             <?php echo CHtml::encode($data->vraag_volgorde); ?>
             <br />
@@ -63,12 +63,13 @@
             }
 
             if (OpenVragen::model()->isActionAllowed(
-										"openVragen", 
-										"moveUpDown", 
+										"openVragen",
+										"moveUpDown",
                                         $data->event_ID,
 										$data->open_vragen_ID,
-                                        "",
-                                        $data->vraag_volgorde, 
+                                        "", //grou_id
+										"", //date
+                                        $data->vraag_volgorde,
 										"up")) {
 				echo CHtml::link(
                     "Omhoog",
@@ -85,13 +86,14 @@
             }
 
             if (OpenVragen::model()->isActionAllowed(
-										"openVragen", 
-										"moveUpDown", 
+										"openVragen",
+										"moveUpDown",
                                         $data->event_ID,
 										$data->open_vragen_ID,
-                                        "",
-                                        $data->vraag_volgorde, 
-										"down")) { 
+                                        "", //group_id
+										"", //date
+                                        $data->vraag_volgorde,
+										"down")) {
 				echo CHtml::link(
                     "Omlaag",
                     "#",
@@ -106,5 +108,5 @@
                         "confirm"=>"Weet je zeker dat je deze vraag omlaag wilt schuiven?"));
             }?>
         </td>
-    </table>	
+    </table>
 </div>

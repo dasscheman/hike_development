@@ -127,14 +127,14 @@ class Route extends HikeActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
-	
+
     public function searchRoute($event_id, $startDate)
     {
 		// Warning: Please modify the following code to remove attributes that
 		// should not be searched.
-	
+
 		$criteria=new CDbCriteria;
-	
+
 		$criteria->compare('route_ID',$this->route_ID);
 		$criteria->compare('event_ID',$this->event_ID);
 		$criteria->compare('day_date',$this->day_date,true);
@@ -147,41 +147,42 @@ class Route extends HikeActiveRecord
 		$criteria->compare('create_user_ID',$this->create_user_ID);
 		$criteria->compare('update_time',$this->update_time,true);
 		$criteria->compare('update_user_ID',$this->update_user_ID);
-	
+
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 			'pagination'=>array('pageSize'=>50)
 		));
     }
 
-    function isActionAllowed($controller_id = null, 
-							 $action_id = null, 
+    function isActionAllowed($controller_id = null,
+							 $action_id = null,
 							 $event_id = null,
 							 $model_id = null,
-							 $date = null, 
+							 $group_id = null,
+							 $date = null,
 							 $order = null,
 							 $move = null)
     {
 		$actionAllowed = parent::isActionAllowed($controller_id, $action_id, $event_id, $model_id);
-		
-        $hikeStatus = EventNames::model()->getStatusHike($_GET['event_id']); 
+
+        $hikeStatus = EventNames::model()->getStatusHike($_GET['event_id']);
         $rolPlayer = DeelnemersEvent::model()->getRolOfPlayer($_GET['event_id'], Yii::app()->user->id);
-		
+
 		if ($action_id == 'moveUpDown'){
 			if (!isset($date) || !isset($move)){
 				return $actionAllowed;
-			}				
+			}
 			if ($hikeStatus != EventNames::STATUS_opstart or
 				$rolPlayer != DeelnemersEvent::ROL_organisatie) {
 					return $actionAllowed;
-			}	
+			}
 			if ($move == 'up'){
-				$nextOrderExist = Route::model()->higherOrderNumberExists($event_id, 
+				$nextOrderExist = Route::model()->higherOrderNumberExists($event_id,
 																		  $date,
 																		  $order);
 			}
 			if ($move == 'down'){
-				$nextOrderExist = Route::model()->lowererOrderNumberExists($event_id, 
+				$nextOrderExist = Route::model()->lowererOrderNumberExists($event_id,
 																		   $date,
 																		   $order);
 			}
@@ -189,19 +190,19 @@ class Route extends HikeActiveRecord
 				$actionAllowed = true;
 			}
 		}
-		
+
 		if ($action_id == 'viewIntroductie'){
             if ($rolPlayer == DeelnemersEvent::ROL_organisatie ){
                 $actionAllowed = true;
             }
-        }		
+        }
 		return $actionAllowed;
 	}
 
 	public function getDayOfRouteId($id)
 	{
 		$data = Route::model()->find('route_ID =:route_id', array(':route_id' => $id));
-		return $data->day_date; 
+		return $data->day_date;
 	}
 
 	public function getRouteName($id)
@@ -209,14 +210,14 @@ class Route extends HikeActiveRecord
 		$criteria = new CDbCriteria();
 		$criteria->condition = 'route_ID =:id';
 		$criteria->params=array(':id' => $id);
-		
+
 		if (Route::model()->exists($criteria))
 		{	$data = Route::model()->find($criteria);
 			return $data->route_name;
 		} else {
 			return "nvt";}
 	}
-			
+
 	public function getIntroductieRouteId($event_id)
 	{
 		$criteria = new CDbCriteria();
@@ -224,14 +225,14 @@ class Route extends HikeActiveRecord
 		$criteria->params=array(':event_id' => $event_id, ':route_name' =>'Introductie');
 		$criteria->order = "route_volgorde DESC";
 		$criteria->limit = 1;
-		
+
 		if (Route::model()->exists($criteria))
 		{
 			$data = Route::model()->findAll($criteria);
 			$introductieID = $data[0]->route_ID;
 		} else {
 			$introductieID = 1;}
-		
+
 		return $introductieID;
 	}
 
@@ -241,9 +242,9 @@ class Route extends HikeActiveRecord
 		if ($data->route_name == "Introductie")
 		{
 			return true;
-		}	
+		}
 		return false;
-	}	
+	}
 
 	public function getNewOrderForIntroductieRoute($event_id)
 	{
@@ -252,7 +253,7 @@ class Route extends HikeActiveRecord
 		$criteria->params=array(':event_id' => $event_id, ':route_name' =>'introductie');
 		$criteria->order = "route_volgorde DESC";
 		$criteria->limit = 1;
-		
+
 		if (Route::model()->exists($criteria))
 		{	$data = Route::model()->findAll($criteria);
 			$newOrder = $data[0]->route_volgorde+1;
@@ -271,7 +272,7 @@ class Route extends HikeActiveRecord
 		$criteria->params=array(':event_id' => $event_id, ':date' => $date, ':route_name' =>'introductie');
 		$criteria->order = "route_volgorde DESC";
 		$criteria->limit = 1;
-		
+
 		if (Route::model()->exists($criteria))
 		{	$data = Route::model()->findAll($criteria);
 			$newOrder = $data[0]->route_volgorde+1;
@@ -290,7 +291,7 @@ class Route extends HikeActiveRecord
 		$criteria = new CDbCriteria();
 		$criteria->condition = 'event_ID =:event_id AND day_date =:date AND route_volgorde >:order';
 		$criteria->params=array(':event_id' => $event_id, ':date' => $date, ':order' => $route_order);
-		
+
 		if (Route::model()->exists($criteria))
 			return true;
 		else
@@ -304,7 +305,7 @@ class Route extends HikeActiveRecord
 		$criteria = new CDbCriteria();
 		$criteria->condition = 'event_ID =:event_id AND day_date =:date AND route_volgorde <:order';
 		$criteria->params=array(':event_id' => $event_id, ':date' => $date, ':order' => $route_order);
-		
+
 		if (Route::model()->exists($criteria))
 			return true;
 		else
@@ -315,7 +316,7 @@ class Route extends HikeActiveRecord
 	{
 		$this->_activeTab = $date;
 	}
-	
+
 	public function getActiveTab()
 	{
 		return $this->_activeTab;

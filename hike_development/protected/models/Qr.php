@@ -131,29 +131,30 @@ class Qr extends HikeActiveRecord
 
 	/**
 	 * Check if actions are allowed. These checks are not only use in the controllers,
-	 * but also for the visability of the menu items. 
+	 * but also for the visability of the menu items.
 	 */
-    function isActionAllowed($controller_id = null, 
-							 $action_id = null, 
+    function isActionAllowed($controller_id = null,
+							 $action_id = null,
 							 $event_id = null,
 							 $model_id = null,
-							 $date = null, 
+							 $group_id = null,
+							 $date = null,
 							 $order = null,
 							 $move = null)
     {
 		$actionAllowed = parent::isActionAllowed($controller_id, $action_id, $event_id, $model_id);
-		
+
 		$hikeStatus = EventNames::model()->getStatusHike($event_id);
 		$rolPlayer = DeelnemersEvent::model()->getRolOfPlayer($event_id, Yii::app()->user->id);
 		$route_id = Qr::model()->getQrRouteID($model_id);
 
-		if ($action_id == 'createIntroductie' and 
+		if ($action_id == 'createIntroductie' and
 			$hikeStatus == EventNames::STATUS_opstart and
 			$rolPlayer == DeelnemersEvent::ROL_organisatie) {
 				$actionAllowed = true;
 		}
 
-		if ($action_id == 'report' and 
+		if ($action_id == 'report' and
 			$rolPlayer == DeelnemersEvent::ROL_organisatie) {
 				$actionAllowed = true;
 		}
@@ -161,85 +162,85 @@ class Qr extends HikeActiveRecord
 		if ($action_id == 'moveUpDown'){
 			if (!isset($order) || !isset($route_id)){
 				return $actionAllowed;
-			}		
+			}
 			if ($hikeStatus != EventNames::STATUS_opstart or
 				$rolPlayer != DeelnemersEvent::ROL_organisatie) {
 					return $actionAllowed;
 			}
-			
+
 			if ($move == 'up'){
-				$nextOrderExist = Qr::model()->higherOrderNumberExists($event_id, 
+				$nextOrderExist = Qr::model()->higherOrderNumberExists($event_id,
 																	   $model_id,
-																	   $order, 
+																	   $order,
 																	   $route_id);
 			}
 			if ($move == 'down'){
-				$nextOrderExist = Qr::model()->lowererOrderNumberExists($event_id, 
+				$nextOrderExist = Qr::model()->lowererOrderNumberExists($event_id,
 																		$model_id,
-																		$order, 
+																		$order,
 																		$route_id);
 			}
 			if ($nextOrderExist) {
 				$actionAllowed = true;
 			}
 		}
-		
+
 		return $actionAllowed;
 	}
 
-	
+
 	public function getUniqueQrCode()
-	{	
+	{
 		$UniqueQrCode = 99;
 		$event_id = $_GET['event_id'];
 		while($UniqueQrCode == 99)
 		{
 			$newqrcode = GeneralFunctions::randomString(22);
-			
-			$data = Qr::model()->find('event_ID = :event_Id AND qr_code=:qr_code', 
-						    array(':event_Id' => $event_id, 
-							  ':qr_code' => $newqrcode)); 
+
+			$data = Qr::model()->find('event_ID = :event_Id AND qr_code=:qr_code',
+						    array(':event_Id' => $event_id,
+							  ':qr_code' => $newqrcode));
 			// if QR code niet bestaat dan wordt de nieuwe gegenereede code gebruikt
 			if(!isset($data))
 			{
 				$UniqueQrCode = $newqrcode;
-			}	
+			}
 		}
 		return($UniqueQrCode);
 	}
-	
+
 	public function getQrCode($event_id, $qr_id)
-	{	
-		$data = Qr::model()->find('event_ID = :event_Id AND qr_ID=:qr_id', 
-						    array(':event_Id' => $event_id, 
+	{
+		$data = Qr::model()->find('event_ID = :event_Id AND qr_ID=:qr_id',
+						    array(':event_Id' => $event_id,
 							  ':qr_id' => $qr_id));
 		return($data->qr_code);
-	}	
-		
+	}
+
 	public function getQrRouteID($qr_id)
-	{	
-		$data = Qr::model()->find('qr_ID=:qr_id', 
+	{
+		$data = Qr::model()->find('qr_ID=:qr_id',
 						    array(':qr_id' => $qr_id));
 		if(isset($data->route_ID)){
 			return $data->route_ID;
 		} else {
 			return false;
 		}
-	}	
-		
+	}
+
 	public function getQrId($event_id, $qr_code)
-	{	
-		$data = Qr::model()->find('event_ID = :event_Id AND qr_code=:qr_code', 
-						    array(':event_Id' => $event_id, 
+	{
+		$data = Qr::model()->find('event_ID = :event_Id AND qr_code=:qr_code',
+						    array(':event_Id' => $event_id,
 							  ':qr_code' => $qr_code));
 		return($data->qr_ID);
-	}				
-	
-	
+	}
+
+
 	public function getQrCodeNAme($event_id, $qr_id)
-	{	
-		$data = Qr::model()->find('event_ID = :event_Id AND qr_ID=:qr_id', 
-						    array(':event_Id' => $event_id, 
+	{
+		$data = Qr::model()->find('event_ID = :event_Id AND qr_ID=:qr_id',
+						    array(':event_Id' => $event_id,
 							  ':qr_id' => $qr_id));
 		return($data->qr_name);
 	}
@@ -253,13 +254,13 @@ class Qr extends HikeActiveRecord
 		$criteria->params=array(':event_id' => $event_id, ':route_id' =>$route_id);
 		$criteria->order = "qr_volgorde DESC";
 		$criteria->limit = 1;
-		
+
 		if (Qr::model()->exists($criteria))
 		{	$data = Qr::model()->findAll($criteria);
 			$newOrder = $data[0]->qr_volgorde+1;
 		} else {
 			$newOrder = 1;}
-		
+
 		return $newOrder;
 	}
 
@@ -270,22 +271,22 @@ class Qr extends HikeActiveRecord
 		$criteria->params=array(':event_id' => $event_id, ':route_id' =>$route_id);
 		$criteria->order = "qr_volgorde DESC";
 		$criteria->limit = 1;
-		
+
 		if (Qr::model()->exists($criteria))
 		{	$data = Qr::model()->findAll($criteria);
 			$newOrder = $data[0]->qr_volgorde+1;
 		} else {
 			$newOrder = 1;}
-		
+
 		return $newOrder;
 	}
-	
+
 	public function getNumberQrRouteId($event_id, $route_id)
 	{
         $criteria = new CDbCriteria();
 		$criteria->condition = 'event_ID =:event_id AND route_ID =:route_id';
 		$criteria->params=array(':event_id' => $event_id, ':route_id' =>$route_id);
-		
+
 		return Qr::model()->count($criteria);
 	}
 
@@ -293,19 +294,19 @@ class Qr extends HikeActiveRecord
 	{
 		$criteria = new CDbCriteria();
 		$criteria->condition = 'event_ID =:event_id AND qr_ID !=:id AND route_ID=:route_id AND qr_volgorde >=:order';
-		$criteria->params=array(':event_id' => $event_id, 
+		$criteria->params=array(':event_id' => $event_id,
 								':id' => $id,
-								':route_id' => $route_id , 
+								':route_id' => $route_id ,
 								':order' => $qr_order);
-		
+
 		if (Qr::model()->exists($criteria))
 			return true;
 		else
 			return false;
 	}
- 
+
 	public function higherOrderNumberExists($event_id, $id, $qr_order, $route_id)
-	{		
+	{
 		$criteria = new CDbCriteria();
 		$criteria->condition = 'event_ID =:event_id AND qr_ID !=:id AND route_ID =:route_id AND qr_volgorde <=:order';
 		$criteria->params=array(':event_id' => $event_id,
@@ -318,7 +319,7 @@ class Qr extends HikeActiveRecord
 		else
 			return false;
 	}
-	 
+
 	public function qrExistForRouteId($event_id, $route_id)
 	{
 		$criteria = new CDbCriteria();
@@ -330,13 +331,13 @@ class Qr extends HikeActiveRecord
 		else
 			return false;
 	}
-	
+
     /**
     * Retrieves the score of an post.
     */
     public function getQrScore($qr_Id)
     {
-    	$data = Qr::model()->find('qr_ID =:qr_Id', array(':qr_Id' => $qr_Id));   
+    	$data = Qr::model()->find('qr_ID =:qr_Id', array(':qr_Id' => $qr_Id));
         return isset($data->score) ?
             $data->score : 0;
     }

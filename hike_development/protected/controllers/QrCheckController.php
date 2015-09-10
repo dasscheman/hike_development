@@ -53,6 +53,7 @@ class QrCheckController extends Controller
                     Yii::app()->controller->id,
                     Yii::app()->controller->action->id,
                     $_GET["event_id"],
+					"",
 					$_GET["group_id"])',
             ),
 			array('deny',  // deny all users

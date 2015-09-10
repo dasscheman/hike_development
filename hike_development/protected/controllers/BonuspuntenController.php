@@ -28,18 +28,18 @@ class BonuspuntenController extends Controller
 	 */
 	public function accessRules()
 	{
-		return array(		
+		return array(
 			array(	'deny',  // deny all guest users
 				'users'=>array('?'),
 			),
 			array(	'allow', // dynamic action should always be allowed
 				'actions'=>array('dynamicpostid'),
 				'users'=>array('@'),
-			),			
+			),
 			array(	'deny',  // deny if group_id is not set
 				'actions'=>array('viewPlayers'),
 				'expression'=> '!isset($_GET["group_id"])',
-			),	
+			),
 			array(	'allow', // allow admin user to perform 'viewplayers' actions
 				'actions'=>array('index', 'update', 'delete', 'create'),
 				'expression'=> 'Bonuspunten::model()->isActionAllowed(
@@ -53,6 +53,7 @@ class BonuspuntenController extends Controller
                     Yii::app()->controller->id,
                     Yii::app()->controller->action->id,
                     $_GET["event_id"],
+					"",
 					$_GET["group_id"])',
 			),
 			array(	'deny',  // deny all users
@@ -71,7 +72,7 @@ class BonuspuntenController extends Controller
 			'model'=>$this->loadModel($id),
 		));
 	}
-	
+
 	/**
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
@@ -79,7 +80,7 @@ class BonuspuntenController extends Controller
 	public function actionCreate()
 	{
 		$model=new Bonuspunten;
-	
+
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
@@ -157,7 +158,7 @@ class BonuspuntenController extends Controller
 			    'pageSize'=>10,
 			),
 		));
-        
+
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -177,18 +178,18 @@ class BonuspuntenController extends Controller
 			'model'=>$model,
 		));
 	}
-		
+
 	public function actionViewPlayers()
-	{       
-		$event_Id = $_GET['event_id'];   
-		$group_id = $_GET['group_id'];   
-			
+	{
+		$event_Id = $_GET['event_id'];
+		$group_id = $_GET['group_id'];
+
 		$testwhere = "event_ID = $event_Id AND group_ID = $group_id";
 		$bonuspuntenDataProvider=new CActiveDataProvider('Bonuspunten',
 		    array(
 			 'criteria'=>array(
 				'condition'=>$testwhere,
-			  ),	  	
+			  ),
 			'pagination'=>array(
 			    'pageSize'=>10,
 			),
@@ -226,10 +227,10 @@ class BonuspuntenController extends Controller
 			Yii::app()->end();
 		}
 	}
-	
+
 	/*
 	 * Deze actie wordt gebruikt voor de form velden. Op basis van een hike
-	 * en een dag wordt bepaald welke posten er beschikbaar zijn. 
+	 * en een dag wordt bepaald welke posten er beschikbaar zijn.
 	 * TODO: Deze functie wordt vaker gebruikt, dus zou op een
 	 * generieke plek moeten komen.
 	 */
@@ -242,13 +243,13 @@ class BonuspuntenController extends Controller
 					       array(':date'=>$date,
 						     ':event_id'=>$event_id));
 	   	$mainarr = array();
-		
+
 		foreach($data as $obj)
 		{
 			//De post naam moet gekoppeld worden aan de post_id:
 			$mainarr["$obj->post_ID"] = Posten::model()->getPostName($obj->post_ID);
 		}
-		
+
 		// Een leeg veld moet mogelijk zijn bij het invoeren van bonuspunten.
 		echo CHtml::tag('option',array('value' => ''),'Posten niet van toepassing...',true);
 		foreach($mainarr as $value=>$name)

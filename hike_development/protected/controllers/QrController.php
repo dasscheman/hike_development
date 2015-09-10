@@ -28,16 +28,17 @@ class QrController extends Controller
 	 */
 	public function accessRules()
 	{
-		return array(		
+		return array(
 			array('deny',  // deny all guest users
 				'users'=>array('?'),),
-			array(	'allow', // only when $_GET are set		
+			array(	'allow', // only when $_GET are set
 					'actions'=>array('moveUpDown'),
 					'expression'=> 'Qr::model()->isActionAllowed(
 						Yii::app()->controller->id,
 						Yii::app()->controller->action->id,
 						$_GET["event_id"],
 						$_GET["qr_id"],
+						"",
 						$_GET["date"],
 						$_GET["volgorde"],
 						$_GET["up_down"])'),
@@ -163,10 +164,10 @@ class QrController extends Controller
 			$this->loadModel($qr_id)->delete();
 		}
 		catch(CDbException $e)
-		{		
+		{
 			throw new CHttpException(400,"Je kan deze stille post niet verwijderen.");
 		}
-		
+
 		if (Route::model()->routeIdIntroduction($_GET['route_id'])){
 			$this->redirect(isset($_POST['returnUrl']) ?
 					$_POST['returnUrl'] : array('/route/viewIntroductie',
@@ -187,7 +188,7 @@ class QrController extends Controller
 	{
 		$event_id = $_GET['event_id'];
 		$where = "event_ID = $event_id";
-	
+
 		$dataProvider=new CActiveDataProvider('Qr',
 		    array(
 			'criteria'=>array(
@@ -197,9 +198,9 @@ class QrController extends Controller
 			'pagination'=>array(
 				'pageSize'=>15,
 			),
-		));  
+		));
 
-	
+
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -219,8 +220,8 @@ class QrController extends Controller
 			'model'=>$model,
 		));
 	}
-	
-	
+
+
 	public function actionReport()
 	{
 		$id = $_GET['id'];
@@ -256,24 +257,24 @@ class QrController extends Controller
 	}
 
 	public function actionMoveUpDown()
-    {	
+    {
 		$event_id = $_GET['event_id'];
 		$qr_id = $_GET['qr_id'];
 		$qr_volgorde = $_GET['volgorde'];
 		$up_down = $_GET['up_down'];
 		$route_id = Qr::model()->getQrRouteID($qr_id);
-		
+
 		$currentModel = Qr::model()->findByPk($qr_id);
-	
+
 		$criteria = new CDbCriteria;
-	
+
 		if ($up_down=='up')
 		{
 			$criteria->condition = 'event_ID =:event_id AND
 									qr_ID !=:id AND
-									route_ID=:route_id AND 
+									route_ID=:route_id AND
 									qr_volgorde <=:order';
-			$criteria->params=array(':event_id' => $event_id, 
+			$criteria->params=array(':event_id' => $event_id,
 									':id' => $qr_id,
 									':route_id' => $route_id ,
 									':order' => $qr_volgorde);
@@ -283,33 +284,33 @@ class QrController extends Controller
 		{
 			$criteria->condition = 'event_ID =:event_id AND
 									qr_ID !=:id AND
-								 	route_ID=:route_id AND 
+								 	route_ID=:route_id AND
 									qr_volgorde >:order';
 			$criteria->params=array(':event_id' => $event_id,
 									':id' => $qr_id,
-									':route_id' => $route_id , 
+									':route_id' => $route_id ,
 									':order' => $qr_volgorde);
 			$criteria->order= 'qr_volgorde ASC';
 		}
 			$criteria->limit=1;
 		$previousModel = Qr::model()->find($criteria);
-	
+
 		$tempCurrentVolgorde = $currentModel->qr_volgorde;
 		$currentModel->qr_volgorde = $previousModel->qr_volgorde;
 		$previousModel->qr_volgorde = $tempCurrentVolgorde;
-	
+
 		$currentModel->save();
 		$previousModel->save();
-		
+
 		if (Route::model()->routeIdIntroduction($currentModel->route_ID))
-		{			
-			$this->redirect(array('route/viewIntroductie', 
+		{
+			$this->redirect(array('route/viewIntroductie',
 				"route_id"=>$currentModel->route_ID,
 				"event_id"=>$currentModel->event_ID,));
-		}	
+		}
 		else
 		{
-			$this->redirect(array('route/view', 
+			$this->redirect(array('route/view',
 				"route_id"=>$currentModel->route_ID,
 				"event_id"=>$currentModel->event_ID,));
 		}

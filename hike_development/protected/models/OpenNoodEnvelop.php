@@ -120,17 +120,17 @@ class OpenNoodEnvelop extends HikeActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
-	
+
 	/**
 	 * Check if actions are allowed. These checks are not only use in the controllers,
-	 * but also for the visability of the menu items. 
+	 * but also for the visability of the menu items.
 	 */
-    function isActionAllowed($controller_id = null, $action_id = null, $event_id = null, $group_id = null)
+    function isActionAllowed($controller_id = null, $action_id = null, $event_id = null, $model_id = null, $group_id = null)
     {
-		$actionAllowed = parent::isActionAllowed($controller_id, $action_id, $event_id, $group_id);
-  
+		$actionAllowed = parent::isActionAllowed($controller_id, $action_id, $event_id, $model_id, $group_id);
+
 		$hikeStatus = EventNames::model()->getStatusHike($event_id);
-		$rolPlayer = DeelnemersEvent::model()->getRolOfPlayer($event_id, Yii::app()->user->id);    
+		$rolPlayer = DeelnemersEvent::model()->getRolOfPlayer($event_id, Yii::app()->user->id);
 		return $actionAllowed;
 	}
 
@@ -146,9 +146,9 @@ class OpenNoodEnvelop extends HikeActiveRecord
 		if(isset($data->open_nood_envelop_ID))
 			{return(true);}
 		else
-			{return(false);}	
+			{return(false);}
 	}
-	
+
 	public function isEnvelopOpenByGroup($nood_envelop_id,
 					     $event_id,
 					     $group_id)
@@ -162,9 +162,9 @@ class OpenNoodEnvelop extends HikeActiveRecord
 		if(isset($data->open_nood_envelop_ID))
 			{return(true);}
 		else
-			{return(false);}	
+			{return(false);}
 	}
-	
+
 	public function getOpenEnvelopScore($event_id,
 					    $group_id)
 	{
@@ -180,5 +180,5 @@ class OpenNoodEnvelop extends HikeActiveRecord
             $score = $score + NoodEnvelop::model()->getNoodEnvelopScore($obj->nood_envelop_ID);
         }
         return $score;
-	}		
+	}
 }
