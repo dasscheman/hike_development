@@ -180,7 +180,7 @@ class OpenVragen extends HikeActiveRecord
 							 $order = null,
 							 $move = null)
     {
-		$actionAllowed = parent::isActionAllowed($controller_id, $action_id, $event_id, $model_id);
+		$actionAllowed = parent::isActionAllowed($controller_id, $action_id, $event_id, $model_id, $group_id);
 
 		$hikeStatus = EventNames::model()->getStatusHike($event_id);
 		$rolPlayer = DeelnemersEvent::model()->getRolOfPlayer($event_id, Yii::app()->user->id);

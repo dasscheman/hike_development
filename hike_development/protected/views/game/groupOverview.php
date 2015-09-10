@@ -65,7 +65,7 @@ $this->menu=array(
 			   'event_id'=>$event_id,
 			   'group_id'=>$group_id,
 			   'set_message'=>false),
-	      'visible'=> NoodEnvelop::model()->isActionAllowed('noodEnvelop', 'viewPlayers', $event_id)),
+	      'visible'=> NoodEnvelop::model()->isActionAllowed('noodEnvelop', 'viewPlayers', $event_id, "", $group_id)),
 
 	array('label'=>'<span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x fa-green"></i>
