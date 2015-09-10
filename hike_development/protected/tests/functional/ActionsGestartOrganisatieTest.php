@@ -66,7 +66,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
     {
 		$scoreVragenBegin = OpenVragenAntwoorden::model()->getOpenVragenScore(3, 5);
 		$scoreTotalBegin = Groups::model()->getTotalScoreGroup(3, 5);
-		
+
 		$this->login();
 
     	$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=3");
@@ -139,7 +139,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
 		$this->assertContains("Alle beantwoorde vragen", $this->getBodyText());
 		$this->assertContains("Hoofdletter b", $this->getBodyText());
-		$this->assertContains("Hoofdletter a", $this->getBodyText());    	
+		$this->assertContains("Hoofdletter a", $this->getBodyText());
 	}
 
     public function testGeopendeHintsBekijken()
@@ -221,7 +221,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		$this->assertContains("Geopende Hints", $this->getBodyText());
 	}
 
-    public function testPostBinnenkomst()
+    public function testDagstart()
 	{
 		$scorePostenBegin = PostPassage::model()->getPostScore(3, 6);
 		$scoreTotalBegin = Groups::model()->getTotalScoreGroup(3, 6);
@@ -230,13 +230,42 @@ class ActionGestartOrganisatieTest extends WebTestCase
     	$this->open("hike_development/index-test.php?r=game/groupOverview&event_id=3&group_id=6");
 		$this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=game/groupOverview&event_id=3&group_id=6", $this->getLocation());
-		$this->assertTrue($this->isElementPresent("link=Binnenkomst Post"));
+		$this->assertFalse($this->isElementPresent("link=Binnenkomst Post"));
+		$this->assertTrue($this->isElementPresent("link=Dag start"));
 		$this->click("link=Binnenkomst Post");
         $this->waitForPageToLoad ( "30000" );
-		$this->assertContains("hike_development/index-test.php?r=postPassage/create&event_id=3&group_id=6", $this->getLocation());
+		$this->assertContains("hike_development/index-test.php?r=postPassage/createDayStart&event_id=3&group_id=6", $this->getLocation());
+
+		$this->select("name=PostPassage[post_ID]", "label=post 3 gestart organisatie START");
+		$this->type("name=PostPassage[vertrek]", "2015-02-27 12:43");
+		$this->click("name=yt0");
+		$this->waitForPageToLoad("30000");
+
+		$scorePostenEnd = PostPassage::model()->getPostScore(3, 6);
+		$scoreTotalEnd = Groups::model()->getTotalScoreGroup(3, 6);
+		$this->assertEquals(0, $scorePostenEnd);
+		$this->assertEquals(5, $scoreTotalEnd);
+		$this->assertEquals(0, $scorePostenEnd-$scorePostenBegin);
+		$this->assertEquals(0, $scoreTotalEnd-$scoreTotalBegin);
+	}
+
+	public function testPostBinnenkomst()
+	{
+		$scorePostenBegin = PostPassage::model()->getPostScore(3, 6);
+		$scoreTotalBegin = Groups::model()->getTotalScoreGroup(3, 6);
+		$this->login();
+
+    	$this->open("hike_development/index-test.php?r=game/groupOverview&event_id=3&group_id=6");
+		$this->waitForPageToLoad ( "30000" );
+		$this->assertContains("hike_development/index-test.php?r=game/groupOverview&event_id=3&group_id=6", $this->getLocation());
+		$this->assertFalse($this->isElementPresent("link=Binnenkomst Post"));
+		$this->assertTrue($this->isElementPresent("link=Dag start"));
+		$this->click("link=Binnenkomst Post");
+        $this->waitForPageToLoad ( "30000" );
+		$this->assertContains("hike_development/index-test.php?r=postPassage/createDayStart&event_id=3&group_id=6", $this->getLocation());
 
 		$this->select("name=PostPassage[post_ID]", "label=post 3 gestart organisatie LUNCH");
-		$this->type("name=PostPassage[binnenkomst]", "2015-02-27 12:43");
+		$this->type("name=PostPassage[vertrek]", "2015-02-27 13:43");
 		$this->click("name=yt0");
 		$this->waitForPageToLoad("30000");
 
@@ -483,7 +512,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
     	$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=3");
         $this->waitForPageToLoad ( "30000" );
-		$this->assertContains("hike_development/index-test.php?r=startup/startupOverview&event_id=3", $this->getLocation());	
+		$this->assertContains("hike_development/index-test.php?r=startup/startupOverview&event_id=3", $this->getLocation());
 		$this->assertTrue($this->isElementPresent("link=Dag Veranderen"));
 		$this->open("hike_development/index-test.php?r=eventNames/changeDay&event_id=3");
         $this->waitForPageToLoad ( "30000" );
@@ -494,7 +523,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=3");
 		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=3", $this->getLocation());
         $this->assertContains("Tijd over (minuten): 724", $this->getBodyText());
-        $this->assertContains("Tijd over (minuten): 1380", $this->getBodyText());
+        $this->assertContains("Tijd over (minuten): 1320", $this->getBodyText());
 
 		$this->open("hike_development/index-test.php?r=eventNames/changeDay&event_id=3");
         $this->waitForPageToLoad ( "30000" );
@@ -505,7 +534,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=3");
 		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=3", $this->getLocation());
 		$this->assertContains("Tijd over (minuten): 784", $this->getBodyText());
-// TODO na rekenen:        
+// TODO na rekenen:
 //$this->assertContains("Tijd over (minuten): nog niet gestart", $this->getBodyText());
 
 		$this->open("hike_development/index-test.php?r=eventNames/changeDay&event_id=3");
@@ -566,7 +595,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 
 		$this->assertContains("hike_development/index-test.php?r=eventNames/changeDay&event_id=3", $this->getLocation());
 
-		$this->type("id=active_day", "2015-02-27");		
+		$this->type("id=active_day", "2015-02-27");
 		$this->type("id=EventNames_max_time", "24:00:00");
 		$this->click("name=yt0");
 		$this->waitForPageToLoad("30000");
