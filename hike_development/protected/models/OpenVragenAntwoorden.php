@@ -27,270 +27,270 @@
  */
 class OpenVragenAntwoorden extends HikeActiveRecord
 {
-	/**
-	 * Returns the static model of the specified AR class.
-	 * @param string $className active record class name.
-	 * @return OpenVragenAntwoorden the static model class
-	 */
-	public static function model($className=__CLASS__)
-	{
-		return parent::model($className);
-	}
-
-	/**
-	 * @return string the associated database table name
-	 */
-	public function tableName()
-	{
-		return 'tbl_open_vragen_antwoorden';
-	}
-
-	/**
-	 * @return array validation rules for model attributes.
-	 */
-	public function rules()
-	{
-		// NOTE: you should only define rules for those attributes that
-		// will receive user inputs.
-		return array(
-			array('open_vragen_ID, group_ID, event_ID, antwoord_spelers', 'required'),
-			//array('open_vragen_ID, group_ID, checked, correct, score, create_user_ID, update_user_ID', 'numerical', 'integerOnly'=>true),
-			array('open_vragen_ID, group_ID, event_ID, checked, correct', 'numerical',
-			      'integerOnly'=>true),
-			array('antwoord_spelers', 'length', 'max'=>255),
-			//array('create_time, update_time', 'safe'),
-			// The following rule is used by search().
-			// Please remove those attributes that should not be searched.
-			array('open_vragen_antwoorden_ID, event_ID, open_vragen_ID,
-			      group_ID, antwoord_spelers, checked, correct,
-			      create_time, create_user_ID, update_time,
-			      update_user_ID', 'safe', 'on'=>'search'),
-		        array('open_vragen_ID',
-			      'ext.UniqueAttributesValidator',
-			      'with'=>'group_ID'),
-		);
-	}
-
-	/**
-	 * @return array relational rules.
-	 */
-	public function relations()
-	{
-		// NOTE: you may need to adjust the relation name and the related
-		// class name for the relations automatically generated below.
-		return array(
-			'event' => array(self::BELONGS_TO,'EventNames', 'event_ID'),
-			'updateUser' => array(self::BELONGS_TO, 'Users', 'update_user_ID'),
-			'createUser' => array(self::BELONGS_TO, 'Users', 'create_user_ID'),
-			'group' => array(self::BELONGS_TO, 'Groups', 'group_ID'),
-			'openVragen' => array(self::BELONGS_TO, 'OpenVragen', 'open_vragen_ID'),
-		);
-	}
-
-	/**
-	 * @return array customized attribute labels (name=>label)
-	 */
-	public function attributeLabels()
-	{
-		return array(
-			'open_vragen_antwoorden_ID' => 'Open Vragen Antwoorden',
-			'event_ID' => 'Event',
-			'open_vragen_ID' => 'Open Vragen',
-			'group_ID' => 'Group',
-			'antwoord_spelers' => 'Antwoord Spelers',
-			'checked' => 'Checked',
-			'correct' => 'Correct',
-			'create_time' => 'Create Time',
-			'create_user_ID' => 'Beantwoord door',
-			'update_time' => 'Update Time',
-			'update_user_ID' => 'Update User',
-		);
-	}
-
-	/**
-	 * Retrieves a list of models based on the current search/filter conditions.
-	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
-	 */
-	public function search()
-	{
-		// Warning: Please modify the following code to remove attributes that
-		// should not be searched.
-
-		$criteria=new CDbCriteria;
-
-		$criteria->compare('open_vragen_antwoorden_ID',$this->open_vragen_antwoorden_ID);
-		$criteria->compare('event_ID',$this->event_ID);
-		$criteria->compare('open_vragen_ID',$this->open_vragen_ID);
-		$criteria->compare('group_ID',$this->group_ID);
-		$criteria->compare('antwoord_spelers',$this->antwoord_spelers,true);
-		$criteria->compare('checked',$this->checked);
-		$criteria->compare('correct',$this->correct);
-		$criteria->compare('create_time',$this->create_time,true);
-		$criteria->compare('create_user_ID',$this->create_user_ID);
-		$criteria->compare('update_time',$this->update_time,true);
-		$criteria->compare('update_user_ID',$this->update_user_ID);
-
-		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
-		));
-	}
-
-	/**
-	 * Check if actions are allowed. These checks are not only use in the controllers,
-	 * but also for the visability of the menu items.
-	 */
-    function isActionAllowed($controller_id = null, $action_id = null, $event_id = null, $model_id = null)
+    /**
+     * Returns the static model of the specified AR class.
+     * @param string $className active record class name.
+     * @return OpenVragenAntwoorden the static model class
+     */
+    public static function model($className=__CLASS__)
     {
-		$actionAllowed = parent::isActionAllowed($controller_id, $action_id, $event_id, $model_id);
-
-		$hikeStatus = EventNames::model()->getStatusHike($event_id);
-		$rolPlayer = DeelnemersEvent::model()->getRolOfPlayer($event_id, Yii::app()->user->id);
-        switch ($action_id) {
-			case 'antwoordGoedOfFout':
-				if (($hikeStatus == EventNames::STATUS_introductie OR
-                    $hikeStatus == EventNames::STATUS_gestart) AND
-                    $rolPlayer == DeelnemersEvent::ROL_organisatie AND
-					!OpenVragenAntwoorden::model()->isAntwoordGecontroleerd($event_id, $model_id)) {
-						$actionAllowed = true;
-                }
-				break;
-			case 'viewControle':
-                if (($hikeStatus == EventNames::STATUS_introductie OR
-                    $hikeStatus == EventNames::STATUS_gestart) AND
-                    $rolPlayer == DeelnemersEvent::ROL_organisatie) {
-                    $actionAllowed = true;
-                }
-				break;
-			case 'updateOrganisatie':
-                if (($hikeStatus == EventNames::STATUS_introductie OR
-                    $hikeStatus == EventNames::STATUS_gestart) AND
-                    $rolPlayer == DeelnemersEvent::ROL_organisatie) {
-                    $actionAllowed = true;
-                }
-				break;
-        }
-		return $actionAllowed;
+	    return parent::model($className);
     }
 
-	/**
-	 * Als een nieuwe record aangemaakt wordt dan moeten deze waarden gezet worden.
-	 * Ook bedenken wat er met het score veld moet gebeuren... Als deze toch gezet wordt moet
-	 * de score anders opgehaald worden.
-	 */
-	protected function beforeSave()
-        {
-		if(!parent::beforeSave())
-		{
-			return false;
-		}
+    /**
+     * @return string the associated database table name
+     */
+    public function tableName()
+    {
+	    return 'tbl_open_vragen_antwoorden';
+    }
 
-		if($this->isNewRecord)
-		{
-			$this->correct = 0;
-			$this->checked = 0;
-		}
-		return true;
+    /**
+     * @return array validation rules for model attributes.
+     */
+    public function rules()
+    {
+	    // NOTE: you should only define rules for those attributes that
+	    // will receive user inputs.
+	    return array(
+		    array('open_vragen_ID, group_ID, event_ID, antwoord_spelers', 'required'),
+		    //array('open_vragen_ID, group_ID, checked, correct, score, create_user_ID, update_user_ID', 'numerical', 'integerOnly'=>true),
+		    array('open_vragen_ID, group_ID, event_ID, checked, correct', 'numerical',
+			  'integerOnly'=>true),
+		    array('antwoord_spelers', 'length', 'max'=>255),
+		    //array('create_time, update_time', 'safe'),
+		    // The following rule is used by search().
+		    // Please remove those attributes that should not be searched.
+		    array('open_vragen_antwoorden_ID, event_ID, open_vragen_ID,
+			  group_ID, antwoord_spelers, checked, correct,
+			  create_time, create_user_ID, update_time,
+			  update_user_ID', 'safe', 'on'=>'search'),
+		    array('open_vragen_ID',
+			  'ext.UniqueAttributesValidator',
+			  'with'=>'group_ID'),
+	    );
+    }
 
+    /**
+     * @return array relational rules.
+     */
+    public function relations()
+    {
+	    // NOTE: you may need to adjust the relation name and the related
+	    // class name for the relations automatically generated below.
+	    return array(
+		    'event' => array(self::BELONGS_TO,'EventNames', 'event_ID'),
+		    'updateUser' => array(self::BELONGS_TO, 'Users', 'update_user_ID'),
+		    'createUser' => array(self::BELONGS_TO, 'Users', 'create_user_ID'),
+		    'group' => array(self::BELONGS_TO, 'Groups', 'group_ID'),
+		    'openVragen' => array(self::BELONGS_TO, 'OpenVragen', 'open_vragen_ID'),
+	    );
+    }
+
+    /**
+     * @return array customized attribute labels (name=>label)
+     */
+    public function attributeLabels()
+    {
+	    return array(
+		    'open_vragen_antwoorden_ID' => 'Open Vragen Antwoorden',
+		    'event_ID' => 'Event',
+		    'open_vragen_ID' => 'Open Vragen',
+		    'group_ID' => 'Group',
+		    'antwoord_spelers' => 'Antwoord Spelers',
+		    'checked' => 'Checked',
+		    'correct' => 'Correct',
+		    'create_time' => 'Create Time',
+		    'create_user_ID' => 'Beantwoord door',
+		    'update_time' => 'Update Time',
+		    'update_user_ID' => 'Update User',
+	    );
+    }
+
+    /**
+     * Retrieves a list of models based on the current search/filter conditions.
+     * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
+     */
+    public function search()
+    {
+	    // Warning: Please modify the following code to remove attributes that
+	    // should not be searched.
+
+	    $criteria=new CDbCriteria;
+
+	    $criteria->compare('open_vragen_antwoorden_ID',$this->open_vragen_antwoorden_ID);
+	    $criteria->compare('event_ID',$this->event_ID);
+	    $criteria->compare('open_vragen_ID',$this->open_vragen_ID);
+	    $criteria->compare('group_ID',$this->group_ID);
+	    $criteria->compare('antwoord_spelers',$this->antwoord_spelers,true);
+	    $criteria->compare('checked',$this->checked);
+	    $criteria->compare('correct',$this->correct);
+	    $criteria->compare('create_time',$this->create_time,true);
+	    $criteria->compare('create_user_ID',$this->create_user_ID);
+	    $criteria->compare('update_time',$this->update_time,true);
+	    $criteria->compare('update_user_ID',$this->update_user_ID);
+
+	    return new CActiveDataProvider($this, array(
+		    'criteria'=>$criteria,
+	    ));
+    }
+
+    /**
+     * Check if actions are allowed. These checks are not only use in the controllers,
+     * but also for the visability of the menu items.
+     */
+    function isActionAllowed($controller_id = null, $action_id = null, $event_id = null, $model_id = null, $group_id = null)
+    {
+	$actionAllowed = parent::isActionAllowed($controller_id, $action_id, $event_id, $model_id, $group_id);
+
+	$hikeStatus = EventNames::model()->getStatusHike($event_id);
+	$rolPlayer = DeelnemersEvent::model()->getRolOfPlayer($event_id, Yii::app()->user->id);
+        switch ($action_id) {
+	    case 'antwoordGoedOfFout':
+		    if (($hikeStatus == EventNames::STATUS_introductie OR
+                    $hikeStatus == EventNames::STATUS_gestart) AND
+                    $rolPlayer == DeelnemersEvent::ROL_organisatie AND
+		    !OpenVragenAntwoorden::model()->isAntwoordGecontroleerd($event_id, $model_id)) {
+			$actionAllowed = true;
+                }
+	    break;
+	    case 'viewControle':
+                if (($hikeStatus == EventNames::STATUS_introductie OR
+                    $hikeStatus == EventNames::STATUS_gestart) AND
+                    $rolPlayer == DeelnemersEvent::ROL_organisatie) {
+			$actionAllowed = true;
+                }
+	    break;
+	    case 'updateOrganisatie':
+                if (($hikeStatus == EventNames::STATUS_introductie OR
+                    $hikeStatus == EventNames::STATUS_gestart) AND
+                    $rolPlayer == DeelnemersEvent::ROL_organisatie) {
+			$actionAllowed = true;
+                }
+	    break;
         }
+	return $actionAllowed;
+    }
 
-	/**
-	 * Score ophalen voor een group.
-	 */
-	public function getOpenVragenScore($event_id, $group_id)
-	{
-		$criteria = new CDbCriteria;
-		$criteria->condition="group_ID = $group_id AND
-				      event_ID = $event_id AND
-				      checked  = 1 AND
-				      correct  = 1";
-		$data = OpenVragenAntwoorden::model()->findAll($criteria);
-        $score = 0;
-    	foreach($data as $obj)
-        {
-            $score = $score + OpenVragen::model()->getOpenVraagScore($obj->open_vragen_ID);
-        }
-        return $score;
-	}
+    /**
+     * Als een nieuwe record aangemaakt wordt dan moeten deze waarden gezet worden.
+     * Ook bedenken wat er met het score veld moet gebeuren... Als deze toch gezet wordt moet
+     * de score anders opgehaald worden.
+     */
+    protected function beforeSave()
+    {
+	    if(!parent::beforeSave())
+	    {
+		    return false;
+	    }
 
-	/**
-	 * Check of een bepaalde vraag is beantwoord door een group, Retruns true of false
-	 */
-	public function isQuestionUsed($vragen_id)
-	{
-		$criteria = new CDbCriteria;
-		$criteria->condition="open_vragen_ID = $vragen_id";
-		$data = OpenVragenAntwoorden::model()->find($criteria);
-		if(isset($data->antwoord_spelers))
-			{return true;}
-		else
-			{return(false);}
-	}
+	    if($this->isNewRecord)
+	    {
+		    $this->correct = 0;
+		    $this->checked = 0;
+	    }
+	    return true;
 
-	/**
-	 * Check of een bepaalde vraag is beantwoord door een gegeven group, Retruns JA of NEE
-	 */
-	public function isVraagBeantwoord($event_id,
-					  $group_id,
-                                          $vragen_id)
-	{
-		$criteria = new CDbCriteria;
-		$criteria->condition="event_ID = $event_id AND
-				      group_ID = $group_id AND
-				      open_vragen_ID = $vragen_id";
-		$data = OpenVragenAntwoorden::model()->find($criteria);
-		if(isset($data->antwoord_spelers))
-			{return('Ja');}
-		else
-			{return('Nee');}
-	}
+    }
 
-	/**
-	 * Check of een bepaalde vraag is gecontroleerd, Retruns JA of NEE
-	 * Als JA dan moet het niet meer mogelijk zijn om die vraag te
-	 * beantwoorden door een groep.
-	 */
-	public function isVraagGecontroleerd($event_id,
-										 $group_id,
-										 $vragen_id)
-	{
-		$criteria = new CDbCriteria;
-		$criteria->condition="event_ID = $event_id AND
-				      group_ID = $group_id AND
-				      open_vragen_ID = $vragen_id";
-		$data = OpenVragenAntwoorden::model()->find($criteria);
-		if(isset($data->checked) AND $data->checked == 1)
-			{return('Ja');}
-		else
-			{return('Nee');}
-	}
+    /**
+     * Score ophalen voor een group.
+     */
+    public function getOpenVragenScore($event_id, $group_id)
+    {
+	    $criteria = new CDbCriteria;
+	    $criteria->condition="group_ID = $group_id AND
+				  event_ID = $event_id AND
+				  checked  = 1 AND
+				  correct  = 1";
+	    $data = OpenVragenAntwoorden::model()->findAll($criteria);
+    $score = 0;
+    foreach($data as $obj)
+    {
+	$score = $score + OpenVragen::model()->getOpenVraagScore($obj->open_vragen_ID);
+    }
+    return $score;
+    }
 
-	public function isAntwoordGecontroleerd($event_id, $id)
-	{
-		$criteria = new CDbCriteria;
-		$criteria->condition="event_ID = $event_id AND
-				      open_vragen_antwoorden_ID = $id";
-		$data = OpenVragenAntwoorden::model()->findAll($criteria);
-		if(isset($data->checked) AND $data->checked == 1)
-			return true;
-		else
-			return false;
-	}
+    /**
+     * Check of een bepaalde vraag is beantwoord door een group, Retruns true of false
+     */
+    public function isQuestionUsed($vragen_id)
+    {
+	    $criteria = new CDbCriteria;
+	    $criteria->condition="open_vragen_ID = $vragen_id";
+	    $data = OpenVragenAntwoorden::model()->find($criteria);
+	    if(isset($data->antwoord_spelers))
+		    {return true;}
+	    else
+		    {return(false);}
+    }
 
-	/**
-	 * Check of een bepaald antwoord goed is. Retruns JA of NEE
-	 */
-	public function isVraagGoed($event_id,
-				    $group_id,
-                                    $vragen_id)
-	{
-		$criteria = new CDbCriteria;
-		$criteria->condition="event_ID = $event_id AND
-				      group_ID = $group_id AND
-				      open_vragen_ID = $vragen_id";
-		$data = OpenVragenAntwoorden::model()->find($criteria);
-		if(isset($data->correct) AND $data->correct == 1)
-			{return('Ja');}
-		else
-			{return('Nee');}
-	}
+    /**
+     * Check of een bepaalde vraag is beantwoord door een gegeven group, Retruns JA of NEE
+     */
+    public function isVraagBeantwoord($event_id,
+				      $group_id,
+				      $vragen_id)
+    {
+	    $criteria = new CDbCriteria;
+	    $criteria->condition="event_ID = $event_id AND
+				  group_ID = $group_id AND
+				  open_vragen_ID = $vragen_id";
+	    $data = OpenVragenAntwoorden::model()->find($criteria);
+	    if(isset($data->antwoord_spelers))
+		    {return('Ja');}
+	    else
+		    {return('Nee');}
+    }
+
+    /**
+     * Check of een bepaalde vraag is gecontroleerd, Retruns JA of NEE
+     * Als JA dan moet het niet meer mogelijk zijn om die vraag te
+     * beantwoorden door een groep.
+     */
+    public function isVraagGecontroleerd($event_id,
+									     $group_id,
+									     $vragen_id)
+    {
+	    $criteria = new CDbCriteria;
+	    $criteria->condition="event_ID = $event_id AND
+				  group_ID = $group_id AND
+				  open_vragen_ID = $vragen_id";
+	    $data = OpenVragenAntwoorden::model()->find($criteria);
+	    if(isset($data->checked) AND $data->checked == 1)
+		    {return('Ja');}
+	    else
+		    {return('Nee');}
+    }
+
+    public function isAntwoordGecontroleerd($event_id, $id)
+    {
+	    $criteria = new CDbCriteria;
+	    $criteria->condition="event_ID = $event_id AND
+				  open_vragen_antwoorden_ID = $id";
+	    $data = OpenVragenAntwoorden::model()->findAll($criteria);
+	    if(isset($data->checked) AND $data->checked == 1)
+		    return true;
+	    else
+		    return false;
+    }
+
+    /**
+     * Check of een bepaald antwoord goed is. Retruns JA of NEE
+     */
+    public function isVraagGoed($event_id,
+				$group_id,
+				$vragen_id)
+    {
+	    $criteria = new CDbCriteria;
+	    $criteria->condition="event_ID = $event_id AND
+				  group_ID = $group_id AND
+				  open_vragen_ID = $vragen_id";
+	    $data = OpenVragenAntwoorden::model()->find($criteria);
+	    if(isset($data->correct) AND $data->correct == 1)
+		    {return('Ja');}
+	    else
+		    {return('Nee');}
+    }
 }

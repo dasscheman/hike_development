@@ -28,27 +28,34 @@ class PostPassageController extends Controller
 	 */
 	public function accessRules()
 	{
-		return array(			
+		return array(
 			array('deny',  // deny all users
 				'users'=>array('?'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array('dynamicpostscore', 'dynamicpostid'),
 				'users'=>array('@'),
-			),	
+			),
 			array(	'deny',  // deny if group is not set
 				'actions'=>array('create'),
 				'expression'=> '!isset($_GET["group_id"])',
-			),		
+			),
             array(	'allow', // allow admin user to perform 'viewplayers' actions
-                'actions'=>array('index', 'update', 'delete', 'create', 'createDayStart', 'updateVertrek'),
+                'actions'=>array('create', 'createDayStart', 'updateVertrek'),
                 'expression'=> 'PostPassage::model()->isActionAllowed(
                     Yii::app()->controller->id,
                     Yii::app()->controller->action->id,
                     $_GET["event_id"],
 					"",
 					$_GET["group_id"])',
-            ),		
+            ),
+            array(	'allow', // allow admin user to perform 'viewplayers' actions
+                'actions'=>array('index', 'update', 'delete'),
+                'expression'=> 'PostPassage::model()->isActionAllowed(
+                    Yii::app()->controller->id,
+                    Yii::app()->controller->action->id,
+                    $_GET["event_id"])',
+            ),
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
@@ -76,17 +83,17 @@ class PostPassageController extends Controller
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
-	    
+
 		if(isset($_POST['PostPassage']))
 		{
 			$model->attributes=$_POST['PostPassage'];
-			
+
 			if($model->save())
 				$this->redirect(array('/game/groupOverview',
 						      'event_id'=>$model->event_ID,
 						      'group_id'=>$model->group_ID));
 		}
-	
+
 		$this->render('create',array(
 			'model'=>$model,
 		));
@@ -102,7 +109,7 @@ class PostPassageController extends Controller
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
-	    
+
 		if(isset($_POST['PostPassage']))
 		{
 			$model->attributes=$_POST['PostPassage'];
@@ -115,7 +122,7 @@ class PostPassageController extends Controller
 						      'event_id'=>$model->event_ID,
 						      'group_id'=>$model->group_ID));
 		}
-	
+
 		$this->render('createDayStart',array(
 			'model'=>$model,
 		));
@@ -248,47 +255,47 @@ class PostPassageController extends Controller
 			Yii::app()->end();
 		}
 	}
-  
-  	/**	
+
+  	/**
 	 * Deze actie wordt gebruikt voor de form velden.
 	 * Returns score depending on post_ID and event_id
-	 * Deze moet anders, want er wordt sowieso altijd maar 1 waarde gereturnd, dus list is niet nodig. 
+	 * Deze moet anders, want er wordt sowieso altijd maar 1 waarde gereturnd, dus list is niet nodig.
 	 */
 	public function actionDynamicPostScore()
 	{
 	    $data=Posten::model()->findAll('post_ID =:post_id, event_ID =:event_id',
 			  array(':post_id'=>$_POST['post_ID'],
 				':event_id'=>$_GET['event_id']));
-	   
+
 	    $data=CHtml::listData($data,'score','score');
-	   
+
 	    foreach($data as $value=>$name)
 	    {
 				echo CHtml::tag('option', array('value'=>$value), CHtml::encode($name),true);
 	    }
 	}
-	
+
 	/**
-	 * Deze actie wordt gebruikt voor de form velden. 
+	 * Deze actie wordt gebruikt voor de form velden.
 	 * Returns list with available posten depending on day and event.
 	 */
 	public function actionDynamicPostId()
 	{
 		$day_id = $_POST['day_id'];
 		$event_id = $_POST['event_id'];
-		
+
 
 		$data=Posten::model()->findAll('day_ID =:day_id AND event_ID =:event_id',
 			  array(':day_id'=>$day_id,
 				':event_id'=>$event_id));
 	   	$mainarr = array();
-		
+
 		foreach($data as $obj)
 		{
 			//De post naam moet gekoppeld worden aan de post_id:
 			$mainarr["$obj->post_ID"] = Posten::model()->getPostName($obj->post_ID);
 		}
-		
+
 		foreach($mainarr as $value=>$name)
 		{
 		    echo CHtml::tag('option', array('value'=>$value), CHtml::encode($name),true);
