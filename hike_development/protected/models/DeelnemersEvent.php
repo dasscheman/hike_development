@@ -155,9 +155,9 @@ class DeelnemersEvent extends HikeActiveRecord
     /* Only the actions specific to the model DeelnemersEvents and to the controller Game are here defined.
        Game does not have an model for itself.
     */
-    function isActionAllowed($controller_id = null, $action_id = null, $event_id = null, $model_id = null, $group_id)
+    function isActionAllowed($controller_id = null, $action_id = null, $event_id = null, $model_id = null, $group_id = null)
     {
-		$actionAllowed = parent::isActionAllowed($controller_id, $action_id, $event_id, $model_id);
+		$actionAllowed = parent::isActionAllowed($controller_id, $action_id, $event_id, $model_id, $group_id);
 		$hikeStatus = EventNames::model()->getStatusHike($event_id);
 		$rolPlayer = DeelnemersEvent::model()->getRolOfPlayer($event_id, Yii::app()->user->id);
 		if ($rolPlayer == DeelnemersEvent::ROL_deelnemer) {
