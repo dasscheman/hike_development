@@ -185,13 +185,13 @@ class DeelnemersEvent extends HikeActiveRecord
 				}
 			}
 		}
+
 		//Startup overview is only allowed when player is organisation
         if (isset($rolPlayer) && $controller_id === 'startup' && $rolPlayer == DeelnemersEvent::ROL_organisatie) {
             if (in_array($action_id, array('startupOverview'))) {
 					$actionAllowed = true;
 			}
         }
-
 		return $actionAllowed;
     }
 

@@ -22,12 +22,23 @@
                                         'value'=>$_GET['event_id'], 
                                         'readonly' => 'true'))
                                      ;?>
-		<?php echo $form->error($model,'event_ID'); ?>
+		<?php echo $form->error($model,'event_ID',array()); ?>
 	</div>
-	
+
 	<div class="row">
 		<?php echo $form->labelEx($model,'user_ID'); ?>
-		<?php echo $form->dropDownList($model,'user_ID', FriendList::model()->getFriendNameOptions());?>
+		<?php echo $form->hiddenField($model, 'user_ID'); ?>
+		<?php $this->widget('zii.widgets.jui.CJuiAutoComplete', array(
+					'name'=>'user_ID',
+					'value'=>Users::model()->getUserName($model->user_ID),
+					'source'=>FriendList::model()->getFriendNameOptions(),
+					'options'=>array(
+						'minLength'=>'1',
+						'select'=>"js:function(event, ui) {
+                                          $('#DeelnemersEvent_user_ID').val(ui.item.id);
+                                        }"
+					),
+				)); ?>
 		<?php echo $form->error($model,'user_ID'); ?>
 	</div>
 

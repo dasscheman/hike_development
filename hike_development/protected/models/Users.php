@@ -354,7 +354,8 @@ class Users extends HikeActiveRecord
             $data = Users::model()->find($criteria);
 			return $data->username;
 		} else {
-			return "nvt";}
+			return;
+		}
 	}
 
    	/**

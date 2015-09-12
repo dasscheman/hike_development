@@ -230,7 +230,8 @@ abstract class HikeActiveRecord extends CActiveRecord
 			case 'posten':
 			case 'qr':
 			case 'groups':
-				if ($hikeStatus == EventNames::STATUS_opstart and
+				if (($hikeStatus == EventNames::STATUS_opstart or
+					 $hikeStatus == EventNames::STATUS_introductie) and
 					$rolPlayer == DeelnemersEvent::ROL_organisatie) {
 					$createAllowed = true;
 				}

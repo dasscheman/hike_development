@@ -181,6 +181,7 @@ class FriendList extends HikeActiveRecord
 	* Retrieves a list of users
 	* @return array an array of all available users'.
 	*/
+
 	public function getFriendNameOptions()
 	{
 		$criteria=new CDbCriteria();
@@ -195,7 +196,11 @@ class FriendList extends HikeActiveRecord
 
 		Yii::app()->user->id;
 		$data = Users::model()->findAll($criteria);
-		$list = CHtml::listData($data, 'user_ID', 'username');
-		return $list;        
+
+		foreach($data as $m)
+		{
+			$results[] = array("id"=>$m->user_ID, "label"=>$m->username);
+		}
+		return $results;  
 	}
 }
