@@ -123,8 +123,9 @@ class FriendList extends HikeActiveRecord
 	 * Check if actions are allowed. These checks are not only use in the controllers,
 	 * but also for the visability of the menu items. 
 	 */
-    function isActionAllowed($controller_id = null, $action_id = null, $event_id = null, $model_id = null)
+    function isActionAllowed($controller_id = null, $action_id = null, $event_id = null, $model_id = null, $group_id = null)
     {
+		$actionAllowed = parent::isActionAllowed($controller_id, $action_id, $event_id, $model_id, $group_id);
 		$requester_id = $model_id;
 		$dataAccepter = FriendList::model()->find('user_ID =:requestUserId AND
 										   friends_with_user_ID =:acceptingUserId',
