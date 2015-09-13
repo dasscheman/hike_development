@@ -95,7 +95,7 @@ class StartupController extends Controller
 			array(
 			'criteria'=>array(
 				'condition'=>$where,
-				//'order'=>'deelnemers_ID DESC',
+				'order'=>'create_time DESC',
 				),
 			'pagination'=>array(
 				'pageSize'=>15,

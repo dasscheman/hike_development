@@ -21,7 +21,7 @@ $this->breadcrumbs=array(
 <?php $this->widget('zii.widgets.CListView',
 		    array('dataProvider'=>$dataProvider,
 			  'itemView'=>'_view',
-			  'enablePagination' => false,
+			  'enablePagination' => true,
 			  'summaryText'=>'',
 			  'emptyText'=>'Er is nog geen enkele stille post gevonden.',
 )); ?>

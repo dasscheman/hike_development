@@ -71,7 +71,7 @@ $this->menu=array(
     $this->widget('zii.widgets.CListView', array(
         'dataProvider'=>$vragenDataProvider,
         'itemView'=>'/openVragen/_view',
-        'enablePagination' => false,
+        'enablePagination' => true,
         'summaryText'=>'',
         'emptyText'=>'Er zijn nog geen vragen gemaakt voor dit routeonderdeel.',
     ));

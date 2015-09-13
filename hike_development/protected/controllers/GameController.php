@@ -98,10 +98,10 @@ class GameController extends Controller
 		    array(
 			'criteria'=>array(
 			    'condition'=>$where,
-			    //'order'=>'deelnemers_ID DESC',
+			    'order'=>'create_time DESC',
 			    ),
 			'pagination'=>array(
-				'pageSize'=>15,
+				'pageSize'=>5,
 			),
 		));
 
@@ -151,8 +151,7 @@ class GameController extends Controller
 		array(
 		    'criteria'=>array(
 				'condition'=>$ppwhere,
-				'order'=>'binnenkomst DESC',
-			),
+				'order'=>'binnenkomst DESC'),
 		    'pagination'=>array(
 			'pageSize'=>10,
 		    ),

@@ -121,7 +121,7 @@ $this->menu=array(
 		$this->widget('zii.widgets.CListView', array(
 			'dataProvider'=>$groupsDataProvider,
 			'itemView'=>'/groups/_view',
-			'enablePagination' => false,
+			'enablePagination' => true,
 			'summaryText'=>'', 
 			'emptyText'=>'Er zijn nog geen groepen aangemaakt voor deze hike.',
 	    ));?>
@@ -133,7 +133,7 @@ $this->menu=array(
 		$this->widget('zii.widgets.CListView', array(
 			'dataProvider'=>$organisatieDataProvider,
 			'itemView'=>'/deelnemersEvent/_view',
-			'enablePagination' => false,
+			'enablePagination' => true,
 			'summaryText'=>'', 
 			'emptyText'=>'Er zijn geen deelenemers ingeschreven als organisatie.',
 	    ));?>

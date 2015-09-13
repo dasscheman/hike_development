@@ -12,7 +12,7 @@ Dit is een overzicht van alle Hikes waarvoor je bent ingeschreven.
     $this->widget('zii.widgets.CListView',
 		  array('dataProvider'=>$deelnemersEventDataProvider,
 			'itemView'=>'_overview',
-			'enablePagination' => false,
+			'enablePagination' => true,
 			'summaryText'=>'',
 			'emptyText'=>'Er zijn geen spellen waar je geregistreerd staat',
 			)

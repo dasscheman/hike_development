@@ -16,7 +16,7 @@
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,
 	'itemView'=>'_viewControle',
-	'enablePagination' => false,
+	'enablePagination' => true,
 	'summaryText'=>'', 
 	'emptyText'=>'Er zijn geen vragen die nog gecontroleerd moeten worden.',
 )); ?>

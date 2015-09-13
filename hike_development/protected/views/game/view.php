@@ -26,7 +26,7 @@ $this->menu=array(
 <?php $this->widget('zii.widgets.CListView',
 		    array('dataProvider'=>$postPassageDataProvider,
 			  'itemView'=>'/postPassage/_view',
-			  'enablePagination' => false,
+			  'enablePagination' => true,
 			  'summaryText'=>'',
 			  'emptyText'=>'Er zijn nog geen route onderdelen aangemaakt voor deze hike.',
 			  )); ?>

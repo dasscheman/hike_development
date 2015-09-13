@@ -520,7 +520,6 @@ class ActionIntroductionOrganisatieTest extends WebTestCase
 		$this->click("name=yt0");
 		$this->waitForPageToLoad("30000");
 
-$this->assertContains("ASDFASDFASDF", $this->getBodyText());
 		$this->assertContains("hike_development/index-test.php?r=eventNames/changeDay&event_id=2", $this->getLocation());
 		$this->type("id=active_day", "2015-02-27");
 		$this->type("id=EventNames_max_time", "24:00:00");

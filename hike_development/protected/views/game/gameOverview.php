@@ -131,7 +131,7 @@ open gemaakt. </center><br/>
 <?php $this->widget('zii.widgets.CListView',
 		    array('dataProvider'=>$dataProvider,
 			  'itemView'=>'_gameOverview',
-			  'enablePagination' => false,
+			  'enablePagination' => true,
 			  'summaryText'=>'',
 			  'emptyText'=>'Er zijn nog geen groepen ingeschreven',
 

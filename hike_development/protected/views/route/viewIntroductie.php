@@ -27,7 +27,7 @@ $this->menu=array(
 $this->widget('zii.widgets.CListView', array(
     'dataProvider'=>$vragenData,
     'itemView'=>'/openVragen/_view',
-    'enablePagination' => false,
+    'enablePagination' => true,
     'summaryText'=>'',
     'emptyText'=>'Je hebt nog geen enkele introductie vragen.',
 ));
@@ -38,7 +38,7 @@ $this->widget('zii.widgets.CListView', array(
 $this->widget('zii.widgets.CListView', array(
     'dataProvider'=>$qrData,
     'itemView'=>'/qr/_view',
-    'enablePagination' => false,
+    'enablePagination' => true,
     'summaryText'=>'',
     'emptyText'=>'Je hebt nog geen stille post gemaakt voor de introductie.',
 ));?>
