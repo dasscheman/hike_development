@@ -74,7 +74,6 @@ class EventNames extends HikeActiveRecord
 		// will receive user inputs.
 		return array(
 			array('event_name, status, organisatie', 'required'),
-			array('event_name', 'unique'),
 			//array('status, create_user_ID, update_user_ID', 'numerical', 'integerOnly'=>true),
 			array('status', 'numerical', 'integerOnly'=>true),
 			array('event_name, organisatie, website', 'length', 'max'=>255),

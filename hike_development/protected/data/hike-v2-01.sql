@@ -104,6 +104,9 @@ CREATE TABLE IF NOT EXISTS `tbl_event_names` (
   `status` int(11) DEFAULT NULL,
   `active_day` date DEFAULT NULL,
   `max_time` time DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `organisatie` varchar(255) NOT NULL,
+  `website` varchar(255) DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,
   `create_user_ID` int(11) DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
@@ -379,14 +382,6 @@ INSERT INTO `tbl_posten` (`post_ID`, `post_name`, `event_ID`, `date`, `post_volg
 (10, 'post 1 beindigd', 4, '2015-02-28', 1, 13, '2014-08-30 10:53:28', 2, '2015-07-15 12:53:08', 2),
 (11, 'post 2 beindigd', 4, '2015-02-28', 2, 13, '2014-08-30 10:54:06', 2, '2015-07-15 12:53:08', 2);
 
--- (3, 'Je weet maar nooit of we ze nog ergens moeten opvangen...', 6, '2014-09-05', 3, 13, '2014-08-30 10:54:43', 2, '2015-07-13 17:40:59', 2),
--- (4, 'Nog maar een kopjekoffie om op gang te komen', 6, '2014-09-06', 5, 13, '2014-08-30 10:55:45', 2, '2015-07-15 12:53:16', 2),
--- (5, 'Tijd voor lunch?', 6, '2014-09-06', 6, 13, '2014-08-30 10:56:19', 2, '2015-07-15 12:53:16', 2),
--- (6, 'Snacky?', 6, '2014-09-06', 7, 13, '2014-08-30 10:57:09', 2, '2014-08-30 14:38:06', 2),
--- (7, 'Is het al tijd voor een biertje?', 6, '2014-09-06', 8, 13, '2014-08-30 10:57:38', 2, '2014-08-30 14:38:12', 2),
--- (8, 'Dinner', 6, '2014-09-06', 10, 13, '2014-08-30 10:59:30', 2, '2015-07-27 12:21:09', 2),
--- (9, 'test', 6, '2014-09-06', 9, 34, '2015-07-27 12:20:55', 2, '2015-07-27 12:21:09', 2);
-
 -- --------------------------------------------------------
 
 --
@@ -415,10 +410,6 @@ INSERT INTO `tbl_post_passage` (`posten_passage_ID`, `post_ID`, `event_ID`, `gro
 (1, 3, 3, 5, 1, null, '2015-02-27 09:57:00', '2014-09-05 20:47:54', 1, '2014-09-05 20:50:46', 1),
 (2, 4, 3, 5, 1, '2015-02-27 11:55:00', '2015-02-27 11:57:00', '2014-09-05 20:55:34', 1, '2014-09-05 20:57:48', 1),
 (3, 5, 3, 5, 1, '2015-02-27 20:55:00', null, '2014-09-05 20:55:34', 1, '2014-09-05 20:57:48', 1);
--- (3, 1, 6, 7, 1, '2014-09-05 21:38:00', '2014-09-05 22:05:00', '2014-09-05 21:38:56', 6, '2014-09-05 22:05:59', 6),
--- (4, 1, 6, 9, 1, '2014-09-05 21:40:00', '2014-09-05 21:46:00', '2014-09-05 21:40:43', 6, '2014-09-05 21:53:58', 6),
--- (5, 1, 6, 4, 1, '2014-09-05 22:01:00', '2014-09-05 22:13:00', '2014-09-05 22:01:17', 6, '2014-09-05 22:13:10', 6),
--- (6, 1, 6, 6, 1, '2014-09-05 22:01:00', '2014-09-05 22:12:00', '2014-09-05 22:01:45', 6, '2014-09-05 22:12:56', 6);
 
 -- --------------------------------------------------------
 
@@ -456,13 +447,6 @@ INSERT INTO `tbl_qr` (`qr_ID`, `qr_name`, `qr_code`, `event_ID`, `route_ID`, `qr
 (9, 'gestart players', '33DlYLbS8Ws9EutrUMjNv6', 3, 6, 2, 7, '2014-08-30 14:44:11', 1, '2014-08-30 14:44:11', 2),
 (10, 'introductie players', '55DlYLbS8Ws9EutrUMjNv6', 2, 3, 3, 7, '2014-08-30 14:44:11', 1, '2014-08-30 14:44:11', 2);
 
-
--- (4, 'Vrijdag - En vraag niet naar de weg', '6hUg3eWLzE4qOcvoFwId1K', 6, 18, 4, 3, '2014-08-30 14:44:42', 2, '2014-08-30 14:45:32', 2),
--- (5, 'Vrijdag - Meneer van Dalen wacht op antwoord', 'swqYfNxRPvikX6KE41cTmH', 6, 19, 5, 3, '2014-08-30 14:45:01', 2, '2014-08-30 14:45:46', 2),
--- (6, 'Vrijdag - Aan de wandel', 'iYMPtVWjXc1EparqnxCeAZ', 6, 20, 7, 3, '2014-08-30 14:46:31', 2, '2014-08-30 14:46:31', 2),
--- (7, 'Vrijdag - Je gaat het pas zien als je het door heb', 'FpoSea4nYzKQ6IOW27NCBm', 6, 21, 7, 3, '2014-08-30 14:46:51', 2, '2014-08-30 14:46:51', 2),
--- (8, 'Vrijdag - In vogelvlucht', 'gNHpBGPb9EcTLs1Ih8Ov5i', 6, 22, 8, 3, '2014-08-30 14:47:05', 2, '2014-08-30 14:48:34', 2);
-
 -- --------------------------------------------------------
 
 --
@@ -487,10 +471,6 @@ CREATE TABLE IF NOT EXISTS `tbl_qr_check` (
 INSERT INTO `tbl_qr_check` (`qr_check_ID`, `qr_ID`, `event_ID`, `group_ID`, `create_time`, `create_user_ID`, `update_time`, `update_user_ID`) VALUES
 (1, 1, 3, 5, '2014-08-31 14:03:05', 2, '2014-08-31 14:03:05', 2),
 (2, 6, 2, 3, '2014-08-31 14:03:05', 2, '2014-08-31 14:03:05', 2);
--- (13, 29, 6, 8, '2014-08-31 14:06:44', 30, '2014-08-31 14:06:44', 30),
--- (15, 29, 6, 5, '2014-08-31 14:19:03', 25, '2014-08-31 14:19:03', 25),
--- (16, 29, 6, 4, '2014-08-31 14:30:00', 17, '2014-08-31 14:30:00', 17),
--- (18, 29, 6, 7, '2014-08-31 15:22:24', 20, '2014-08-31 15:22:24', 20);
 
 -- --------------------------------------------------------
 
@@ -621,7 +601,7 @@ ALTER TABLE `tbl_migration`
 --
 ALTER TABLE `tbl_nood_envelop`
   ADD PRIMARY KEY (`nood_envelop_ID`),
-  ADD UNIQUE KEY `envelop_id` (`nood_envelop_name`,`event_ID`),
+  ADD UNIQUE KEY `envelop_id` (`nood_envelop_name`,`event_ID`,`route_ID`),
   ADD KEY `fk_nood_envelop_event_id` (`event_ID`),
   ADD KEY `fk_nood_envelop_route` (`route_ID`),
   ADD KEY `fk_nood_envelop_create_user` (`create_user_ID`),
@@ -643,7 +623,7 @@ ALTER TABLE `tbl_open_nood_envelop`
 --
 ALTER TABLE `tbl_open_vragen`
   ADD PRIMARY KEY (`open_vragen_ID`),
-  ADD UNIQUE KEY `open_vragen_name` (`open_vragen_name`),
+  ADD UNIQUE KEY `open_vragen_name` (`open_vragen_name`,`event_ID`,`route_ID`),
   ADD KEY `fk_open_vragen_event_id` (`event_ID`),
   ADD KEY `fk_open_vragen_route` (`route_ID`),
   ADD KEY `fk_open_vragen_create_user` (`create_user_ID`),
