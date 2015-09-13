@@ -12,6 +12,12 @@ $activeDay  = EventNames::model()->getActiveDayOfHike($event_id);
 $event_id = $_GET['event_id'];
 $this->menu=array(	
     array(
+		'label'=>'Hike instellingen',
+		'url'=>array(
+			'/eventNames/update',
+			'event_id'=>$_GET['event_id']),
+		'visible'=> EventNames::model()->isActionAllowed('eventNames', 'update', $_GET['event_id'])),
+    array(
 		'label'=>'Introductie',
 		'url'=>array(
 			'/Route/viewIntroductie',

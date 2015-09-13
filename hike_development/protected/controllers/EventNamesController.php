@@ -41,7 +41,7 @@ class EventNamesController extends Controller
                 'users'=>array('admin'),
             ),*/
             array('allow', // allow admin user to perform 'viewplayers' actions
-                'actions'=>array('index', 'view', 'update', 'delete', 'viewPlayers', 'changeStatus', 'changeDay'),
+                'actions'=>array('index', 'view', 'update', 'updateImage', 'delete', 'viewPlayers', 'changeStatus', 'changeDay'),
                 'expression'=> 'EventNames::model()->isActionAllowed(
                     Yii::app()->controller->id,
                     Yii::app()->controller->action->id,
@@ -85,6 +85,7 @@ class EventNamesController extends Controller
             $model->attributes=$_POST['EventNames'];
             $model->event_ID = EventNames::model()->determineNewHikeId();
             $model->status = 1;
+            $model->image=CUploadedFile::getInstance($model,'image');
 
             $modelDeelnemersEvent->event_ID = $model->event_ID;
             $modelDeelnemersEvent->user_ID = Yii::app()->user->id;
@@ -103,8 +104,13 @@ class EventNamesController extends Controller
 
             if($valid)
             {
+				$newImageName='event_id=' . $model->event_ID . '-logo.jpg';
                 // use false parameter to disable validation
                 $model->save(false);
+				$model->image->saveAs('images/event_images/' . $newImageName);
+				$model->image = $newImageName;
+				EventNames::model()->resizeForReport('images/event_images/' . $model->image, $newImageName);
+				$model->save(false);	
                 $modelDeelnemersEvent->save(false);
                 $modelRoute->save(false);
                 $this->redirect(array('startup/startupOverview','event_id'=>$model->event_ID));
@@ -121,20 +127,56 @@ class EventNamesController extends Controller
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id the ID of the model to be updated
      */
-    public function actionUpdate($id)
+    public function actionUpdate($event_id)
     {
-        $model=$this->loadModel($id);
+        $model=$this->loadModel($event_id);
 
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
-
         if(isset($_POST['EventNames']))
         {
             $model->attributes=$_POST['EventNames'];
-            if($model->save())
-                $this->redirect(array('view','id'=>$model->event_ID));
+
+            if($model->save()){	
+                $this->redirect(array('startup/startupOverview','event_id'=>$model->event_ID));
+			}
         }
 
+        $this->render('update',array(
+            'model'=>$model,
+        ));
+    }
+
+
+    /**
+     * Updates a particular model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id the ID of the model to be updated
+     */
+    public function actionUpdateImage($event_id)
+    {
+        $model=$this->loadModel($event_id);
+
+        // Uncomment the following line if AJAX validation is needed
+        // $this->performAjaxValidation($model);
+        if(isset($_POST['EventNames']))
+        {
+			$model->image=CUploadedFile::getInstance($model,'image');
+            $model->attributes=$_POST['EventNames'];
+			$newImageName='event_id=' . $model->event_ID . '-logo.jpg';
+
+            if($model->save()){
+				if (isset($model->image) && $model->image != '') {
+					$model->image->saveAs('images/event_images/' . $newImageName);
+					$model->image = $newImageName;
+					EventNames::model()->resizeForReport('images/event_images/' . $model->image, $newImageName);
+					$model->save(false);
+				}
+                $this->redirect(array('startup/startupOverview','event_id'=>$model->event_ID));
+			}
+        }
+            
+		$this->layout='//layouts/column1';
         $this->render('update',array(
             'model'=>$model,
         ));
@@ -199,15 +241,15 @@ class EventNamesController extends Controller
      * If deletion is successful, the browser will be redirected to the 'admin' page.
      * @param integer $id the ID of the model to be deleted
      */
-    public function actionDelete($id)
+    public function actionDelete($event_id)
     {
-        try
+		try
         {
-            $this->loadModel($id)->delete();
+            $this->loadModel($event_id)->delete();
         }
         catch(CDbException $e)
         {
-            throw new CHttpException(400,"Je kan deze hike niet deleten.");
+            throw new CHttpException(400,"Je kan deze hike niet verwijderen.");
         }
 
         // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser

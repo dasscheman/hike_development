@@ -451,10 +451,11 @@ class ActionIntroductionOrganisatieTest extends WebTestCase
     	$this->open("hike_development/index-test.php?r=startup/startupOverview&event_id=2");
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=startup/startupOverview&event_id=2", $this->getLocation());
-		$this->assertFalse($this->isElementPresent("link=Groep Aanmaken"));
+		$this->assertTrue($this->isElementPresent("link=Groep Aanmaken"));
 		$this->open("hike_development/index-test.php?r=groups/create&event_id=2");
         $this->waitForPageToLoad ( "30000" );
-        $this->assertContains("Dat mag dus niet...", $this->getBodyText());
+        $this->assertNotContains("Dat mag dus niet...", $this->getBodyText());
+// TODO aanmaken van een groep nog uitwerken. 
 	}
 
     public function testDagVeranderen()

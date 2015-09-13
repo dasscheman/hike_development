@@ -13,10 +13,18 @@
 	// get the HTML
 	ob_start();
 	$model=Qr::model()->findByPk($_GET['id']);
-	$event_name = EventNames::model()->getEventName($model->event_ID);
-	$start_date = EventNames::model()->getStartDate($model->event_ID);
-	$end_date = EventNames::model()->getEndDate($model->event_ID);
-
+	$modelEvent=EventNames::model()->findByPk($model->event_ID);
+	$event_name = $modelEvent->event_name; // EventEventNames::model()->getEventName($model->event_ID);
+	$start_date = $modelEvent->start_date; //EventEventNames::model()->getStartDate($model->event_ID);
+	$end_date = $modelEvent->end_date; //EventEventNames::model()->getEndDate($model->event_ID);
+	$organisatie = $modelEvent->organisatie; 
+	$site = $modelEvent->website; //'www.debison.nl';
+	$image = $modelEvent->image;
+	if (!isset($image) || $image == '') {
+		$image = './images/bisonkop.jpg';
+	} else {
+		$image = './images/event_images/qrreport/' . $image;
+	}
 	$event_id = $model->event_ID;
 	$qr_code = $model->qr_code;
 	$qr_name = $model->qr_name;
@@ -24,7 +32,6 @@
     // localhost: $link = "hike/index.php?r=qrCheck/create%26event_id=".$event_id."%26qr_code=".$qr_code;
 	$link = "index.php?r=qrCheck/create&event_id=".$event_id."&qr_code=".$qr_code;
 	$num = 'CMD01-'.date('ymd');
-	$site = 'www.debison.nl';
 ?>
 	<style type="text/css">
 	<!--
@@ -43,6 +50,7 @@
 				<td colspan="3" style="width: 100%">
 					<div class="zone" style="height: 26mm;position: relative;font-size: 5mm;">
 						<div style="position: absolute; right: 3mm; top: 3mm; text-align: right; font-size: 4mm; ">
+							<b><?php echo $organisatie; ?></b>
 							<b><?php echo $site; ?></b><br>
 						</div>
 						<div style="position: absolute; right: 3mm; bottom: 3mm; text-align: right; font-size: 4mm; ">
@@ -82,10 +90,9 @@
 				</td>
 				<td style="width: 30%">
 					<div class="zone" style="height: 48mm;vertical-align: middle; text-align: center">	
-						<img src="./images/bisonkop.jpg" height=90% width= 90% alt="logo" style="margin-top: 3mm; margin-left: 20mm">	
+						<img src="<?php echo $image; ?>" height=90% width= 90% alt="logo" style="margin-top: 2mm; margin-left: 20mm">	
 					</div>
 				</td>
-				
 			</tr>
 		</table>
 	</page>

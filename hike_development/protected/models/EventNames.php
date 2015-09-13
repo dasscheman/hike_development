@@ -13,6 +13,9 @@
  * @property integer $status
  * @property integer $active_day
  * @property string $max_time
+ * @property string $image
+ * @property string $organisatie
+ * @property string $website
  * @property string $create_time
  * @property integer $create_user_ID
  * @property string $update_time
@@ -70,20 +73,24 @@ class EventNames extends HikeActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('event_name, status', 'required'),
+			array('event_name, status, organisatie', 'required'),
 			array('event_name', 'unique'),
 			//array('status, create_user_ID, update_user_ID', 'numerical', 'integerOnly'=>true),
 			array('status', 'numerical', 'integerOnly'=>true),
-			array('event_name', 'length', 'max'=>255),
+			array('event_name, organisatie, website', 'length', 'max'=>255),
 			//array('start_date, end_date, create_time, update_time', 'safe'),
-			array('start_date, end_date, active_day, max_time', 'safe'),
+			array('start_date, end_date, active_day, max_time, organisatie, website', 'safe'),
+			array('image', 'unsafe', 'on'=>'update'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
+			array('image','file', 'allowEmpty'=>true, 'types'=>'jpg, gif, png, jpeg', 'maxSize'=>1024 * 1024 * 2, 'tooLarge'=>'File has to be smaller than 2MB'),       
+			//array('image', 'file', 'types'=>'jpg, gif, png', 'safe' => false),
 			array('event_ID, event_name, start_date, end_date, status, active_day,
 			      create_time, create_user_ID, update_time, update_user_ID',
 			      'safe', 'on'=>'search'),
 		);
 	}
+
 
 	/**
 	 * @return array relational rules.
@@ -123,6 +130,9 @@ class EventNames extends HikeActiveRecord
 			'status' => 'Status',
 			'active_day' => 'Active Day',
 			'max_time' => 'Max time',
+			'image' => 'Hike logo',
+			'organisatie' => 'Organisatie',
+			'website' => 'Website',
 			'create_time' => 'Create Time',
 			'create_user_ID' => 'Organisator',
 			'update_time' => 'Update Time',
@@ -151,6 +161,8 @@ class EventNames extends HikeActiveRecord
 		$criteria->compare('status',$this->status);
 		$criteria->compare('active_day',$this->active_day);
 		$criteria->compare('max_time',$this->max_time);
+		$criteria->compare('organisatie',$this->organisatie);
+		$criteria->compare('website',$this->website);
 		$criteria->compare('create_time',$this->create_time,true);
 		$criteria->compare('create_user_ID',$this->create_user_ID);
 		$criteria->compare('update_time',$this->update_time,true);
@@ -409,5 +421,30 @@ class EventNames extends HikeActiveRecord
 			}
 		}
 		return $mainarr;
+	}
+
+	public function resizeForReport($image, $name)
+	{
+		$maxsize = 170;
+		// Content type
+		//header('Content-Type: image/jpeg');
+		
+		// Get new dimensions
+		list($width, $height) = getimagesize($image);
+		if ($width >= $height) {
+			$ratio = $width/$maxsize;
+		} else {
+			$ratio = $height/$maxsize;
+		}
+		$new_width = $width / $ratio;
+		$new_height = $height / $ratio;
+		
+		// Resample
+		$image_p = imagecreatetruecolor($new_width, $new_height);
+		$timage = imagecreatefromjpeg($image);
+		imagecopyresampled($image_p, $timage, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
+		
+		// Output
+		imagejpeg($image_p, 'images/event_images/qrreport/' . $name, 100);
 	}
 }

@@ -270,4 +270,16 @@ class DeelnemersEvent extends HikeActiveRecord
 							  ':user_Id' => $user_Id));
 		return $data;
 	}
+
+	public function getId(	$event_Id,
+										$user_Id)
+	{
+		$data = DeelnemersEvent::model()->find('event_ID = :event_Id AND user_ID=:user_Id',
+						    array(':event_Id' => $event_Id,
+							  ':user_Id' => $user_Id));
+		if(isset($data->deelnemers_ID)) {
+		    return $data->deelnemers_ID;
+		}
+		return;
+	}
 }

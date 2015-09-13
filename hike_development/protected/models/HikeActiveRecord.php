@@ -78,6 +78,7 @@ abstract class HikeActiveRecord extends CActiveRecord
 				$actionAllowed = HikeActiveRecord::setCreateIntroductieAllowed($controller_id, $action_id, $event_id);
 				break;
 			case 'update':
+			case 'updateImage':
 				$actionAllowed = HikeActiveRecord::setUpdateAllowed($controller_id, $action_id, $event_id, $model_id, $group_id);
 				break;
 			case 'delete':
@@ -165,7 +166,7 @@ abstract class HikeActiveRecord extends CActiveRecord
           // case 'chart':
 			case 'groups':
 			case 'deelnemersEvent':
-			case "groups":
+			case 'groups':
 				if ($rolPlayer == DeelnemersEvent::ROL_organisatie) {
 						$updateAllowed = true;
 				}
