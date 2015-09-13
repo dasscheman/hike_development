@@ -105,6 +105,8 @@ class ChartController extends Controller
 		$criteria->condition="event_ID = $event_id";
         $data = Groups::model()->findAll($criteria);
 		$count = 0;
+		$modelEventNames = EventNames::model()->findByPk($event_id);
+		$min_time = $modelEventNames->start_date;
 		foreach($data as $obj)
 		{
 			/*$testarr[$count]['name'] = DeelnemersEvent::model()->getAllPlayersOfGroup($event_id,
@@ -117,13 +119,14 @@ class ChartController extends Controller
 		}
 		if(!isset($grapharr))
 		{
-			$this->render('index');
+			throw new CHttpException(404,'Geen data beschikbaar voor de grafiek.');
 		}
 		else
 		{
             $this->layout='//layouts/column1';
 			$this->render('viewChart',
-                array('testarr'=>$grapharr,
+                array(	'testarr'=>$grapharr,
+						'min_time'=>$min_time
             ));
 		}
 	}

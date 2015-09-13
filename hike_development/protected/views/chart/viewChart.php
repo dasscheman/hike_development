@@ -8,6 +8,7 @@
 	Dit bevindt zich nog in experimentele fase.
 </p>
 <?php
+	
     $timestamp=CDateTimeParser::parse('25/08/2015 19:15:00','dd/MM/yyyy hh:mm:ss');
     $mintimestamp = $timestamp *1000;
 	$this->Widget('ext.highcharts.HighchartsWidget',
