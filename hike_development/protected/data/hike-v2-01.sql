@@ -117,11 +117,11 @@ CREATE TABLE IF NOT EXISTS `tbl_event_names` (
 -- Dumping data for table `tbl_event_names`
 --
 
-INSERT INTO `tbl_event_names` (`event_ID`, `event_name`, `start_date`, `end_date`, `status`, `active_day`, `max_time`, `create_time`, `create_user_ID`, `update_time`, `update_user_ID`) VALUES
-(1, 'opstart', '2015-02-25', '2015-03-01', 1, NULL, NULL, '2014-08-25 12:47:51', 1, '2015-07-28 16:03:11', 2),
-(2, 'introductie', '2015-02-25', '2015-03-01', 2, '0000-00-00', NULL, '2015-02-23 19:45:17', 2, '2015-02-23 19:45:17', 2),
-(3, 'gestart', '2015-02-25', '2015-03-01', 3, '2015-02-27', '24:00:00', '2015-02-23 19:46:08', 2, '2015-07-10 14:36:10', 2),
-(4, 'beindigd', '2015-02-25', '2015-03-01', 4, NULL, NULL, '2015-02-23 19:46:08', 2, '2015-07-10 14:36:10', 2);
+INSERT INTO `tbl_event_names` (`event_ID`, `event_name`, `start_date`, `end_date`, `status`, `active_day`, `max_time`, `organisatie`, `create_time`, `create_user_ID`, `update_time`, `update_user_ID`) VALUES
+(1, 'opstart', '2015-02-25', '2015-03-01', 1, NULL, NULL, 'de Bison', '2014-08-25 12:47:51', 1, '2015-07-28 16:03:11', 2),
+(2, 'introductie', '2015-02-25', '2015-03-01', 2, '0000-00-00', NULL, 'de Bison', '2015-02-23 19:45:17', 2, '2015-02-23 19:45:17', 2),
+(3, 'gestart', '2015-02-25', '2015-03-01', 3, '2015-02-27', '24:00:00', 'de Bison', '2015-02-23 19:46:08', 2, '2015-07-10 14:36:10', 2),
+(4, 'beindigd', '2015-02-25', '2015-03-01', 4, NULL, NULL, 'de Bison', '2015-02-23 19:46:08', 2, '2015-07-10 14:36:10', 2);
 
 -- --------------------------------------------------------
 
