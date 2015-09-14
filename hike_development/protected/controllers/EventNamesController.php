@@ -107,10 +107,12 @@ class EventNamesController extends Controller
 				$newImageName='event_id=' . $model->event_ID . '-logo.jpg';
                 // use false parameter to disable validation
                 $model->save(false);
-				$model->image->saveAs('images/event_images/' . $newImageName);
-				$model->image = $newImageName;
-				EventNames::model()->resizeForReport('images/event_images/' . $model->image, $newImageName);
-				$model->save(false);	
+				if(isset($model->image) && $model->image != ''){
+					$model->image->saveAs('images/event_images/' . $newImageName);
+					$model->image = $newImageName;
+					EventNames::model()->resizeForReport('images/event_images/' . $model->image, $newImageName);
+					$model->save(false);
+				}
                 $modelDeelnemersEvent->save(false);
                 $modelRoute->save(false);
                 $this->redirect(array('startup/startupOverview','event_id'=>$model->event_ID));

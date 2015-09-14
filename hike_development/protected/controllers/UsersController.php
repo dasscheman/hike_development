@@ -86,10 +86,15 @@ class UsersController extends Controller
 			$newWachtwoord = GeneralFunctions::randomString(4);
 			$model->password =$newWachtwoord;
 			$model->password_repeat = $newWachtwoord;
-			$emailSend = Users::model()->sendEmailWithNewPassword($model, $newWachtwoord);
-			if($emailSend && $model->save())
-			{
-				$this->redirect(array('site/index'));
+			if($model->save())
+            {
+				$emailSend = Users::model()->sendEmailWithNewPassword($model, $newWachtwoord);
+				if($emailSend)
+				{
+					$this->redirect(array('site/index'));
+				} else {
+					throw new CHttpException(400,"Je account is aangemaakt, maar helaas is het verzenden van je wachtwoord niet gelukt. Stuur een mail hike-app@biologenkantoor.nl");
+				}
 			}
 		}
 
@@ -162,10 +167,15 @@ class UsersController extends Controller
 				$model=$this->loadModel($newModel->user_ID);
 				$model->password =$newWachtwoord;
 				$model->password_repeat = $newWachtwoord;
-				$emailSend = Users::model()->sendEmailWithNewPassword($model, $newWachtwoord);
-				if($emailSend && $model->save())
-				{
-					$this->redirect(array('site/index'));
+				if($model->save()){
+					$emailSend = Users::model()->sendEmailWithNewPassword($model, $newWachtwoord);
+				
+					if($emailSend)
+					{
+						$this->redirect(array('site/index'));
+					} else {
+						throw new CHttpException(400,"Je wachtwoord is gewijzigd, maar helaas is het verzenden van je wachtwoord niet gelukt. Probeer nog eens of stuur een mail hike-app@biologenkantoor.nl");
+					}
 				}
 			}
 		}

@@ -34,6 +34,12 @@
 	</div>
 
 	<div class="row">
+		<?php echo $form->labelEx($model,'organisatie'); ?>
+		<?php echo $form->textField($model,'organisatie',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo $form->error($model,'organisatie'); ?>
+	</div>
+
+	<div class="row">
 		<?php echo $form->labelEx($model,'email'); ?>
 		<?php echo $form->textField($model,'email',array('size'=>60,'maxlength'=>255)); ?>
 		<?php echo $form->error($model,'email'); ?>

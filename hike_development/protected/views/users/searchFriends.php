@@ -17,11 +17,12 @@ $this->breadcrumbs=array(
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
-		'user_ID',
+		//'user_ID',
 		'username',
 		'voornaam',
 		'achternaam',
-		'email',
+		'organisatie',
+		//'email',
 		'last_login_time',
 		array(
 			'header'=>'Uitnodigen',

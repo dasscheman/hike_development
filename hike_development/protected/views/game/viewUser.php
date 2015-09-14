@@ -65,6 +65,7 @@
                             'username',
                             'voornaam',
                             'achternaam',
+							'organisatie',
                             'email',),),
                     true
                 ),
@@ -81,6 +82,7 @@
                             'username',
                             'voornaam',
                             'achternaam',
+							'organisatie',
                             'email',
                             array(
                                 'header'=>'accepteer',

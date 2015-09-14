@@ -58,11 +58,12 @@ $this->menu=array(
 	Met deze Hike-app kun je realtime je score zien, maar ook de score van je tegenstanders.
 	Hierdoor kun je je strategie bepalen en wordt de hike nog spannender.
 </p>
+
 	<h4>Korte uitleg</h4> 
     Hoewel de helppagina verre van compleet is, staat er toch het een en ander uitgelegd dat handig zou kunnen zijn.   
     Je kunt naar de help gaan door op dit icoontje te klikken:  
     <?php echo CHtml::link('<i class="fa fa-question-circle fa-inverse"></i>',
-    array('/site/help#Begin'),
+    array('/site/help#faq'),
     array('target'=>'_blank')); ?> <br/><br/>
 
   

@@ -10,6 +10,7 @@
  * @property string $username
  * @property string $voornaam
  * @property string $achternaam
+ * @property string $organisatie
  * @property string $email
  * @property string $password
  * @property string $macadres
@@ -96,22 +97,23 @@ class Users extends HikeActiveRecord
 			//array('password','allowEmpty'=>false),
 			array('username, voornaam, achternaam, email', 'required'),
 			array('create_user_ID, update_user_ID', 'numerical', 'integerOnly'=>true),
-			array('username, voornaam, achternaam, email, password, macadres', 'length', 'max'=>255),
+			array('username, voornaam, achternaam, organisatie, email, password, macadres', 'length', 'max'=>255),
 			array('birthdate, last_login_time, create_time, update_time, password_repeat', 'safe'),
 			array('email, username', 'unique'),
 			array('email', 'email'),
-			array('password', 'compare'),
+			array('birthdate', 'type', 'type' => 'date', 'message' => '{attribute}: Dit is geen datum!', 'dateFormat' => 'yyyy-MM-dd'),
+			array('password', 'compare', 'on'=>'ChangePassword'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('user_ID, username, voornaam, achternaam, email,
+			array('user_ID, username, voornaam, achternaam, organisatie, email,
 			      password, macadres, birthdate, last_login_time,
 			      create_time, create_user_ID, update_time,
 			      update_user_ID', 'safe', 'on'=>'search'),
-			array('user_ID, username, voornaam, achternaam, email,
+			array('user_ID, username, voornaam, achternaam, organisatie, email,
 			      password, macadres, birthdate, last_login_time,
 			      create_time, create_user_ID, update_time,
 			      update_user_ID', 'safe', 'on'=>'searchPending'),
-			array('user_ID, username, voornaam, achternaam, email,
+			array('user_ID, username, voornaam, achternaam, organisatie, email,
 			      password, macadres, birthdate, last_login_time,
 			      create_time, create_user_ID, update_time,
 			      update_user_ID', 'safe', 'on'=>'searchFriends'),
@@ -170,6 +172,7 @@ class Users extends HikeActiveRecord
 			'username' => 'Gebruikersnaam',
 			'voornaam' => 'Voornaam',
 			'achternaam' => 'Achternaam',
+			'organisatie' => 'Scoutinggroep',
 			'email' => 'Email',
 			'password' => 'Password',
 			'macadres' => 'Macadres',
