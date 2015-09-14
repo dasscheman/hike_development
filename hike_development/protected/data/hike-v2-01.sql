@@ -515,6 +515,7 @@ CREATE TABLE IF NOT EXISTS `tbl_users` (
   `username` varchar(255) NOT NULL,
   `voornaam` varchar(255) NOT NULL,
   `achternaam` varchar(255) NOT NULL,
+  `organisatie` varchar(255) DEFAULT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `macadres` varchar(255) DEFAULT NULL,
