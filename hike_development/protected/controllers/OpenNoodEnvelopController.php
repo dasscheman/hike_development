@@ -151,23 +151,17 @@ class OpenNoodEnvelopController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$event_id = $_GET['event_id'];
-		$where = "event_ID = $event_id";
+		$model = new OpenNoodEnvelop('searchOpened');
 
-		$dataProvider=new CActiveDataProvider(
-			'OpenNoodEnvelop',
-			array('criteria'=>array(
-					'condition'=>$where,
-					'order'=>'create_time DESC',
-					),
-				 'pagination'=>array('pageSize'=>20,),
-			)
-		);
 		$this->layout='//layouts/column1';
+		$model->unsetAttributes();  // clear any default values
+		if(isset($_GET['OpenNoodEnvelop']))
+			$model->attributes=$_GET['OpenNoodEnvelop'];
 		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
-		));
+			'model'=>$model,
+		));		
 	}
+
 
 	/**
 	 * Manages all models.

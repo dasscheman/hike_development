@@ -68,6 +68,12 @@
 								  <i class="fa fa-envelope-o fa-stack-1x"></i>
 							        </span>',
 						      'url'=>array('/site/contact')),
+						array('label'=>'<span class="fa-stack fa-lg" title="FAQ & Help">
+								  <i class="fa fa-circle fa-stack-1x fa-green fa-15x"></i>
+								  <i class="fa fa-question fa-stack-1x"></i>
+							        </span>',
+						      'url'=>array('/site/help')),
+
 //						array('label'=>'<span class="fa-stack fa-lg">
 //								  <i class="fa fa-circle fa-stack-1x fa-green fa-15x"></i>
 //								  <i class="fa fa-unlock-alt fa-stack-1x"></i>

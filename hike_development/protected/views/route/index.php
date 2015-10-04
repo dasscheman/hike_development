@@ -89,7 +89,7 @@ $this->breadcrumbs=array(
 									'options'=>array('title'=>'Bekijk deze hike'),
 									'url'=>'Yii::app()->createUrl("route/view", array(
 										"route_id"=>$data->route_ID,
-										"event_id"=>$data->event_ID,))',
+										"event_id"=>$data->event_ID))',
 								),
 								'omhoog' => array(
 									'label'=>'<span class="fa-stack fa-lg">

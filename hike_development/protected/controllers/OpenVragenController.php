@@ -182,8 +182,6 @@ class OpenVragenController extends Controller
 		if(isset($_POST['OpenVragen']))
 		{
 			$model->attributes=$_POST['OpenVragen'];
-
-
 			$model->event_ID = $_GET['event_id'];
 			$model->route_ID = Route::model()-> getIntroductieRouteId($_GET['event_id']);
 			$model->vraag_volgorde = OpenVragen::model()->getNewOrderForIntroductieVragen($_GET['event_id']);

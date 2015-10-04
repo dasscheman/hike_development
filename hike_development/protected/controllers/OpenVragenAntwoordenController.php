@@ -220,44 +220,44 @@ class OpenVragenAntwoordenController extends Controller
 	}
 
 
-		/**
-		 * Updates a particular model.
-		 * If update is successful, the browser will be redirected to the 'groupOverview' page.
-		 * @param integer $id the ID of the model to be updated
-		 */
-		public function actionUpdateOrganisatie()
-		{
-				if(isset($_GET['event_id']) AND
-				   isset($_GET['group_id']) AND
-				   isset($_GET['vraag_id']))
-				{$data=OpenVragenAntwoorden::model()->find('event_ID =:event_id AND
-											group_ID =:group_id AND
-											open_vragen_ID=:vraag_id',
-										array(':event_id'=>$_GET['event_id'],
-											  ':group_id'=>$_GET['group_id'],
-											  ':vraag_id'=>$_GET['vraag_id']));}
-				if(isset($data->open_vragen_antwoorden_ID))
-				{$id = $data->open_vragen_antwoorden_ID;}
+	/**
+	 * Updates a particular model.
+	 * If update is successful, the browser will be redirected to the 'groupOverview' page.
+	 * @param integer $id the ID of the model to be updated
+	 */
+	public function actionUpdateOrganisatie()
+	{
+			if(isset($_GET['event_id']) AND
+			   isset($_GET['group_id']) AND
+			   isset($_GET['vraag_id']))
+			{$data=OpenVragenAntwoorden::model()->find('event_ID =:event_id AND
+										group_ID =:group_id AND
+										open_vragen_ID=:vraag_id',
+									array(':event_id'=>$_GET['event_id'],
+										  ':group_id'=>$_GET['group_id'],
+										  ':vraag_id'=>$_GET['vraag_id']));}
+			if(isset($data->open_vragen_antwoorden_ID))
+			{$id = $data->open_vragen_antwoorden_ID;}
 
-				$model=$this->loadModel($id);
+			$model=$this->loadModel($id);
 
-				// Uncomment the following line if AJAX validation is needed
-				// $this->performAjaxValidation($model);
+			// Uncomment the following line if AJAX validation is needed
+			// $this->performAjaxValidation($model);
 
-				if(isset($_POST['OpenVragenAntwoorden']))
-				{
-					$model->attributes=$_POST['OpenVragenAntwoorden'];
-					if($model->save())
-						$this->redirect(array('/game/groupOverview',
-									  'event_id'=>$model->event_ID,
-									  'group_id'=>$model->group_ID));
-				}
+			if(isset($_POST['OpenVragenAntwoorden']))
+			{
+				$model->attributes=$_POST['OpenVragenAntwoorden'];
+				if($model->save())
+					$this->redirect(array('/game/groupOverview',
+								  'event_id'=>$model->event_ID,
+								  'group_id'=>$model->group_ID));
+			}
 
-				$this->render('updateOrganisatie',
-							  array('model'=>$model,
-									)
-							  );
-		}
+			$this->render('updateOrganisatie',
+						  array('model'=>$model,
+								)
+						  );
+	}
 
 	/**
 	 * Deletes a particular model.
@@ -278,19 +278,15 @@ class OpenVragenAntwoordenController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$event_id = $_GET['event_id'];
-		$where = "event_ID = $event_id";
-		$dataProvider=new CActiveDataProvider('OpenVragenAntwoorden',
-								array('criteria'=>array(
-										'condition'=>$where,
-										'order'=>'create_time DESC',
-								),
-									'pagination'=>array('pageSize'=>20,),
-							    )
-						    );
+		$model = new OpenVragenAntwoorden('searchAnswered');
+
 		$this->layout='//layouts/column1';
+		$model->unsetAttributes();  // clear any default values
+
+		if(isset($_GET['OpenVragenAntwoorden']))
+			$model->attributes=$_GET['OpenVragenAntwoorden'];
 		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
+			'model'=>$model,
 		));
 	}
 

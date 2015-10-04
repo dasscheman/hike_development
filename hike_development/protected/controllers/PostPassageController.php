@@ -201,17 +201,20 @@ class PostPassageController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$event_id = $_GET['event_id'];
-		$where = "event_ID = $event_id";
-
-		$dataProvider=new CActiveDataProvider('PostPassage',
-			array('criteria'=>array(
-					'condition'=>$where,)));
+		$model=new PostPassage('search');
 		$this->layout='//layouts/column1';
+
+		$model->unsetAttributes();  // clear any default values
+
+		if(isset($_GET['PostPassage']))
+			$model->attributes=$_GET['PostPassage'];
+
 		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
+			'model'=>$model,
 		));
 	}
+
+
 
 	/**
 	 * Manages all models.

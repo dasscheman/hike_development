@@ -38,24 +38,22 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'vertrek'); ?>
+
 		<?php $this->widget('application.extensions.timepicker.timepicker',
 				    array('model'=>$model,
 					  'name'=>'vertrek',
 					  'options'=>array(
-							   'showAnim'=>'slide',
+							   'showAnim'=>'fadeIn',//'slide','fold','slideDown','fadeIn','blind','bounce','clip','drop'
 							   'showSecond'=>false,
 							   'ampm'=>false,
-							   'value'=>date("Y-m-d H:i", time()), 
-							   //'timeFormat' => 'hh.mm.ss.000000 tt',
+							   'value'=>date("Y-m-d H:i", time()),
 							   'dateFormat'=>'yy-mm-dd',
 							   'changeMonth' => false,
 							   'changeYear' => false,
-							   'showOn'=>'focus',
+							   'showOn'=>'focus',//button
 							   'timeFormat'=>'hh:mm',
-							   //'hourMin'=> (int) $hourMin,
-							   //'hourMax'=> (int) $hourMax,
 							   'showPeriodLabels' => false,
-							   'showNowButton'=>true,
+								'showNowButton'=>true,
 							   ),
 					  )
 				    );

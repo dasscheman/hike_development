@@ -168,7 +168,8 @@ class RouteController extends Controller
 					$qrModel->save(false);
 				}
 				$this->redirect(array('/route/index',
-							  'event_id'=>$model->event_ID));
+								'event_id'=>$model->event_ID,
+								'date'=>$model->day_date));
 			}
 		}
 		$this->layout='//layouts/column1';
@@ -192,24 +193,6 @@ class RouteController extends Controller
 		if(isset($_POST['Route']))
 		{
 			$model->attributes=$_POST['Route'];
-			// Wanneer er een route onderdeel aangepast wordt (datum), dan moet er gecheckt woren of er voor
-			// die dag al een begin post aangemaakt is.  Als dat niet het geval is dan moet die nog aangemaakt worden.
-//Volgens mij toch niet nodig, zou mee moeten gaan met de Mysql cascade!!
-
-			/*if (!Posten::model()->startPostExist($_GET['event_id'], $_GET['date'])) {
-				$modelStartPost = new Posten;
-				$modelStartPost->post_name = 'Dag Start';
-				$modelStartPost->date = $_GET['event_id'];
-				$modelStartPost->post_volgorde = 1;
-				$modelStartPost->score = 0;
-			}
-
-			// validate BOTH $model, $modelStartPost and $qrModel.
-			$valid=$model->validate();
-			if (isset($modelStartPost)) {
-				$valid=$modelStartPost->validate() && $valid;
-			}*/
-			//if($valid)*/
 			if($model->save())
 			{
 				$this->redirect(array('/route/index',
@@ -249,6 +232,10 @@ class RouteController extends Controller
 	 */
 	public function actionIndex()
 	{
+		if (isset($_GET['date'])) {
+			Route::model()->setActiveTab($_GET['date']);
+		}
+
 		$event_Id = $_GET['event_id'];
 		$startDate=EventNames::model()->getStartDate($event_Id);
 		$endDate=EventNames::model()->getEndDate($event_Id);
@@ -360,8 +347,6 @@ class RouteController extends Controller
 		$route_volgorde = $_GET['volgorde'];
 		$up_down = $_GET['up_down'];
 
-		Route::model()->setActiveTab($_GET['date']);
-
 		$currentModel = Route::model()->findByPk($route_id);
 
 		$criteria = new CDbCriteria;
@@ -388,20 +373,11 @@ class RouteController extends Controller
 		$currentModel->save();
 		$previousModel[0]->save();
 
-		$startDate=EventNames::model()->getStartDate($event_id);
-		$endDate=EventNames::model()->getEndDate($event_id);
-
-		$routeData=new Route('searchRoute');
-
-		$dataModel=array(
-			'routeData'=>$routeData,
-			'startDate'=>$startDate,
-			'endDate'=>$endDate
-		);
 		//if(!isset($_GET['ajax'])) $this->render('grid_view', $params);
 		//$this->renderPartial('index', $dataModel);
 		$this->layout='//layouts/column1';
-		$this->render('index', $dataModel);
-
+				$this->redirect(array('/route/index',
+								'event_id'=>$event_id,
+								'date'=>$date));
 	}
 }

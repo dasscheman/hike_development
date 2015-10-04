@@ -118,21 +118,15 @@ class GameController extends Controller
 	 */
 	public function actionGameOverview()
 	{
-		$event_Id = $_GET['event_id'];
-		$where = "event_ID = $event_Id";
-		$dataProvider=new CActiveDataProvider('Groups',
-		    array(
-			'criteria'=>array(
-			    'condition'=>$where,
-			    //'order'=>'group_ID DESC',
-			    ),
-			'pagination'=>array(
-			    'pageSize'=>10,
-			),
-		));
+		$model = new Groups('searchScore');
 
+		//$this->layout='//layouts/column1';
+		$model->unsetAttributes();  // clear any default values
+
+		if(isset($_GET['Groups']))
+			$model->attributes=$_GET['Groups'];
 		$this->render('gameOverview',array(
-			'dataProvider'=>$dataProvider,
+			'model'=>$model,
 		));
 	}
 

@@ -25,6 +25,12 @@
  */
 class OpenNoodEnvelop extends HikeActiveRecord
 {
+	public $nood_envelop_name;
+	public $day_date;
+	public $group_name;
+	public $route_name;
+	public $username;
+	public $score;
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -57,9 +63,16 @@ class OpenNoodEnvelop extends HikeActiveRecord
 			array('open_nood_envelop_ID', 'ext.UniqueAttributesValidator', 'with'=>'group_ID'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('open_nood_envelop_ID, event_ID, nood_envelop_ID, group_ID, opened, create_time, create_user_ID, update_time, update_user_ID', 'safe', 'on'=>'search'),
+			array('open_nood_envelop_ID, event_ID, nood_envelop_ID, group_ID,
+				opened, create_time, create_user_ID, update_time,
+				update_user_ID', 'safe', 'on'=>'search'),
+			array('open_nood_envelop_ID, event_ID, nood_envelop_ID, group_ID,
+				opened, create_time, create_user_ID, update_time,
+				update_user_ID, nood_envelop_name, group_name,
+				day_date, route_name, username, score', 'safe', 'on'=>'searchOpened'),
 		);
 	}
+
 
 	/**
 	 * @return array relational rules.
@@ -119,6 +132,77 @@ class OpenNoodEnvelop extends HikeActiveRecord
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
+	}
+
+
+	/**
+	 * Retrieves a list of models based on the current search/filter conditions.
+	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
+	 */
+	public function searchOpened($event_id)
+	{
+		// Warning: Please modify the following code to remove attributes that
+		// should not be searched.
+
+		$criteria=new CDbCriteria;
+
+		$criteria->with=array('noodEnvelop', 'group', 'createUser', 'noodEnvelop.route');
+		$criteria->compare('open_nood_envelop_ID',$this->open_nood_envelop_ID);
+		$criteria->compare('t.event_ID',$event_id);
+		$criteria->compare('nood_envelop_ID',$this->nood_envelop_ID);
+		$criteria->compare('group_ID',$this->group_ID);
+		$criteria->compare('opened',$this->opened);
+		$criteria->compare('t.create_time',$this->create_time,true);
+		$criteria->compare('create_user_ID',$this->create_user_ID);
+		$criteria->compare('update_time',$this->update_time,true);
+		$criteria->compare('update_user_ID',$this->update_user_ID);
+		$criteria->compare('group.group_name', $this->group_name,true);
+
+		$criteria->compare('noodEnvelop.nood_envelop_name', $this->nood_envelop_name,true);
+
+		$criteria->compare('route.day_date', $this->day_date,true);
+		$criteria->compare('route.route_name', $this->route_name,true);
+
+		$criteria->compare('noodEnvelop.score', $this->score,true);
+		$criteria->compare('createUser.username', $this->username,true);
+
+		$sort = new CSort();
+		$sort->attributes = array(
+			//'defaultOrder'=>'t.create_time ASC',
+			'group_name'=>array(
+				'asc'=>'group.group_name',
+				'desc'=>'group.group_name desc',
+			),
+			'nood_envelop_name'=>array(
+				'asc'=>'noodEnvelop.nood_envelop_name',
+				'desc'=>'noodEnvelop.nood_envelop_name desc',
+			),
+			'day_date'=>array(
+				'asc'=>'route.day_date',
+				'desc'=>'route.day_date desc',
+			),
+			'route_name'=>array(
+				'asc'=>'route.route_name',
+				'desc'=>'route.route_name desc',
+			),
+			'username'=>array(
+				'asc'=>'createUser.username',
+				'desc'=>'createUser.username desc',
+			),
+			'score'=>array(
+				'asc'=>'noodEnvelop.score',
+				'desc'=>'noodEnvelop.score desc',
+			),
+			'create_time'=>array(
+				'asc'=>'t.create_time',
+				'desc'=>'t.create_time asc',
+			),
+		);
+
+	    return new CActiveDataProvider($this, array(
+		    'criteria'=>$criteria,
+			'sort'=>$sort
+	    ));
 	}
 
 	/**

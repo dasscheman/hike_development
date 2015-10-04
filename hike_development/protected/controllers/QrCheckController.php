@@ -174,21 +174,16 @@ class QrCheckController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$event_id = $_GET['event_id'];
-		$where = "event_ID = $event_id";
-
-		$dataProvider=new CActiveDataProvider('QrCheck',
-			array('criteria'=>array(
-					'condition'=>$where,
-					'order'=>'create_time DESC',
-						),
-				'pagination'=>array('pageSize'=>20,),
-			)
-		);
-
+		$model=new QrCheck('search');
 		$this->layout='//layouts/column1';
+
+		$model->unsetAttributes();  // clear any default values
+
+		if(isset($_GET['QrCheck']))
+			$model->attributes=$_GET['QrCheck'];
+
 		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
+			'model'=>$model,
 		));
 	}
 

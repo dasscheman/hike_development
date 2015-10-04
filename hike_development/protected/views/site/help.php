@@ -77,7 +77,7 @@ Groepjes kunnen dus niet eindeloos op google maps gaan zitten zoeken.
 De ervaring leert dat dit juist een leuk extra spelelement is.
 
 <div id="hoetebeginnen">
-<p><h3>Hoe te beginnen</h3>
+<p><h3>Hoe te beginnen?</h3>
 Als je gebruik wil maken van de Hike-app dan moet je een account maken op www.hike-app.nl
 Je kunt dan al direct een hike aanmaken. Aan je hike kun je vervolgens posten, vragen, hints en stille posten toevoegen.
 Je kunt deelnemers toevoegen aan je hike, maar alleen als je hike-vrienden met ze bent.
@@ -86,8 +86,22 @@ De gegevens die je invoert worden alleen gebruikt voor de hike-app.
 Zolang de hike niet is gestart kunnen de deelnemers niets van de hike zien,
 pas als de hike start dan kunnen de deelnemers de onderdelen zien die bij die dag horen.
 
+<div id="kanikeenhkeaanmaken">
+<p><h3>Kan ik zelf een hike aanmaken?</h3>
+Ja, als je ingelogd bent en je gaat naar de home pagina (het huisje), dan staat er in het menu rechts,
+of onderaan de optie 'Nieuwe hike beginnen'.
+Als je daarop klikt kun je een hike aanmaken. Klik vervolgens op het metertje in het menu bovenaan (Hike uitzetten),
+vanaf daar kun je de verschillende hike onderdelen aanmaken. 
 
-
+<div id="moetjenogeenrouteboekjemaken">
+<p><h3>Moet ik nog een routeboekje maken?</h3>
+Jazeker, de Hike-app is er alleen ter ondersteuning voor het bijhouden van de scores en de tijdslimiet.
+De route en puzzels moeten de deelnemers uit een routeboekje halen. Het best is dan ook om eerste de route en
+het routeboekje te maken en als dat (bijna) klaar is, de hike aanmaken op de Hike-app.
+<br>
+<br>
+<br>
+<br>
 <h1>Help</h1>
 <div id="iconen">
 <p><h3>Iconen</h3>
@@ -119,7 +133,7 @@ pas als de hike start dan kunnen de deelnemers de onderdelen zien die bij die da
 								  <i class="fa fa-circle fa-stack-1x fa-green fa-15x"></i>
 								  <i class="fa fa-tachometer fa-stack-1x"></i>
 							        </span>						
-				  </td></b> Hier kan de organisatie het een en ander instellen en aanpassen.</li>	
+				  </td></b> Hier kan de organisatie een hike invoeren.</li>	
     <li><b>
             <td colspan="4" style="text-align:center; font-size:220%">
 						<span class="fa-stack fa-lg">

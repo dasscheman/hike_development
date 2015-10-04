@@ -47,6 +47,7 @@ class EventNames extends HikeActiveRecord
 
 	public $changeStatusAllowed = false;
 	public $changeDayAllowed = false;
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.

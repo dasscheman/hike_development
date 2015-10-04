@@ -26,7 +26,12 @@
  * @property Posten $post
  */
 class Bonuspunten extends HikeActiveRecord
-{
+{   
+	public $group_name;
+	public $post_name;
+	public $route_name;
+	public $username;
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -62,9 +67,10 @@ class Bonuspunten extends HikeActiveRecord
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('bouspunten_ID, event_ID, date, post_ID, group_ID,
-			      omschrijving, score, create_time, create_user_ID,
-			      update_time, update_user_ID', 'safe', 'on'=>'search'),
-		        array('omschrijving',
+				omschrijving, score, create_time, create_user_ID,
+				update_time, update_user_ID, username,
+				group_name, post_name, route_name;', 'safe', 'on'=>'search'),
+		    array('omschrijving',
 			      'ext.UniqueAttributesValidator',
 			      'with'=>'group_ID,event_ID,date,post_ID'),
 		);
@@ -110,28 +116,68 @@ class Bonuspunten extends HikeActiveRecord
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
 	 */
-	public function search()
+	public function search($event_id)
 	{
 		// Warning: Please modify the following code to remove attributes that
 		// should not be searched.
 
 		$criteria=new CDbCriteria;
 
+		$criteria->with=array('post', 'group', 'createUser');
+
 		$criteria->compare('bouspunten_ID',$this->bouspunten_ID);
-		$criteria->compare('event_ID',$this->event_ID);
-		$criteria->compare('date',$this->date,true);
+		$criteria->compare('t.event_ID',$event_id);
+		$criteria->compare('t.date',$this->date);
 		$criteria->compare('post_ID',$this->post_ID);
 		$criteria->compare('group_ID',$this->group_ID);
 		$criteria->compare('omschrijving',$this->omschrijving,true);
-		$criteria->compare('score',$this->score);
-		$criteria->compare('create_time',$this->create_time,true);
+		$criteria->compare('t.score',$this->score);
+		$criteria->compare('t.create_time',$this->create_time,true);
 		$criteria->compare('create_user_ID',$this->create_user_ID);
 		$criteria->compare('update_time',$this->update_time,true);
 		$criteria->compare('update_user_ID',$this->update_user_ID);
 
-		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
-		));
+		$criteria->compare('group.group_name', $this->group_name,true);
+		$criteria->compare('post.post_name', $this->post_name,true);
+		$criteria->compare('createUser.username', $this->username,true);
+		
+		$sort = new CSort();
+		$sort->attributes = array(
+			//'defaultOrder'=>'t.create_time ASC',
+			'group_name'=>array(
+				'asc'=>'group.group_name',
+				'desc'=>'group.group_name desc',
+			),
+			'date'=>array(
+				'asc'=>'t.date',
+				'desc'=>'t.date desc',
+			),
+			'post_name'=>array(
+				'asc'=>'post.post_name',
+				'desc'=>'post.post_name desc',
+			),
+			'omschrijving'=>array(
+				'asc'=>'omschrijving',
+				'desc'=>'omschrijving desc',
+			),
+			'score'=>array(
+				'asc'=>'t.score',
+				'desc'=>'t.score desc',
+			),
+			'username'=>array(
+				'asc'=>'createUser.username',
+				'desc'=>'createUser.username desc',
+			),
+			'create_time'=>array(
+				'asc'=>'t.create_time',
+				'desc'=>'t.create_time asc',
+			),
+		);
+
+	    return new CActiveDataProvider($this, array(
+		    'criteria'=>$criteria,
+			'sort'=>$sort
+	    ));
 	}
 
 	/**
@@ -144,7 +190,7 @@ class Bonuspunten extends HikeActiveRecord
 		$criteria->condition="event_ID = $event_id AND
 				      group_ID = $group_id";
 		$data = Bonuspunten::model()->find($criteria);
-	    	if(isset($data->score))
+	    if(isset($data->score))
 			{return($data->score);}
 		else
 			{return(0);}	

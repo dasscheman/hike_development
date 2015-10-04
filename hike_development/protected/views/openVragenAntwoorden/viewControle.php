@@ -19,4 +19,4 @@
 	'enablePagination' => true,
 	'summaryText'=>'', 
 	'emptyText'=>'Er zijn geen vragen die nog gecontroleerd moeten worden.',
-)); ?>
+));?>

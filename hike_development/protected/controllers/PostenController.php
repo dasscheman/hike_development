@@ -87,8 +87,9 @@ class PostenController extends Controller
 			$model->date = $_GET['date'];
 			$model->post_volgorde = Posten::model()->getNewOrderForPosten($_GET['event_id'], $model->date);
 			if($model->save())
-				$this->redirect(array('/startup/startupOverview',
-						      'event_id'=>$model->event_ID));
+				$this->redirect(array('/posten/index',
+								'event_id'=>$model->event_ID,
+								'date'=>$model->date));
 		}
 		$this->layout='/layouts/column1';
 		$this->render('create',array(
@@ -150,6 +151,10 @@ class PostenController extends Controller
 	 */
 	public function actionIndex()
 	{
+		if (isset($_GET['date'])) {
+			Posten::model()->setActiveTab($_GET['date']);
+		}
+
 		$event_Id = $_GET['event_id'];
 		$startDate=EventNames::model()->getStartDate($event_Id);
 		$endDate=EventNames::model()->getEndDate($event_Id);
@@ -245,16 +250,11 @@ class PostenController extends Controller
 		$startDate=EventNames::model()->getStartDate($event_id);
 		$endDate=EventNames::model()->getEndDate($event_id);
 
-		$postenData=new Posten('searchPostDate');
-
-		$dataModel=array(
-			'postenData'=>$postenData,
-			'startDate'=>$startDate,
-			'endDate'=>$endDate
-		);
 		//if(!isset($_GET['ajax'])) $this->render('grid_view', $params);
 		//$this->renderPartial('index', $dataModel);
 		$this->layout='//layouts/column1';
-		$this->render('index', $dataModel);
+		$this->redirect(array('/posten/index',
+						'event_id'=>$event_id,
+						'date'=>$date));
    }
 }

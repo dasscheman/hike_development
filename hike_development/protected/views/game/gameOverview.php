@@ -127,13 +127,116 @@ Je kunt zien wat de score is van een groepje voor een bepaald onderdeel, maar
 je kunt niet precies zien welke vragen of hints deze groep heeft beantwoord of
 open gemaakt. </center><br/>
 
-<i> Als de Hike is afgelopen, dan kun je de resultaten van een ander groepje bekijken. </i><br/>
-<?php $this->widget('zii.widgets.CListView',
-		    array('dataProvider'=>$dataProvider,
-			  'itemView'=>'_gameOverview',
-			  'enablePagination' => true,
-			  'summaryText'=>'',
-			  'emptyText'=>'Er zijn nog geen groepen ingeschreven',
 
+
+
+<i> Als de Hike is afgelopen, dan kun je de resultaten van een ander groepje bekijken. </i><br/>
+<?php
+	$this->widget('bootstrap.widgets.TbGridView', array(
+        'id'=>'post-passage-grid',
+        'dataProvider'=>$model->searchScore($_GET['event_id']),
+        'filter'=>$model,
+        'columns'=>array(
+			array(
+                'header'=>Groups::model()->getAttributeLabel('group_name'),
+				'name'=>'group_name',
+				'value'=>'$data->group_name',
+				'headerHtmlOptions'=>array('width'=>'10%'),
+			),
+			array(
+                'header'=>Groups::model()->getAttributeLabel('group_members'),
+				'name'=>'group_members',
+				'value'=>'$data->group_members',
+				'headerHtmlOptions'=>array('width'=>'10%'),
+			),
+			array(
+                'header'=>Groups::model()->getAttributeLabel('bonus_score'),
+				'name'=>'bonus_score',
+				'value'=>'$data->bonus_score',
+				'headerHtmlOptions'=>array('width'=>'3%'), 
+				'htmlOptions'=>array('style'=>'text-align:center'),
+			),
+			array(
+                'header'=>Groups::model()->getAttributeLabel('posten_score'),
+				'name'=>'posten_score',
+				'value'=>'$data->posten_score',
+				'headerHtmlOptions'=>array('width'=>'3%'),
+				'htmlOptions'=>array('style'=>'text-align:center'),
+			),
+			array(
+                'header'=>Groups::model()->getAttributeLabel('qr_score'),
+				'name'=>'qr_score',
+				'value'=>'$data->qr_score',
+				'headerHtmlOptions'=>array('width'=>'3%'),
+				'htmlOptions'=>array('style'=>'text-align:center'),
+			),
+			array(
+                'header'=>Groups::model()->getAttributeLabel('vragen_score'),
+				'name'=>'vragen_score',
+				'value'=>'$data->vragen_score',
+				'headerHtmlOptions'=>array('width'=>'3%'),
+				'htmlOptions'=>array('style'=>'text-align:center'),
+			),
+			array(
+                'header'=>Groups::model()->getAttributeLabel('hint_score'),
+				'name'=>'hint_score',
+				'value'=>'$data->hint_score',
+				'headerHtmlOptions'=>array('width'=>'3%'),
+				'htmlOptions'=>array('style'=>'text-align:center'),
+			),
+			array(
+                'header'=>Groups::model()->getAttributeLabel('totaal_score'),
+				'name'=>'totaal_score',
+				'value'=>'$data->totaal_score',
+				'headerHtmlOptions'=>array('width'=>'3%'),
+				'htmlOptions'=>array('style'=>'text-align:center'),
+			),
+			array(
+                'header'=>Groups::model()->getAttributeLabel('rank'),
+				'name'=>'rank',
+                'type'=> 'raw',
+				'filter'=>false,
+				//'value'=>'$data->rank',
+				'value'=>'Groups::model()->getRankGroup($data->event_ID, $data->group_ID)',
+				'headerHtmlOptions'=>array('width'=>'3%'),
+				'htmlOptions'=>array('style'=>'text-align:center'),
+			),
+            array(
+                'header'=>'Optie',
+                'class'=>'CButtonColumn',
+				'headerHtmlOptions'=>array('width'=>'3%'),
+				//'htmlOptions'=>array('width'=>'3%'),
+                'template'=>'{details}',
+                'buttons'=>array(
+                    'details' => array(
+                        'label'=>'<span class="fa-stack fa-lg">
+                                    <i class="fa fa-search-plus fa-inverse"></i>
+                                  </span>',
+                        'options'=>array('title'=>'Bekijken'),
+                        'url'=>'Yii::app()->createUrl("/game/groupOverview", array(
+                            "event_id"=>$data->event_ID,
+                            "group_id"=>$data->group_ID,))',
+                    ),
+                ),
+            ),
+    )
 ));
+
+// echo CHtml::encode(Posten::model()->getPostName(PostPassage::model()->getLaatstePostPassageNaam($data->event_ID,
+//																			  $data->group_ID)));
+// echo CHtml::encode(PostPassage::model()->getLaatstePostPassageTijd($data->event_ID,
+//															 $data->group_ID)); 
+/*
+if (EventNames::model()->maxTimeSet($data->event_ID) AND
+	EventNames::model()->getStatusHike($data->event_ID) == EventNames::STATUS_gestart) {
+	if (PostPassage::model()->timeLeftToday($data->event_ID, $data->group_ID)) { 
+		echo CHtml::encode('Tijd over (minuten)');	
+		echo CHtml::encode(PostPassage::model()->timeLeftToday($data->event_ID,
+                                                                     $data->group_ID));
+   } else { 
+	echo CHtml::encode('De tijd is om voor vandaag!'); 
+   }
+} else {
+	echo CHtml::encode('Er is geen maximum tijd voor vandaag'); ?></b>		
+} */
 ?>

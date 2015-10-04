@@ -2,7 +2,7 @@
 	<head></head>
 	<body>
 		Hallo <?php echo $newMailUsers; ?><br>
-		Je ontvangt deze mail omdat je je hebt ingeschreven op www.hike.nl, 
+		Je ontvangt deze mail omdat je je hebt ingeschreven op www.hike-app.nl, 
         of omdat je een nieuw wachtwoord opgevraagd hebt. 
 		
 		Je kunt nu inloggen op de site www.hike-app.nl met <br>

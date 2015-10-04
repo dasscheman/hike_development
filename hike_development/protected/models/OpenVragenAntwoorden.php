@@ -27,6 +27,12 @@
  */
 class OpenVragenAntwoorden extends HikeActiveRecord
 {
+	public $open_vragen_name;
+	public $open_vraag;
+	public $group_name;
+	public $goede_antwoord;
+	public $username;
+	public $score;
     /**
      * Returns the static model of the specified AR class.
      * @param string $className active record class name.
@@ -58,13 +64,17 @@ class OpenVragenAntwoorden extends HikeActiveRecord
 		    array('open_vragen_ID, group_ID, event_ID, checked, correct', 'numerical',
 			  'integerOnly'=>true),
 		    array('antwoord_spelers', 'length', 'max'=>255),
-		    //array('create_time, update_time', 'safe'),
+		    array('create_time, update_time', 'safe'),
 		    // The following rule is used by search().
 		    // Please remove those attributes that should not be searched.
 		    array('open_vragen_antwoorden_ID, event_ID, open_vragen_ID,
 			  group_ID, antwoord_spelers, checked, correct,
 			  create_time, create_user_ID, update_time,
-			  update_user_ID', 'safe', 'on'=>'search'),
+			  update_user_ID, group_name', 'safe', 'on'=>'search'),
+			array('event_ID, antwoord_spelers, checked, correct,
+				create_time, create_user_ID, update_time, update_user_ID,
+				group_name, open_vraag, open_vragen_name,
+				goede_antwoord, username, score', 'safe', 'on'=>'searchAnswered'),
 		    array('open_vragen_ID',
 			  'ext.UniqueAttributesValidator',
 			  'with'=>'group_ID'),
@@ -120,8 +130,8 @@ class OpenVragenAntwoorden extends HikeActiveRecord
 
 	    $criteria->compare('open_vragen_antwoorden_ID',$this->open_vragen_antwoorden_ID);
 	    $criteria->compare('event_ID',$this->event_ID);
-	    $criteria->compare('open_vragen_ID',$this->open_vragen_ID);
-	    $criteria->compare('group_ID',$this->group_ID);
+	    $criteria->compare('open_vragen_ID',$this->open_vragen_ID, true );
+	    $criteria->compare('group_ID',$this->group_ID, true );
 	    $criteria->compare('antwoord_spelers',$this->antwoord_spelers,true);
 	    $criteria->compare('checked',$this->checked);
 	    $criteria->compare('correct',$this->correct);
@@ -132,6 +142,84 @@ class OpenVragenAntwoorden extends HikeActiveRecord
 
 	    return new CActiveDataProvider($this, array(
 		    'criteria'=>$criteria,
+	    ));
+    }
+
+
+    public function searchAnswered($event_id)
+    {
+	    // Warning: Please modify the following code to remove attributes that
+	    // should not be searched.
+
+	    $criteria=new CDbCriteria;
+
+		$criteria->with=array('openVragen', 'group', 'createUser');
+	    $criteria->compare('t.event_ID', $event_id);
+	    $criteria->compare('antwoord_spelers',$this->antwoord_spelers);
+	    $criteria->compare('checked',$this->checked);
+	    $criteria->compare('correct',$this->correct);
+	    $criteria->compare('create_time',$this->create_time,true);
+	    $criteria->compare('create_user_ID',$this->create_user_ID);
+	    $criteria->compare('update_time',$this->update_time,true);
+	    $criteria->compare('update_user_ID',$this->update_user_ID);
+		$criteria->compare('group.group_name', $this->group_name,true);
+
+		$criteria->compare('openVragen.open_vragen_name', $this->open_vragen_name,true);
+		$criteria->compare('openVragen.vraag', $this->open_vraag,true);
+		$criteria->compare('openVragen.goede_antwoord', $this->goede_antwoord,true);
+		$criteria->compare('openVragen.score', $this->score,true);
+		$criteria->compare('createUser.username', $this->username,true);
+
+		$sort = new CSort();
+		$sort->attributes = array(
+			//'defaultOrder'=>'t.create_time ASC',
+			'create_time'=>array(
+				'asc'=>'t.create_time',
+				'desc'=>'t.create_time asc',
+			),
+			'group_name'=>array(
+				'asc'=>'group.group_name',
+				'desc'=>'group.group_name desc',
+			),
+			'open_vragen_name'=>array(
+				'asc'=>'openVragen.open_vragen_name',
+				'desc'=>'openVragen.open_vragen_name desc',
+			),
+			'open_vraag'=>array(
+				'asc'=>'openVragen.vraag',
+				'desc'=>'openVragen.vraag desc',
+			),
+
+
+			'antwoord_spelers'=>array(
+				'asc'=>'t.antwoord_spelers',
+				'desc'=>'t.antwoord_spelers desc',
+			),
+			'goede_antwoord'=>array(
+				'asc'=>'openVragen.goede_antwoord',
+				'desc'=>'openVragen.goede_antwoord desc',
+			),/*
+			'checked'=>array(
+				'asc'=>'t.checked',
+				'desc'=>'t.checked desc',
+			),
+			'correct'=>array(
+				'asc'=>'t.correct',
+				'desc'=>'t.correct desc',
+			),*/
+			'username'=>array(
+				'asc'=>'createUser.username',
+				'desc'=>'createUser.username desc',
+			),
+			'score'=>array(
+				'asc'=>'openVragen.score',
+				'desc'=>'openVragen.score desc',
+			),
+		);
+
+	    return new CActiveDataProvider($this, array(
+		    'criteria'=>$criteria,
+			'sort'=>$sort
 	    ));
     }
 

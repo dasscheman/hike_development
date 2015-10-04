@@ -26,7 +26,7 @@ $this->breadcrumbs=array(
     $this->widget('bootstrap.widgets.TbGridView', array(
         'id'=>'open-vragen-grid',
         'dataProvider'=>$vragenData->searchOpenVragen($_GET['event_id']),
-        //'filter'=>$model,
+        //'filter'=>$vragenData,
         'columns'=>array(
             array(
                 'header'=>'Titel',

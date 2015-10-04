@@ -145,22 +145,16 @@ class BonuspuntenController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$event_id = $_GET['event_id'];
-		$where = "event_ID = $event_id";
+		$model=new Bonuspunten('search');
+		$this->layout='//layouts/column1';
 
-		$dataProvider=new CActiveDataProvider('Bonuspunten',
-		    array(
-			'criteria'=>array(
-			    'condition'=>$where,
-			    //'order'=>'group_ID DESC',
-			    ),
-			'pagination'=>array(
-			    'pageSize'=>10,
-			),
-		));
+		$model->unsetAttributes();  // clear any default values
+
+		if(isset($_GET['Bonuspunten']))
+			$model->attributes=$_GET['Bonuspunten'];
 
 		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
+			'model'=>$model,
 		));
 	}
 
