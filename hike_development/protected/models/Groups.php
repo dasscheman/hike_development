@@ -35,6 +35,10 @@ class Groups extends HikeActiveRecord
 	public $hint_score;
 	public $totaal_score;
 	public $rank;
+	public $time_walking;
+	public $time_left;
+	public $last_post;
+	public $last_post_time;
 
 	/**
 	 * Returns the static model of the specified AR class.
@@ -74,6 +78,10 @@ class Groups extends HikeActiveRecord
 			    update_time, update_user_ID, group_members,
 				bonus_score, posten_score, qr_score, vragen_score, hint_score,
 				totaal_score, rank', 'safe', 'on'=>'searchScore'),
+			array('group_ID, event_ID, group_name, create_time, create_user_ID,
+			    update_time, update_user_ID, group_members,
+				bonus_score, posten_score, qr_score, vragen_score, hint_score,
+				totaal_score, rank', 'safe', 'on'=>'searchPost'),
 		    array('group_name',
 			      'ext.UniqueAttributesValidator',
 			      'with'=>'event_ID'),
@@ -188,12 +196,8 @@ class Groups extends HikeActiveRecord
 			'group_name');
 
 		$criteria->group = 'tbl_bonuspunten.group_ID, t.group_ID';
-		$criteria->compare('group_ID',$this->group_ID);
 		$criteria->compare('t.event_ID',$event_id);
 		$criteria->compare('group_name',$this->group_name,true);
-		$criteria->compare('t.create_time',$this->create_time,true);
-		$criteria->compare('create_user_ID',$this->create_user_ID);
-		$criteria->compare('update_time',$this->update_time,true);		
 		$criteria->compare('user.username',$this->group_members,true);
 		$criteria->compare('bonus_score',$this->bonus_score);
 		$criteria->compare('posten_score',$this->posten_score);
@@ -202,7 +206,6 @@ class Groups extends HikeActiveRecord
 		$criteria->compare('hint_score',$this->hint_score,true);
 		$criteria->compare('totaal_score',$this->totaal_score,true);
 		//$criteria->compare('rank',$this->totaal_score,true);
-		$criteria->compare('update_user_ID',$this->update_user_ID);
 
 		$sort = new CSort();
 		$sort->attributes = array(
@@ -247,6 +250,64 @@ class Groups extends HikeActiveRecord
 
 	    return new CActiveDataProvider($this, array(
 		    'criteria'=>$criteria,
+			'pagination'=>array(
+				 'pageSize'=>10
+				 ),
+			'sort'=>$sort
+	    ));
+	}
+
+	public function searchPost($event_id)
+	{
+		// Warning: Please modify the following code to remove attributes that
+		// should not be searched.
+
+		$criteria=new CDbCriteria;
+			
+		$criteria->with=array(
+			'deelnemersEvents'=>array('together'=>true, 'joinType'=>'LEFT JOIN'), 
+			'deelnemersEvents.user'=>array('select'=>'username', 'together'=>false, 'joinType'=>'LEFT JOIN'), 
+			'postPassages'=>array('together'=>true, 'joinType'=>'LEFT JOIN'), 
+			'postPassages.post'=>array('together'=>false, 'joinType'=>'LEFT JOIN'), 
+		);
+
+		$criteria->select = array(
+			'group_name',
+			'group_ID',
+			'event_ID',
+			'group_concat(DISTINCT user.username SEPARATOR " ") AS group_members',
+			'postPassages.binnenkomst AS last_post_time',
+			'post.post_name AS last_post');  
+		//$criteria->condition = 't.event_ID=:event_id AND t.group_ID=:group_id';
+		//$criteria->condition = 't.event_ID=:event_id';
+		//$criteria->order =  'postPassages.binnenkomst ASC';
+	//	$criteria->params=array(':event_id'=>$event_id);
+		$criteria->group = 't.group_ID	, postPassages.group_ID';
+	
+		$criteria->compare('group_ID',$this->group_ID);
+		$criteria->compare('t.event_ID',$event_id);
+		$criteria->compare('group_name',$this->group_name,true);
+		$criteria->compare('user.username',$this->group_members,true);
+		$criteria->compare('update_user_ID',$this->update_user_ID);
+
+		$sort = new CSort();
+		$sort->attributes = array(
+			//'defaultOrder'=>'t.create_time ASC',
+			'group_name'=>array(
+				'asc'=>'group_name',
+				'desc'=>'group_name desc',
+			),
+			'group_members'=>array(
+				'asc'=>'group_members',
+				'desc'=>'group_members',
+			),
+		);
+
+	    return new CActiveDataProvider($this, array(
+		    'criteria'=>$criteria,
+			'pagination'=>array(
+				 'pageSize'=>10
+				 ),
 			'sort'=>$sort
 	    ));
 	}
@@ -289,25 +350,25 @@ class Groups extends HikeActiveRecord
 	public function getTotalScoreGroup($event_id,
 					   $group_id)
 	{
-			$post_score = PostPassage::model()->getPostScore($event_id, $group_id);
-			$qr_score = QrCheck::model()->getQrScore($event_id, $group_id);
-			$vragen_score =OpenVragenAntwoorden::model()->getOpenVragenScore($event_id, $group_id); 
-			$bonus_score =Bonuspunten::model()->getBonuspuntenScore($event_id, $group_id);
-			$OpenEnvelopStrafpunten = OpenNoodEnvelop::model()->getOpenEnvelopScore($event_id,
-												$group_id);
-			$total_score = 	$post_score +
-					$qr_score +
-					$vragen_score +
-					$bonus_score -
-					$OpenEnvelopStrafpunten;
-			if(isset($total_score))
-			{
-					return($total_score);
-			}
-			else
-			{
-					return(0);
-			}	
+		$post_score = PostPassage::model()->getPostScore($event_id, $group_id);
+		$qr_score = QrCheck::model()->getQrScore($event_id, $group_id);
+		$vragen_score =OpenVragenAntwoorden::model()->getOpenVragenScore($event_id, $group_id); 
+		$bonus_score =Bonuspunten::model()->getBonuspuntenScore($event_id, $group_id);
+		$OpenEnvelopStrafpunten = OpenNoodEnvelop::model()->getOpenEnvelopScore($event_id,
+											$group_id);
+		$total_score = 	$post_score +
+				$qr_score +
+				$vragen_score +
+				$bonus_score -
+				$OpenEnvelopStrafpunten;
+		if(isset($total_score))
+		{
+				return($total_score);
+		}
+		else
+		{
+				return(0);
+		}	
 	}
 		
 	public function getRankGroup($event_id,
@@ -321,42 +382,29 @@ class Groups extends HikeActiveRecord
 	
 		foreach($data as $obj)
 		{
-				$groupsArray[$obj->group_ID] = Groups::model()->getTotalScoreGroup($event_id,
-																				   $obj->group_ID);
+			$groupsArray[$obj->group_ID] = Groups::model()->getTotalScoreGroup(
+				$event_id,
+				$obj->group_ID);
 		}
 		
 		arsort($groupsArray);
 		foreach($groupsArray as $key=>$key_value)
 		{			
-				if($key == $group_id)
+			if($key == $group_id)
+			{
+				if($temp_score == $key_value)
 				{
-						/* echo output gebruikt voor testen.
-						 * Later misschien nog handig
-						 *
-						echo($key);
-						echo ',';
-						echo($key_value);
-						echo ',';
-						echo($temp_score);
-						echo '.';
-						*/
-						/* Als de temp score gelijk is aan de key value, dan
-						 * blijft de ranking gelijk
-						 */
-						if($temp_score == $key_value)
-						{
-							return($counter);
-						}
-						$temp_score = $key_value;
-						$counter++;
-						return($counter);
-				}
-				if($temp_score != $key_value)
-				{
-						$counter++;
+					return($counter);
 				}
 				$temp_score = $key_value;
-				//$counter++;
+				$counter++;
+				return($counter);
+			}
+			if($temp_score != $key_value)
+			{
+				$counter++;
+			}
+			$temp_score = $key_value;
 		}
 	}
 }

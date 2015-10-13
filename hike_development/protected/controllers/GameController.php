@@ -119,14 +119,18 @@ class GameController extends Controller
 	public function actionGameOverview()
 	{
 		$model = new Groups('searchScore');
+		$modelPost = new Groups('searchPost');
 
 		//$this->layout='//layouts/column1';
 		$model->unsetAttributes();  // clear any default values
-
-		if(isset($_GET['Groups']))
+		$modelPost->unsetAttributes();  // clear any default values
+		if(isset($_GET['Groups'])){
 			$model->attributes=$_GET['Groups'];
+			$modelPost->attributes=$_GET['Groups'];
+		}
 		$this->render('gameOverview',array(
 			'model'=>$model,
+			'modelPost'=>$modelPost,
 		));
 	}
 

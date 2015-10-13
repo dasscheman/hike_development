@@ -361,8 +361,7 @@ class PostPassage extends HikeActiveRecord
 		return false;
 	}
 
-
-	public function timeLeftToday($event_id, $group_id)
+	public function walkingTimeToday($event_id, $group_id)
 	{
 		$criteriaEvent = new CDbCriteria;
 		$criteriaEvent->condition = 'event_ID = :event_id';
@@ -423,7 +422,31 @@ class PostPassage extends HikeActiveRecord
 			$timeLeftLastPost = $obj->vertrek;
 			$count++;
         }
-		return round((strtotime("1970-01-01 $dataEvent->max_time UTC") - $totalTime) / 60, 0);
+		return $totalTime;
+		//return round($totalTime / 60, 0);
+		//return round((strtotime("1970-01-01 $dataEvent->max_time UTC") - $totalTime) / 60, 0);
+	}
+
+	public function timeLeftToday($event_id, $group_id)
+	{
+		$criteriaEvent = new CDbCriteria;
+		$criteriaEvent->condition = 'event_ID = :event_id';
+		$criteriaEvent->params = array(':event_id'=>$event_id);
+		$dataEvent = EventNames::model()->find($criteriaEvent);
+	/*	if ($dataEvent->max_time = 0) {
+			return "nvt";
+		}*/
+		$totalTime = PostPassage::model()->walkingTimeToday($event_id, $group_id);
+		if ((strtotime("1970-01-01 $dataEvent->max_time UTC") - $totalTime) < 0 ) {
+			return 0;
+		}
+		return strtotime("1970-01-01 $dataEvent->max_time UTC") - $totalTime;
+	}
+
+	public function convertToHoursMinute($timestamp)
+	{
+		$time = sprintf('%02d',floor($timestamp / 60 / 60))  . ':' . sprintf('%02d',($timestamp / 60) %60);
+		return $time;
 	}
 
 	public function isFirstPostOfDayForGroup($event_id, $group_id)
