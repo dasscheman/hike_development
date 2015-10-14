@@ -48,18 +48,18 @@ if(isset($_GET['previous'])){
 				'name'=>'omschrijving',
 				'value'=>'$data->omschrijving'
 			),
-			array(
+/*			array(
                 'header'=>Users::model()->getAttributeLabel('username'),
 				'name'=>'username',
 				'value'=>'$data->createUser->username'
-			),
-/*			array(
+			),*/
+			array(
                 'header'=>$model->getAttributeLabel('score'),
 				'name'=>'score',
 				'value'=>'$data->score',
 				'headerHtmlOptions'=>array('width'=>'3%'),
 				'htmlOptions'=>array('style'=>'text-align:center'),
-			),*/
+			),
 			'create_time',
             array(
                 'header'=>'Bewerken',
