@@ -59,7 +59,7 @@ if(isset($_GET['previous'])){
 				'value'=>'$data->score',
 				'headerHtmlOptions'=>array('width'=>'3%'),
 				'htmlOptions'=>array('style'=>'text-align:center'),
-			),
+			),*/
 			'create_time',
             array(
                 'header'=>'Bewerken',
@@ -77,6 +77,6 @@ if(isset($_GET['previous'])){
                             "id"=>$data->bouspunten_ID,))',
                     ),
                 ),
-            ),*/
+            ),
     )
 ));?>
