@@ -33,12 +33,12 @@ if(isset($_GET['previous'])){
 				'value'=>'$data->group->group_name',
 				'headerHtmlOptions'=>array('width'=>'10%'),
 			),
-/*			array(
+			array(
                 'header'=>Bonuspunten::model()->getAttributeLabel('date'),
 				'name'=>'date',
 				'value'=>'$data->date'
 			),
-			array(
+/*			array(
                 'header'=>Posten::model()->getAttributeLabel('post_name'),
 				'name'=>'post_name',
 				'value'=>'$data->post->post_name'
