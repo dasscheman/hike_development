@@ -41,7 +41,7 @@ if(isset($_GET['previous'])){
 			array(
                 'header'=>Posten::model()->getAttributeLabel('post_name'),
 				'name'=>'post_name',
-				//'value'=>'$data->post->post_name'
+				'value'=>'$data->post_name'
 			),
 			array(
                 'header'=>$model->getAttributeLabel('omschrijving'),
