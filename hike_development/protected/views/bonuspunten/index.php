@@ -38,11 +38,11 @@ if(isset($_GET['previous'])){
 				'name'=>'date',
 				'value'=>'$data->date'
 			),
-/*			array(
+			array(
                 'header'=>Posten::model()->getAttributeLabel('post_name'),
 				'name'=>'post_name',
-				'value'=>'$data->post->post_name'
-			),*/
+				//'value'=>'$data->post->post_name'
+			),
 			array(
                 'header'=>$model->getAttributeLabel('omschrijving'),
 				'name'=>'omschrijving',
