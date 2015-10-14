@@ -22,7 +22,7 @@ if(isset($_GET['previous'])){
 </small></sup></h1>
 
 <?php 
-/*	$this->widget('bootstrap.widgets.TbGridView', array(
+	$this->widget('bootstrap.widgets.TbGridView', array(
         'id'=>'bonuspunten-grid',
         'dataProvider'=>$model->search($_GET['event_id']),
         'filter'=>$model,
@@ -33,7 +33,7 @@ if(isset($_GET['previous'])){
 				'value'=>'$data->group->group_name',
 				'headerHtmlOptions'=>array('width'=>'10%'),
 			),
-			array(
+/*			array(
                 'header'=>Bonuspunten::model()->getAttributeLabel('date'),
 				'name'=>'date',
 				'value'=>'$data->date'
@@ -77,6 +77,6 @@ if(isset($_GET['previous'])){
                             "id"=>$data->bouspunten_ID,))',
                     ),
                 ),
-            ),
+            ),*/
     )
-))*/;?>
+));?>
