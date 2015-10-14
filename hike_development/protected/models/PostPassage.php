@@ -202,6 +202,7 @@ class PostPassage extends HikeActiveRecord
 		if ($action_id == 'create' and
 			$hikeStatus == EventNames::STATUS_gestart and
 			$rolPlayer <= DeelnemersEvent::ROL_post and
+			PostPassage::model()->isTimeLeftToday($event_id, $group_id) and
 			Posten::model()->existPostForActiveDay($event_id) and
 			!PostPassage::model()->isFirstPostOfDayForGroup($event_id, $group_id) and
 			PostPassage::model()->notAllPostsOfDayPassedByGroup($event_id, $group_id)) {
@@ -219,12 +220,12 @@ class PostPassage extends HikeActiveRecord
 		if ($action_id == 'updateVertrek' and
 			$hikeStatus == EventNames::STATUS_gestart and
 			$rolPlayer <= DeelnemersEvent::ROL_post and
+			PostPassage::model()->isTimeLeftToday($event_id, $group_id) and
 			Posten::model()->existPostForActiveDay($event_id) and
 			PostPassage::model()->notAllPostsOfDayPassedByGroup($event_id, $group_id) and
 			!PostPassage::model()->isFirstPostOfDayForGroup($event_id, $group_id)) {
 				$actionAllowed = true;
 		}
-
 		return $actionAllowed;
 	}
 
@@ -352,9 +353,6 @@ class PostPassage extends HikeActiveRecord
 	
 	public function isTimeLeftToday($event_id, $group_id)
 	{
-		if (is_string(PostPassage::model()->timeLeftToday($event_id, $group_id)))
-			return true;
-
 		if (PostPassage::model()->timeLeftToday($event_id, $group_id) > 0)
 			return true;
 
@@ -433,9 +431,7 @@ class PostPassage extends HikeActiveRecord
 		$criteriaEvent->condition = 'event_ID = :event_id';
 		$criteriaEvent->params = array(':event_id'=>$event_id);
 		$dataEvent = EventNames::model()->find($criteriaEvent);
-	/*	if ($dataEvent->max_time = 0) {
-			return "nvt";
-		}*/
+
 		$totalTime = PostPassage::model()->walkingTimeToday($event_id, $group_id);
 		if ((strtotime("1970-01-01 $dataEvent->max_time UTC") - $totalTime) < 0 ) {
 			return 0;
@@ -443,8 +439,15 @@ class PostPassage extends HikeActiveRecord
 		return strtotime("1970-01-01 $dataEvent->max_time UTC") - $totalTime;
 	}
 
-	public function convertToHoursMinute($timestamp)
+	public function convertToHoursMinute($event_id, $timestamp)
 	{
+		$criteriaEvent = new CDbCriteria;
+		$criteriaEvent->condition = 'event_ID = :event_id';
+		$criteriaEvent->params = array(':event_id'=>$event_id);
+		$dataEvent = EventNames::model()->find($criteriaEvent);
+		if ($dataEvent->max_time = 0 || $dataEvent->max_time = null) {
+			return "nvt";
+		}
 		$time = sprintf('%02d',floor($timestamp / 60 / 60))  . ':' . sprintf('%02d',($timestamp / 60) %60);
 		return $time;
 	}

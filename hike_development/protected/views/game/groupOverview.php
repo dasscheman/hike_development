@@ -99,10 +99,10 @@ $this->menu=array(
 	</td>
 	<?php
 		if (EventNames::model()->getStatusHike($event_id) == EventNames::STATUS_gestart) {
-	   		if (PostPassage::model()->timeLeftToday($event_id, $group_id)) {?>
+	   		if (PostPassage::model()->isTimeLeftToday($event_id, $group_id)) {?>
     <tr>
         <td style="text-align:center;font-family:verdana;font-size:17px;">
-			<b> Tijd over vandaag (minuten): </b><?php echo PostPassage::model()->timeLeftToday($event_id, $group_id); ?>
+			<b> Tijd over vandaag (minuten): </b><?php echo PostPassage::model()->convertToHoursMinute($event_id, PostPassage::model()->timeLeftToday($event_id, $group_id)); ?>
 		<?php } else { ?>
 			<h4>Jullie tijd is voorbij, ga direct door naar het eindpunt. Je vindt de cooordinaten van het eindpunt bij de hints.</h4>
         </td>
@@ -141,7 +141,8 @@ $this->menu=array(
 										  </span>',
 										array('postPassage/updateVertrek',
 											  'id'=>$obj->posten_passage_ID,
-											  'event_id'=>$obj->event_ID)),
+											  'event_id'=>$obj->event_ID,
+											  'group_id'=>$obj->group_ID)),
 			);
 		}
 		$postData[] = array(
