@@ -62,8 +62,7 @@ class ActionOpstartPlayersTest extends WebTestCase
 		$this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=1", $this->getLocation());
         $this->assertContains("Status van Hike: Opstart", $this->getBodyText());
-        $this->assertContains("Laatste post: nvt", $this->getBodyText());
-        $this->assertContains("Tijd laatste post: nvt", $this->getBodyText());
+        $this->assertContains("nvt", $this->getBodyText());
     }
 
     ##Game Overview:

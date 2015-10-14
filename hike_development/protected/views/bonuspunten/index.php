@@ -16,13 +16,13 @@ if(isset($_GET['previous'])){
 ?>
 
 <h1>Bonuspunten Overzicht<sup><small>
-				<?php echo CHtml::link('<i class="fa fa-question-circle fa-inverse"></i>',
-				array('/site/help#Bonuspunten'),
-				array('target'=>'_blank')); ?>
-			   </small></sup></h1>
+	<?php echo CHtml::link('<i class="fa fa-question-circle fa-inverse"></i>',
+	array('/site/help#Bonuspunten'),
+	array('target'=>'_blank')); ?>
+</small></sup></h1>
 
 <?php 
-  $this->widget('bootstrap.widgets.TbGridView', array(
+/*	$this->widget('bootstrap.widgets.TbGridView', array(
         'id'=>'bonuspunten-grid',
         'dataProvider'=>$model->search($_GET['event_id']),
         'filter'=>$model,
@@ -79,4 +79,4 @@ if(isset($_GET['previous'])){
                 ),
             ),
     )
-));?>
+))*/;?>
