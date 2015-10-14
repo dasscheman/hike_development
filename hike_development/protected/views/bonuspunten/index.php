@@ -33,7 +33,7 @@ if(isset($_GET['previous'])){
 				'value'=>'$data->group->group_name',
 				'headerHtmlOptions'=>array('width'=>'10%'),
 			),
-			array(
+/*			array(
                 'header'=>Bonuspunten::model()->getAttributeLabel('date'),
 				'name'=>'date',
 				'value'=>'$data->date'
@@ -42,17 +42,17 @@ if(isset($_GET['previous'])){
                 'header'=>Posten::model()->getAttributeLabel('post_name'),
 				'name'=>'post_name',
 				'value'=>'$data->post->post_name'
-			),
+			),*/
 			array(
                 'header'=>$model->getAttributeLabel('omschrijving'),
 				'name'=>'omschrijving',
 				'value'=>'$data->omschrijving'
 			),
-/*			array(
+			array(
                 'header'=>Users::model()->getAttributeLabel('username'),
 				'name'=>'username',
 				'value'=>'$data->createUser->username'
-			),*/
+			),
 			array(
                 'header'=>$model->getAttributeLabel('score'),
 				'name'=>'score',
