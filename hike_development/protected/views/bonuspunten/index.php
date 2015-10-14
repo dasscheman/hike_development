@@ -47,12 +47,12 @@ if(isset($_GET['previous'])){
                 'header'=>$model->getAttributeLabel('omschrijving'),
 				'name'=>'omschrijving',
 				'value'=>'$data->omschrijving'
-			),
+			),*/
 			array(
                 'header'=>Users::model()->getAttributeLabel('username'),
 				'name'=>'username',
 				'value'=>'$data->createUser->username'
-			),*/
+			),
 			array(
                 'header'=>$model->getAttributeLabel('score'),
 				'name'=>'score',
