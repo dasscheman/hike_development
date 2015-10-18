@@ -476,7 +476,7 @@ class PostPassage extends HikeActiveRecord
 		$criteriaEvent->condition = 'event_ID = :event_id';
 		$criteriaEvent->params = array(':event_id'=>$event_id);
 		$dataEvent = EventNames::model()->find($criteriaEvent);
-		if ($dataEvent->max_time == 0) {
+		if ($dataEvent->max_time == null || $dataEvent->max_time == '00:00:00') {
 			return 'Er is geen maximum tijd voor vandaag';
 		}
 		return $this->convertToHoursMinute($event_id, $this->timeLeftToday($event_id, $group_id));
