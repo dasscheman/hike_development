@@ -528,7 +528,7 @@ class ActionIntroductionOrganisatieTest extends WebTestCase
 
 		$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=2");
 		$this->assertContains("hike_development/index-test.php?r=game/gameOverview&event_id=2", $this->getLocation());
-		$this->assertContains("Laatste post: nvt", $this->getBodyText());
+		$this->assertContains("deelnemera nvtnog niet gestart", $this->getBodyText());
         $this->assertContains("Tijd laatste post: nvt", $this->getBodyText());
         $this->assertContains("nog niet gestart", $this->getBodyText());
 
