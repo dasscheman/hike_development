@@ -500,7 +500,7 @@ class ActionGestartPlayersTest extends WebTestCase
 		$this->click("name=yt0");
 		$this->waitForPageToLoad("30000");
 		$this->open("hike_development/index-test.php?r=game/gameOverview&event_id=3");
-		$this->assertContains("Tijd over (minuten): -", $this->getBodyText());
+		$this->assertContains("01:0000:00", $this->getBodyText());
 		$this->login();
 
 		$this->open("hike_development/index-test.php?r=openVragenAntwoorden/update&event_id=2&group_id=6&vraag_id=1");
