@@ -256,10 +256,11 @@ open gemaakt. </center><br/>
 				'headerHtmlOptions'=>array('width'=>'3%'),
 				'htmlOptions'=>array('style'=>'text-align:center'),
 			),
+
 			array(
                // 'header'=>Groups::model()->getAttributeLabel('hint_score'),
 				'name'=>'time_walking',
-				'value'=>'PostPassage::model()->convertToHoursMinute($data->event_ID, PostPassage::model()->walkingTimeToday($data->event_ID, $data->group_ID))',
+				'value'=>'PostPassage::model()->displayWalkingTime($data->event_ID, $data->group_ID)',
 				'filter'=>false,
 				'headerHtmlOptions'=>array('width'=>'3%'),
 				'htmlOptions'=>array('style'=>'text-align:center'),
@@ -267,7 +268,7 @@ open gemaakt. </center><br/>
 			array(
                // 'header'=>Groups::model()->getAttributeLabel('hint_score'),
 				'name'=>'time_left',
-				'value'=>'PostPassage::model()->convertToHoursMinute($data->event_ID, PostPassage::model()->timeLeftToday($data->event_ID, $data->group_ID))',
+				'value'=>'PostPassage::model()->displayTimeLeft($data->event_ID, $data->group_ID)',
 				'filter'=>false,
 				'headerHtmlOptions'=>array('width'=>'3%'),
 				'htmlOptions'=>array('style'=>'text-align:center'),

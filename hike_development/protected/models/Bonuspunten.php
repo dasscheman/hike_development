@@ -124,11 +124,16 @@ class Bonuspunten extends HikeActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->with=array('post', 'group', 'createUser');
-
+		$criteria->select = array(
+			'date',
+			'omschrijving',
+			'score',
+			'create_time',
+			'post.post_name AS post_name');
 		$criteria->compare('bouspunten_ID',$this->bouspunten_ID);
 		$criteria->compare('t.event_ID',$event_id);
 		$criteria->compare('t.date',$this->date);
-		$criteria->compare('post_ID',$this->post_ID);
+		$criteria->compare('post.post_name',$this->post_name);
 		$criteria->compare('group_ID',$this->group_ID);
 		$criteria->compare('omschrijving',$this->omschrijving,true);
 		$criteria->compare('t.score',$this->score);
@@ -153,8 +158,8 @@ class Bonuspunten extends HikeActiveRecord
 				'desc'=>'t.date desc',
 			),
 			'post_name'=>array(
-				'asc'=>'post.post_name',
-				'desc'=>'post.post_name desc',
+				'asc'=>'post_name',
+				'desc'=>'post_name desc',
 			),
 			'omschrijving'=>array(
 				'asc'=>'omschrijving',

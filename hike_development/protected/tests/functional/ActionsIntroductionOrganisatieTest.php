@@ -200,7 +200,7 @@ class ActionIntroductionOrganisatieTest extends WebTestCase
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=QrCheck/index&event_id=2", $this->getLocation());
 
-		$this->assertContains("2wDlYLbS8Ws9EutrUMjNv6", $this->getBodyText());
+		$this->assertContains("introductieintro", $this->getBodyText());
 	}
 
     ## Group Overview

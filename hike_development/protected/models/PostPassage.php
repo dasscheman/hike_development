@@ -384,9 +384,6 @@ class PostPassage extends HikeActiveRecord
 		$timeLeftLastPost = 0;
 		$atPost = false;
 		$count = 1;
-		if ($aantalPosten == 0){
-			return 'nog niet gestart';
-		}
 
 		foreach($dataPostPassages as $obj)
 		{
@@ -421,8 +418,6 @@ class PostPassage extends HikeActiveRecord
 			$count++;
         }
 		return $totalTime;
-		//return round($totalTime / 60, 0);
-		//return round((strtotime("1970-01-01 $dataEvent->max_time UTC") - $totalTime) / 60, 0);
 	}
 
 	public function timeLeftToday($event_id, $group_id)
@@ -441,15 +436,50 @@ class PostPassage extends HikeActiveRecord
 
 	public function convertToHoursMinute($event_id, $timestamp)
 	{
+		$time = sprintf('%02d',floor($timestamp / 60 / 60))  . ':' . sprintf('%02d',($timestamp / 60) %60);
+		return $time;
+	}
+
+	public function displayWalkingTime($event_id, $group_id)
+	{
 		$criteriaEvent = new CDbCriteria;
 		$criteriaEvent->condition = 'event_ID = :event_id';
 		$criteriaEvent->params = array(':event_id'=>$event_id);
 		$dataEvent = EventNames::model()->find($criteriaEvent);
-		if ($dataEvent->max_time = 0 || $dataEvent->max_time = null) {
-			return "nvt";
+		
+		$criteriaPostenPassages = new CDbCriteria;
+		$criteriaPostenPassages->with = array('post');
+
+		$criteriaPostenPassages->condition = 'group_ID =:group_id AND
+											  post.event_ID =:event_id AND
+											  post.date =:active_date';
+
+		if ($dataEvent->active_day == null) {
+			return 'Geen dag geactiveerd';
+		}	
+		$criteriaPostenPassages->order = 'binnenkomst ASC';
+		$criteriaPostenPassages->params = array(':group_id'=>$group_id,
+												':event_id'=>$event_id,
+												':active_date'=>$dataEvent->active_day);
+		$aantalPosten = PostPassage::model()->count($criteriaPostenPassages);	
+
+		if ($aantalPosten == 0){
+			return 'nog niet gestart';
 		}
-		$time = sprintf('%02d',floor($timestamp / 60 / 60))  . ':' . sprintf('%02d',($timestamp / 60) %60);
-		return $time;
+
+		return $this->convertToHoursMinute($event_id, $this->walkingTimeToday($event_id, $group_id));
+	}
+
+	public function displayTimeLeft($event_id, $group_id)
+	{
+		$criteriaEvent = new CDbCriteria;
+		$criteriaEvent->condition = 'event_ID = :event_id';
+		$criteriaEvent->params = array(':event_id'=>$event_id);
+		$dataEvent = EventNames::model()->find($criteriaEvent);
+		if ($dataEvent->max_time == 0) {
+			return 'Er is geen maximum tijd voor vandaag';
+		}
+		return $this->convertToHoursMinute($event_id, $this->timeLeftToday($event_id, $group_id));
 	}
 
 	public function isFirstPostOfDayForGroup($event_id, $group_id)

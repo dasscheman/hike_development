@@ -205,7 +205,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
         $this->waitForPageToLoad ( "30000" );
 		$this->assertContains("hike_development/index-test.php?r=QrCheck/index&event_id=3", $this->getLocation());
 
-		$this->assertContains("1wDlYLbS8Ws9EutrUMjNv6", $this->getBodyText());
+		$this->assertContains("gestartgestart", $this->getBodyText());
 	}
 
     ## Group Overview
