@@ -454,7 +454,7 @@ class PostPassage extends HikeActiveRecord
 											  post.event_ID =:event_id AND
 											  post.date =:active_date';
 
-		if ($dataEvent->active_day == null) {
+		if ($dataEvent->active_day == null || $dataEvent->active_day == '0000-00-00') {
 			return 'Geen dag geactiveerd';
 		}	
 		$criteriaPostenPassages->order = 'binnenkomst ASC';

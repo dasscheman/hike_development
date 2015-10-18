@@ -585,6 +585,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		$this->assertNotContains("13:04", $this->getBodyText());
         $this->assertNotContains("nog niet gestart", $this->getBodyText());
         $this->assertContains("Status van Hike: Opstart", $this->getBodyText());
+        $this->assertContains("Geen dag geactiveerd", $this->getBodyText());
         $this->assertNotContains("Actieve dag: 2015-02-27", $this->getBodyText());
 
 		$this->open("hike_development/index-test.php?r=eventNames/changeStatus&event_id=3");
