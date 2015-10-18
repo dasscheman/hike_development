@@ -237,7 +237,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		$this->assertContains("hike_development/index-test.php?r=postPassage/createDayStart&event_id=3&group_id=6", $this->getLocation());
 
 		$this->select("name=PostPassage[post_ID]", "label=post 3 gestart organisatie START");
-		$this->type("name=PostPassage[vertrek]", "2015-02-27 12:43");
+		$this->type("name=PostPassage[vertrek]", date("Y-m-d H:i"));
 		$this->click("name=yt0");
 		$this->waitForPageToLoad("30000");
 
@@ -265,7 +265,7 @@ class ActionGestartOrganisatieTest extends WebTestCase
 		$this->assertContains("hike_development/index-test.php?r=postPassage/create&event_id=3&group_id=6", $this->getLocation());
 
 		$this->select("name=PostPassage[post_ID]", "label=post 3 gestart organisatie LUNCH");
-		$this->type("name=PostPassage[binnenkomst]", "2015-02-27 13:43");
+		$this->type("name=PostPassage[binnenkomst]", date("Y-m-d H:i", strtotime('+1 hour')));
 		$this->click("name=yt0");
 		$this->waitForPageToLoad("30000");
 
