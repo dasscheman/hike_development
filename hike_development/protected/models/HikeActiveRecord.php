@@ -266,11 +266,6 @@ abstract class HikeActiveRecord extends CActiveRecord
 				    $groupOfPlayer == $group_id and
 					PostPassage::model()->timeLeftToday($event_id, $group_id) > 0 ) {
 						$createAllowed = true;}
-
-				if (($hikeStatus == EventNames::STATUS_introductie or
-					 $hikeStatus == EventNames::STATUS_gestart) and
-					$rolPlayer == DeelnemersEvent::ROL_organisatie) {
-						$createAllowed = true;}
 				break;
 			default:
 		}
