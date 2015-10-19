@@ -18,7 +18,7 @@ $this->breadcrumbs=array(
 			array('target'=>'_blank')); ?>
 		 </small></sup>
 	</h2>
-<?php
+<?php 
 	foreach($openVragenAntwoordenDataProvider->data as $obj){
 		$vraagtData[]['header']='Vraag naam: ' . OpenVragen::model()->getOpenVragenName($obj->open_vragen_ID);
 		if (OpenVragenAntwoorden::model()->isActionAllowed('openVragenAntwoorden',
@@ -39,10 +39,10 @@ $this->breadcrumbs=array(
 										<i class="fa fa-blue fa-text-right fa-09x"> Bewerken</i>
 										<i class="fa fa-refresh fa-stack-up-15p fa-blue fa-06x"> </i>
 								  </span>',
-								  array('/openVragenAntwoorden/update',
-										'event_id'=>$obj->event_ID,
-										'group_id'=>$_GET['group_id'],
-										'vraag_id'=>$obj->open_vragen_ID))
+					array('/openVragenAntwoorden/update',
+						  'event_id'=>$obj->event_ID,
+						  'group_id'=>$_GET['group_id'],
+						  'vraag_id'=>$obj->open_vragen_ID))
 			);
 		}
 		$vraagtData[] = array(

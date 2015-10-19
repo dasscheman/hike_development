@@ -150,13 +150,14 @@ abstract class HikeActiveRecord extends CActiveRecord
 				if ($hikeStatus == EventNames::STATUS_introductie and
 					$rolPlayer == DeelnemersEvent::ROL_deelnemer and
 				    $groupOfPlayer == $group_id) {
-						$updateAllowed = true;}
+						$updateAllowed = true;
+				}
 				if ($hikeStatus == EventNames::STATUS_gestart and
 					$rolPlayer == DeelnemersEvent::ROL_deelnemer and
 				    $groupOfPlayer == $group_id and
 					PostPassage::model()->isTimeLeftToday($event_id, $group_id)) {
-						$updateAllowed = true;}
-				// No break, because we want to check for organisation aswell. 
+						$updateAllowed = true;
+				}
 			case 'bonuspunten':
           	case 'qrCheck':
 				if (($hikeStatus == EventNames::STATUS_introductie or
@@ -257,10 +258,9 @@ abstract class HikeActiveRecord extends CActiveRecord
 					$rolPlayer == DeelnemersEvent::ROL_deelnemer and
 					(PostPassage::model()->isTimeLeftToday($event_id, $groupOfPlayer))) {
 						$createAllowed = true;}
-
-				break;
 				// Hier geen break. OpenNoodenvelop en postPassage moeten uitgesloten worden voor de introductie.
 			case 'openNoodEnvelop':
+			case 'postPassage':
 				if ($hikeStatus == EventNames::STATUS_gestart and
 					$rolPlayer == DeelnemersEvent::ROL_deelnemer and
 				    $groupOfPlayer == $group_id and

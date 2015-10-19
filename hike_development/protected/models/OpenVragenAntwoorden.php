@@ -221,35 +221,36 @@ class OpenVragenAntwoorden extends HikeActiveRecord
      */
     function isActionAllowed($controller_id = null, $action_id = null, $event_id = null, $model_id = null, $group_id = null)
     {
-	$actionAllowed = parent::isActionAllowed($controller_id, $action_id, $event_id, $model_id, $group_id);
+		$actionAllowed = parent::isActionAllowed($controller_id, $action_id, $event_id, $model_id, $group_id);
+	
+		$hikeStatus = EventNames::model()->getStatusHike($event_id);
+		$rolPlayer = DeelnemersEvent::model()->getRolOfPlayer($event_id, Yii::app()->user->id);
 
-	$hikeStatus = EventNames::model()->getStatusHike($event_id);
-	$rolPlayer = DeelnemersEvent::model()->getRolOfPlayer($event_id, Yii::app()->user->id);
-        switch ($action_id) {
-	    case 'antwoordGoedOfFout':
-		    if (($hikeStatus == EventNames::STATUS_introductie OR
-                    $hikeStatus == EventNames::STATUS_gestart) AND
-                    $rolPlayer == DeelnemersEvent::ROL_organisatie AND
-		    !OpenVragenAntwoorden::model()->isAntwoordGecontroleerd($event_id, $model_id)) {
-			$actionAllowed = true;
-                }
-	    break;
-	    case 'viewControle':
-                if (($hikeStatus == EventNames::STATUS_introductie OR
-                    $hikeStatus == EventNames::STATUS_gestart) AND
-                    $rolPlayer == DeelnemersEvent::ROL_organisatie) {
-			$actionAllowed = true;
-                }
-	    break;
-	    case 'updateOrganisatie':
-                if (($hikeStatus == EventNames::STATUS_introductie OR
-                    $hikeStatus == EventNames::STATUS_gestart) AND
-                    $rolPlayer == DeelnemersEvent::ROL_organisatie) {
-			$actionAllowed = true;
-                }
-	    break;
-        }
-	return $actionAllowed;
+		switch ($action_id) {
+			case 'antwoordGoedOfFout':
+				if (($hikeStatus == EventNames::STATUS_introductie OR
+						$hikeStatus == EventNames::STATUS_gestart) AND
+						$rolPlayer == DeelnemersEvent::ROL_organisatie AND
+				!OpenVragenAntwoorden::model()->isAntwoordGecontroleerd($event_id, $model_id)) {
+				$actionAllowed = true;
+					}
+			break;
+			case 'viewControle':
+					if (($hikeStatus == EventNames::STATUS_introductie OR
+						$hikeStatus == EventNames::STATUS_gestart) AND
+						$rolPlayer == DeelnemersEvent::ROL_organisatie) {
+				$actionAllowed = true;
+					}
+			break;
+			case 'updateOrganisatie':
+					if (($hikeStatus == EventNames::STATUS_introductie OR
+						$hikeStatus == EventNames::STATUS_gestart) AND
+						$rolPlayer == DeelnemersEvent::ROL_organisatie) {
+				$actionAllowed = true;
+					}
+			break;
+		}
+		return $actionAllowed;
     }
 
     /**

@@ -64,7 +64,7 @@ $this->breadcrumbs=array(
 				$vraagtData[] = array(
 					'oneRow'=>true,
 					'type'=>'raw',
-					'value'=>Html::link('<span class="fa-stack fa-lg">
+					'value'=>CHtml::link('<span class="fa-stack fa-lg">
 											<i class="fa fa-circle fa-stack-2x fa-green"></i>
 											<i class="fa fa-file-o fa-stack-1x"></i>
 											<i class="fa fa-blue fa-text-right fa-09x"> Bewerken</i>
@@ -73,8 +73,9 @@ $this->breadcrumbs=array(
 										 array('/openVragenAntwoorden/update',
 											   'event_id'=>$obj->event_ID,
 											   'group_id'=>$_GET['group_id'],
-											   'vraag_id'=>$obj->open_vragen_ID))
-					);
+											   'vraag_id'=>$obj->open_vragen_ID)
+					)
+				);
 			}
 		}
 		$vraagtData[] = array(
