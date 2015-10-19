@@ -146,12 +146,30 @@ abstract class HikeActiveRecord extends CActiveRecord
 		}
 
 		switch ($controller_id) {
+			case 'openVragenAntwoorden':
+				if ($hikeStatus == EventNames::STATUS_introductie and
+					$rolPlayer == DeelnemersEvent::ROL_deelnemer and
+				    $groupOfPlayer == $group_id) {
+						$updateAllowed = true;}
+				if ($hikeStatus == EventNames::STATUS_gestart and
+					$rolPlayer == DeelnemersEvent::ROL_deelnemer and
+				    $groupOfPlayer == $group_id and
+					PostPassage::model()->isTimeLeftToday($event_id, $group_id)) {
+						$updateAllowed = true;}
+				// No break, because we want to check for organisation aswell. 
 			case 'bonuspunten':
+          	case 'qrCheck':
 				if (($hikeStatus == EventNames::STATUS_introductie or
 					 $hikeStatus == EventNames::STATUS_gestart) and
 					$rolPlayer == DeelnemersEvent::ROL_organisatie) {
 					$updateAllowed = true;
 				}
+				break;
+			case 'openNoodEnvelop':
+			case 'postPassage':
+				if ($hikeStatus == EventNames::STATUS_gestart and
+					$rolPlayer == DeelnemersEvent::ROL_organisatie) {
+					$updateAllowed = true;}
 				break;
 			case 'noodEnvelop':
 			case 'openVragen':
@@ -177,33 +195,6 @@ abstract class HikeActiveRecord extends CActiveRecord
 					$updateAllowed = true;
 				}
           		break;
-			case 'openNoodEnvelop':
-          	case 'qrCheck':
-          		break;
-			case 'openVragenAntwoorden':
-				if ($hikeStatus == EventNames::STATUS_introductie and
-					$rolPlayer == DeelnemersEvent::ROL_deelnemer and
-				    $groupOfPlayer == $group_id) {
-						$updateAllowed = true;}
-				if ($hikeStatus == EventNames::STATUS_gestart and
-					$rolPlayer == DeelnemersEvent::ROL_deelnemer and
-				    $groupOfPlayer == $group_id and
-					PostPassage::model()->isTimeLeftToday($event_id, $group_id)) {
-						$updateAllowed = true;}
-				break;
-			case 'postPassage':
-				if ($hikeStatus == EventNames::STATUS_gestart and
-					$rolPlayer == DeelnemersEvent::ROL_organisatie) {
-					$updateAllowed = true;}
-				break;
-			case 'route';
-				if ($hikeStatus == EventNames::STATUS_opstart and
-					$rolPlayer == DeelnemersEvent::ROL_organisatie ){
-					$updateAllowed = true;
-				}
-				break;
-			//case friendList:
-			//	break;
 			case 'users':
 				break;
 			default:

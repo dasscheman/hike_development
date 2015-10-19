@@ -48,7 +48,7 @@ $this->breadcrumbs=array(
 				'value'=>'$data->createUser->username'
 			),
 			'create_time',
-            array(
+          /*  array(
                 'header'=>'Bewerken',
                 'class'=>'CButtonColumn',
                 'template'=>'{details}',
@@ -62,8 +62,14 @@ $this->breadcrumbs=array(
                             "event_id"=>$data->event_ID,
                             "group_id"=>$data->group_ID,
                             "id"=>$data->qr_check_ID,))',
+						'visible'=>'QrCheck::model()->isActionAllowed(
+							"qrCheck",
+							"update",
+							$data->event_ID,
+							$data->qr_check_ID,
+							$data->group_ID)'
                     ),
                 ),
-            ),
+            ),*/
     )
 ));?>

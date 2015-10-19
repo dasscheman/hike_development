@@ -75,6 +75,12 @@ if(isset($_GET['previous'])){
                             "event_id"=>$data->event_ID,
                             "group_id"=>$data->group_ID,
                             "id"=>$data->bouspunten_ID,))',
+						'visible'=>'Bonuspunten::model()->isActionAllowed(
+							"bonuspunten",
+							"update",
+							$data->event_ID,
+							$data->bouspunten_ID,
+							$data->group_ID)'
                     ),
                 ),
             ),

@@ -125,6 +125,8 @@ class Bonuspunten extends HikeActiveRecord
 
 		$criteria->with=array('post', 'group', 'createUser');
 		$criteria->select = array(
+			't.event_ID',
+			'group_ID',
 			'date',
 			'omschrijving',
 			'score',

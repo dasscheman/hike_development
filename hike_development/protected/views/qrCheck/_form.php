@@ -16,30 +16,6 @@
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'qr_ID'); ?>
-		<?php echo $form->textField($model,'qr_ID'); ?>
-		<?php echo $form->error($model,'qr_ID'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'event_ID'); ?>
-		<?php echo $form->textField($model,'event_ID'); ?>
-		<?php echo $form->error($model,'event_ID'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'group_ID'); ?>
-		<?php echo $form->textField($model,'group_ID'); ?>
-		<?php echo $form->error($model,'group_ID'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'score'); ?>
-		<?php echo $form->textField($model,'score'); ?>
-		<?php echo $form->error($model,'score'); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->labelEx($model,'create_time'); ?>
 		<?php echo $form->textField($model,'create_time'); ?>
 		<?php echo $form->error($model,'create_time'); ?>

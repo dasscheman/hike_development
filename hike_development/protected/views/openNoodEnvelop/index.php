@@ -72,6 +72,12 @@ $this->breadcrumbs=array(
                             "event_id"=>$data->event_ID,
                             "group_id"=>$data->group_ID,
                             "id"=>$data->open_nood_envelop_ID,))',
+						'visible'=>'OpenNoodEnvelop::model()->isActionAllowed(
+							"openNoodEnvelop",
+							"update",
+							$data->event_ID,
+							$data->open_nood_envelop_ID,
+							$data->group_ID)'
                     ),
                 ),
             ),

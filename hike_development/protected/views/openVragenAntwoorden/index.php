@@ -93,11 +93,18 @@ $this->breadcrumbs=array(
                             "event_id"=>$data->event_ID,
                             "group_id"=>$data->group_ID,
                             "vraag_id"=>$data->open_vragen_ID,))',
+						'visible'=>'OpenVragenAntwoorden::model()->isActionAllowed(
+							"openVragenAntwoorden",
+							"update",
+							$data->event_ID,
+							$data->open_vragen_ID,
+							$data->group_ID)'
                     ),
                 ),
             ),
     )
 ));
+
 ?>
 
 

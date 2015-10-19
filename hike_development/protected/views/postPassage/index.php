@@ -80,9 +80,16 @@ $this->breadcrumbs=array(
                                     <i class="fa fa-search fa-stack-1x"></i>
                                   </span>',
                         'options'=>array('title'=>'Bewerken'),
-                        'url'=>'Yii::app()->createUrl("/postPassage/updateVertrek", array(
+                        //'url'=>'Yii::app()->createUrl("/postPassage/updateVertrek", array(
+                        'url'=>'Yii::app()->createUrl("/postPassage/update", array(
                             "event_id"=>$data->event_ID,
                             "id"=>$data->posten_passage_ID,))',
+						'visible'=>'Bonuspunten::model()->isActionAllowed(
+							"postPassage",
+							"update",
+							$data->event_ID,
+							$data->posten_passage_ID,
+							$data->group_ID)'
                     ),
                 ),
             ),

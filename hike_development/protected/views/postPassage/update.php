@@ -10,7 +10,7 @@ $this->breadcrumbs=array(
 );
 
 ?>
-<h2>Vertrek van Post Registreren <?php echo CHtml::link(TbHtml::icon(TbHtml::ICON_QUESTION_SIGN),
+<h2>Binnenkomst/Vertrek Post wijzigen <?php echo CHtml::link(TbHtml::icon(TbHtml::ICON_QUESTION_SIGN),
 					  array('/site/help#ScoreOverzicht'),
 					  array('target'=>'_blank')); ?></h2>
 

@@ -41,11 +41,20 @@ class BonuspuntenController extends Controller
 				'expression'=> '!isset($_GET["group_id"])',
 			),
 			array(	'allow', // allow admin user to perform 'viewplayers' actions
-				'actions'=>array('index', 'update', 'delete', 'create'),
+				'actions'=>array('index', 'delete', 'create'),
 				'expression'=> 'Bonuspunten::model()->isActionAllowed(
                     Yii::app()->controller->id,
                     Yii::app()->controller->action->id,
                     $_GET["event_id"])',
+			),
+			array(	'allow', // allow admin user to perform 'viewplayers' actions
+				'actions'=>array('update'),
+				'expression'=> 'Bonuspunten::model()->isActionAllowed(
+                    Yii::app()->controller->id,
+                    Yii::app()->controller->action->id,
+                    $_GET["event_id"],
+					$_GET["id"],
+					$_GET["group_id"])',
 			),
 			array(	'allow', // allow admin user to perform 'viewplayers' actions
 				'actions'=>array('viewPlayers'),

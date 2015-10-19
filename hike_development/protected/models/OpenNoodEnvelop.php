@@ -100,7 +100,7 @@ class OpenNoodEnvelop extends HikeActiveRecord
 			'event_ID' => 'Event',
 			'nood_envelop_ID' => 'Nood Envelop',
 			'group_ID' => 'Group',
-			'opened' => 'Opened',
+			'opened' => 'Geopend',
 			'create_time' => 'Create Time',
 			'create_user_ID' => 'Geopend door',
 			'update_time' => 'Update Time',

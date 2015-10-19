@@ -158,7 +158,7 @@ class OpenVragenAntwoorden extends HikeActiveRecord
 	    $criteria->compare('antwoord_spelers',$this->antwoord_spelers);
 	    $criteria->compare('checked',$this->checked);
 	    $criteria->compare('correct',$this->correct);
-	    $criteria->compare('create_time',$this->create_time,true);
+	    $criteria->compare('t.create_time',$this->create_time,true);
 	    $criteria->compare('create_user_ID',$this->create_user_ID);
 	    $criteria->compare('update_time',$this->update_time,true);
 	    $criteria->compare('update_user_ID',$this->update_user_ID);
@@ -198,15 +198,7 @@ class OpenVragenAntwoorden extends HikeActiveRecord
 			'goede_antwoord'=>array(
 				'asc'=>'openVragen.goede_antwoord',
 				'desc'=>'openVragen.goede_antwoord desc',
-			),/*
-			'checked'=>array(
-				'asc'=>'t.checked',
-				'desc'=>'t.checked desc',
 			),
-			'correct'=>array(
-				'asc'=>'t.correct',
-				'desc'=>'t.correct desc',
-			),*/
 			'username'=>array(
 				'asc'=>'createUser.username',
 				'desc'=>'createUser.username desc',
