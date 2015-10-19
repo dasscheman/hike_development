@@ -198,8 +198,8 @@ class Bonuspunten extends HikeActiveRecord
 				      group_ID = $group_id";
 		$data = Bonuspunten::model()->find($criteria);
 	    if(isset($data->score))
-			{return($data->score);}
+			{return (int) $data->score;}
 		else
-			{return(0);}	
+			{return 0;}	
 	}
 }

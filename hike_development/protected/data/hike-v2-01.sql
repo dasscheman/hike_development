@@ -994,7 +994,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `tbl_totaal_score`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `tbl_totaal_score` AS select `groups`.`event_ID` AS `event_ID`,`groups`.`group_ID` AS `group_ID`,((((coalesce(sum(`tbl_bonuspunten`.`score`),0) + coalesce(`tbl_hint_score`.`hint_score`,0)) + coalesce(`tbl_vragen_score`.`vragen_score`,0)) + coalesce(`tbl_posten_score`.`post_score`,0)) + coalesce(`tbl_qr_score`.`qr_score`,0)) AS `totaal_score` from (((((`tbl_groups` `groups` left join `tbl_posten_score` on((`tbl_posten_score`.`group_ID` = `groups`.`group_ID`))) left join `tbl_vragen_score` on((`tbl_vragen_score`.`group_ID` = `groups`.`group_ID`))) left join `tbl_qr_score` on((`tbl_qr_score`.`group_ID` = `groups`.`group_ID`))) left join `tbl_hint_score` on((`tbl_hint_score`.`group_ID` = `groups`.`group_ID`))) left join `tbl_bonuspunten` on((`tbl_bonuspunten`.`group_ID` = `groups`.`group_ID`))) group by `tbl_bonuspunten`.`group_ID`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `tbl_totaal_score` AS select `groups`.`event_ID` AS `event_ID`,`groups`.`group_ID` AS `group_ID`,((((coalesce(sum(`tbl_bonuspunten`.`score`),0) - coalesce(`tbl_hint_score`.`hint_score`,0)) + coalesce(`tbl_vragen_score`.`vragen_score`,0)) + coalesce(`tbl_posten_score`.`post_score`,0)) + coalesce(`tbl_qr_score`.`qr_score`,0)) AS `totaal_score` from (((((`tbl_groups` `groups` left join `tbl_posten_score` on((`tbl_posten_score`.`group_ID` = `groups`.`group_ID`))) left join `tbl_vragen_score` on((`tbl_vragen_score`.`group_ID` = `groups`.`group_ID`))) left join `tbl_qr_score` on((`tbl_qr_score`.`group_ID` = `groups`.`group_ID`))) left join `tbl_hint_score` on((`tbl_hint_score`.`group_ID` = `groups`.`group_ID`))) left join `tbl_bonuspunten` on((`tbl_bonuspunten`.`group_ID` = `groups`.`group_ID`))) group by `group_ID`;
 
 -- --------------------------------------------------------
 
@@ -1003,7 +1003,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `tbl_vragen_score`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `tbl_vragen_score` AS select `tbl_open_vragen_antwoorden`.`event_ID` AS `event_ID`,`tbl_open_vragen_antwoorden`.`group_ID` AS `group_ID`,sum(`tbl_open_vragen`.`score`) AS `vragen_score` from (`tbl_open_vragen_antwoorden` left join `tbl_open_vragen` on((`tbl_open_vragen`.`open_vragen_ID` = `tbl_open_vragen_antwoorden`.`open_vragen_ID`))) group by `tbl_open_vragen_antwoorden`.`group_ID`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `tbl_vragen_score` AS select `tbl_open_vragen_antwoorden`.`event_ID` AS `event_ID`,`tbl_open_vragen_antwoorden`.`group_ID` AS `group_ID`,sum(`tbl_open_vragen`.`score`) AS `vragen_score` from (`tbl_open_vragen_antwoorden` left join `tbl_open_vragen` on((`tbl_open_vragen`.`open_vragen_ID` = `tbl_open_vragen_antwoorden`.`open_vragen_ID`))) where `tbl_open_vragen_antwoorden`.`checked` = 1 and `tbl_open_vragen_antwoorden`.`correct` = 1 group by `tbl_open_vragen_antwoorden`.`group_ID`;
 
 
 

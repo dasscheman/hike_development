@@ -242,10 +242,6 @@ class Groups extends HikeActiveRecord
 				'asc'=>'totaal_score',
 				'desc'=>'totaal_score desc',
 			),
-			/*'rank'=>array(
-				'asc'=>'rank',
-				'desc'=>'rank desc',
-			),*/
 		);
 
 	    return new CActiveDataProvider($this, array(
@@ -347,27 +343,21 @@ class Groups extends HikeActiveRecord
 	 * Returns total score van een group.
 	 * TODO: deze functie moet naar een generieke plek.
 	 */
-	public function getTotalScoreGroup($event_id,
-					   $group_id)
+	public function getTotalScoreGroup(	$event_id,
+										$group_id)
 	{
 		$post_score = PostPassage::model()->getPostScore($event_id, $group_id);
 		$qr_score = QrCheck::model()->getQrScore($event_id, $group_id);
-		$vragen_score =OpenVragenAntwoorden::model()->getOpenVragenScore($event_id, $group_id); 
-		$bonus_score =Bonuspunten::model()->getBonuspuntenScore($event_id, $group_id);
-		$OpenEnvelopStrafpunten = OpenNoodEnvelop::model()->getOpenEnvelopScore($event_id,
-											$group_id);
-		$total_score = 	$post_score +
-				$qr_score +
-				$vragen_score +
-				$bonus_score -
-				$OpenEnvelopStrafpunten;
-		if(isset($total_score))
-		{
-				return($total_score);
-		}
-		else
-		{
-				return(0);
+		$vragen_score = OpenVragenAntwoorden::model()->getOpenVragenScore($event_id, $group_id); 
+		$bonus_score = Bonuspunten::model()->getBonuspuntenScore($event_id, $group_id);
+		$OpenEnvelopStrafpunten = OpenNoodEnvelop::model()->getOpenEnvelopScore($event_id, $group_id);
+
+		$total_score = 	$post_score + $qr_score + $vragen_score + $bonus_score - $OpenEnvelopStrafpunten;
+
+		if(isset($total_score))	{
+			return($total_score);
+		} else {
+			return(0);
 		}	
 	}
 		

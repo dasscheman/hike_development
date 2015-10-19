@@ -280,17 +280,17 @@ class OpenVragenAntwoorden extends HikeActiveRecord
     public function getOpenVragenScore($event_id, $group_id)
     {
 	    $criteria = new CDbCriteria;
-	    $criteria->condition="group_ID = $group_id AND
-				  event_ID = $event_id AND
-				  checked  = 1 AND
-				  correct  = 1";
+	    $criteria->condition= "group_ID = $group_id AND
+								event_ID = $event_id AND
+								checked  = 1 AND
+								correct  = 1";
 	    $data = OpenVragenAntwoorden::model()->findAll($criteria);
-    $score = 0;
-    foreach($data as $obj)
-    {
-	$score = $score + OpenVragen::model()->getOpenVraagScore($obj->open_vragen_ID);
-    }
-    return $score;
+		$score = 0;
+		foreach($data as $obj)
+		{
+			$score = $score + OpenVragen::model()->getOpenVraagScore($obj->open_vragen_ID);
+		}
+		return $score;
     }
 
     /**
@@ -334,11 +334,12 @@ class OpenVragenAntwoorden extends HikeActiveRecord
 									     $group_id,
 									     $vragen_id)
     {
-	    $criteria = new CDbCriteria;
+		$criteria = new CDbCriteria;
 	    $criteria->condition="event_ID = $event_id AND
 				  group_ID = $group_id AND
 				  open_vragen_ID = $vragen_id";
 	    $data = OpenVragenAntwoorden::model()->find($criteria);
+
 	    if(isset($data->checked) AND $data->checked == 1)
 		    {return('Ja');}
 	    else

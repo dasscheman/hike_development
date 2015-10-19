@@ -92,9 +92,9 @@ if (OpenVragenAntwoorden::model()->isActionAllowed('openVragenAntwoorden',
 										'update',
 										$data->event_ID,
 										"",
-										$_GET['group_id']) &&
+										$data->group_ID) &&
 	OpenVragenAntwoorden::model()->isVraagGecontroleerd($data->event_ID,
-														$_GET['group_id'],
+														$data->group_ID,
 														$data->open_vragen_ID) == 'Nee')
 {
 	$vraagtData[] = array(
