@@ -164,7 +164,6 @@ class Groups extends HikeActiveRecord
 	{
 		// Warning: Please modify the following code to remove attributes that
 		// should not be searched.
-
 		$criteria=new CDbCriteria;
 			
 		$criteria->with=array(
@@ -179,22 +178,17 @@ class Groups extends HikeActiveRecord
 			LEFT JOIN tbl_vragen_score ON tbl_vragen_score.group_ID = t.group_ID
 			LEFT JOIN tbl_bonus_score ON tbl_bonus_score.group_ID = t.group_ID
 			LEFT JOIN tbl_totaal_score ON tbl_totaal_score.group_ID = t.group_ID';
-//			LEFT JOIN tbl_bonuspunten ON tbl_bonuspunten.group_ID = t.group_ID
-
-
 
 		$criteria->select = array(
 			'event_ID',
 			'group_ID',
 			'group_concat(DISTINCT user.username SEPARATOR " ") AS group_members',
-			//'COALESCE(SUM(tbl_bonuspunten.score),0) AS bonus_score',
 			'tbl_bonus_score.bonus_score AS bonus_score',
 			'tbl_hint_score.hint_score AS hint_score',
 			'tbl_vragen_score.vragen_score AS vragen_score',
 			'tbl_posten_score.post_score AS post_score',
 			'tbl_qr_score.qr_score AS qr_score',
 			'tbl_totaal_score.totaal_score AS totaal_score',
-//'Groups::model()->getRankGroup(event_ID, group_ID) AS rank',
 			'group_name');
 
 		$criteria->group = 't.group_ID';
@@ -211,7 +205,6 @@ class Groups extends HikeActiveRecord
 
 		$sort = new CSort();
 		$sort->attributes = array(
-			//'defaultOrder'=>'t.create_time ASC',
 			'group_name'=>array(
 				'asc'=>'group_name',
 				'desc'=>'group_name desc',
@@ -246,6 +239,7 @@ class Groups extends HikeActiveRecord
 			),
 		);
 
+		$sort->defaultOrder = ['totaal_score'=>true];
 	    return new CActiveDataProvider($this, array(
 		    'criteria'=>$criteria,
 			'pagination'=>array(
@@ -278,7 +272,7 @@ class Groups extends HikeActiveRecord
 			'post.post_name AS last_post');  
 		//$criteria->condition = 't.event_ID=:event_id AND t.group_ID=:group_id';
 		//$criteria->condition = 't.event_ID=:event_id';
-		//$criteria->order =  'postPassages.binnenkomst ASC';
+		$criteria->order =  'postPassages.binnenkomst ASC';
 	//	$criteria->params=array(':event_id'=>$event_id);
 		$criteria->group = 't.group_ID	, postPassages.group_ID';
 	
