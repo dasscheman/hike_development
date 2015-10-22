@@ -29,7 +29,7 @@ class Groups extends HikeActiveRecord
 {
 	public $group_members;
 	public $bonus_score;
-	public $posten_score;
+	public $post_score;
 	public $qr_score;
 	public $vragen_score;
 	public $hint_score;
@@ -76,11 +76,11 @@ class Groups extends HikeActiveRecord
 			      update_time, update_user_ID', 'safe', 'on'=>'search'),
 			array('group_ID, event_ID, group_name, create_time, create_user_ID,
 			    update_time, update_user_ID, group_members,
-				bonus_score, posten_score, qr_score, vragen_score, hint_score,
+				bonus_score, post_score, qr_score, vragen_score, hint_score,
 				totaal_score, rank', 'safe', 'on'=>'searchScore'),
 			array('group_ID, event_ID, group_name, create_time, create_user_ID,
 			    update_time, update_user_ID, group_members,
-				bonus_score, posten_score, qr_score, vragen_score, hint_score,
+				bonus_score, post_score, qr_score, vragen_score, hint_score,
 				totaal_score, rank', 'safe', 'on'=>'searchPost'),
 		    array('group_name',
 			      'ext.UniqueAttributesValidator',
@@ -123,7 +123,7 @@ class Groups extends HikeActiveRecord
 			'update_user_ID' => 'Groep',
 			'group_members' => 'Leden',
 			'bonus_score' => 'Bonus',
-			'posten_score' => 'Post',
+			'post_score' => 'Post',
 			'qr_score' => 'S. Post',
 			'vragen_score' => 'Vraag',
 			'hint_score' => 'Hint',
@@ -177,8 +177,9 @@ class Groups extends HikeActiveRecord
 			LEFT JOIN tbl_qr_score ON tbl_qr_score.group_ID = t.group_ID
 			LEFT JOIN tbl_posten_score ON tbl_posten_score.group_ID = t.group_ID
 			LEFT JOIN tbl_vragen_score ON tbl_vragen_score.group_ID = t.group_ID
-			LEFT JOIN tbl_bonuspunten ON tbl_bonuspunten.group_ID = t.group_ID
+			LEFT JOIN tbl_bonus_score ON tbl_bonus_score.group_ID = t.group_ID
 			LEFT JOIN tbl_totaal_score ON tbl_totaal_score.group_ID = t.group_ID';
+//			LEFT JOIN tbl_bonuspunten ON tbl_bonuspunten.group_ID = t.group_ID
 
 
 
@@ -186,25 +187,26 @@ class Groups extends HikeActiveRecord
 			'event_ID',
 			'group_ID',
 			'group_concat(DISTINCT user.username SEPARATOR " ") AS group_members',
-			'COALESCE(SUM(tbl_bonuspunten.score),0) AS bonus_score',
+			//'COALESCE(SUM(tbl_bonuspunten.score),0) AS bonus_score',
+			'tbl_bonus_score.bonus_score AS bonus_score',
 			'tbl_hint_score.hint_score AS hint_score',
 			'tbl_vragen_score.vragen_score AS vragen_score',
-			'tbl_posten_score.post_score AS posten_score',
+			'tbl_posten_score.post_score AS post_score',
 			'tbl_qr_score.qr_score AS qr_score',
 			'tbl_totaal_score.totaal_score AS totaal_score',
 //'Groups::model()->getRankGroup(event_ID, group_ID) AS rank',
 			'group_name');
 
-		$criteria->group = 'tbl_bonuspunten.group_ID, t.group_ID';
+		$criteria->group = 't.group_ID';
 		$criteria->compare('t.event_ID',$event_id);
-		$criteria->compare('group_name',$this->group_name,true);
-		$criteria->compare('user.username',$this->group_members,true);
-		$criteria->compare('bonus_score',$this->bonus_score);
-		$criteria->compare('posten_score',$this->posten_score);
-		$criteria->compare('qr_score',$this->qr_score,true);
-		$criteria->compare('vragen_score',$this->vragen_score,true);
-		$criteria->compare('hint_score',$this->hint_score,true);
-		$criteria->compare('totaal_score',$this->totaal_score,true);
+		$criteria->compare('group_name',$this->group_name, true);
+		$criteria->compare('user.username',$this->group_members, true);
+		$criteria->compare('bonus_score',$this->bonus_score, true);
+		$criteria->compare('posten_score',$this->post_score, true);
+		$criteria->compare('qr_score',$this->qr_score, true);
+		$criteria->compare('vragen_score',$this->vragen_score, true);
+		$criteria->compare('hint_score',$this->hint_score, true);
+		$criteria->compare('totaal_score',$this->totaal_score, true);
 		//$criteria->compare('rank',$this->totaal_score,true);
 
 		$sort = new CSort();
@@ -216,15 +218,15 @@ class Groups extends HikeActiveRecord
 			),
 			'group_members'=>array(
 				'asc'=>'group_members',
-				'desc'=>'group_members',
+				'desc'=>'group_members desc',
 			),
 			'bonus_score'=>array(
 				'asc'=>'bonus_score',
 				'desc'=>'bonus_score desc',
 			),
-			'posten_score'=>array(
-				'asc'=>'posten_score',
-				'desc'=>'posten_score desc',
+			'post_score'=>array(
+				'asc'=>'post_score',
+				'desc'=>'post_score desc',
 			),
 			'qr_score'=>array(
 				'asc'=>'qr_score',

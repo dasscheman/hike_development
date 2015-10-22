@@ -158,8 +158,8 @@ open gemaakt. </center><br/>
 			),
 			array(
                // 'header'=>Groups::model()->getAttributeLabel('posten_score'),
-				'name'=>'posten_score',
-				'value'=>'$data->posten_score',
+				'name'=>'post_score',
+				'value'=>'$data->post_score',
 				'headerHtmlOptions'=>array('width'=>'3%'),
 				'htmlOptions'=>array('style'=>'text-align:center'),
 			),
