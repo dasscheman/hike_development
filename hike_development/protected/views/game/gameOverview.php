@@ -191,13 +191,6 @@ open gemaakt. </center><br/>
 				'headerHtmlOptions'=>array('width'=>'3%'),
 				'htmlOptions'=>array('style'=>'text-align:center'),
 			),
-			/*array(
-              //  'header'=>Groups::model()->getAttributeLabel('totaal_score'),
-				'name'=>'totaal_score',
-				'value'=>'Groups::model()->getTotalScoreGroup($data->event_ID, $data->group_ID)',
-				'headerHtmlOptions'=>array('width'=>'3%'),
-				'htmlOptions'=>array('style'=>'text-align:center'),
-			),*/
 			array(
                // 'header'=>Groups::model()->getAttributeLabel('rank'),
 				'name'=>'rank',

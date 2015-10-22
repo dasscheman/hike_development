@@ -239,7 +239,7 @@ class Groups extends HikeActiveRecord
 			),
 		);
 
-		$sort->defaultOrder = ['totaal_score'=>true];
+		$sort->defaultOrder = array('totaal_score'=>true);
 	    return new CActiveDataProvider($this, array(
 		    'criteria'=>$criteria,
 			'pagination'=>array(
