@@ -180,7 +180,7 @@ open gemaakt. </center><br/>
 			array(
                // 'header'=>Groups::model()->getAttributeLabel('hint_score'),
 				'name'=>'hint_score',
-				'value'=>'$data->hint_score',
+				'value'=>'-$data->hint_score',
 				'headerHtmlOptions'=>array('width'=>'3%'),
 				'htmlOptions'=>array('style'=>'text-align:center'),
 			),
