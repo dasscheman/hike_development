@@ -920,6 +920,15 @@ CREATE TABLE IF NOT EXISTS `tbl_hint_score` (
 ,`group_ID` int(11)
 ,`hint_score` decimal(32,0)
 );
+
+-- --------------------------------------------------------
+-- Stand-in structure for view `tbl_bonus_score`
+--
+CREATE TABLE IF NOT EXISTS `tbl_bonus_score` (
+`event_ID` int(11)
+,`group_ID` int(11)
+,`bonus_score` decimal(32,0)
+);
 -- --------------------------------------------------------
 
 --
@@ -968,6 +977,14 @@ CREATE TABLE IF NOT EXISTS `tbl_vragen_score` (
 DROP TABLE IF EXISTS `tbl_hint_score`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `tbl_hint_score` AS select `tbl_open_nood_envelop`.`event_ID` AS `event_ID`,`tbl_open_nood_envelop`.`group_ID` AS `group_ID`,sum(`tbl_nood_envelop`.`score`) AS `hint_score` from (`tbl_open_nood_envelop` left join `tbl_nood_envelop` on((`tbl_nood_envelop`.`nood_envelop_ID` = `tbl_open_nood_envelop`.`nood_envelop_ID`))) group by `tbl_open_nood_envelop`.`group_ID`;
+
+-- --------------------------------------------------------
+--
+-- Structure for view `tbl_bonus_score`
+--
+DROP TABLE IF EXISTS `tbl_bonus_score`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `tbl_bonus_score` AS select `tbl_bonuspunten`.`event_ID` AS `event_ID`,`tbl_bonuspunten`.`group_ID` AS `group_ID`,sum(`tbl_bonuspunten`.`score`) AS `bonus_score` from `tbl_bonuspunten` group by `tbl_bonuspunten`.`group_ID`;
 
 -- --------------------------------------------------------
 
