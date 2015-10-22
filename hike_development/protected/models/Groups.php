@@ -253,7 +253,6 @@ class Groups extends HikeActiveRecord
 	{
 		// Warning: Please modify the following code to remove attributes that
 		// should not be searched.
-
 		$criteria=new CDbCriteria;
 			
 		$criteria->with=array(
@@ -270,12 +269,8 @@ class Groups extends HikeActiveRecord
 			'group_concat(DISTINCT user.username SEPARATOR " ") AS group_members',
 			'postPassages.binnenkomst AS last_post_time',
 			'post.post_name AS last_post');  
-		//$criteria->condition = 't.event_ID=:event_id AND t.group_ID=:group_id';
-		//$criteria->condition = 't.event_ID=:event_id';
-		$criteria->order =  'postPassages.binnenkomst ASC';
-	//	$criteria->params=array(':event_id'=>$event_id);
-		$criteria->group = 't.group_ID	, postPassages.group_ID';
-	
+		$criteria->order = 'postPassages.binnenkomst DESC';
+		$criteria->group = 't.group_ID, postPassages.group_ID';
 		$criteria->compare('group_ID',$this->group_ID);
 		$criteria->compare('t.event_ID',$event_id);
 		$criteria->compare('group_name',$this->group_name,true);
