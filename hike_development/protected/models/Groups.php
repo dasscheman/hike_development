@@ -129,6 +129,10 @@ class Groups extends HikeActiveRecord
 			'hint_score' => 'Hint',
 			'totaal_score' => 'Totaal',
 			'rank' => 'Plaats',
+			'time_walking' => 'Loop tijd (hh:mm)',
+			'time_left' => 'Tijd over (hh:mm)',
+			'last_post' => 'Laatste post',
+			'last_post_time' => 'Tijd laatste post',
 		);
 	}
 
@@ -259,7 +263,7 @@ class Groups extends HikeActiveRecord
 			'deelnemersEvents'=>array('together'=>true, 'joinType'=>'LEFT JOIN'), 
 			'deelnemersEvents.user'=>array('select'=>'username', 'together'=>false, 'joinType'=>'LEFT JOIN'), 
 			'postPassages'=>array('together'=>true, 'joinType'=>'LEFT JOIN'), 
-			'postPassages.post'=>array('together'=>false, 'joinType'=>'LEFT JOIN'), 
+			'postPassages.post'=>array('together'=>true, 'joinType'=>'LEFT JOIN'), 
 		);
 
 		$criteria->select = array(
@@ -269,7 +273,7 @@ class Groups extends HikeActiveRecord
 			'group_concat(DISTINCT user.username SEPARATOR " ") AS group_members',
 			'postPassages.binnenkomst AS last_post_time',
 			'post.post_name AS last_post');  
-		$criteria->order = 'postPassages.binnenkomst DESC';
+		$criteria->order = 'last_post_time DESC';
 		$criteria->group = 't.group_ID, postPassages.group_ID';
 		$criteria->compare('group_ID',$this->group_ID);
 		$criteria->compare('t.event_ID',$event_id);
@@ -290,6 +294,7 @@ class Groups extends HikeActiveRecord
 			),
 		);
 
+		$sort->defaultOrder = array('group_name'=>true);
 	    return new CActiveDataProvider($this, array(
 		    'criteria'=>$criteria,
 			'pagination'=>array(

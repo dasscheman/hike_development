@@ -120,17 +120,15 @@ $this->menu=array(
     </tr>
     <?php } ?>
 </table>
-<center>Dit is een overzicht van alle groepjes die meedoen. Het symbool <i class="fa fa-search-plus fa-inverse"></i>
-betekent dat je daar meer details van je groep kan bekijken.
-
-Je kunt zien wat de score is van een groepje voor een bepaald onderdeel, maar
-je kunt niet precies zien welke vragen of hints deze groep heeft beantwoord of
-open gemaakt. </center><br/>
+<center>Dit is een overzicht van alle groepjes die meedoen. Klik op <i class="fa fa-search-plus fa-inverse"></i>
+om meer details van een groep te bekijken.
+Momenteel kunnen deelnemers alleen het groepsoverzicht van hun eigen groep bekijken.
+De organisatie kan wel alle groepsoverzichten bekijken. </center><br/>
 
 
 
 
-<i> Als de Hike is afgelopen, dan kun je de resultaten van een ander groepje bekijken. </i><br/>
+<i> Je kunt de headers gebruiken om te zoeken naar een goepje of deelnemer. </i><br/>
 <?php
 	$this->widget('bootstrap.widgets.TbGridView', array(
         'id'=>'post-score-grid',
@@ -232,19 +230,21 @@ open gemaakt. </center><br/>
                // 'header'=>Groups::model()->getAttributeLabel('group_name'),
 				'name'=>'group_name',
 				'value'=>'$data->group_name',
-				'headerHtmlOptions'=>array('width'=>'6%'),
+				'headerHtmlOptions'=>array('width'=>'5%'),
 			),
 			array(
               //  'header'=>Groups::model()->getAttributeLabel('group_members'),
 				'name'=>'group_members',
 				'value'=>'$data->group_members',
-				'headerHtmlOptions'=>array('width'=>'6%'),
+				'headerHtmlOptions'=>array('width'=>'5%'),
 			),
 			array(
                // 'header'=>Groups::model()->getAttributeLabel('vragen_score'),
 				'name'=>'last_post',
-				'value'=>'$data->last_post',
-				'headerHtmlOptions'=>array('width'=>'3%'),
+				//'value'=>'$data->last_post',
+				'value'=>'Posten::model()->getPostName(PostPassage::model()->getLaatstePostPassageNaam($data->event_ID, $data->group_ID))',
+				'filter'=>false,
+				'headerHtmlOptions'=>array('width'=>'4%'),
 				'htmlOptions'=>array('style'=>'text-align:center'),
 			),
 			array(
@@ -253,7 +253,7 @@ open gemaakt. </center><br/>
 				//'value'=>'$data->last_post_time',
 				'value'=>'PostPassage::model()->getLaatstePostPassageTijd($data->event_ID, $data->group_ID)',
 				'filter'=>false,
-				'headerHtmlOptions'=>array('width'=>'3%'),
+				'headerHtmlOptions'=>array('width'=>'4%'),
 				'htmlOptions'=>array('style'=>'text-align:center'),
 			),
 
@@ -262,7 +262,7 @@ open gemaakt. </center><br/>
 				'name'=>'time_walking',
 				'value'=>'PostPassage::model()->displayWalkingTime($data->event_ID, $data->group_ID)',
 				'filter'=>false,
-				'headerHtmlOptions'=>array('width'=>'3%'),
+				'headerHtmlOptions'=>array('width'=>'4%'),
 				'htmlOptions'=>array('style'=>'text-align:center'),
 			),
 			array(
@@ -270,7 +270,7 @@ open gemaakt. </center><br/>
 				'name'=>'time_left',
 				'value'=>'PostPassage::model()->displayTimeLeft($data->event_ID, $data->group_ID)',
 				'filter'=>false,
-				'headerHtmlOptions'=>array('width'=>'3%'),
+				'headerHtmlOptions'=>array('width'=>'4%'),
 				'htmlOptions'=>array('style'=>'text-align:center'),
 			),
     )

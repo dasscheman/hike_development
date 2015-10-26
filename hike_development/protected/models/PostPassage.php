@@ -434,7 +434,7 @@ class PostPassage extends HikeActiveRecord
 		return strtotime("1970-01-01 $dataEvent->max_time UTC") - $totalTime;
 	}
 
-	public function convertToHoursMinute($event_id, $timestamp)
+	public function convertToHoursMinute($timestamp)
 	{
 		$time = sprintf('%02d',floor($timestamp / 60 / 60))  . ':' . sprintf('%02d',($timestamp / 60) %60);
 		return $time;
@@ -467,7 +467,11 @@ class PostPassage extends HikeActiveRecord
 			return 'nog niet gestart';
 		}
 
-		return $this->convertToHoursMinute($event_id, $this->walkingTimeToday($event_id, $group_id));
+		if ($this->timeLeftToday($event_id, $group_id) == 0){
+			return $this->convertToHoursMinute(strtotime("1970-01-01 $dataEvent->max_time UTC"));
+		}		
+
+		return $this->convertToHoursMinute($this->walkingTimeToday($event_id, $group_id));
 	}
 
 	public function displayTimeLeft($event_id, $group_id)
@@ -479,7 +483,7 @@ class PostPassage extends HikeActiveRecord
 		if ($dataEvent->max_time == null || $dataEvent->max_time == '00:00:00') {
 			return 'Er is geen maximum tijd voor vandaag';
 		}
-		return $this->convertToHoursMinute($event_id, $this->timeLeftToday($event_id, $group_id));
+		return $this->convertToHoursMinute($this->timeLeftToday($event_id, $group_id));
 	}
 
 	public function isFirstPostOfDayForGroup($event_id, $group_id)

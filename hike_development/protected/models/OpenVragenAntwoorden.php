@@ -110,7 +110,7 @@ class OpenVragenAntwoorden extends HikeActiveRecord
 		    'antwoord_spelers' => 'Antwoord Spelers',
 		    'checked' => 'Checked',
 		    'correct' => 'Correct',
-		    'create_time' => 'Create Time',
+		    'create_time' => 'Tijd',
 		    'create_user_ID' => 'Beantwoord door',
 		    'update_time' => 'Update Time',
 		    'update_user_ID' => 'Update User',

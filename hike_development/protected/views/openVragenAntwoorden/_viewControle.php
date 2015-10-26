@@ -88,7 +88,7 @@ if (!isset($vraagtData)){
 			'value'=>'Er zijn geen vragen beantwoord',
 			'oneRow'=>true);
 }
-if (OpenVragenAntwoorden::model()->isActionAllowed('openVragenAntwoorden',
+/*if (OpenVragenAntwoorden::model()->isActionAllowed('openVragenAntwoorden',
 										'update',
 										$data->event_ID,
 										"",
@@ -111,8 +111,7 @@ if (OpenVragenAntwoorden::model()->isActionAllowed('openVragenAntwoorden',
 								'group_id'=>$_GET['group_id'],
 								'vraag_id'=>$data->open_vragen_ID))
 	);
-}
-
+}*/
 $this->widget('ext.widgets.DetailView4Col', array(
 	'data'=>$data,
 	'attributes'=>$vraagtData,
