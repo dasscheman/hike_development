@@ -2,8 +2,33 @@
 /* @var $this SiteController */
 /*
  */
+/*echo CHtml::link('<i class="fa fa-question-circle fa-inverse"></i>',
+	array('/site/help#SpelOverzicht'),
+    array('target'=>'_blank')); */
+?>
+<div id="faq">
+<h1>FAQ</h1>
+<?php
+	echo CHtml::link('Waarom de Hike-app?',	array('/site/help#waaromdehikeapp')); ?><br><?php
+	echo CHtml::link('Hoe gaat het in zijn werk?',	array('/site/help#hoewerkthet')); ?><br><?php
+	echo CHtml::link('Wat zijn de benodigdheden?',	array('/site/help#benodigdheden')); ?><br><?php
+	echo CHtml::link('Hoe te beginnen?',	array('/site/help#hoetebeginnen')); ?><br><?php
+	echo CHtml::link('Kan ik zelf een hike aanmaken?',	array('/site/help#kanikeenhkeaanmaken')); ?><br><?php
+	echo CHtml::link('Moet ik nog een routeboekje maken?',	array('/site/help#moetjenogeenrouteboekjemaken')); ?><br><?php
+	echo CHtml::link('Hoe voeg je deelnemers toe?',	array('/site/help#hoevoegikdeelnemerstoe')); ?><br><?php
+	echo CHtml::link('Hoe start ik een hike',	array('/site/help#hoestartikeenhike')); ?><br><?php
+	echo CHtml::link('Hoe maak ik hike-vrienden?',	array('/site/help#hoemaakikvrienden')); ?><br><?php
+	echo CHtml::link('Wat betekent de hike status?',	array('/site/help#watbetekenthikestatus')); ?><br><?php
+	echo CHtml::link('Hoe start ik een hike?',	array('/site/help#hoestartikeenhike')); ?><br><?php
+	echo CHtml::link('Wat kunnen de deelenemers zien?',	array('/site/help#watkunnendedeelnemerszien')); ?><br><?php
 
 ?>
+
+<!--
+<div id="faq">
+<h1>Uitleg</h1>
+-->
+
 <div id="faq">
 <h1>FAQ</h1>
 
@@ -98,6 +123,89 @@ vanaf daar kun je de verschillende hike onderdelen aanmaken.
 Jazeker, de Hike-app is er alleen ter ondersteuning voor het bijhouden van de scores en de tijdslimiet.
 De route en puzzels moeten de deelnemers uit een routeboekje halen. Het best is dan ook om eerste de route en
 het routeboekje te maken en als dat (bijna) klaar is, de hike aanmaken op de Hike-app.
+
+<div id="hoevoegikdeelnemerstoe">
+<p><h3>Hoe voeg je deelnemers toe?</h3>
+Als je een hike hebt aangemaakt, dan ben je automatisch toegevoegd aan die hike als organisatie.
+Je kunt anderen toevoegen aan je hike, je kunt anderen toevoegen als oa organisatie of als deelnemer.
+Maar let op, je kunt alleen hike-vrienden toevoegen aan je hike.
+Als je op de pagina 'Hike uitzetten'bent, dan staat er in het menu rechts
+(mits de status van de hike is 'opstart') de optie 'Deelnemers toevoegen'.
+Als je daarop klikt kom je op de pagina deelnemers toevoegen.
+In het eerste veld kun je beginnen met het typen van de naam van een hike-vriend die je wilt toevoegen. 
+Het is een autocomplete veld, dus na 2 a 3 letters komen er suggesties.
+Komt er niets, dan heb je geen hike-vrienden met die letter combinatie.
+Kies vervolgens een rol, indien de rol 'deelnemer' is, dan moet je ook een groep selecteren.
+De groep moet je dus al aangemaakt hebben. Druk op de submit knop als je klaar bent. 
+
+<div id="hoemaakikvriengen">
+<p><h3>Hoe maak ik hike-vrienden?</h3>
+Als je mensen aan je hike wilt toevoegen dan moet je vrienden met ze zijn.
+Maar ook als je aan een hike toegevoegd wilt worden moet je vrienden zijn met de op zijn mist 1 persoon van de organisatie. 
+Als je vrienden wilt maken/zoeken, ga dan naar de thuis pagina als je bent ingelogd.
+Rechts in het menu staat de optie 'Vrienden Zoeken' als je daarop klikt zie je een lijst met mensen die zich aangemeld hebben bij de hike-app.
+Als je iemand gevonden hebt, klik je op het vinkje rechts bij zijn naam.
+Je hebt dan een uitnodiging gestuurd en je moet wachten tot diegene de uitnodiging accepteert. 
+Als je iemand niet in de lijst ziet staan, maar je weet zeker dat hij/zij zich wel aangemeld heeft op de site,
+dan kan iemand jou al een vriendschapsverzoek gestuurd hebben.
+Om een vriendschapsverzoek te accepteren, ga naar de homepage en klik op het tabblad 'Verzoeken', daar zie je mensen staan die jou een verzoek hebben gedaan.
+Klik het vinkje om het verzoek te accepteren. Als je het vezoek wilt  weigeren dan klik je op het rondje met de streep erdoor.
+Let op, als je iemands verzoek weigert, dan kan je die persoon ook niet meer zoeken. 
+
+<div id="watbetekenthikestatus">
+<p><h3>Wat betekent de hike status?</h3>
+Als je een hike hebt aangemaakt, dan is de hike status automatisch 'Opstart'.
+Deze status betekent dat je als organisatie de hike en deelnemers in kan voeren.
+Zolang de status 'Opstart' is kunnen de deelnemers ook niets zien van de hike.
+Pas als je de status veranderd naar 'Introductie' of 'Gestart' dan kunnen de deelnemers pas de hike zien.
+De status 'Introductie' kun je gebruiken voor de voorpret, je kunt al wat vragen maken die de deelenemers voor de hike moeten maken.
+En je kunt ook stille posten maken die de deelenemers tijdens de introductie (dus voor de hike) kunnen scannen om punten te halen.
+Groot voordeel van het gebruik van een introductie is dat de deelenemers al
+in de dagen voor de hike, de app al een keer bekeken en gebruikt hebben.
+Voorbeeld van het gebruik van de stille post tijdens de introductie is bijvoorbeeld, de stille post ergens op de site van de groep zetten.
+
+
+<div id="hoestartikeenhike">
+<p><h3>Hoe start ik een hike? </h3>
+Als je een hike gemaakt hebt, je hebt alle vragen ingevoerd, de (stille) posten gemaakt, de hints ingevoerd en de deelenemers toegevoegd,
+dan kun je de hike starten door de status te veranderen.
+Als je de status op 'Introductie' zet dan kunnen de deelnemers de vragen beantwoorden die bij de introductie hoort.
+Ook kunnen ze de stillen posten voor de introductie scannen. Let op! De introductie kan geen hints of gewone posten hebben.
+Als de hike echt begint, dan zet je de hike status op 'Gestart' tevens selecteer je welke dag het is en geef je aan hoeveel looptijd de deelnemers hebben.
+De looptijd is de tijd die deelnemers tussen de posten hebben.
+Als die voorbij is dan kunnen ze geen vragen meer beantwoorden of punten krijgen voor (stille) posten.
+Wil je niet met een tijdslimiet lopen, zet de tijdlimiet dan op 24 uur.
+Vanaf het moment dat de hike gestart is kunnen de deelnemers de onderdelen zien die bij die dag hoort.
+De onderdelen die bij een andere dag hoort, kunnen de deelnemers niet zien. 
+
+<div id="watkunnendedeelnemerszien">
+<p><h3>Wat kunnen de deelenemers zien? </h3>
+Wat de deelnemers kunnen zien hangt af van de status van de hike.
+<p><h4>Opstart</h4>
+Deelnemers kunnen niets zien van de hike. De organisatie kan dus tijdens deze status rustig dingen toevoegen, verwijderen of wijzigen.
+
+<p><h4>Introductie</h4>
+Tijdens deze status kunnen de groepjes de vragen zien die bij de introductie hoort.
+Ze kunnen de vraag beantwoorden en als de organisatie de vraag heeft gecontroleerd dan kunnen ze ook zien of de vraag goed of fout is. 
+De groepjes kunnen niet van elkaar zien welke vragen zij beantwoord hebben en of het goed of fout is.
+De groepjes kunnen niet zien of en hoeveel stille posten er zijn tijdens de introductie.
+Maar als ze een stille post hebben gevonden en gescand, dan zien ze die wel in hun eigen overzicht terug met de score die erbij hoort.
+In het spel overzicht kan iedereen zien hoeveel punten elke groep heeft op welk onderdelen.
+Maar de groepjes kunnen niet bij elkaar zien welke vragen of stille posten een ander groepje al heeft gehad. 
+Tijdens de introductie zijn er geen hints of posten.
+
+
+<p><h4>Gestart</h4>
+Vragen en stille posten zijn hetzelfde als tijdens de introductie.
+De gewone posten kunnen de deelenemers niet zien. Ze weten dus niet wanneer en hoeveel posten er zijn.
+Pas als ze een post gepasseerd zijn en in gecheckt zijn, dan zien ze de post (met de score) terug in hun groepsoverzicht. 
+De deelnemers zien voor een dag alle beschikbare hints.
+De hints hebben een titel waaraan de deelenemers kunnen afleiden op welk punt in de route de hint betrekking heeft.
+Als de deelnemers de hint openmaken kunnen ze het veld 'coordinaten' en het veld 'opmerkingen' zien. 
+
+Ook hier geld dat de groepen wel de totaal scores van elkaar kunnen zien,
+maar niet precies zien voor welke posten of hint een andere groep (straf)punten heeft gekregen.
+
 <br>
 <br>
 <br>

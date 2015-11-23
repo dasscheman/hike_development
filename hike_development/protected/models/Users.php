@@ -221,6 +221,7 @@ class Users extends HikeActiveRecord
 		$criteria->compare('username',$this->username,true);
 		$criteria->compare('voornaam',$this->voornaam,true);
 		$criteria->compare('achternaam',$this->achternaam,true);
+		$criteria->compare('organisatie',$this->organisatie,true);
 		$criteria->compare('email',$this->email,true);
 		$criteria->compare('password',$this->password,true);
 		$criteria->compare('macadres',$this->macadres,true);
@@ -254,6 +255,7 @@ class Users extends HikeActiveRecord
 		$criteria->compare('username',$this->username,true);
 		$criteria->compare('voornaam',$this->voornaam,true);
 		$criteria->compare('achternaam',$this->achternaam,true);
+		$criteria->compare('organisatie',$this->organisatie,true);
 		$criteria->compare('email',$this->email,true);
 		$criteria->compare('password',$this->password,true);
 		$criteria->compare('macadres',$this->macadres,true);
@@ -286,6 +288,7 @@ class Users extends HikeActiveRecord
 		$criteria->compare('username',$this->username,true);
 		$criteria->compare('voornaam',$this->voornaam,true);
 		$criteria->compare('achternaam',$this->achternaam,true);
+		$criteria->compare('organisatie',$this->organisatie,true);
 		$criteria->compare('email',$this->email,true);
 		$criteria->compare('password',$this->password,true);
 		$criteria->compare('macadres',$this->macadres,true);
