@@ -192,7 +192,7 @@ class FriendList extends HikeActiveRecord
 								FROM `tbl_friend_list`
 								WHERE user_ID =:currentuser AND status =2)
 					AND t.user_ID <>:currentuser");
-		$criteria->order = username;
+		$criteria->order = 'username';
 		$criteria->params = array(':currentuser'=>Yii::app()->user->id);
 
 		Yii::app()->user->id;
